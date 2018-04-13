@@ -1,0 +1,26 @@
+image: node:latest
+
+stages:
+  - test
+  - build
+
+before_script:
+  - cd connected-worlds
+  - yarn install
+
+cache:
+  paths:
+    - connected-worlds/node_modules/
+
+test:
+  stage: test
+  script:
+    - yarn test
+
+build:
+  stage: build
+  script:
+    - yarn build
+  artifacts:
+    paths:
+      - connected-worlds/build/
