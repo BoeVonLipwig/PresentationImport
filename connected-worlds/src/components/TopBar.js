@@ -1,16 +1,16 @@
-import React from 'react';
-import SelectButton from './SelectButton';
+import React from "react";
+import SelectButton from "./SelectButton";
 
 class TopBar extends React.Component {
   clickHandler() {
-    alert('Hello');
+    alert("Hello");
   }
 
   render() {
     const elems = [
-      { name: 'Projects', id: 'showProjects' },
-      { name: 'Programme', id: 'showSchools' },
-      { name: 'Collaborators', id: 'showCollab' }
+      { name: "Projects", id: "showProjects" },
+      { name: "Programme", id: "showSchools" },
+      { name: "Collaborators", id: "showCollab" }
     ];
     const items = elems.map(elem => {
       return <SelectButton key={elem.id} name={elem.name} id={elem.id} />;
