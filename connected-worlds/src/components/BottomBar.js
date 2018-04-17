@@ -20,7 +20,7 @@ class BottomBar extends React.Component {
             <img src={logo} alt="Connected Worlds Logo" />
           </div>
         </div>
-        <select name="contact" id="contact">
+        <select name="contact" id="contact" defaultValue="github">
           <option value="help" data-class="cw-help">
             Help
           </option>
@@ -33,7 +33,6 @@ class BottomBar extends React.Component {
           </option>
           <option
             value="github"
-            selected="selected"
             data-class="cw-github"
             href="https://github.com/axbwh/VR-Network-Vis"
           >

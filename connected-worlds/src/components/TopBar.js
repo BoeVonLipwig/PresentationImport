@@ -1,4 +1,5 @@
 import React from 'react';
+import SelectButton from './SelectButton';
 
 class TopBar extends React.Component {
   clickHandler() {
@@ -6,6 +7,14 @@ class TopBar extends React.Component {
   }
 
   render() {
+    const elems = [
+      { name: 'Projects', id: 'showProjects' },
+      { name: 'Programme', id: 'showSchools' },
+      { name: 'Collaborators', id: 'showCollab' }
+    ];
+    const items = elems.map(elem => {
+      return <SelectButton key={elem.id} name={elem.name} id={elem.id} />;
+    });
     return (
       <div id="navbar">
         <div id="controls" className="topnav">
@@ -15,35 +24,8 @@ class TopBar extends React.Component {
               <h3 className="icon">&#9776;</h3>
             </div>
           </a>
-
-          <div className="control">
-            <div className="checkbox-round">
-              <input id="showProjects" type="checkbox" defaultChecked />
-              <label htmlFor="showProjects" />
-            </div>
-
-            <h2>Projects</h2>
-          </div>
-
-          <div className="control">
-            <div className="checkbox-round">
-              <input id="showSchools" type="checkbox" />
-              <label htmlFor="showSchools" />
-            </div>
-
-            <h2>Programme</h2>
-          </div>
-
-          <div className="control">
-            <div className="checkbox-round">
-              <input id="showCollab" type="checkbox" />
-              <label htmlFor="showCollab" />
-            </div>
-
-            <h2>Collaborators</h2>
-          </div>
+          {items}
         </div>
-
         <div id="toggle">
           <div className="checkbox-round">
             <input id="showInfo" type="checkbox" defaultChecked />
