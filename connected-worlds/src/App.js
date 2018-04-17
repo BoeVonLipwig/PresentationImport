@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import './App.css';
 import Cytoscape from './components/Cytoscape';
 import TopBar from './components/TopBar';
 import BottomBar from './components/BottomBar';

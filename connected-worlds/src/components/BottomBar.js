@@ -10,8 +10,7 @@ class BottomBar extends React.Component {
             id="autocomplete"
             type="text"
             placeholder="Search Nodes"
-            spellcheck="false"
-            onclick="this.select()"
+            spellCheck="false"
           />
         </div>
         <div id="outer-header">

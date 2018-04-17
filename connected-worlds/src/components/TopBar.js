@@ -1,39 +1,43 @@
 import React from 'react';
 
 class TopBar extends React.Component {
+  clickHandler() {
+    alert('Hello');
+  }
+
   render() {
     return (
       <div id="navbar">
-        <div id="controls" class="topnav">
-          <a onclick="navbarCollapse()">
-            <div id="view" class="">
-              <h>VIEW</h>
-              <h3 class="icon">&#9776;</h3>
+        <div id="controls" className="topnav">
+          <a onClick={this.clickHandler}>
+            <div id="view" className="">
+              <h1>VIEW</h1>
+              <h3 className="icon">&#9776;</h3>
             </div>
           </a>
 
-          <div class="control">
-            <div class="checkbox-round">
-              <input id="showProjects" type="checkbox" checked />
-              <label for="showProjects" />
+          <div className="control">
+            <div className="checkbox-round">
+              <input id="showProjects" type="checkbox" defaultChecked />
+              <label htmlFor="showProjects" />
             </div>
 
             <h2>Projects</h2>
           </div>
 
-          <div class="control">
-            <div class="checkbox-round">
+          <div className="control">
+            <div className="checkbox-round">
               <input id="showSchools" type="checkbox" />
-              <label for="showSchools" />
+              <label htmlFor="showSchools" />
             </div>
 
             <h2>Programme</h2>
           </div>
 
-          <div class="control">
-            <div class="checkbox-round">
+          <div className="control">
+            <div className="checkbox-round">
               <input id="showCollab" type="checkbox" />
-              <label for="showCollab" />
+              <label htmlFor="showCollab" />
             </div>
 
             <h2>Collaborators</h2>
@@ -41,12 +45,11 @@ class TopBar extends React.Component {
         </div>
 
         <div id="toggle">
-          <div class="checkbox-round">
-            <input id="showInfo" type="checkbox" checked />
-            <label for="showInfo" />
+          <div className="checkbox-round">
+            <input id="showInfo" type="checkbox" defaultChecked />
+            <label htmlFor="showInfo" />
           </div>
           <h2>Show Details</h2>
-          <h />
         </div>
       </div>
     );
