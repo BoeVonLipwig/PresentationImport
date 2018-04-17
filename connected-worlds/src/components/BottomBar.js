@@ -1,10 +1,10 @@
-import React from 'react';
-import logo from '../assets/vic-logo.svg';
+import React from "react";
+import logo from "../assets/vic-logo.svg";
 
 class BottomBar extends React.Component {
   render() {
     return (
-      <div id="bottom-navbar">
+      <div id="navbar-bottom">
         <div>
           <input
             id="autocomplete"
@@ -15,7 +15,7 @@ class BottomBar extends React.Component {
         </div>
         <div id="outer-header">
           <div id="header">
-            <a>Connected Worlds</a>{' '}
+            <a>Connected Worlds</a>{" "}
             <span>: Research into VR, AR and MR at Victoria</span>
             <img src={logo} alt="Connected Worlds Logo" />
           </div>
