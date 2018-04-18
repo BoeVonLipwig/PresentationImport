@@ -1,5 +1,6 @@
-import React from 'react';
-import cytoscape from 'cytoscape';
+import React from "react";
+import cytoscape from "cytoscape";
+import loadData from "../util/data";
 
 class Cytoscape extends React.Component {
   constructor() {
@@ -8,36 +9,17 @@ class Cytoscape extends React.Component {
   }
 
   componentDidMount() {
+    // get exported json from cytoscape desktop via ajax
+    let graphP = loadData();
+
+    // also get style via ajax
+    let styleP = fetch("data.cycss");
+
     let cy = cytoscape({
       container: this.cyDiv.current,
-      elements: [],
+      style: styleP,
+      elements: graphP,
       wheelSensitivity: 0.5
-    });
-
-    for (let i = 0; i < 10; i++) {
-      let source = 'node' + i;
-
-      cy.add({
-        data: { id: source }
-      });
-
-      if (i > 0) {
-        cy.add({
-          data: {
-            id: 'edge' + i + (i - 1),
-            source: source,
-            target: 'node' + (i - 1)
-          }
-        });
-      }
-    }
-
-    cy.add({
-      data: {
-        id: 'edgy',
-        source: 'node' + 9,
-        target: 'node' + 0
-      }
     });
   }
 
