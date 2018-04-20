@@ -1,6 +1,7 @@
 import React from "react";
 import cytoscape from "cytoscape";
 import loadData from "../util/data";
+import LayoutManager from "../util/LayoutManager";
 
 class Cytoscape extends React.Component {
   constructor() {
@@ -25,13 +26,7 @@ class Cytoscape extends React.Component {
     });
 
     // wait for data to be loaded before attempt to run layout
-    cy.on("ready", () => {
-      cy
-        .layout({
-          name: "concentric"
-        })
-        .run();
-    });
+    LayoutManager.set(cy, "concentric");
   }
 
   render() {
