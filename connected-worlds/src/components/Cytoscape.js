@@ -23,6 +23,15 @@ class Cytoscape extends React.Component {
       elements: graphP,
       wheelSensitivity: 0.5
     });
+
+    // wait for data to be loaded before attempt to run layout
+    cy.on("ready", () => {
+      cy
+        .layout({
+          name: "concentric"
+        })
+        .run();
+    });
   }
 
   render() {
