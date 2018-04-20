@@ -13,7 +13,9 @@ class Cytoscape extends React.Component {
     let graphP = loadData();
 
     // also get style via ajax
-    let styleP = fetch("data.cycss");
+    let styleP = fetch("data.cycss").then(x => {
+      return x.text();
+    });
 
     let cy = cytoscape({
       container: this.cyDiv.current,

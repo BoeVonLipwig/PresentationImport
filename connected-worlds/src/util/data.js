@@ -223,7 +223,7 @@ function loadData() {
     });
   }
 
-  let surveyData = fetch("data.csv")
+  let surveyData = fetch("/data.csv")
     .then(x => {
       return x.text();
     })
@@ -231,7 +231,7 @@ function loadData() {
     .then(extractRelevantData); //uses lodash.js to iterate over objects and extract relevant data
 
   let projectData = surveyData.then(function(data) {
-    return fetch("project_data.csv")
+    return fetch("/project_data.csv")
       .then(x => {
         return x.text();
       })
