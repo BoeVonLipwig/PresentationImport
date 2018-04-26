@@ -13,6 +13,7 @@ class TopBar extends React.Component {
       { name: "Collaborators", id: "showCollab" }
     ];
     const items = elems.map(elem => {
+      /* items are each view toggle*/
       return <SelectButton key={elem.id} name={elem.name} id={elem.id} />;
     });
     return (
