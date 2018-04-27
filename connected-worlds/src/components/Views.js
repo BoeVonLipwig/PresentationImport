@@ -18,6 +18,7 @@ class Views extends React.Component {
   toggleCheck(id) {
     const newViews = this.state.views.map(function(entry) {
       if (entry.id === id) {
+        notify(id);
         return Object.assign({}, entry, {
           isChecked: true
         });

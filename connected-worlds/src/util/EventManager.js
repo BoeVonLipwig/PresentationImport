@@ -1,6 +1,7 @@
 import Concentric from "../layouts/Concentric";
 import SelectButton from "../components/SelectButton";
 
+/*
 function getLayout(layout) {
   //TODO
   let layoutObj = new Concentric(); //eval("new " + layout + "()");
@@ -12,23 +13,20 @@ function set(graph, layout) {
     graph.layout(this.getLayout(layout)).run();
   });
 }
+*/
+let cy;
 
-let currentlySelectedButton;
+const layouts = {
+  showSchools: { name: "concentric" },
+  showProjects: { name: "circle" },
+  showCollab: { name: "grid" }
+};
 
-export function notify(button) {
-  console.log(button);
-
-  //alert(lastNodeID);
-  if (currentlySelectedButton != null) {
-    currentlySelectedButton.toggleCheck();
-    currentlySelectedButton = button;
-    button.toggleCheck();
-  }
-
-  //alert(buttonID);
+export function notify(layoutID) {
+  cy.setLayout(layouts[layoutID]);
 }
 
-export function setFirstButton(button) {
-  currentlySelectedButton = button;
-  currentlySelectedButton.toggleCheck();
+export function set(cyto) {
+  console.log(cyto);
+  cy = cyto;
 }
