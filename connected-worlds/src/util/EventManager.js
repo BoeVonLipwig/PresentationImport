@@ -1,4 +1,5 @@
 import Concentric from "../layouts/Concentric";
+import SelectButton from "../components/SelectButton";
 
 function getLayout(layout) {
   //TODO
@@ -12,12 +13,22 @@ function set(graph, layout) {
   });
 }
 
-function notify(buttonID) {
-  alert(lastNodeID);
-  lastNodeID = buttonID;
-  alert(buttonID);
+let currentlySelectedButton;
+
+export function notify(button) {
+  console.log(button);
+
+  //alert(lastNodeID);
+  if (currentlySelectedButton != null) {
+    currentlySelectedButton.toggleCheck();
+    currentlySelectedButton = button;
+    button.toggleCheck();
+  }
+
+  //alert(buttonID);
 }
 
-let lastNodeID;
-
-export default notify;
+export function setFirstButton(button) {
+  currentlySelectedButton = button;
+  currentlySelectedButton.toggleCheck();
+}
