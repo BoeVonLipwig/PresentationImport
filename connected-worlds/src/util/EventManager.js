@@ -12,12 +12,12 @@ function set(graph, layout) {
   });
 }
 
-function notify(buttonId) {
-  alert(lastNode);
-  lastNode = buttonId;
-  alert(buttonId);
+function notify(buttonID) {
+  alert(lastNodeID);
+  lastNodeID = buttonID;
+  alert(buttonID);
 }
 
-let lastNode;
+let lastNodeID;
 
 export default notify;

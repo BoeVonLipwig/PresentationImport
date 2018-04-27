@@ -9,16 +9,19 @@ class SelectButton extends React.Component {
   }
 
   clickHandler() {
-    console.log(this);
     notify(this.props.id);
+  }
+
+  setChecked(val) {
+    this.prp;
   }
 
   render() {
     return (
       <div className="control">
-        <div className="checkbox-round" onClick={this.clickHandler}>
+        <div className="checkbox-round">
           <input id={this.props.id} type="checkbox" />
-          <label htmlFor={this.props.id} />
+          <label htmlFor={this.props.id} onClick={this.clickHandler} />
         </div>
 
         <h2>{this.props.name}</h2>
