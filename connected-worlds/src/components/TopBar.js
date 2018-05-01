@@ -1,6 +1,4 @@
 import React from "react";
-import SelectButton from "./SelectButton";
-import { setFirstButton } from "../util/EventManager";
 import Views from "./Views";
 
 class TopBar extends React.Component {

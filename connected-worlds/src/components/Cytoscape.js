@@ -1,7 +1,6 @@
 import React from "react";
 import cytoscape from "cytoscape";
 import loadData from "../util/data";
-import EventManager from "../util/EventManager";
 
 import _ from "lodash";
 
@@ -12,43 +11,44 @@ class Cytoscape extends React.Component {
   }
 
   setInitials(ele, cutoff01, cutoff02, space) {
+    let initNum;
     if (ele.data("name").length > cutoff01) {
-      var initNum = 1;
-      if (space != 1) {
+      initNum = 1;
+      if (space !== 1) {
         initNum = 2;
       }
     } else {
-      var initNum = 0;
+      initNum = 0;
     }
 
-    var nameShort = this.getInitials(ele.data("name"), initNum, space);
+    let nameShort = Cytoscape.getInitials(ele.data("name"), initNum, space);
 
     if (nameShort.length > cutoff02) {
-      nameShort = this.getInitials(ele.data("name"), 2, space);
+      nameShort = Cytoscape.getInitials(ele.data("name"), 2, space);
     }
 
     return nameShort;
   }
 
-  getInitials(string, initNum, space) {
-    var names = string.split(" ");
+  static getInitials(string, initNum, space) {
+    const names = string.split(" ");
     _.pull(names, "of", "the", "&");
-    var initials = names[0].substring(0, 1).toUpperCase();
-
-    if (space == 1) {
-      var kerning = " ";
+    let initials = names[0].substring(0, 1).toUpperCase();
+    let kerning;
+    if (space === 1) {
+      kerning = " ";
     } else {
-      var kerning = "";
+      kerning = "";
     }
 
     if (names.length > 2) {
-      for (var i = 1; i < names.length - 1; i++) {
+      for (let i = 1; i < names.length - 1; i++) {
         initials += kerning + names[i].substring(0, 1).toUpperCase();
       }
     }
 
     if (names.length > 1) {
-      if (initNum == 1 || isNaN(names[names.length - 1]) == false) {
+      if (initNum === 1 || isNaN(names[names.length - 1]) === false) {
         initials += kerning + names[names.length - 1];
       } else {
         initials +=
@@ -56,7 +56,7 @@ class Cytoscape extends React.Component {
       }
     }
 
-    if (initNum == 0) {
+    if (initNum === 0) {
       initials = string;
     }
 
@@ -100,7 +100,7 @@ class Cytoscape extends React.Component {
       label: ele => {
         if (
           cy.nodes('.highlighted[type = "project"]').size() > 5 &&
-          ele.data("type") == "project"
+          ele.data("type") === "project"
         ) {
           return this.setInitials(ele, 6, 6, 1);
         } else {
@@ -110,7 +110,7 @@ class Cytoscape extends React.Component {
     });
   }
 
-  hoverLight(node) {
+  static hoverLight(node) {
     node.closedNeighborhood().addClass("hover-hood");
     node.addClass("hover");
     node.style({
@@ -142,14 +142,14 @@ class Cytoscape extends React.Component {
 
     cy.on("mouseover", "node", e => {
       // alert("mouseover");
-      var node = e.target;
-      this.hoverLight(node);
+      const node = e.target;
+      Cytoscape.hoverLight(node);
       // $("#cy").css("cursor", "pointer");
     });
 
     cy.on("mouseout", "node", e => {
       // alert("mouseout");
-      var node = e.target;
+      const node = e.target;
       this.hoverNight(node, cy);
       // $("#cy").css("cursor", "default");
     });
