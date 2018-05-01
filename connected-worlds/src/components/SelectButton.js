@@ -1,5 +1,4 @@
 import React from "react";
-import { notify } from "../util/EventManager";
 
 class SelectButton extends React.Component {
   render() {

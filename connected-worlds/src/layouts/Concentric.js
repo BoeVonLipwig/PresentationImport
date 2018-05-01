@@ -1,6 +1,6 @@
 // does it have abstract classes
 class Concentric {
-  getLayout() {
+  static getLayout() {
     return { name: "concentric" };
   }
 }

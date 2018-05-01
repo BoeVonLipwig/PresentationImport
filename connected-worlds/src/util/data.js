@@ -3,20 +3,6 @@ import _ from "lodash";
 import Promise from "bluebird";
 
 function loadData() {
-  if (!String.prototype.includes) {
-    String.prototype.includes = function(search, start) {
-      if (typeof start !== "number") {
-        start = 0;
-      }
-
-      if (start + search.length > this.length) {
-        return false;
-      } else {
-        return this.indexOf(search, start) !== -1;
-      }
-    };
-  }
-
   const SCHOOL_MATCHERS = {
     Design: ["design"],
     Film: ["film"],
@@ -116,23 +102,19 @@ function loadData() {
 
   function formatQuestions(row, questionsRow) {
     //TODO HTML escape
-    const formattedQuestions = _.keys(row).map(questionKey => {
-      // .keys creates array of object keys(csv column names) .map iterates over array/object and creates array by invoking function
-      if (row[questionKey] && row[questionKey] !== "Unknown") {
+
+    const formattedQuestions = _.keys(row)
+      .filter(questionKey => row[questionKey] && row[questionKey] !== "Unknown")
+      .map(questionKey => {
+        // .keys creates array of object keys(csv column names) .map iterates over array/object and creates array by invoking function
+
         // if field exists and(&&) isn't(!==) "Unknown"
-        return `
-      <h3>${questionsRow[questionKey]}</h3>
-      <p>${row[questionKey]}</p>
-      `;
-      }
-    });
+        return `<h3>${questionsRow[questionKey]}</h3><p>${
+          row[questionKey]
+        }</p>`;
+      });
 
     return _.compact(formattedQuestions).join("");
-  }
-
-  function print(s) {
-    console.log(s);
-    return s;
   }
 
   function extractRelevantData(result) {
