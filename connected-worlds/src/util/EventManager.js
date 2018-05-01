@@ -1,33 +1,31 @@
 // import Concentric from "../layouts/Concentric";
 
-// function getLayout() {
-//   //TODO
-//   let layoutObj = new Concentric(); //eval("new " + layout + "()");
-//   return Concentric.getLayout();
-// }
-
-// function set(graph, layout) {
-//   graph.on("ready", () => {
-//     graph.layout(this.getLayout(layout)).run();
-//   });
-// }
-
-let currentlySelectedButton;
-
-export function notify(button) {
-  console.log(button);
-
-  //alert(lastNodeID);
-  if (currentlySelectedButton != null) {
-    currentlySelectedButton.toggleCheck();
-    currentlySelectedButton = button;
-    button.toggleCheck();
-  }
-
-  //alert(buttonID);
+/*
+function getLayout(layout) {
+  //TODO
+  let layoutObj = new Concentric(); //eval("new " + layout + "()");
+  return layoutObj.getLayout();
 }
 
-export function setFirstButton(button) {
-  currentlySelectedButton = button;
-  currentlySelectedButton.toggleCheck();
+function set(graph, layout) {
+  graph.on("ready", () => {
+    graph.layout(this.getLayout(layout)).run();
+  });
+}
+*/
+let cy;
+
+const layouts = {
+  showSchools: { name: "concentric" },
+  showProjects: { name: "circle" },
+  showCollab: { name: "grid" }
+};
+
+export function notify(layoutID) {
+  cy.setLayout(layouts[layoutID]);
+}
+
+export function set(cyto) {
+  console.log(cyto);
+  cy = cyto;
 }

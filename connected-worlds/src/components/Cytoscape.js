@@ -8,6 +8,11 @@ class Cytoscape extends React.Component {
   constructor() {
     super();
     this.cyDiv = React.createRef();
+    this.cy;
+  }
+
+  setLayout(options) {
+    this.cy.layout(options).run();
   }
 
   setInitials(ele, cutoff01, cutoff02, space) {
@@ -133,7 +138,7 @@ class Cytoscape extends React.Component {
       return x.text();
     });
 
-    let cy = cytoscape({
+    this.cy = cytoscape({
       container: this.cyDiv.current,
       style: styleP,
       elements: graphP,
@@ -155,7 +160,11 @@ class Cytoscape extends React.Component {
     });
 
     // wait for data to be loaded before attempt to run layout
-    //EventManager.set(cy, "Concentric");
+    this.cy.on("ready", () => {
+      notify("showProjects");
+    });
+
+    set(this);
   }
 
   render() {
