@@ -3,12 +3,12 @@ import cytoscape from "cytoscape";
 import loadData from "../util/data";
 
 import _ from "lodash";
+import { notify, set } from "../util/EventManager";
 
 class Cytoscape extends React.Component {
   constructor() {
     super();
     this.cyDiv = React.createRef();
-    this.cy;
   }
 
   setLayout(options) {
@@ -145,17 +145,17 @@ class Cytoscape extends React.Component {
       wheelSensitivity: 0.5
     });
 
-    cy.on("mouseover", "node", e => {
+    this.cy.on("mouseover", "node", e => {
       // alert("mouseover");
       const node = e.target;
       Cytoscape.hoverLight(node);
       // $("#cy").css("cursor", "pointer");
     });
 
-    cy.on("mouseout", "node", e => {
+    this.cy.on("mouseout", "node", e => {
       // alert("mouseout");
       const node = e.target;
-      this.hoverNight(node, cy);
+      this.hoverNight(node, this.cy);
       // $("#cy").css("cursor", "default");
     });
 

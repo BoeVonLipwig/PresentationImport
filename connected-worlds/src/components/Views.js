@@ -1,5 +1,6 @@
 import React from "react";
 import SelectButton from "./SelectButton";
+import { notify } from "../util/EventManager";
 
 class Views extends React.Component {
   constructor(props) {
