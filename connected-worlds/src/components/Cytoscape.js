@@ -63,45 +63,43 @@ class Cytoscape extends React.Component {
     return initials;
   }
 
-  setLabels() {
-    this.cyDiv
-      .nodes('[type = "person"],[type = "project"],[type = "school"]')
-      .style({
-        label: function(ele) {
-          return ele.data("name");
-        }
-      });
+  setLabels(cy) {
+    cy.nodes('[type = "person"],[type = "project"],[type = "school"]').style({
+      label: ele => {
+        return ele.data("name");
+      }
+    });
 
-    this.cyDiv.nodes('[type = "project"]:unselected').style({
-      label: function(ele) {
+    cy.nodes('[type = "project"]:unselected').style({
+      label: ele => {
         return this.setInitials(ele, 15, 15, 2);
       }
     });
 
-    this.cyDiv.nodes('[type = "school"]:unselected').style({
-      label: function(ele) {
+    cy.nodes('[type = "school"]:unselected').style({
+      label: ele => {
         return this.setInitials(ele, 12, 12, 2);
       }
     });
 
-    if (this.cyDiv.zoom() < 1.2) {
-      this.cyDiv.nodes('[type = "person"]:unselected').style({
-        label: function(ele) {
+    if (cy.zoom() < 1.2) {
+      cy.nodes('[type = "person"]:unselected').style({
+        label: ele => {
           return this.setInitials(ele, 6, 6, 1);
         }
       });
     } else {
-      this.cyDiv.nodes('[type = "person"]:unselected').style({
-        label: function(ele) {
+      cy.nodes('[type = "person"]:unselected').style({
+        label: ele => {
           return this.setInitials(ele, 12, 12, 1);
         }
       });
     }
 
-    this.cyDiv.nodes(".highlighted").style({
-      label: function(ele) {
+    cy.nodes(".highlighted").style({
+      label: ele => {
         if (
-          this.cyDiv.nodes('.highlighted[type = "project"]').size() > 5 &&
+          cy.nodes('.highlighted[type = "project"]').size() > 5 &&
           ele.data("type") == "project"
         ) {
           return this.setInitials(ele, 6, 6, 1);
@@ -120,10 +118,10 @@ class Cytoscape extends React.Component {
     });
   }
 
-  hoverNight(node) {
+  hoverNight(node, cy) {
     node.closedNeighborhood().removeClass("hover-hood");
     node.removeClass("hover");
-    this.setLabels();
+    this.setLabels(cy);
   }
 
   componentDidMount() {
@@ -152,7 +150,7 @@ class Cytoscape extends React.Component {
     cy.on("mouseout", "node", e => {
       // alert("mouseout");
       var node = e.target;
-      this.hoverNight(node);
+      this.hoverNight(node, cy);
       // $("#cy").css("cursor", "default");
     });
 
