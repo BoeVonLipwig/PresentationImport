@@ -3,12 +3,14 @@ import cytoscape from "cytoscape";
 import loadData from "../util/data";
 import { set } from "../util/EventManager";
 import { notify } from "../util/EventManager";
+import Promise from "bluebird";
 
 class Cytoscape extends React.Component {
   constructor() {
     super();
     this.cyDiv = React.createRef();
     this.cy;
+    this.initCy = this.initCy.bind(this);
   }
 
   setLayout(options) {
@@ -24,6 +26,11 @@ class Cytoscape extends React.Component {
       return x.text();
     });
 
+    Promise.all([graphP, styleP]).spread(this.initCy);
+  }
+
+  initCy(graphP, styleP) {
+    console.log(graphP);
     this.cy = cytoscape({
       container: this.cyDiv.current,
       style: styleP,
@@ -31,12 +38,8 @@ class Cytoscape extends React.Component {
       wheelSensitivity: 0.5
     });
 
-    // wait for data to be loaded before attempt to run layout
-    this.cy.on("ready", () => {
-      notify("showProjects");
-    });
-
     set(this);
+    notify("showProjects");
   }
 
   render() {
