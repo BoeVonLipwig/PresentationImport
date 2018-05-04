@@ -14,17 +14,10 @@
 
 let cy;
 
-const layouts = {
-  showSchools: { name: "concentric" },
-  showProjects: { name: "circle" },
-  showCollab: { name: "grid" }
-};
-
-export function notify(layoutID) {
-  cy.setLayout(layouts[layoutID]);
+export function notify(layout) {
+  cy.setLayout(layout);
 }
 
 export function set(cyto) {
-  console.log(cyto);
   cy = cyto;
 }

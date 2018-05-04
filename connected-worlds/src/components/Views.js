@@ -7,9 +7,24 @@ class Views extends React.Component {
     super(props);
     this.state = {
       views: [
-        { name: "Projects", id: "showProjects", isChecked: true },
-        { name: "Programme", id: "showSchools", isChecked: false },
-        { name: "Collaborators", id: "showCollab", isChecked: false }
+        {
+          name: "Projects",
+          id: "showProjects",
+          isChecked: true,
+          layout: { name: "concentric" }
+        },
+        {
+          name: "Programme",
+          id: "showSchools",
+          isChecked: false,
+          layout: { name: "circle" }
+        },
+        {
+          name: "Collaborators",
+          id: "showCollab",
+          isChecked: false,
+          layout: { name: "breadthfirst" }
+        }
       ]
     };
     this.clickHandler = this.clickHandler.bind(this);
@@ -18,7 +33,7 @@ class Views extends React.Component {
   toggleCheck(id) {
     const newViews = this.state.views.map(function(entry) {
       if (entry.id === id) {
-        notify(id);
+        notify(entry.layout);
         return Object.assign({}, entry, {
           isChecked: true
         });

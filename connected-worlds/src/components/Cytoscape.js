@@ -4,6 +4,7 @@ import loadData from "../util/data";
 import Promise from "bluebird";
 import _ from "lodash";
 import { notify, set } from "../util/EventManager";
+import { observer } from "mobx-react";
 
 class Cytoscape extends React.Component {
   constructor() {
@@ -165,7 +166,7 @@ class Cytoscape extends React.Component {
     });
 
     set(this);
-    notify("showProjects");
+    notify({ name: "concentric" });
   }
 
   render() {
