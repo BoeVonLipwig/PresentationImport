@@ -1,5 +1,6 @@
 import React from "react";
-import Views from "./Views";
+import SelectButton from "./SelectButton";
+import DetailsPane from "./DetailsPane";
 
 class TopBar extends React.Component {
   clickHandler() {
@@ -7,6 +8,15 @@ class TopBar extends React.Component {
   }
 
   render() {
+    const elems = [
+      { name: "Projects", id: "showProjects" },
+      { name: "Programme", id: "showSchools" },
+      { name: "Collaborators", id: "showCollab" }
+    ];
+    const items = elems.map(elem => {
+      /* items are each view toggle*/
+      return <SelectButton key={elem.id} name={elem.name} id={elem.id} />;
+    });
     return (
       <div id="navbar">
         <div id="controls" className="topnav">
@@ -18,13 +28,7 @@ class TopBar extends React.Component {
           </a>
           <Views />
         </div>
-        <div id="toggle">
-          <div className="checkbox-round">
-            <input id="showInfo" type="checkbox" defaultChecked />
-            <label htmlFor="showInfo" />
-          </div>
-          <h2>Show Details</h2>
-        </div>
+        <DetailsPane />
       </div>
     );
   }
