@@ -8,7 +8,11 @@ class DetailsPane extends React.Component {
   }
 
   clickHandler() {
-    this.state.isHidden = !this.state().isHidden;
+    this.setState(
+      Object.assign({}, this.state, {
+        isHidden: !this.state.isHidden
+      })
+    );
   }
 
   render() {

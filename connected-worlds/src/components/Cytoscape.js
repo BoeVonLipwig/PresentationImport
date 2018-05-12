@@ -9,7 +9,6 @@ class Cytoscape extends React.Component {
   constructor() {
     super();
     this.cyDiv = React.createRef();
-    this.cy;
     this.initCy = this.initCy.bind(this);
   }
 

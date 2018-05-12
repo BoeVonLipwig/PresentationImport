@@ -1,6 +1,5 @@
 import React from "react";
 import Views from "./Views";
-import SelectButton from "./SelectButton";
 import DetailsPane from "./DetailsPane";
 
 class TopBar extends React.Component {
@@ -9,15 +8,6 @@ class TopBar extends React.Component {
   }
 
   render() {
-    const elems = [
-      { name: "Projects", id: "showProjects" },
-      { name: "Programme", id: "showSchools" },
-      { name: "Collaborators", id: "showCollab" }
-    ];
-    const items = elems.map(elem => {
-      /* items are each view toggle*/
-      return <SelectButton key={elem.id} name={elem.name} id={elem.id} />;
-    });
     return (
       <div id="navbar">
         <div id="controls" className="topnav">
