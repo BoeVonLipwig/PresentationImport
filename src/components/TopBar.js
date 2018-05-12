@@ -1,6 +1,7 @@
 import React from "react";
 import Views from "./Views";
 import DetailsPane from "./DetailsPane";
+import { observer } from "mobx-react";
 
 class TopBar extends React.Component {
   clickHandler() {
@@ -25,4 +26,4 @@ class TopBar extends React.Component {
   }
 }
 
-export default TopBar;
+export default observer(TopBar);
