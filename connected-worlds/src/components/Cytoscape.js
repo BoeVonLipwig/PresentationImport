@@ -3,17 +3,14 @@ import cytoscape from "cytoscape";
 import loadData from "../util/data";
 import Promise from "bluebird";
 import _ from "lodash";
-import { notify, set } from "../util/EventManager";
+import { autorun } from "mobx";
+import { observer } from "mobx-react";
 
 class Cytoscape extends React.Component {
   constructor() {
     super();
     this.cyDiv = React.createRef();
     this.initCy = this.initCy.bind(this);
-  }
-
-  setLayout(options) {
-    this.cy.layout(options).run();
   }
 
   setInitials(ele, cutoff01, cutoff02, space) {
@@ -164,8 +161,11 @@ class Cytoscape extends React.Component {
       // $("#cy").css("cursor", "default");
     });
 
-    set(this);
-    notify("showProjects");
+    this.cy.ready(() => {
+      autorun(() => {
+        this.cy.layout(this.props.cytoscapeStore.layout).run();
+      });
+    });
   }
 
   render() {
@@ -173,4 +173,4 @@ class Cytoscape extends React.Component {
   }
 }
 
-export default Cytoscape;
+export default observer(Cytoscape);
