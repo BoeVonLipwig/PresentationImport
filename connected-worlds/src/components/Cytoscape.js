@@ -1,8 +1,175 @@
-import React from 'react';
+import React from "react";
+import cytoscape from "cytoscape";
+import loadData from "../util/data";
+import Promise from "bluebird";
+import _ from "lodash";
+import { notify, set } from "../util/EventManager";
 
 class Cytoscape extends React.Component {
+  constructor() {
+    super();
+    this.cyDiv = React.createRef();
+    this.initCy = this.initCy.bind(this);
+  }
+
+  setLayout(options) {
+    this.cy.layout(options).run();
+  }
+
+  setInitials(ele, cutoff01, cutoff02, space) {
+    let initNum;
+    if (ele.data("name").length > cutoff01) {
+      initNum = 1;
+      if (space !== 1) {
+        initNum = 2;
+      }
+    } else {
+      initNum = 0;
+    }
+
+    let nameShort = Cytoscape.getInitials(ele.data("name"), initNum, space);
+
+    if (nameShort.length > cutoff02) {
+      nameShort = Cytoscape.getInitials(ele.data("name"), 2, space);
+    }
+
+    return nameShort;
+  }
+
+  static getInitials(string, initNum, space) {
+    const names = string.split(" ");
+    _.pull(names, "of", "the", "&");
+    let initials = names[0].substring(0, 1).toUpperCase();
+    let kerning;
+    if (space === 1) {
+      kerning = " ";
+    } else {
+      kerning = "";
+    }
+
+    if (names.length > 2) {
+      for (let i = 1; i < names.length - 1; i++) {
+        initials += kerning + names[i].substring(0, 1).toUpperCase();
+      }
+    }
+
+    if (names.length > 1) {
+      if (initNum === 1 || isNaN(names[names.length - 1]) === false) {
+        initials += kerning + names[names.length - 1];
+      } else {
+        initials +=
+          kerning + names[names.length - 1].substring(0, 1).toUpperCase();
+      }
+    }
+
+    if (initNum === 0) {
+      initials = string;
+    }
+
+    return initials;
+  }
+
+  setLabels(cy) {
+    cy.nodes('[type = "person"],[type = "project"],[type = "school"]').style({
+      label: ele => {
+        return ele.data("name");
+      }
+    });
+
+    cy.nodes('[type = "project"]:unselected').style({
+      label: ele => {
+        return this.setInitials(ele, 15, 15, 2);
+      }
+    });
+
+    cy.nodes('[type = "school"]:unselected').style({
+      label: ele => {
+        return this.setInitials(ele, 12, 12, 2);
+      }
+    });
+
+    if (cy.zoom() < 1.2) {
+      cy.nodes('[type = "person"]:unselected').style({
+        label: ele => {
+          return this.setInitials(ele, 6, 6, 1);
+        }
+      });
+    } else {
+      cy.nodes('[type = "person"]:unselected').style({
+        label: ele => {
+          return this.setInitials(ele, 12, 12, 1);
+        }
+      });
+    }
+
+    cy.nodes(".highlighted").style({
+      label: ele => {
+        if (
+          cy.nodes('.highlighted[type = "project"]').size() > 5 &&
+          ele.data("type") === "project"
+        ) {
+          return this.setInitials(ele, 6, 6, 1);
+        } else {
+          return ele.data("name");
+        }
+      }
+    });
+  }
+
+  static hoverLight(node) {
+    node.closedNeighborhood().addClass("hover-hood");
+    node.addClass("hover");
+    node.style({
+      label: node.data("name")
+    });
+  }
+
+  hoverNight(node, cy) {
+    node.closedNeighborhood().removeClass("hover-hood");
+    node.removeClass("hover");
+    this.setLabels(cy);
+  }
+
+  componentDidMount() {
+    // get exported json from cytoscape desktop via ajax
+    let graphP = loadData();
+
+    // also get style via ajax
+    let styleP = fetch("data.cycss").then(x => {
+      return x.text();
+    });
+
+    Promise.all([graphP, styleP]).spread(this.initCy);
+  }
+
+  initCy(graphP, styleP) {
+    this.cy = cytoscape({
+      container: this.cyDiv.current,
+      style: styleP,
+      elements: graphP,
+      wheelSensitivity: 0.5
+    });
+
+    this.cy.on("mouseover", "node", e => {
+      // alert("mouseover");
+      const node = e.target;
+      Cytoscape.hoverLight(node);
+      // $("#cy").css("cursor", "pointer");
+    });
+
+    this.cy.on("mouseout", "node", e => {
+      // alert("mouseout");
+      const node = e.target;
+      this.hoverNight(node, this.cy);
+      // $("#cy").css("cursor", "default");
+    });
+
+    set(this);
+    notify("showProjects");
+  }
+
   render() {
-    return <div id="cy" />;
+    return <div ref={this.cyDiv} id="cy" />;
   }
 }
 

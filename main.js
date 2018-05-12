@@ -285,7 +285,7 @@ $(function () {
       for( reWidth = titleWidth; $("#toggle h").height() < $("#toggle h2").height(); reWidth--) {
         $("#toggle h").css('width', reWidth);
       }
-      
+
     }
   }
   function populateHtml(node, callback) {
@@ -316,7 +316,7 @@ $(function () {
 
     infoTitle.html(node.data('name'));
     infoTitleResize();
-    
+
 
     if (role) {
       infoContainer.append('<div class="info-row"><p class="info-left">Role |</p> <p class ="info-right">' + node.data('role') + '</p></div>');
@@ -1320,6 +1320,3 @@ $(function () {
     .addClass("ui-menu-icons");
 
 });
-
-
-
