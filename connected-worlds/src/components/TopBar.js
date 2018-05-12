@@ -1,4 +1,5 @@
 import React from "react";
+import Views from "./Views";
 import SelectButton from "./SelectButton";
 import DetailsPane from "./DetailsPane";
 
