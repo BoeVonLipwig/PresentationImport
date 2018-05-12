@@ -5,12 +5,11 @@ stages:
   - build
 
 before_script:
-  - cd connected-worlds
   - yarn install
 
 cache:
   paths:
-    - connected-worlds/node_modules/
+    - node_modules/
 
 test:
   stage: test
@@ -23,4 +22,4 @@ build:
     - yarn build
   artifacts:
     paths:
-      - connected-worlds/build/
+      - build/
