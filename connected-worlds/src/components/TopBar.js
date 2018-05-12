@@ -1,5 +1,6 @@
 import React from "react";
 import SelectButton from "./SelectButton";
+import DetailsPane from "./DetailsPane";
 
 class TopBar extends React.Component {
   clickHandler() {
@@ -27,13 +28,7 @@ class TopBar extends React.Component {
           </a>
           {items}
         </div>
-        <div id="toggle">
-          <div className="checkbox-round">
-            <input id="showInfo" type="checkbox" defaultChecked />
-            <label htmlFor="showInfo" />
-          </div>
-          <h2>Show Details</h2>
-        </div>
+        <DetailsPane />
       </div>
     );
   }

@@ -11,7 +11,7 @@ class BottomBar extends React.Component {
       </div>
     </div>
   );
-  createMenuItem(Name, Text) {
+  static createMenuItem(Name, Text) {
     return (
       <li className="ui-menu-item">
         <div>
@@ -42,7 +42,7 @@ class BottomBar extends React.Component {
             <img src={logo} alt="Connected Worlds Logo" />
           </div>
         </div>
-        {ContactButton}
+        {this.ContactButton}
         {/*<select name="contact" id="contact-button" defaultValue="github">
           <option value="help" id="help" data-class="cw-help">
             Help
