@@ -201,6 +201,7 @@ function loadData() {
   function parseData(csv) {
     return Papa.parse(csv, {
       delimiter: ",",
+      skipEmptyLines: true,
       header: true //first row interpreted as field name, following rows interpreted as objects with values keyed by field name
     });
   }

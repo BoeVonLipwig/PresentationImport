@@ -1,6 +1,6 @@
 import React from "react";
 import SelectButton from "./SelectButton";
-import { notify } from "../util/EventManager";
+import cytoscapeStore from "../util/CytoscapeStore";
 
 class Views extends React.Component {
   constructor(props) {
@@ -33,7 +33,8 @@ class Views extends React.Component {
   toggleCheck(id) {
     const newViews = this.state.views.map(function(entry) {
       if (entry.id === id) {
-        notify(entry.layout);
+        console.log(entry.layout);
+        cytoscapeStore.layout = entry.layout;
         return Object.assign({}, entry, {
           isChecked: true
         });
