@@ -5,7 +5,7 @@ class DetailsPane extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      status: [{ show: "<em> Select Any Node </em>", isChecked: false }]
+      status: [{ isChecked: false }]
       // this.state = { show: "<em> Select Any Node </em>", isHidden: false };
     };
   }
