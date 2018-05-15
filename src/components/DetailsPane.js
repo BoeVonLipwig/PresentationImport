@@ -33,7 +33,11 @@ class DetailsPane extends React.Component {
     if (!hidden) {
       return "";
     }
-    return <div className="info-row">{"<em> Select Any Node </em>"}</div>;
+    return (
+      <div className="info-row">
+        <em>Select Any Node</em>
+      </div>
+    );
   }
 
   render() {
