@@ -5,8 +5,7 @@ class DetailsPane extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      status: [{ isChecked: false }]
-      // this.state = { show: "<em> Select Any Node </em>", isHidden: false };
+      status: [{ show: "<em> Select Any Node </em>", isHidden: false }]
     };
   }
 
@@ -14,7 +13,8 @@ class DetailsPane extends React.Component {
     // compute new dictionary
     const newStatus = this.state.status.map(function(entry) {
       return Object.assign({}, entry, {
-        isChecked: !entry.isChecked
+        isChecked: !entry.isChecked,
+        isHidden: !entry.isHidden
       });
     });
 
@@ -50,6 +50,7 @@ class DetailsPane extends React.Component {
           name={"Show Details"}
           id={""}
           isChecked={elem.isChecked}
+          isHidden={elem.isHidden}
           clickHandler={event => this.clickHandler(event)}
         />
       );
