@@ -8,7 +8,7 @@ class DetailsPane extends React.Component {
       status: [{ show: "<em> Select Any Node </em>", isHidden: false }]
     };
   }
-
+  
   clickHandler(e) {
     // compute new dictionary
     const newStatus = this.state.status.map(function(entry) {
@@ -17,7 +17,7 @@ class DetailsPane extends React.Component {
         isHidden: !entry.isHidden
       });
     });
-
+    
     // assign new dictionary to the details pane select button.
     this.setState(
       Object.assign({}, this.state, {
@@ -25,11 +25,11 @@ class DetailsPane extends React.Component {
       })
     );
   }
-
+  
   toggleCheck() {
     // get boolean based on button's state
     let hidden = this.state.status[0].isChecked;
-
+    
     if (!hidden) {
       return "";
     }
@@ -41,7 +41,7 @@ class DetailsPane extends React.Component {
       </div>
     );
   }
-
+  
   render() {
     const elem = this.state.status.map(elem => {
       return (
