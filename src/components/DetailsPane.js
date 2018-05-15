@@ -4,19 +4,41 @@ import SelectButton from "./SelectButton";
 class DetailsPane extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { show: "<em> Select Any Node </em>", isHidden: false };
+    this.state = {
+      status: [{ show: "<em> Select Any Node </em>", isHidden: false }]
+    };
   }
 
-  clickHandler() {
+  clickHandler(e) {
+    // compute new dictionary
+    const newStatus = this.state.status.map(function(entry) {
+      return Object.assign({}, entry, {
+        isChecked: !entry.isChecked,
+        isHidden: !entry.isHidden
+      });
+    });
+
+    // assign new dictionary to the details pane select button.
     this.setState(
       Object.assign({}, this.state, {
-        isHidden: !this.state.isHidden
+        status: newStatus
       })
     );
   }
 
   render() {
-    const elem = <SelectButton key={""} name={"Show Details"} id={""} />;
+    const elem = this.state.status.map(elem => {
+      return (
+        <SelectButton
+          key={""}
+          name={"Show Details"}
+          id={""}
+          isChecked={elem.isChecked}
+          isHidden={elem.isHidden}
+          clickHandler={event => this.clickHandler(event)}
+        />
+      );
+    });
     return (
       <div id="detailsBar">
         <div id="toggle">{elem}</div>
