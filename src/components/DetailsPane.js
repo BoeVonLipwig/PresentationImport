@@ -5,7 +5,8 @@ class DetailsPane extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      status: [{ show: "<em> Select Any Node </em>", isHidden: false }]
+      status: [{ show: "<em> Select Any Node </em>", isChecked: false }]
+      // this.state = { show: "<em> Select Any Node </em>", isHidden: false };
     };
   }
 
@@ -13,8 +14,7 @@ class DetailsPane extends React.Component {
     // compute new dictionary
     const newStatus = this.state.status.map(function(entry) {
       return Object.assign({}, entry, {
-        isChecked: !entry.isChecked,
-        isHidden: !entry.isHidden
+        isChecked: !entry.isChecked
       });
     });
 
@@ -26,6 +26,16 @@ class DetailsPane extends React.Component {
     );
   }
 
+  toggleCheck() {
+    // get boolean based on button's state
+    let hidden = this.state.status[0].isChecked;
+
+    if (!hidden) {
+      return "";
+    }
+    return <div className="info-row">{"<em> Select Any Node </em>"}</div>;
+  }
+
   render() {
     const elem = this.state.status.map(elem => {
       return (
@@ -34,7 +44,6 @@ class DetailsPane extends React.Component {
           name={"Show Details"}
           id={""}
           isChecked={elem.isChecked}
-          isHidden={elem.isHidden}
           clickHandler={event => this.clickHandler(event)}
         />
       );
@@ -44,9 +53,7 @@ class DetailsPane extends React.Component {
         <div id="toggle">{elem}</div>
         <div id="nodeDetails" className="expanded">
           <div id="infoContainer" className="info">
-            <div className="container">
-              <div className="info-row">{this.state.show}</div>
-            </div>
+            <div className="container"> {this.toggleCheck()} </div>
           </div>
         </div>
       </div>
