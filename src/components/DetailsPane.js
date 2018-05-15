@@ -34,10 +34,15 @@ class DetailsPane extends React.Component {
       return "";
     }
     return (
+<<<<<<< HEAD
       <div id="infoContainer" className="info">
         <div className="info-row">
           <em>Select Any Node</em>
         </div>
+=======
+      <div className="info-row">
+        <em>Select Any Node</em>
+>>>>>>> made use of em tag styling. removed em from string into actual html code. now it looks likes the original. still need to add information based on selected node
       </div>
     );
   }
