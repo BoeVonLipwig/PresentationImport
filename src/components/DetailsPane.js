@@ -1,5 +1,8 @@
 import React from "react";
 import SelectButton from "./SelectButton";
+import cytoscapeStore from "../util/CytoscapeStore";
+import { autorun } from "mobx";
+import { observer } from "mobx-react";
 
 class DetailsPane extends React.Component {
   constructor(props) {
@@ -29,13 +32,21 @@ class DetailsPane extends React.Component {
   toggleCheck() {
     // get boolean based on button's state
     let hidden = this.state.status[0].isChecked;
-
+    // console.log(cytoscapeStore.layout);
+    console.log(cytoscapeStore.node);
     if (!hidden) {
       return "";
     }
+    if (cytoscapeStore.node === null) {
+      return (
+        <div className="info-row">
+          <em>Select Any Node</em>
+        </div>
+      );
+    }
     return (
       <div className="info-row">
-        <em>Select Any Node</em>
+        <em>node not null</em>
       </div>
     );
   }
@@ -65,4 +76,4 @@ class DetailsPane extends React.Component {
   }
 }
 
-export default DetailsPane;
+export default observer(DetailsPane);
