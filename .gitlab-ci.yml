@@ -1,0 +1,29 @@
+image: node:8
+
+stages:
+  - test
+  - build
+
+before_script:
+  - yarn install
+
+cache:
+  paths:
+    - node_modules/
+
+test:
+  tags:
+    - docker
+  stage: test
+  script:
+    - yarn test
+
+build:
+  tags:
+    - docker
+  stage: build
+  script:
+    - yarn build
+  artifacts:
+    paths:
+      - build/
