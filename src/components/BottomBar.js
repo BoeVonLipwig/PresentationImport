@@ -4,7 +4,6 @@ import ContactButton from "./ContactButton";
 
 class BottomBar extends React.Component {
   render() {
-    console.log("rendering");
     return (
       <div id="navbar-bottom">
         <div>
