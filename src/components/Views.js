@@ -1,6 +1,7 @@
 import React from "react";
 import SelectButton from "./SelectButton";
 import cytoscapeStore from "../util/CytoscapeStore";
+import layoutFactory from "../util/LayoutFactory";
 
 class Views extends React.Component {
   constructor(props) {
@@ -34,7 +35,7 @@ class Views extends React.Component {
     const newViews = this.state.views.map(function(entry) {
       if (entry.id === id) {
         console.log(entry.layout);
-        cytoscapeStore.layout = entry.layout;
+        cytoscapeStore.layout = layoutFactory.computeLayout(entry.id);
         return Object.assign({}, entry, {
           isChecked: true
         });
