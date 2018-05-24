@@ -1,27 +1,20 @@
 class LayoutFactory {
-  projectsLayout() {
-    return { name: "concentric" };
-  }
-
-  programmeLayout() {
-    return { name: "circle" };
-  }
-
-  collaboratorsLayout() {
-    return { name: "breadthfirst" };
-  }
+  static projectsLayout = { name: "concentric" };
+  static programmeLayout = { name: "circle" };
+  static collaboratorsLayout = { name: "breadthfirst" };
 
   static computeLayout(l) {
-    if (l === "showProjects") {
-      return this.projectsLayout();
-    } else if (l === "showSchools") {
-      return this.programmeLayout();
-    } else if (l === "showCollab") {
-      return this.collaboratorsLayout();
-    }
+    switch (l) {
+      case "showProjects":
+        return this.projectsLayout;
+      case "showSchools":
+        return this.programmeLayout;
+      case "showCollab":
+        return this.collaboratorsLayout;
 
-    // default layout if failed to read input
-    return { name: "grid" };
+      default:
+        return { name: "grid" };
+    }
   }
 }
 
