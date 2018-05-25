@@ -7,22 +7,20 @@ class ProjectLayout extends Layout {
   static projectRadius;
 
   static init() {
-    let elesHide = Layout.cy.elements(
-      'edge[type = "collab"], [type = "school"]'
-    );
-    let elesFilter = Layout.cy.elements('edge[type = "collab"]');
+    let elesHide = this.cy.elements('edge[type = "collab"], [type = "school"]');
+    let elesFilter = this.cy.elements('edge[type = "collab"]');
 
-    this.activePeople = Layout.cy
+    this.activePeople = this.cy
       .nodes('[type = "project"]')
       .closedNeighborhood()
       .nodes('[type = "person"]');
-    let nonActivePeople = Layout.cy
+    let nonActivePeople = this.cy
       .nodes('[type = "person"]')
       .not(this.activePeople);
 
-    this.projects = Layout.cy.nodes('[type = "project"]');
+    this.projects = this.cy.nodes('[type = "project"]');
 
-    let emptySchoolNodes = Layout.cy
+    let emptySchoolNodes = this.cy
       .elements('[type = "school"]')
       .filter(function(ele) {
         return (
@@ -38,22 +36,22 @@ class ProjectLayout extends Layout {
     elesHide.addClass("hidden");
     elesFilter.addClass("filtered");
 
-    let paddedHeight = Layout.cy.height() - Layout.layoutPadding * 2;
+    let paddedHeight = this.cy.height() - this.layoutPadding * 2;
 
     if (
-      Layout.cy
+      this.cy
         .filter(function(ele) {
           return ele.selected();
         })
         .anySame(nonActivePeople) == true
     ) {
-      Layout.cy.elements('[type = "school"]').addClass("filtered");
-      // Layout.cy.$(':selected').removeClass('filtered').addClass('hidden')
+      this.cy.elements('[type = "school"]').addClass("filtered");
+      // this.cy.$(':selected').removeClass('filtered').addClass('hidden')
     }
 
-    this.personRadius = Layout.circleRadius(this.activePeople) * 2;
+    this.personRadius = this.circleRadius(this.activePeople) * 2;
     this.projectRadius =
-      Layout.circleRadius(Layout.cy.nodes('[type = "project"]')) * 2;
+      this.circleRadius(this.cy.nodes('[type = "project"]')) * 2;
 
     if (this.projectRadius < this.personRadius + 250) {
       this.projectRadius = this.personRadius + 250;
@@ -61,15 +59,15 @@ class ProjectLayout extends Layout {
   }
 
   static getLayout() {
-    Layout.clearStyles();
-    Layout.cy.nodes().positions({ x: 0, y: 0 });
+    this.clearStyles();
+    this.cy.nodes().positions({ x: 0, y: 0 });
     this.init();
 
     return [
       this.activePeople.layout({
         name: "circle",
         avoidOverlap: false,
-        padding: Layout.layoutPadding,
+        padding: this.layoutPadding,
         startAngle: 0,
         sweep: Math.PI,
         boundingBox: {
@@ -106,7 +104,7 @@ class ProjectLayout extends Layout {
       this.projects.layout({
         name: "circle",
         avoidOverlap: false,
-        padding: Layout.layoutPadding,
+        padding: this.layoutPadding,
         startAngle: 0,
         sweep: Math.PI,
         boundingBox: {
