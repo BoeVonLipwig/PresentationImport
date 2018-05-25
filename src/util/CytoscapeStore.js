@@ -1,7 +1,8 @@
 import { observable, decorate } from "mobx";
+import ProjectLayout from "../layouts/ProjectLayout";
 
 class CytoscapeStore {
-  layout = { name: "concentric" };
+  layout = null;
 }
 decorate(CytoscapeStore, {
   layout: observable

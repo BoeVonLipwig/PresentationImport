@@ -1,6 +1,8 @@
 import React from "react";
 import cytoscape from "cytoscape";
 import loadData from "../util/data";
+import Layout from "../layouts/Layout";
+import ProjectLayout from "../layouts/ProjectLayout";
 import Promise from "bluebird";
 import _ from "lodash";
 import { autorun } from "mobx";
@@ -127,6 +129,44 @@ class Cytoscape extends React.Component {
     this.setLabels(cy);
   }
 
+  addCollab(cy) {
+    cy.nodes('[type = "project"]').forEach(function(projectNode) {
+      projectNode
+        .closedNeighborhood()
+        .nodes('[type = "person"]')
+        .forEach(function(person) {
+          projectNode
+            .closedNeighborhood()
+            .nodes('[type = "person"]')
+            .forEach(function(otherPerson) {
+              if (
+                person != otherPerson &&
+                cy
+                  .edges(
+                    '[id ="' + person.id() + "to" + otherPerson.id() + '"]'
+                  )
+                  .size() < 1 &&
+                cy
+                  .edges(
+                    '[id ="' + otherPerson.id() + "to" + person.id() + '"]'
+                  )
+                  .size() < 1
+              ) {
+                cy.add({
+                  group: "edges",
+                  data: {
+                    id: person.id() + "to" + otherPerson.id(),
+                    source: person.id(),
+                    target: otherPerson.id(),
+                    type: "collab"
+                  }
+                });
+              }
+            });
+        });
+    });
+  }
+
   componentDidMount() {
     // get exported json from cytoscape desktop via ajax
     let graphP = loadData();
@@ -147,6 +187,11 @@ class Cytoscape extends React.Component {
       wheelSensitivity: 0.5
     });
 
+    this.addCollab(this.cy);
+
+    this.cy.elements('[type = "school"]').addClass("school");
+    this.cy.elements('[type = "project"]').addClass("project");
+
     this.cy.on("mouseover", "node", e => {
       // alert("mouseover");
       const node = e.target;
@@ -162,8 +207,12 @@ class Cytoscape extends React.Component {
     });
 
     this.cy.ready(() => {
+      Layout.cy = this.cy;
+      console.log("hi");
+      this.props.cytoscapeStore.layout = ProjectLayout.getLayout();
       autorun(() => {
-        this.cy.layout(this.props.cytoscapeStore.layout).run();
+        this.props.cytoscapeStore.layout.run();
+        console.log("ready");
       });
     });
   }

@@ -11,20 +11,17 @@ class Views extends React.Component {
         {
           name: "Projects",
           id: "showProjects",
-          isChecked: true,
-          layout: { name: "concentric" }
+          isChecked: true
         },
         {
           name: "Programme",
           id: "showSchools",
-          isChecked: false,
-          layout: { name: "circle" }
+          isChecked: false
         },
         {
           name: "Collaborators",
           id: "showCollab",
-          isChecked: false,
-          layout: { name: "breadthfirst" }
+          isChecked: false
         }
       ]
     };

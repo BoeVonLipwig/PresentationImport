@@ -3,18 +3,26 @@ import ProgrammeLayout from "../layouts/ProgrammeLayout";
 import CollaboratorLayout from "../layouts/CollaboratorLayout";
 
 class LayoutFactory {
-  static projectLayout = ProjectLayout.getLayout();
-  static programmeLayout = ProgrammeLayout.getLayout();
-  static collaboratorLayout = CollaboratorLayout.getLayout();
+  static projectLayout() {
+    return ProjectLayout.getLayout();
+  }
+
+  static programmeLayout() {
+    return ProgrammeLayout.getLayout();
+  }
+
+  static collaboratorLayout() {
+    return CollaboratorLayout.getLayout();
+  }
 
   static computeLayout(l) {
     switch (l) {
       case "showProjects":
-        return this.projectLayout;
+        return this.projectLayout();
       case "showSchools":
-        return this.programmeLayout;
+        return this.programmeLayout();
       case "showCollab":
-        return this.collaboratorLayout;
+        return this.collaboratorLayout();
 
       default:
         return { name: "grid" };
