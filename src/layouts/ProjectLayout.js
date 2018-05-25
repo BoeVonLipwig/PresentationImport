@@ -3,6 +3,8 @@ import Layout from "./Layout";
 class ProjectLayout extends Layout {
   static activePeople;
   static projects;
+  static personRadius;
+  static projectRadius;
 
   static init() {
     let elesHide = Layout.cy.elements(
@@ -49,12 +51,12 @@ class ProjectLayout extends Layout {
       // Layout.cy.$(':selected').removeClass('filtered').addClass('hidden')
     }
 
-    let personRadius = Layout.circleRadius(this.activePeople) * 2;
-    let projectRadius =
+    this.personRadius = Layout.circleRadius(this.activePeople) * 2;
+    this.projectRadius =
       Layout.circleRadius(Layout.cy.nodes('[type = "project"]')) * 2;
 
-    if (projectRadius < personRadius + 250) {
-      projectRadius = personRadius + 250;
+    if (this.projectRadius < this.personRadius + 250) {
+      this.projectRadius = this.personRadius + 250;
     }
   }
 
@@ -64,8 +66,6 @@ class ProjectLayout extends Layout {
     Layout.clearStyles();
     Layout.cy.nodes().positions({ x: 0, y: 0 });
 
-    let personRadius = 1000;
-    let projectRadius = 750;
     return [
       this.activePeople.layout({
         name: "circle",
@@ -74,12 +74,12 @@ class ProjectLayout extends Layout {
         startAngle: 0,
         sweep: Math.PI,
         boundingBox: {
-          x1: 0 - personRadius,
-          y1: 0 - personRadius,
-          w: personRadius * 2,
-          h: personRadius * 2
+          x1: 0 - this.personRadius,
+          y1: 0 - this.personRadius,
+          w: this.personRadius * 2,
+          h: this.personRadius * 2
         },
-        radius: personRadius,
+        radius: this.personRadius,
         nodeDimensionsIncludeLabels: false,
         sort: function(a, b) {
           let orderA = 0;
@@ -111,12 +111,12 @@ class ProjectLayout extends Layout {
         startAngle: 0,
         sweep: Math.PI,
         boundingBox: {
-          x1: 0 - projectRadius,
-          y1: 0 - projectRadius,
-          w: projectRadius * 2,
-          h: projectRadius * 2
+          x1: 0 - this.projectRadius,
+          y1: 0 - this.projectRadius,
+          w: this.projectRadius * 2,
+          h: this.projectRadius * 2
         },
-        radius: projectRadius,
+        radius: this.projectRadius,
         nodeDimensionsIncludeLabels: false
       })
     ];

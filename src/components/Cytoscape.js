@@ -167,6 +167,121 @@ class Cytoscape extends React.Component {
     });
   }
 
+  addKey(cy) {
+    let keyXPadding = 100;
+    let keyYPadding = 50;
+
+    let keyBorder = cy.add({
+      group: "nodes",
+      data: { id: "keyBorder", type: "border" }
+    });
+
+    let titleKey = cy.add({
+      group: "nodes",
+      data: { id: "titleKey", name: "NODE TYPE", type: "key" }
+    });
+
+    let projectKey = cy.add({
+      group: "nodes",
+      data: { id: "projectKey", name: "Project", type: "key" }
+    });
+
+    projectKey.addClass("project");
+
+    let schoolKey = cy.add({
+      group: "nodes",
+      data: { id: "schoolKey", name: "Programme", type: "key" }
+    });
+
+    schoolKey.addClass("school");
+
+    let roleKey = cy.add([
+      {
+        group: "nodes",
+        data: { id: "schoolKey", name: "Programme", type: "key" }
+      },
+      {
+        group: "nodes",
+        data: {
+          id: "academicStaffKey",
+          name: "Academic Staff",
+          role: "Academic Staff",
+          type: "key"
+        }
+      },
+      {
+        group: "nodes",
+        data: {
+          id: "postgradKey",
+          name: "Post-Grad Student",
+          role: "Masters Student",
+          type: "key"
+        }
+      },
+      {
+        group: "nodes",
+        data: {
+          id: "professionalStaff",
+          name: "Professional Staff",
+          role: "Professional Staff",
+          type: "key"
+        }
+      }
+    ]);
+
+    let keys = cy.elements('[type = "key"]');
+    keys.unselectify().ungrabify();
+
+    keyBorder.unselectify().ungrabify();
+
+    let maxLabelWidth = 0;
+
+    keys.forEach(function(n) {
+      let labelWidth = n.boundingBox({ includeLabels: true }).w;
+
+      if (labelWidth > maxLabelWidth) {
+        maxLabelWidth = labelWidth;
+      }
+    });
+
+    function arrange() {
+      let maxLabelWidth = maxLabelWidth;
+      let nodeHeight = keys.height();
+      let bboxIgnore = cy.elements(
+        '.hidden, .filtered, [type = "key"], [type = "border"]'
+      );
+      let bbox = cy
+        .elements()
+        .not(bboxIgnore)
+        .boundingBox({ includeLabels: true });
+      let keyNum = keys.size();
+      let keysHeight = nodeHeight * keyNum + keyYPadding * (keyNum - 1);
+
+      let layout = keys.layout({
+        name: "grid",
+        columns: 1,
+        boundingBox: {
+          x1: bbox.x1 - (maxLabelWidth + keyXPadding),
+          y1: bbox.y1 + (bbox.h - keysHeight) / 2,
+          w: maxLabelWidth,
+          h: keysHeight
+        }
+      });
+
+      keyBorder.position({
+        x: bbox.x1 - (maxLabelWidth + keyXPadding) + maxLabelWidth / 2,
+        y: bbox.y1 + (bbox.h - keysHeight) / 2 + keysHeight / 2
+      });
+      keyBorder.style({
+        width: maxLabelWidth + keyXPadding / 2,
+        height: keysHeight + keyXPadding / 2
+      });
+
+      layout.run();
+    }
+    this.addKey.arrange = arrange;
+  }
+
   componentDidMount() {
     // get exported json from cytoscape desktop via ajax
     let graphP = loadData();
@@ -188,6 +303,7 @@ class Cytoscape extends React.Component {
     });
 
     this.addCollab(this.cy);
+    this.addKey(this.cy);
 
     this.cy.elements('[type = "school"]').addClass("school");
     this.cy.elements('[type = "project"]').addClass("project");
@@ -208,16 +324,13 @@ class Cytoscape extends React.Component {
 
     this.cy.ready(() => {
       Layout.cy = this.cy;
-      console.log("hi");
       this.props.cytoscapeStore.layouts = ProjectLayout.getLayout();
       autorun(() => {
-        console.log("WHOOO");
         this.props.cytoscapeStore.layouts.forEach(layout => {
-          console.log("WOO");
           console.log(layout);
           layout.run();
         });
-        console.log("ready");
+        this.addKey.arrange();
       });
     });
   }
