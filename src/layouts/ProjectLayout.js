@@ -61,10 +61,9 @@ class ProjectLayout extends Layout {
   }
 
   static getLayout() {
-    if (this.activePeople == null) this.init();
-    console.log("hiya");
     Layout.clearStyles();
     Layout.cy.nodes().positions({ x: 0, y: 0 });
+    this.init();
 
     return [
       this.activePeople.layout({
