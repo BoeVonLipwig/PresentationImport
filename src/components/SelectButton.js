@@ -9,6 +9,7 @@ class SelectButton extends React.Component {
             id={this.props.id}
             type="checkbox"
             checked={this.props.isChecked}
+            readOnly
           />
           <label htmlFor={this.props.id} onClick={this.props.clickHandler} />
         </div>
