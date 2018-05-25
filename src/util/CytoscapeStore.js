@@ -2,10 +2,10 @@ import { observable, decorate } from "mobx";
 import ProjectLayout from "../layouts/ProjectLayout";
 
 class CytoscapeStore {
-  layout = null;
+  layouts = null;
 }
 decorate(CytoscapeStore, {
-  layout: observable
+  layouts: observable
 });
 
 const cytoscapeStore = new CytoscapeStore();

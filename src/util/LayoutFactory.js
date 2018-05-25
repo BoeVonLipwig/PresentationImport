@@ -18,6 +18,7 @@ class LayoutFactory {
   static computeLayout(l) {
     switch (l) {
       case "showProjects":
+        console.log("projects");
         return this.projectLayout();
       case "showSchools":
         return this.programmeLayout();
