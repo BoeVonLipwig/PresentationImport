@@ -1,26 +1,15 @@
 .menu-div {
   position: relative;
-  top: -10px;
-  left: 10px;
-}
-
-.help {
-  content: url("../assets/help.svg");
-  width: 100px;
-}
-
-.mailto {
-  content: url("../assets/mailto.svg");
-  width: 100px;
-}
-
-.github {
-  content: url("../assets/github.svg");
-  width: 100px;
+  top: -27px;
+  left: -21px;
 }
 
 .menu-ul {
   width: 190px;
+}
+
+#img-option {
+  float: right;
 }
 
 #contact-button {
@@ -72,7 +61,7 @@
 .contact-menu {
   z-index: 9;
   /*color: #ddd;*/
-  width: 150px;
+  width: 190px;
   /*  background-color:  #1A2A39;
     border: solid 1px #3D4452;*/
   /*padding: 0px 0px;
@@ -82,10 +71,12 @@
 }
 
 #contact-menu {
+  position: absolute;
+  bottom: calc(100%);
   cursor: pointer;
   z-index: 9;
   color: #ddd;
-  width: 150px;
+  width: 190px;
   background-color: #1a2a39;
   border: solid 1px #3d4452;
   font: 15px roboto condensed, helvetica neue, helvetica, arial, sans-serif;
