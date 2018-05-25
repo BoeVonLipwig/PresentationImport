@@ -8,8 +8,7 @@ class DetailsPane extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      status: [{ isChecked: false }]
-      // this.state = { show: "<em> Select Any Node </em>", isHidden: false };
+      status: [{ isChecked: true }]
     };
   }
 
@@ -30,25 +29,25 @@ class DetailsPane extends React.Component {
     );
   }
 
-  toggleCheck() {
-    // get boolean based on button's state
-    let hidden = this.state.status[0].isChecked;
+  infoPane() {
+    return (
+      //Checks if a node is selected and displays the info if it is
+      this.state.status[0].isChecked ?
+        <div id="infoContainer" className="info">
+          <div className="container">
+            <div className="info-row">
+              <div>{cytoscapeStore.node === null ? <em>Select Any Node</em> : this.nodeInfo()}</div>
+            </div>
+          </div>
+        </div> : null
+    );
+  }
+
+  nodeInfo() {
     // console.log(cytoscapeStore.layout);
     console.log(cytoscapeStore.node);
-    if (!hidden) {
-      return "";
-    }
-    if (cytoscapeStore.node === null) {
-      return (
-        <div className="info-row">
-          <em>Select Any Node</em>
-        </div>
-      );
-    }
     return (
-      <div className="info-row">
-        <em>node not null</em>
-      </div>
+      <em>node not null</em>
     );
   }
 
@@ -69,11 +68,18 @@ class DetailsPane extends React.Component {
       <div id="detailsBar">
         <div id="toggle">{elem}</div>
         <div id="nodeDetails" className="expanded">
+<<<<<<< HEAD
           {this.toggleCheck()}
+=======
+          {this.infoPane()
+
+          }
+>>>>>>> Made the show details div hide when its meant to instead of just unfilling and cleaned up the details pane code some what
         </div>
       </div>
     );
   }
 }
+
 
 export default observer(DetailsPane);
