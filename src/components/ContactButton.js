@@ -49,7 +49,7 @@ class ContactButton extends React.Component {
           {this.state.selected[0]}
           <span className={this.state.selected[1]} />
           <span id="img-option">
-            <img src={this.state.selected[2]} height="15px" />
+            <img src={this.state.selected[2]} height="15px" alt="" />
           </span>
         </div>
         {menu ? this.createMenu() : null}
