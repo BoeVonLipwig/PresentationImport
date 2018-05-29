@@ -140,7 +140,7 @@ class Cytoscape extends React.Component {
             .nodes('[type = "person"]')
             .forEach(function(otherPerson) {
               if (
-                person != otherPerson &&
+                person !== otherPerson &&
                 cy
                   .edges(
                     '[id ="' + person.id() + "to" + otherPerson.id() + '"]'
