@@ -168,10 +168,10 @@ class Cytoscape extends React.Component {
   }
 
   addKey(cy) {
-    let keyXPadding = 100;
-    let keyYPadding = 50;
+    this.keyXPadding = 100;
+    this.keyYPadding = 50;
 
-    let keyBorder = cy.add({
+    this.keyBorder = cy.add({
       group: "nodes",
       data: { id: "keyBorder", type: "border" }
     });
@@ -229,57 +229,61 @@ class Cytoscape extends React.Component {
       }
     ]);
 
-    let keys = cy.elements('[type = "key"]');
-    keys.unselectify().ungrabify();
+    this.keys = cy.elements('[type = "key"]');
+    this.keys.unselectify().ungrabify();
 
-    keyBorder.unselectify().ungrabify();
+    this.keyBorder.unselectify().ungrabify();
 
-    let maxLabelWidth = 0;
+    let maxLabelWidthLocal = 0;
 
-    keys.forEach(function(n) {
+    this.keys.forEach(function(n) {
       let labelWidth = n.boundingBox({ includeLabels: true }).w;
 
-      if (labelWidth > maxLabelWidth) {
-        maxLabelWidth = labelWidth;
+      if (labelWidth > maxLabelWidthLocal) {
+        maxLabelWidthLocal = labelWidth;
       }
     });
 
-    function arrange() {
-      let maxLabelWidth = maxLabelWidth;
-      let nodeHeight = keys.height();
-      let bboxIgnore = cy.elements(
-        '.hidden, .filtered, [type = "key"], [type = "border"]'
-      );
-      let bbox = cy
-        .elements()
-        .not(bboxIgnore)
-        .boundingBox({ includeLabels: true });
-      let keyNum = keys.size();
-      let keysHeight = nodeHeight * keyNum + keyYPadding * (keyNum - 1);
+    this.maxLabelWidth = maxLabelWidthLocal;
+  }
 
-      let layout = keys.layout({
-        name: "grid",
-        columns: 1,
-        boundingBox: {
-          x1: bbox.x1 - (maxLabelWidth + keyXPadding),
-          y1: bbox.y1 + (bbox.h - keysHeight) / 2,
-          w: maxLabelWidth,
-          h: keysHeight
-        }
-      });
+  arrangeKey(cy) {
+    console.log("arranging key");
+    let nodeHeight = this.keys.height();
+    let bboxIgnore = cy.elements(
+      '.hidden, .filtered, [type = "key"], [type = "border"]'
+    );
+    let bbox = cy
+      .elements()
+      .not(bboxIgnore)
+      .boundingBox({ includeLabels: true });
+    let keyNum = this.keys.size();
+    let keysHeight = nodeHeight * keyNum + this.keyYPadding * (keyNum - 1);
 
-      keyBorder.position({
-        x: bbox.x1 - (maxLabelWidth + keyXPadding) + maxLabelWidth / 2,
-        y: bbox.y1 + (bbox.h - keysHeight) / 2 + keysHeight / 2
-      });
-      keyBorder.style({
-        width: maxLabelWidth + keyXPadding / 2,
-        height: keysHeight + keyXPadding / 2
-      });
+    let layout = this.keys.layout({
+      name: "grid",
+      columns: 1,
+      boundingBox: {
+        x1: bbox.x1 - (this.maxLabelWidth + this.keyXPadding),
+        y1: bbox.y1 + (bbox.h - keysHeight) / 2,
+        w: this.maxLabelWidth,
+        h: keysHeight
+      }
+    });
 
-      layout.run();
-    }
-    this.addKey.arrange = arrange;
+    this.keyBorder.position({
+      x:
+        bbox.x1 -
+        (this.maxLabelWidth + this.keyXPadding) +
+        this.maxLabelWidth / 2,
+      y: bbox.y1 + (bbox.h - keysHeight) / 2 + keysHeight / 2
+    });
+    this.keyBorder.style({
+      width: this.maxLabelWidth + this.keyXPadding / 2,
+      height: keysHeight + this.keyXPadding / 2
+    });
+
+    layout.run();
   }
 
   componentDidMount() {
@@ -330,7 +334,7 @@ class Cytoscape extends React.Component {
           console.log(layout);
           layout.run();
         });
-        this.addKey.arrange();
+        this.arrangeKey(this.cy);
       });
     });
   }
