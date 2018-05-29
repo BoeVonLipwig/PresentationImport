@@ -24,17 +24,17 @@ class Layout {
       var orderA = 0;
       var orderB = 0;
 
-      if (a.data("role") == "Academic Staff") {
+      if (a.data("role") === "Academic Staff") {
         orderA = order[0];
-      } else if (a.data("role") == "Professional Staff") {
+      } else if (a.data("role") === "Professional Staff") {
         orderA = order[1];
       } else {
         orderA = order[2];
       }
 
-      if (b.data("role") == "Academic Staff") {
+      if (b.data("role") === "Academic Staff") {
         orderB = order[0];
-      } else if (b.data("role") == "Professional Staff") {
+      } else if (b.data("role") === "Professional Staff") {
         orderB = order[1];
       } else {
         orderB = order[2];

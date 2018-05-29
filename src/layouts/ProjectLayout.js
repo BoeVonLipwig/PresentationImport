@@ -36,8 +36,6 @@ class ProjectLayout extends Layout {
     elesHide.addClass("hidden");
     elesFilter.addClass("filtered");
 
-    let paddedHeight = this.cy.height() - this.layoutPadding * 2;
-
     if (
       this.cy
         .filter(function(ele) {

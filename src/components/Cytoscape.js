@@ -176,7 +176,7 @@ class Cytoscape extends React.Component {
       data: { id: "keyBorder", type: "border" }
     });
 
-    let titleKey = cy.add({
+    cy.add({
       group: "nodes",
       data: { id: "titleKey", name: "NODE TYPE", type: "key" }
     });
@@ -195,7 +195,7 @@ class Cytoscape extends React.Component {
 
     schoolKey.addClass("school");
 
-    let roleKey = cy.add([
+    cy.add([
       {
         group: "nodes",
         data: { id: "schoolKey", name: "Programme", type: "key" }
