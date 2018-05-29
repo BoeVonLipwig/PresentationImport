@@ -1,29 +1,8 @@
 import React from "react";
 import logo from "../assets/vic-logo.svg";
+import ContactButton from "./ContactButton";
 
 class BottomBar extends React.Component {
-  Menu = [];
-  ContactButton = (
-    <div id="contact-button" onClick={this.buttonClicked}>
-      <div>
-        Submit Issue
-        <span className="cw-github" />
-      </div>
-    </div>
-  );
-  static createMenuItem(Name, Text) {
-    return (
-      <li className="ui-menu-item">
-        <div>
-          {Text}
-          <span className={"cw-" + Name} />
-        </div>
-      </li>
-    );
-  }
-
-  buttonClicked() {}
-
   render() {
     return (
       <div id="navbar-bottom">
@@ -42,7 +21,7 @@ class BottomBar extends React.Component {
             <img src={logo} alt="Connected Worlds Logo" />
           </div>
         </div>
-        {this.ContactButton}
+        <ContactButton />
         {/*<select name="contact" id="contact-button" defaultValue="github">
           <option value="help" id="help" data-class="cw-help">
             Help
