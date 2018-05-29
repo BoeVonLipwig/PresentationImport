@@ -335,6 +335,7 @@ class Cytoscape extends React.Component {
           layout.run();
         });
         this.arrangeKey(this.cy);
+        this.cy.fit();
       });
     });
   }
