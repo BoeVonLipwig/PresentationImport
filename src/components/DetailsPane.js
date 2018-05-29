@@ -34,8 +34,10 @@ class DetailsPane extends React.Component {
       return "";
     }
     return (
-      <div className="info-row">
-        <em>Select Any Node</em>
+      <div id="infoContainer" className="info">
+        <div className="info-row">
+          <em>Select Any Node</em>
+        </div>
       </div>
     );
   }
@@ -56,9 +58,7 @@ class DetailsPane extends React.Component {
       <div id="detailsBar">
         <div id="toggle">{elem}</div>
         <div id="nodeDetails" className="expanded">
-          <div id="infoContainer" className="info">
-            <div className="container"> {this.toggleCheck()} </div>
-          </div>
+          {this.toggleCheck()}
         </div>
       </div>
     );
