@@ -78,28 +78,7 @@ class ProjectLayout extends Layout {
         },
         radius: this.personRadius,
         nodeDimensionsIncludeLabels: false,
-        sort: function(a, b) {
-          let orderA = 0;
-          let orderB = 0;
-
-          if (a.data("role") === "Academic Staff") {
-            orderA = 1;
-          } else if (a.data("role") === "Professional Staff") {
-            orderA = 2;
-          } else {
-            orderA = 3;
-          }
-
-          if (b.data("role") === "Academic Staff") {
-            orderB = 1;
-          } else if (b.data("role") === "Professional Staff") {
-            orderB = 2;
-          } else {
-            orderB = 3;
-          }
-
-          return orderA - orderB;
-        }
+        sort: this.sortBy("normal")
       }),
       this.projects.layout({
         name: "circle",
