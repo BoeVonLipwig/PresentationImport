@@ -12,7 +12,6 @@ class SelectButton extends React.Component {
           />
           <label htmlFor={this.props.id} onClick={this.props.clickHandler} />
         </div>
-
         <h2>{this.props.name}</h2>
       </div>
     );

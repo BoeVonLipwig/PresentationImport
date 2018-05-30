@@ -1,0 +1,8 @@
+.nameHeader {
+    position: absolute;
+    font-size: 20px;
+    font-weight: 300;
+    width: auto;
+    letter-spacing: 0.04em;
+    margin: 7px 0px;
+}
