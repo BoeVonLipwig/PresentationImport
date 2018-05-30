@@ -1,12 +1,10 @@
 import { observable, decorate } from "mobx";
 
 class CytoscapeStore {
-  layout = { name: "concentric" };
-  node = null;
+  layouts = null;
 }
 decorate(CytoscapeStore, {
-  layout: observable,
-  node: observable
+  layouts: observable
 });
 
 const cytoscapeStore = new CytoscapeStore();

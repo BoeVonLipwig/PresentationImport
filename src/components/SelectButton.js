@@ -5,11 +5,7 @@ class SelectButton extends React.Component {
     return (
       <div className="control">
         <div className="checkbox-round">
-          <input
-            id={this.props.id}
-            type="checkbox"
-            checked={this.props.isChecked}
-          />
+          <input id={this.props.id} type="checkbox" defaultChecked />
           <label htmlFor={this.props.id} onClick={this.props.clickHandler} />
         </div>
         <h2>{this.props.name}</h2>

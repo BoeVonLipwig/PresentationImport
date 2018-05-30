@@ -12,11 +12,15 @@ cache:
     - node_modules/
 
 test:
+  tags:
+    - docker
   stage: test
   script:
     - yarn test
 
 build:
+  tags:
+    - docker
   stage: build
   script:
     - yarn build
