@@ -68,13 +68,9 @@ class DetailsPane extends React.Component {
       <div id="detailsBar">
         <div id="toggle">{elem}</div>
         <div id="nodeDetails" className="expanded">
-<<<<<<< HEAD
-          {this.toggleCheck()}
-=======
           {this.infoPane()
 
           }
->>>>>>> Made the show details div hide when its meant to instead of just unfilling and cleaned up the details pane code some what
         </div>
       </div>
     );
