@@ -84,7 +84,7 @@ exports[`renders button correctly as correct name 'Show Details' 1`] = `
 </div>
 `;
 
-exports[`renders button correctly as false 1`] = `
+exports[`renders button correctly as correct name 'Show Projects' with id 'showProjects' 1`] = `
 <div>
   <div
     class="control"
@@ -93,31 +93,17 @@ exports[`renders button correctly as false 1`] = `
       class="checkbox-round"
     >
       <input
+        id="showProjects"
         type="checkbox"
         readonly=""
       />
-      <label />
-    </div>
-    <h2 />
-  </div>
-</div>
-`;
-
-exports[`renders button correctly as true 1`] = `
-<div>
-  <div
-    class="control"
-  >
-    <div
-      class="checkbox-round"
-    >
-      <input
-        type="checkbox"
-        readonly=""
+      <label
+        for="showProjects"
       />
-      <label />
     </div>
-    <h2 />
+    <h2>
+      Projects
+    </h2>
   </div>
 </div>
 `;
