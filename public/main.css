@@ -495,11 +495,6 @@ body.calc #loading {
   background-color: #ddd;
 }
 
-.ui-menu-item-wrapper {
-  padding: 12px 20px;
-  padding-bottom: 12px;
-}
-
 .ui-state-active {
   color: #1a2a39;
   background-color: #ddd;
