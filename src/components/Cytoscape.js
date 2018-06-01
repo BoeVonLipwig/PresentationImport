@@ -313,26 +313,17 @@ class Cytoscape extends React.Component {
     this.cy.elements('[type = "project"]').addClass("project");
 
     this.cy.on("mouseover", "node", e => {
-      // alert("mouseover");
       const node = e.target;
       Cytoscape.hoverLight(node);
-      // $("#cy").css("cursor", "pointer");
     });
 
     this.cy.on("mouseout", "node", e => {
-      // alert("mouseout");
       const node = e.target;
       this.hoverNight(node, this.cy);
-      // $("#cy").css("cursor", "default");
     });
 
     this.cy.on("tap", "node", e => {
-      const node = e.target;
-      console.log(node);
-      this.props.cytoscapeStore.node = node;
-      // const node = e.target;
-      // this.hoverLight(node, this.cy);
-      // $("#cy").css("cursor", "default");
+      this.props.cytoscapeStore.node = e.target;
     });
 
     this.cy.ready(() => {
