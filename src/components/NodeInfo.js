@@ -1,5 +1,6 @@
 import React from "react";
 import cytoscapeStore from "../util/CytoscapeStore"
+import './NodeInfo.css'
 
 class NodeInfo extends React.Component {
 	
