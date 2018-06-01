@@ -43,7 +43,6 @@ class DetailsPane extends React.Component {
 		);
 	}
 	
-	
 	render() {
 		const elem = this.state.status.map(elem => {
 			return (
@@ -56,7 +55,7 @@ class DetailsPane extends React.Component {
 						clickHandler={event => this.clickHandler(event)}
 					/>
 					<h2>Show details</h2>
-					<h className = "nameHeader">{this.getName()}</h>
+					{cytoscapeStore.node == null? "":<h className = "nameHeader">{this.getName()}</h>}
 				</Fragment>
 			);
 		});
@@ -71,7 +70,7 @@ class DetailsPane extends React.Component {
 	}
 	
 	getName() {
-		return (cytoscapeStore.node === null ? "" : cytoscapeStore.node.data('name'))
+		return cytoscapeStore.node === null ? "" : cytoscapeStore.node.data('name');
 	}
 }
 
