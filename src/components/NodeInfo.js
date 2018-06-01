@@ -27,9 +27,9 @@ class NodeInfo extends React.Component {
     }
 
     return (
-      <div class="info-row">
+      <div className="info-row">
         <hr />
-        <p class="info-brief">{brief}</p>
+        <p className="info-brief">{brief}</p>
       </div>
     );
   }
