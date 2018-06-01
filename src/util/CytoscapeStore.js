@@ -1,7 +1,7 @@
 import { observable, decorate } from "mobx";
 
 class CytoscapeStore {
-  layouts = null
+  layouts = null;
   node = null;
 }
 decorate(CytoscapeStore, {
