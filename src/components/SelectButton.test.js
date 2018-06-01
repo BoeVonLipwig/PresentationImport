@@ -16,21 +16,6 @@ it("renders button correctly without crashing", () => {
   ReactDOM.unmountComponentAtNode(div);
 });
 
-// it("renders button correctly as false", () => {
-//   const div = document.createElement("div");
-//   ReactDOM.render(<SelectButton isChecked="false" />, div);
-//
-//   expect(div).toMatchSnapshot();
-//   ReactDOM.unmountComponentAtNode(div);
-// });
-//
-// it("renders button correctly as true", () => {
-//   const div = document.createElement("div");
-//   ReactDOM.render(<SelectButton isChecked={true} />, div);
-//   expect(div).toMatchSnapshot();
-//   ReactDOM.unmountComponentAtNode(div);
-// });
-
 it("renders button correctly as correct name 'Projects'", () => {
   const div = document.createElement("div");
   ReactDOM.render(<SelectButton name="Projects" />, div);
@@ -74,11 +59,6 @@ it("should have correct checked value of true", () => {
 it("should have correct checked value of false", () => {
   const wrapper = shallow(<SelectButton id="showSchools" isChecked={false} />);
   expect(wrapper.find("input").props().checked).toBe(false);
-  // expect(wrapper.toEqual(null));
-  // console.log("value:");
-  // console.log(wrapper.find("input").prop("checked").value);
-  // console.log(wrapper.find("input").props());
-  // console.log(wrapper.find("input").props().checked);
 });
 
 it("should have correct checked value of true to not equal false", () => {
@@ -96,15 +76,6 @@ it("should have correct click handler", () => {
     />
   );
   expect(mockCallback.mock.calls.length).toBe(0);
-  //Click the thing I don't know how to do this either
-  wrapper.find("button").simulate("click");
+  wrapper.find("label").simulate("click");
   expect(mockCallback.mock.calls.length).toBe(1);
 });
-
-// it("should respond to change event and change the state of the select button component", () => {
-//   const wrapper = shallow(<SelectButton id="showSchools" checked=true />);
-//   wrapper
-//     .find("#showSchools")
-//     .simulate("change", { target: { name: "email", checked: true } });
-//   expect(wrapper.state("email")).toEqual("blah@gmail.com");
-// });
