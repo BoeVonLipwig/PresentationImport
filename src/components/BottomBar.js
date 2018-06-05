@@ -1,9 +1,20 @@
 import React from "react";
 import Aid from "./Aid";
 import logo from "../assets/vic-logo.svg";
+import aidStore from "../util/AidStore";
 import ContactButton from "./ContactButton";
+import { observer } from "mobx-react";
 
 class BottomBar extends React.Component {
+  clickHandler(e, type) {
+    if (type === "search") {
+      aidStore.aids.search = { display: "none" };
+    }
+    if (type === "contact") {
+      aidStore.aids.contact = { display: "none" };
+    }
+  }
+
   render() {
     return (
       <div id="navbar-bottom">
@@ -11,14 +22,16 @@ class BottomBar extends React.Component {
           id="searchAid-label"
           msg="Start Typing a Person/Project Name"
           className="aid-label"
+          style={aidStore.aids.search}
         />
-        <Aid id="searchAid" className="aid" />
+        <Aid id="searchAid" className="aid" style={aidStore.aids.search} />
         <div>
           <input
             id="autocomplete"
             type="text"
             placeholder="Search Nodes"
             spellCheck="false"
+            onClick={event => this.clickHandler(event, "search")}
           />
         </div>
         <div id="outer-header">
@@ -33,12 +46,13 @@ class BottomBar extends React.Component {
           id="contactAid-label"
           msg="Click Through to Request an Addition to the Dataset, Report an Issue Through GitHub or Bring Up Tooltip"
           className="aid-label"
+          style={aidStore.aids.contact}
         />
-        <Aid id="contactAid" className="aid" />
+        <Aid id="contactAid" className="aid" style={aidStore.aids.contact} />
         <ContactButton />
       </div>
     );
   }
 }
 
-export default BottomBar;
+export default observer(BottomBar);
