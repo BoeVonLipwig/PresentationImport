@@ -28,6 +28,13 @@ class BottomBar extends React.Component {
             <img src={logo} alt="Connected Worlds Logo" />
           </div>
         </div>
+
+        <Aid
+          id="contactAid-label"
+          msg="Click Through to Request an Addition to the Dataset, Report an Issue Through GitHub or Bring Up Tooltip"
+          className="aid-label"
+        />
+        <Aid id="contactAid" className="aid" />
         <ContactButton />
       </div>
     );
