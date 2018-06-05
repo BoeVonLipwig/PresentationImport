@@ -1,16 +1,18 @@
 import React from "react";
+import aidStore from "../util/AidStore";
 import SelectButton from "./SelectButton";
+import { observer } from "mobx-react";
 
 class DetailsPane extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      status: [{ isChecked: false }]
-      // this.state = { show: "<em> Select Any Node </em>", isHidden: false };
+      status: [{ isChecked: true }]
     };
   }
 
   clickHandler(e) {
+    aidStore.aids.details = { display: "none" };
     // compute new dictionary
     const newStatus = this.state.status.map(function(entry) {
       return Object.assign({}, entry, {
@@ -35,8 +37,10 @@ class DetailsPane extends React.Component {
     }
     return (
       <div id="infoContainer" className="info">
-        <div className="info-row">
-          <em>Select Any Node</em>
+        <div className="container">
+          <div className="info-row">
+            <em>Select Any Node</em>
+          </div>
         </div>
       </div>
     );
@@ -65,4 +69,4 @@ class DetailsPane extends React.Component {
   }
 }
 
-export default DetailsPane;
+export default observer(DetailsPane);

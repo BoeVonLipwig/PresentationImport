@@ -30,7 +30,6 @@ class Views extends React.Component {
   }
 
   toggleCheck(id) {
-    aidStore.aids.views = { display: "none" };
     const newViews = this.state.views.map(function(entry) {
       if (entry.id === id) {
         cytoscapeStore.layouts = layoutFactory.computeLayout(entry.id);
@@ -51,6 +50,7 @@ class Views extends React.Component {
   }
 
   clickHandler(e, id) {
+    aidStore.aids.views = { display: "none" };
     this.toggleCheck(id);
   }
 

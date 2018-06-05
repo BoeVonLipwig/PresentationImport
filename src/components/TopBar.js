@@ -3,7 +3,6 @@ import Views from "./Views";
 import Aid from "./Aid";
 import aidStore from "../util/AidStore";
 import DetailsPane from "./DetailsPane";
-import cytoscapeStore from "../util/CytoscapeStore";
 import { observer } from "mobx-react";
 
 class TopBar extends React.Component {
