@@ -13,13 +13,27 @@ class TopBar extends React.Component {
     alert("hi");
   }
 
-  aidHTML() {
+  aidViewHTML() {
     return (
       <div>
         <Aid id="viewAid" className="aid" />
         <Aid
           id="viewAid-label"
           msg="Click to Change Graph Layouts"
+          className="aid-label"
+          // style={{}}
+        />
+      </div>
+    );
+  }
+
+  aidDetailHTML() {
+    return (
+      <div>
+        <Aid id="detailAid" className="aid" />
+        <Aid
+          id="detailAid-label"
+          msg="Project/Personal Details Will Display Here. Can Be Toggle On/Off for Better View"
           className="aid-label"
           // style={{}}
         />
@@ -37,9 +51,10 @@ class TopBar extends React.Component {
               <h3 className="icon">&#9776;</h3>
             </div>
           </a>
-          <div>{this.aidHTML()}</div>
+          {this.aidViewHTML()}
           <Views />
         </div>
+        {this.aidDetailHTML()}
         <DetailsPane />
       </div>
     );
