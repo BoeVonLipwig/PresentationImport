@@ -48,6 +48,7 @@ class TopBar extends React.Component {
   render() {
     return (
       <div id="navbar">
+        {this.aidViewHTML()}
         <div id="controls" className="topnav">
           <a onClick={event => this.clickHandler(event)}>
             <div id="view" className="">
@@ -55,7 +56,6 @@ class TopBar extends React.Component {
               <h3 className="icon">&#9776;</h3>
             </div>
           </a>
-          {this.aidViewHTML()}
           <Views />
         </div>
         {this.aidDetailHTML()}
