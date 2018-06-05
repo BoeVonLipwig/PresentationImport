@@ -101,3 +101,17 @@
 .contact-menu::-webkit-scrollbar-thumb {
   background-color: #ddd;
 }
+
+.ui-menu-item-wrapper {
+  padding: 12px 20px;
+  padding-bottom: 12px;
+}
+
+.ui-menu-item:hover {
+  background-color: white;
+  color: black;
+}
+
+.ui-menu-item:hover .svg-path {
+  fill: black;
+}

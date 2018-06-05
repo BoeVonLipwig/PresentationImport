@@ -1,8 +1,8 @@
 import React from "react";
 import "./ContactButton.css";
-import help from "../assets/help.svg";
-import github from "../assets/github.svg";
-import mailto from "../assets/mailto.svg";
+import MailIcon from "./icons/MailIcon.js";
+import HelpIcon from "./icons/HelpIcon.js";
+import GithubIcon from "./icons/GithubIcon.js";
 
 class ContactButton extends React.Component {
   constructor(props) {
@@ -13,17 +13,17 @@ class ContactButton extends React.Component {
     };
   }
   names = [
-    ["Help", "help", help, ""],
+    ["Help", "help", HelpIcon, ""],
     [
       "Request Addition",
       "mailto",
-      mailto,
+      MailIcon,
       "https://mail.google.com/mail/u/0/?view=cm&fs=1&tf=1&source=mailto&su=VR+Connected+Worlds+Request&to=matt.plummer@vuw.ac.nz"
     ],
     [
       "Submit Issue",
       "github",
-      github,
+      GithubIcon,
       "https://github.com/axbwh/VR-Network-Vis"
     ]
   ];
@@ -43,13 +43,14 @@ class ContactButton extends React.Component {
   }
 
   createButton = menu => {
+    const Image = this.state.selected[2];
     return (
       <div id="contact-button" onClick={this.buttonClicked}>
         <div>
           {this.state.selected[0]}
           <span className={this.state.selected[1]} />
           <span id="img-option">
-            <img src={this.state.selected[2]} height="15px" alt="" />
+            <Image colour="#fff" height="15px" />
           </span>
         </div>
         {menu ? this.createMenu() : null}
@@ -58,6 +59,7 @@ class ContactButton extends React.Component {
   };
 
   createMenuItem = (text, name, image, key) => {
+    const Image = image;
     return (
       <li
         key={key}
@@ -68,7 +70,7 @@ class ContactButton extends React.Component {
           {text}
           <span className={name} />
           <span id="img-option">
-            <img id="label-img" src={image} width="21px" alt="" />
+            <Image colour="#fff" height="15px" />
           </span>
         </div>
       </li>
