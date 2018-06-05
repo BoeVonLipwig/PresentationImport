@@ -5,14 +5,19 @@ import "./NodeInfo.css";
 class NodeInfo extends React.Component {
   render() {
     let node = cytoscapeStore.node;
+    return <div>{this.nodeData(node)}</div>;
+  }
 
+  nodeData(node) {
     let infoTitle = node.data("name");
     let brief = node.data("brief");
     let infoSchool = node.data("school");
     let mediaLink = node.data("mediaLink");
     let siteLink = node.data("siteLink");
     let staffSiteLink = node.data("staffSiteLink");
-    let siteName = node.data("siteName");
+    let siteName = !node.data("siteName")
+      ? node.data("siteName")
+      : node.data("name");
     let nodeType = node.data("type");
     let role = node.data("role");
     let datesActive = node.data("datesActive");

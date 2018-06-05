@@ -1,5 +1,4 @@
-import React from "react";
-import { Fragment } from "react";
+import React, { Fragment } from "react";
 import SelectButton from "./SelectButton";
 import cytoscapeStore from "../util/CytoscapeStore";
 import { observer } from "mobx-react";
