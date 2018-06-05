@@ -5,7 +5,18 @@ import DetailsPane from "./DetailsPane";
 import { observer } from "mobx-react";
 
 class TopBar extends React.Component {
-  clickHandler() {
+  constructor(props) {
+    super(props);
+    this.state = {
+      display: ""
+    };
+    console.log(this);
+  }
+
+  clickHandler(e) {
+    const newDict = { display: "none" };
+    console.log(this);
+    this.setState(Object.assign({}, this.state, newDict));
     alert("Hello");
   }
 
@@ -16,12 +27,12 @@ class TopBar extends React.Component {
   aidViewHTML() {
     return (
       <div>
-        <Aid id="viewAid" className="aid" />
+        <Aid id="viewAid" className="aid" style={this.state} />
         <Aid
           id="viewAid-label"
           msg="Click to Change Graph Layouts"
           className="aid-label"
-          // style={{}}
+          style={this.state}
         />
       </div>
     );
@@ -45,7 +56,7 @@ class TopBar extends React.Component {
     return (
       <div id="navbar">
         <div id="controls" className="topnav">
-          <a onClick={this.clickHandler}>
+          <a onClick={event => this.clickHandler(event)}>
             <div id="view" className="">
               <h1>VIEW</h1>
               <h3 className="icon">&#9776;</h3>
