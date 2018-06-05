@@ -1,18 +1,12 @@
 import React from "react";
 import Views from "./Views";
 import Aid from "./Aid";
+import aidStore from "../util/AidStore";
 import DetailsPane from "./DetailsPane";
+import cytoscapeStore from "../util/CytoscapeStore";
 import { observer } from "mobx-react";
 
 class TopBar extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      display: ""
-    };
-    console.log(this);
-  }
-
   clickHandler(e) {
     const newDict = { display: "none" };
     console.log(this);
@@ -27,12 +21,12 @@ class TopBar extends React.Component {
   aidViewHTML() {
     return (
       <div>
-        <Aid id="viewAid" className="aid" style={this.state} />
+        <Aid id="viewAid" className="aid" style={aidStore.aids.views} />
         <Aid
           id="viewAid-label"
           msg="Click to Change Graph Layouts"
           className="aid-label"
-          style={this.state}
+          style={aidStore.aids.views}
         />
       </div>
     );
@@ -41,12 +35,12 @@ class TopBar extends React.Component {
   aidDetailHTML() {
     return (
       <div>
-        <Aid id="detailAid" className="aid" />
+        <Aid id="detailAid" className="aid" style={aidStore.aids.details} />
         <Aid
           id="detailAid-label"
           msg="Project/Personal Details Will Display Here. Can Be Toggle On/Off for Better View"
           className="aid-label"
-          // style={{}}
+          style={aidStore.aids.details}
         />
       </div>
     );
