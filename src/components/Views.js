@@ -1,4 +1,5 @@
 import React from "react";
+import Aid from "./Aid";
 import SelectButton from "./SelectButton";
 import cytoscapeStore from "../util/CytoscapeStore";
 import layoutFactory from "../util/LayoutFactory";
