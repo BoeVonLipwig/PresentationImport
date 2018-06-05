@@ -111,3 +111,7 @@
   background-color: white;
   color: black;
 }
+
+.ui-menu-item:hover .svg-path {
+  fill: black;
+}

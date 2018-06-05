@@ -1,8 +1,5 @@
 import React from "react";
 import "./ContactButton.css";
-// import help from "../assets/help.svg";
-// import github from "../assets/github.svg";
-// import mailto from "../assets/mailto.svg";
 import MailIcon from "./icons/MailIcon.js";
 import HelpIcon from "./icons/HelpIcon.js";
 import GithubIcon from "./icons/GithubIcon.js";
@@ -12,25 +9,22 @@ class ContactButton extends React.Component {
     super(props);
     this.state = {
       showMenu: false,
-      selected: this.names[2],
-      hover: [false, false, false]
+      selected: this.names[2]
     };
   }
   names = [
-    ["Help", "help", HelpIcon, "", 0],
+    ["Help", "help", HelpIcon, ""],
     [
       "Request Addition",
       "mailto",
       MailIcon,
-      "https://mail.google.com/mail/u/0/?view=cm&fs=1&tf=1&source=mailto&su=VR+Connected+Worlds+Request&to=matt.plummer@vuw.ac.nz",
-      1
+      "https://mail.google.com/mail/u/0/?view=cm&fs=1&tf=1&source=mailto&su=VR+Connected+Worlds+Request&to=matt.plummer@vuw.ac.nz"
     ],
     [
       "Submit Issue",
       "github",
       GithubIcon,
-      "https://github.com/axbwh/VR-Network-Vis",
-      2
+      "https://github.com/axbwh/VR-Network-Vis"
     ]
   ];
 
@@ -48,19 +42,6 @@ class ContactButton extends React.Component {
     }
   }
 
-  onHover(text, leave) {
-    for (let i = 0; i < 3; i++) {
-      if (this.names[i][0] === text) {
-        let newHover = this.state.hover.slice();
-        newHover[i] = leave;
-        console.log(newHover);
-        console.log(this.state.hover);
-        this.setState({ ...this.state, hover: newHover });
-        console.log(this.state.hover);
-      }
-    }
-  }
-
   createButton = menu => {
     const Image = this.state.selected[2];
     return (
@@ -69,11 +50,7 @@ class ContactButton extends React.Component {
           {this.state.selected[0]}
           <span className={this.state.selected[1]} />
           <span id="img-option">
-            {this.state.hover[this.state.selected[4]] ? (
-              <Image colour="#000" height="15px" />
-            ) : (
-              <Image colour="#fff" height="15px" />
-            )}
+            <Image colour="#fff" height="15px" />
           </span>
         </div>
         {menu ? this.createMenu() : null}
@@ -81,26 +58,19 @@ class ContactButton extends React.Component {
     );
   };
 
-  createMenuItem = (text, name, image, key, hover) => {
+  createMenuItem = (text, name, image, key) => {
     const Image = image;
-    console.log(hover);
     return (
       <li
         key={key}
         className="ui-menu-item"
         onClick={() => this.menuClicked(text)}
-        onMouseEnter={() => this.onHover(text, true)}
-        onMouseOut={() => this.onHover(text, false)}
       >
         <div className="ui-menu-item-wrapper">
           {text}
           <span className={name} />
           <span id="img-option">
-            {hover ? (
-              <Image colour="#000" height="21px" />
-            ) : (
-              <Image colour="#fff" height="21px" />
-            )}
+            <Image colour="#fff" height="15px" />
           </span>
         </div>
       </li>
@@ -115,8 +85,7 @@ class ContactButton extends React.Component {
           this.names[i][0],
           this.names[i][1],
           this.names[i][2],
-          i,
-          this.state.hover[i]
+          i
         )
       );
     }

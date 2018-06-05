@@ -2,26 +2,26 @@ import React from "react";
 import "../ContactButton.css";
 
 class MailIcon extends React.Component {
+  colour;
+  height;
   constructor(props) {
     super(props);
-    this.state = {
-      colour: "#fff",
-      height: "15px"
-    };
+    this.colour = props.colour;
+    this.height = props.height;
   }
 
   render() {
     return (
       <svg
         version="1.1"
-        fill={this.state.colour}
-        height={this.state.height}
+        className="svg-path"
+        fill={this.colour}
+        height={this.height}
         id="Layer_1"
         xmlns="http://www.w3.org/2000/svg"
         x="0px"
         y="0px"
         viewBox="0 0 194.6 118"
-        // style={enable-background:"new 0 0 194.6 118"}
       >
         <g>
           <path
@@ -34,7 +34,7 @@ class MailIcon extends React.Component {
           <g>
             <polygon
               points="42.2,58.7 42.2,70.9 27.8,70.9 27.8,87.4 14.5,87.4 14.5,70.9 0,70.9 0,58.7 14.5,58.7 14.5,42.6 27.8,42.6 
-                    27.8,58.7 		"
+                    27.8,58.7"
             />
           </g>
         </g>
