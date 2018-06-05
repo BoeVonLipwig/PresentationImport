@@ -1,0 +1,128 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders button correctly as correct name 'Collaborators' 1`] = `
+<div>
+  <div
+    class="control"
+  >
+    <div
+      class="checkbox-round"
+    >
+      <input
+        type="checkbox"
+        readonly=""
+      />
+      <label />
+    </div>
+    <h2>
+      Collaborators
+    </h2>
+  </div>
+</div>
+`;
+
+exports[`renders button correctly as correct name 'Programme' 1`] = `
+<div>
+  <div
+    class="control"
+  >
+    <div
+      class="checkbox-round"
+    >
+      <input
+        type="checkbox"
+        readonly=""
+      />
+      <label />
+    </div>
+    <h2>
+      Programme
+    </h2>
+  </div>
+</div>
+`;
+
+exports[`renders button correctly as correct name 'Projects' 1`] = `
+<div>
+  <div
+    class="control"
+  >
+    <div
+      class="checkbox-round"
+    >
+      <input
+        type="checkbox"
+        readonly=""
+      />
+      <label />
+    </div>
+    <h2>
+      Projects
+    </h2>
+  </div>
+</div>
+`;
+
+exports[`renders button correctly as correct name 'Show Details' 1`] = `
+<div>
+  <div
+    class="control"
+  >
+    <div
+      class="checkbox-round"
+    >
+      <input
+        type="checkbox"
+        readonly=""
+      />
+      <label />
+    </div>
+    <h2>
+      Show Details
+    </h2>
+  </div>
+</div>
+`;
+
+exports[`renders button correctly as correct name 'Show Projects' with id 'showProjects' 1`] = `
+<div>
+  <div
+    class="control"
+  >
+    <div
+      class="checkbox-round"
+    >
+      <input
+        id="showProjects"
+        type="checkbox"
+        readonly=""
+      />
+      <label
+        for="showProjects"
+      />
+    </div>
+    <h2>
+      Projects
+    </h2>
+  </div>
+</div>
+`;
+
+exports[`renders button correctly without crashing 1`] = `
+<div>
+  <div
+    class="control"
+  >
+    <div
+      class="checkbox-round"
+    >
+      <input
+        type="checkbox"
+        readonly=""
+      />
+      <label />
+    </div>
+    <h2 />
+  </div>
+</div>
+`;
