@@ -1,0 +1,63 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders views correctly without crashing 1`] = `
+<div>
+  <div
+    class="control"
+  >
+    <div
+      class="checkbox-round"
+    >
+      <input
+        id="showProjects"
+        type="checkbox"
+        readonly=""
+      />
+      <label
+        for="showProjects"
+      />
+    </div>
+    <h2>
+      Projects
+    </h2>
+  </div>
+  <div
+    class="control"
+  >
+    <div
+      class="checkbox-round"
+    >
+      <input
+        id="showSchools"
+        type="checkbox"
+        readonly=""
+      />
+      <label
+        for="showSchools"
+      />
+    </div>
+    <h2>
+      Programme
+    </h2>
+  </div>
+  <div
+    class="control"
+  >
+    <div
+      class="checkbox-round"
+    >
+      <input
+        id="showCollab"
+        type="checkbox"
+        readonly=""
+      />
+      <label
+        for="showCollab"
+      />
+    </div>
+    <h2>
+      Collaborators
+    </h2>
+  </div>
+</div>
+`;
