@@ -36,12 +36,12 @@ class NodeInfo extends React.Component {
     );
   }
 
-  parseMedia(mediaLink) {
+  parseMedia(mediaLink, name) {
     return (
       <div>
         <img
           src={mediaLink}
-          alt={"Profile picture or descriptive media link"}
+          alt={"Digital Portrait or descriptive media link"}
         />
       </div>
     );
