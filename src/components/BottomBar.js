@@ -19,12 +19,10 @@ class BottomBar extends React.Component {
     return (
       <div id="navbar-bottom">
         <Aid
-          id="searchAid-label"
+          id="searchAid"
           msg="Start Typing a Person/Project Name"
-          className="aid-label"
           style={aidStore.aids.search}
         />
-        <Aid id="searchAid" className="aid" style={aidStore.aids.search} />
         <div>
           <input
             id="autocomplete"
@@ -43,12 +41,10 @@ class BottomBar extends React.Component {
         </div>
 
         <Aid
-          id="contactAid-label"
+          id="contactAid"
           msg="Click Through to Request an Addition to the Dataset, Report an Issue Through GitHub or Bring Up Tooltip"
-          className="aid-label"
           style={aidStore.aids.contact}
         />
-        <Aid id="contactAid" className="aid" style={aidStore.aids.contact} />
         <ContactButton />
       </div>
     );

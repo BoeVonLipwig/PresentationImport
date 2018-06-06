@@ -13,35 +13,23 @@ class TopBar extends React.Component {
     alert("Hello");
   }
 
-  hide() {
-    alert("hi");
-  }
-
   aidViewHTML() {
     return (
-      <div>
-        <Aid id="viewAid" className="aid" style={aidStore.aids.views} />
-        <Aid
-          id="viewAid-label"
-          msg="Click to Change Graph Layouts"
-          className="aid-label"
-          style={aidStore.aids.views}
-        />
-      </div>
+      <Aid
+        id="viewAid"
+        msg="Click to Change Graph Layouts"
+        style={aidStore.aids.views}
+      />
     );
   }
 
   aidDetailHTML() {
     return (
-      <div>
-        <Aid id="detailAid" className="aid" style={aidStore.aids.details} />
-        <Aid
-          id="detailAid-label"
-          msg="Project/Personal Details Will Display Here. Can Be Toggle On/Off for Better View"
-          className="aid-label"
-          style={aidStore.aids.details}
-        />
-      </div>
+      <Aid
+        id="detailAid"
+        msg="Project/Personal Details Will Display Here. Can Be Toggle On/Off for Better View"
+        style={aidStore.aids.details}
+      />
     );
   }
 
