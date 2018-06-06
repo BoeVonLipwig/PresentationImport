@@ -4,6 +4,7 @@ import cytoscapeStore from "../util/CytoscapeStore";
 import { observer } from "mobx-react";
 import NodeInfo from "./NodeInfo";
 import "./DetailsPane.css";
+import aidStore from "../util/AidStore";
 
 class DetailsPane extends React.Component {
   constructor(props) {
@@ -13,7 +14,8 @@ class DetailsPane extends React.Component {
     };
   }
 
-  clickHandler() {
+  clickHandler(e) {
+    aidStore.aids.details = { display: "none" };
     // compute new dictionary
     const newStatus = this.state.status.map(function(entry) {
       return Object.assign({}, entry, {
