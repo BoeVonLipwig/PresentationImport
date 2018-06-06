@@ -1,5 +1,6 @@
 import React from "react";
 import SelectButton from "./SelectButton";
+import aidStore from "../util/AidStore";
 import cytoscapeStore from "../util/CytoscapeStore";
 import layoutFactory from "../util/LayoutFactory";
 
@@ -49,6 +50,7 @@ class Views extends React.Component {
   }
 
   clickHandler(e, id) {
+    aidStore.aids.views = { display: "none" };
     this.toggleCheck(id);
   }
 
