@@ -514,40 +514,7 @@ body.calc #loading {
   display: inherit;
 }
 
-.info-row {
-  display: inline-block;
-  padding: 0px 0px;
-  width: 100%;
-}
 
-.info-row hr {
-  padding-left: 20px;
-  padding-right: 20px;
-  border-width: 0.5px;
-  border-bottom: solid 0.5px #3d4452;
-}
-
-.info-left {
-  padding-left: 20px;
-
-  float: left;
-}
-
-.info-right {
-  padding-right: 20px;
-
-  float: right;
-}
-
-.info-brief {
-  padding-left: 20px;
-  padding-right: 20px;
-  display: block;
-  text-align: center;
-  padding-bottom: 8px;
-  padding-top: 8px;
-  /*float: left;*/
-}
 
 .media-wrapper {
   width: 100%;
@@ -577,10 +544,6 @@ body.calc #loading {
   top: calc(100% - 76px);
 }
 
-#nodeDetails .info {
-  top: 58px;
-  z-index: 3;
-}
 
 #cy {
   height: calc(100% - 58px - 76px);
