@@ -44,17 +44,28 @@ class ContactButton extends React.Component {
 
   createButton = menu => {
     const Image = this.state.selected[2];
+    let divClass = "";
+    if (this.state.showMenu) {
+      divClass = "contact-menu-selected";
+    }
     return (
-      <div id="contact-button" onClick={this.buttonClicked}>
-        <div>
-          {this.state.selected[0]}
-          <span className={this.state.selected[1]} />
-          <span id="img-option">
-            <Image colour="#fff" height="15px" />
-          </span>
+      <React.Fragment>
+        <div
+          id="contact-button"
+          className={divClass}
+          onClick={this.buttonClicked}
+        >
+          <div>
+            {this.state.selected[0]}
+            <span className={this.state.selected[1]} />
+            <span id="img-option">
+              <Image colour="#fff" height="15px" />
+            </span>
+          </div>
         </div>
+
         {menu ? this.createMenu() : null}
-      </div>
+      </React.Fragment>
     );
   };
 
