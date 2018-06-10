@@ -1,0 +1,36 @@
+.info {
+    top: 58px;
+    z-index: 3;
+}
+
+.info-row {
+    display: inline-block;
+    padding: 0 0;
+    width: 100%;
+}
+
+.info-row hr {
+    padding-left: 20px;
+    padding-right: 20px;
+    border-width: 0.5px;
+    border-bottom: solid 0.5px #3d4452;
+}
+
+.info-left {
+    padding-left: 20px;
+
+    float: left;
+}
+
+.info-right {
+    padding-right: 20px;
+
+    float: right;
+}
+
+.info-brief {
+    display: block;
+    text-align: center;
+    padding: 8px 20px;
+    /*float: left;*/
+}

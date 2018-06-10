@@ -3,6 +3,7 @@ import cytoscape from "cytoscape";
 import loadData from "../util/data";
 import Layout from "../layouts/Layout";
 import ProjectLayout from "../layouts/ProjectLayout";
+import aidStore from "../util/AidStore";
 import Promise from "bluebird";
 import _ from "lodash";
 import { autorun } from "mobx";
@@ -248,7 +249,6 @@ class Cytoscape extends React.Component {
   }
 
   arrangeKey(cy) {
-    console.log("arranging key");
     let nodeHeight = this.keys.height();
     let bboxIgnore = cy.elements(
       '.hidden, .filtered, [type = "key"], [type = "border"]'
@@ -313,17 +313,18 @@ class Cytoscape extends React.Component {
     this.cy.elements('[type = "project"]').addClass("project");
 
     this.cy.on("mouseover", "node", e => {
-      // alert("mouseover");
       const node = e.target;
       Cytoscape.hoverLight(node);
-      // $("#cy").css("cursor", "pointer");
     });
 
     this.cy.on("mouseout", "node", e => {
-      // alert("mouseout");
       const node = e.target;
       this.hoverNight(node, this.cy);
-      // $("#cy").css("cursor", "default");
+    });
+
+    this.cy.on("tap", "node", e => {
+      aidStore.aids.details = { display: "none" };
+      this.props.cytoscapeStore.node = e.target;
     });
 
     this.cy.ready(() => {
@@ -332,7 +333,6 @@ class Cytoscape extends React.Component {
       this.setLabels(this.cy);
       autorun(() => {
         this.props.cytoscapeStore.layouts.forEach(layout => {
-          console.log(layout);
           layout.run();
         });
         this.arrangeKey(this.cy);

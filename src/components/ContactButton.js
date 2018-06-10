@@ -3,6 +3,7 @@ import "./ContactButton.css";
 import MailIcon from "./icons/MailIcon.js";
 import HelpIcon from "./icons/HelpIcon.js";
 import GithubIcon from "./icons/GithubIcon.js";
+import aidStore from "../util/AidStore";
 
 class ContactButton extends React.Component {
   constructor(props) {
@@ -30,6 +31,7 @@ class ContactButton extends React.Component {
 
   buttonClicked = () => {
     this.setState({ ...this.state, showMenu: !this.state.showMenu });
+    aidStore.aids.contact = { display: "none" };
   };
 
   menuClicked(text) {
