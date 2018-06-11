@@ -36,7 +36,40 @@ class NodeInfo extends React.Component {
     );
   }
 
-  parseMedia(mediaLink, name) {
+  parseMedia(mediaLink) {
+    let pattern1 = /(?:http?s?:\/\/)?(?:www\.)?(?:vimeo\.com)\/?(.+)/g;
+    let pattern2 = /(?:http?s?:\/\/)?(?:www\.)?(?:youtube\.com|youtu\.be)\/(?:watch\?v=)?(.+)/g;
+
+    if (pattern1.test(mediaLink)) {
+      return (
+        <div className="videoWrapper">
+          <iframe
+            width="1920"
+            height="1080"
+            className="info-media"
+            src="//player.vimeo.com/video/$1"
+            frameBorder="0"
+            allowFullScreen
+          />
+        </div>
+      );
+    }
+
+    if (pattern2.test(mediaLink)) {
+      return (
+        <div className="videoWrapper">
+          <iframe
+            width="1920"
+            height="1080"
+            className="info-media"
+            src="http://www.youtube.com/embed/$1?&rel=0&showinfo=0&modestbranding=1&hd=1&autohide=1&color=white"
+            frameBorder="0"
+            allowFullScreen
+          />
+        </div>
+      );
+    }
+
     return (
       <div>
         <img
