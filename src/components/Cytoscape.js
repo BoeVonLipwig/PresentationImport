@@ -591,7 +591,7 @@ class Cytoscape extends React.Component {
       this.hoverNight(node, this.cy);
     });
 
-    this.cy.on("tap", "node", e => {
+    this.cy.on("select", "node", e => {
       aidStore.aids.details = { display: "none" };
       this.props.cytoscapeStore.node = e.target;
       let nhood = this.highlight(this.props.cytoscapeStore.node);
