@@ -570,7 +570,8 @@ class Cytoscape extends React.Component {
   }
 
   clear() {
-    this.unspreadNodes();
+    // console.log("clear");
+    // this.unspreadNodes();
     this.cy
       .elements()
       .removeClass("highlighted")
@@ -622,7 +623,7 @@ class Cytoscape extends React.Component {
     this.cy.on("unselect", "node", e => {
       this.props.cytoscapeStore.node = null;
       //unspreadNodes();
-      // this.clear();
+      this.clear();
       // this.clearNav();
       this.fitAll();
     });
