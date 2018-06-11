@@ -597,6 +597,13 @@ class Cytoscape extends React.Component {
       let nhood = this.highlight(this.props.cytoscapeStore.node);
       this.reframe(this.cy, nhood);
     });
+    this.cy.on("unselect", "node", e => {
+      this.props.cytoscapeStore.node = null;
+      //unspreadNodes();
+      // this.clear();
+      // this.clearNav();
+      // this.fitAll();
+    });
 
     this.cy.ready(() => {
       Layout.cy = this.cy;
