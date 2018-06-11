@@ -555,6 +555,28 @@ class Cytoscape extends React.Component {
     });
   }
 
+  fitAll() {
+    this.cy.animate(
+      {
+        fit: {
+          eles: this.cy.elements().not(".hidden, .filtered"),
+          padding: Layout.layoutPadding
+        }
+      },
+      {
+        duration: 150
+      }
+    );
+  }
+
+  clear() {
+    this.unspreadNodes();
+    this.cy
+      .elements()
+      .removeClass("highlighted")
+      .removeClass("faded");
+  }
+
   componentDidMount() {
     // get exported json from cytoscape desktop via ajax
     let graphP = loadData();
@@ -602,7 +624,7 @@ class Cytoscape extends React.Component {
       //unspreadNodes();
       // this.clear();
       // this.clearNav();
-      // this.fitAll();
+      this.fitAll();
     });
 
     this.cy.ready(() => {
