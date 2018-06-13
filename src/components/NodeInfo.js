@@ -1,5 +1,6 @@
 import React, { Fragment } from "react";
 import cytoscapeStore from "../util/CytoscapeStore";
+import idImg from "../assets/id-img.png";
 import "./NodeInfo.css";
 
 class NodeInfo extends React.Component {
@@ -21,7 +22,7 @@ class NodeInfo extends React.Component {
     let role = node.data("role");
     let datesActive = node.data("datesActive");
     if (nodeType === "person" && !mediaLink) {
-      mediaLink = "assets/id-img.png";
+      mediaLink = idImg;
     }
 
     return (
