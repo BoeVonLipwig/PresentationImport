@@ -5,7 +5,7 @@ import "./NodeInfo.css";
 class NodeInfo extends React.Component {
   render() {
     let node = cytoscapeStore.node;
-    return <div>{this.nodeData(node)}</div>;
+    return <Fragment>{this.nodeData(node)}</Fragment>;
   }
 
   nodeData(node) {
@@ -71,11 +71,14 @@ class NodeInfo extends React.Component {
     }
 
     return (
-      <div>
-        <img
-          src={mediaLink}
-          alt={"Digital Portrait or descriptive media link"}
-        />
+      <div className="id-wrapper id-linked">
+        <a href="https://google.com" target="_blank">
+          <img
+            className="img-crop"
+            src={mediaLink}
+            alt={"Digital Portrait or descriptive media link"}
+          />
+        </a>
       </div>
     );
   }

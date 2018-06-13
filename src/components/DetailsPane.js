@@ -37,15 +37,11 @@ class DetailsPane extends React.Component {
       this.state.status[0].isChecked ? (
         <div id="infoContainer" className="info">
           <div className="container">
-            <div className="info-row">
-              <div>
-                {cytoscapeStore.node === null ? (
-                  <em>Select Any Node</em>
-                ) : (
-                  <NodeInfo />
-                )}
-              </div>
-            </div>
+            {cytoscapeStore.node === null ? (
+              <em>Select Any Node</em>
+            ) : (
+              <NodeInfo />
+            )}
           </div>
         </div>
       ) : null
