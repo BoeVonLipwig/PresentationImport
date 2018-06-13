@@ -249,6 +249,7 @@ class Cytoscape extends React.Component {
   }
 
   arrangeKey(cy) {
+    let maxLabelWidth = this.getMaxLabelWidth(this.keys);
     let nodeHeight = this.keys.height();
     let bboxIgnore = cy.elements(
       '.hidden, .filtered, [type = "key"], [type = "border"]'
@@ -264,26 +265,317 @@ class Cytoscape extends React.Component {
       name: "grid",
       columns: 1,
       boundingBox: {
-        x1: bbox.x1 - (this.maxLabelWidth + this.keyXPadding),
+        x1: bbox.x1 - (maxLabelWidth + this.keyXPadding),
         y1: bbox.y1 + (bbox.h - keysHeight) / 2,
-        w: this.maxLabelWidth,
+        w: maxLabelWidth,
         h: keysHeight
       }
     });
 
     this.keyBorder.position({
-      x:
-        bbox.x1 -
-        (this.maxLabelWidth + this.keyXPadding) +
-        this.maxLabelWidth / 2,
+      x: bbox.x1 - (maxLabelWidth + this.keyXPadding) + maxLabelWidth / 2,
       y: bbox.y1 + (bbox.h - keysHeight) / 2 + keysHeight / 2
     });
     this.keyBorder.style({
-      width: this.maxLabelWidth + this.keyXPadding / 2,
+      width: maxLabelWidth + this.keyXPadding / 2,
       height: keysHeight + this.keyXPadding / 2
     });
 
     layout.run();
+  }
+
+  highlight(node) {
+    let nhood = node.closedNeighborhood();
+    this.props.cytoscapeStore.nhood = nhood;
+
+    let dataType = node.data("type");
+    if (dataType === "project" || dataType === "school") {
+      let nhoodType = dataType === "project" ? "school" : "project";
+      let indhood = nhood.closedNeighborhood('[type = "' + nhoodType + '"]');
+      nhood = nhood.add(indhood);
+    }
+
+    let view = this.props.cytoscapeStore.view;
+    if (view === "showProjects" || view === "showCollab") {
+      console.log(view);
+      let nschool = nhood.nodes('[type = "school"]');
+      console.log(nschool.size());
+      if (nschool.size() > 1) {
+        this.spreadNodes(nschool);
+        console.log(nschool);
+      }
+    }
+  }
+
+  spreadNodes(nodesToSpread) {
+    nodesToSpread.style({
+      label: function(ele) {
+        return ele.data("name");
+      }
+    });
+
+    let nodeNum = nodesToSpread.size();
+
+    nodesToSpread.forEach(function(n) {
+      let p = n.position();
+      n.data("originPos", {
+        x: p.x,
+        y: p.y
+      });
+    });
+
+    let nodeCenter = nodesToSpread.position();
+    let nodeHeight = nodesToSpread.outerHeight();
+
+    let maxLabelWidth = this.getMaxLabelWidth(nodesToSpread);
+
+    let gridWidth = maxLabelWidth * nodeNum;
+
+    let layout = nodesToSpread.layout({
+      name: "grid",
+      columns: nodeNum,
+      boundingBox: {
+        x1: nodeCenter.x - gridWidth / 2,
+        y1: nodeCenter.y - nodeHeight / 2,
+        w: gridWidth,
+        h: nodeHeight
+      },
+      avoidOverlap: true,
+      avoidOverlapPadding: 0,
+      padding: 0
+    });
+
+    layout.run();
+  }
+
+  getMaxLabelWidth(eles) {
+    var maxLabelWidth = 0;
+
+    eles.forEach(function(n) {
+      var labelWidth = n.boundingBox({ includeLabels: true }).w;
+
+      if (labelWidth > maxLabelWidth) {
+        maxLabelWidth = labelWidth;
+      }
+    });
+    return maxLabelWidth;
+  }
+
+  reframe(cy) {
+    let nhood = this.props.cytoscapeStore.nhood;
+    let layoutPadding = Layout.layoutPadding;
+    let details = this.props.cytoscapeStore.details;
+
+    cy.batch(function() {
+      //batch processess multiple eles at once
+      cy
+        .elements()
+        .not(nhood)
+        .removeClass("highlighted")
+        .addClass("faded");
+      nhood.removeClass("faded").addClass("highlighted");
+
+      // Cytoscape Canvas Dimensions
+      var cyW = cy.width();
+      var cyH = cy.height();
+
+      if (details) {
+        if (nhood.nodes().size() < 3) {
+          nhood = cy.nodes();
+        }
+
+        cy.maxZoom(100);
+
+        var ogPan = Object.assign({}, cy.pan());
+        var ogZoom = cy.zoom();
+
+        cy.stop().fit(nhood, 0);
+        var fitZoom = cy.zoom();
+
+        //Highlighted Node Bouding Box Dimension before Being Resized
+        var nhoodHeight = nhood.renderedBoundingBox().h;
+        var nhoodWidth = nhood.renderedBoundingBox().w;
+
+        var nhoodRatio = nhoodHeight / nhoodWidth;
+
+        //Info Window Dimension
+        var infoWidth = document.getElementById("infoContainer").clientWidth;
+        var infoHeight = document.getElementById("infoContainer").clientHeight;
+
+        //Left Negative Space Dimensions minus Padding
+        var leftWidth = cyW - (infoWidth + layoutPadding * 2);
+        var leftHeight = cyH - layoutPadding * 2;
+
+        //Bottom Negative Space Dimensions minus Padding
+        var bottomWidth = cyW - layoutPadding * 2;
+        var bottomHeight = cyH - (infoHeight + layoutPadding * 2);
+
+        var panOffset = { x: 0, y: 0 };
+
+        //Check Whether Left or Bottom offer Largest Possible Display Area for Nodes Bounding Box
+
+        //Calc area for each alignment
+        var alignment = [];
+        ////Align Left, Width First // Height First
+        alignment[0] = {
+          placement: "left",
+          order: "width",
+          width: leftWidth,
+          height: leftWidth * nhoodRatio
+        };
+
+        alignment[1] = {
+          placement: "left",
+          order: "height",
+          width: leftHeight / nhoodRatio,
+          height: leftHeight
+        };
+
+        ////Align Bottom, Width First // Height First
+        alignment[2] = {
+          placement: "bottom",
+          order: "width",
+          width: bottomWidth,
+          height: bottomWidth * nhoodRatio
+        };
+
+        alignment[3] = {
+          placement: "bottom",
+          order: "height",
+          width: bottomHeight / nhoodRatio,
+          height: bottomHeight
+        };
+
+        alignment.map(ali => (ali.area = ali.width * ali.height));
+
+        alignment = _.orderBy(
+          alignment,
+          [
+            function(ali) {
+              return ali.area;
+            }
+          ],
+          ["desc"]
+        );
+
+        var isAligned = false;
+
+        for (let i = 0; i < 3 && isAligned === false; i++) {
+          let curAli = alignment[i];
+
+          if (
+            curAli.placement === "left" &&
+            curAli.order === "width" &&
+            curAli.height < leftHeight
+          ) {
+            var scaleFactor = leftWidth / nhoodWidth;
+            var newZoom = fitZoom * scaleFactor;
+
+            panOffset.x = -(infoWidth / 2);
+            panOffset.y = 0;
+
+            isAligned = true;
+          }
+
+          if (
+            curAli.placement === "left" &&
+            curAli.order === "height" &&
+            curAli.width < leftWidth
+          ) {
+            scaleFactor = leftHeight / nhoodHeight;
+            newZoom = fitZoom * scaleFactor;
+
+            panOffset.x = -(infoWidth / 2);
+            panOffset.y = 0;
+
+            isAligned = true;
+          }
+
+          if (
+            curAli.placement === "bottom" &&
+            curAli.order === "width" &&
+            curAli.height < bottomHeight
+          ) {
+            scaleFactor = bottomWidth / nhoodWidth;
+            newZoom = fitZoom * scaleFactor;
+
+            panOffset.x = 0;
+            panOffset.y = infoHeight / 2;
+
+            isAligned = true;
+          }
+
+          if (
+            curAli.placement === "bottom" &&
+            curAli.order === "height" &&
+            curAli.width < bottomWidth
+          ) {
+            scaleFactor = bottomHeight / nhoodHeight;
+            newZoom = fitZoom * scaleFactor;
+
+            panOffset.x = 0;
+            panOffset.y = infoHeight / 2;
+
+            isAligned = true;
+          }
+        }
+
+        cy.zoom(newZoom);
+        cy.center(nhood);
+        var centerPan = Object.assign({}, cy.pan());
+
+        cy.zoom(ogZoom);
+        cy.pan(ogPan);
+        cy.pan(centerPan);
+
+        cy.stop().animate(
+          {
+            //frames all elements
+            zoom: newZoom,
+            pan: { x: centerPan.x + panOffset.x, y: centerPan.y + panOffset.y }
+          },
+          {
+            duration: 150
+          }
+        );
+      } else {
+        cy.stop().animate(
+          {
+            //frames all elements
+            fit: {
+              eles: nhood,
+              padding: layoutPadding
+            }
+          },
+          {
+            duration: 150
+          }
+        );
+      }
+    });
+  }
+
+  fitAll() {
+    this.cy.animate(
+      {
+        fit: {
+          eles: this.cy.elements().not(".hidden, .filtered"),
+          padding: Layout.layoutPadding
+        }
+      },
+      {
+        duration: 150
+      }
+    );
+  }
+
+  clear() {
+    // console.log("clear");
+    // this.unspreadNodes();
+    this.cy
+      .elements()
+      .removeClass("highlighted")
+      .removeClass("faded");
   }
 
   componentDidMount() {
@@ -322,9 +614,18 @@ class Cytoscape extends React.Component {
       this.hoverNight(node, this.cy);
     });
 
-    this.cy.on("tap", "node", e => {
+    this.cy.on("select", "node", e => {
       aidStore.aids.details = { display: "none" };
       this.props.cytoscapeStore.node = e.target;
+      let nhood = this.highlight(this.props.cytoscapeStore.node);
+      this.reframe(this.cy, nhood);
+    });
+    this.cy.on("unselect", "node", e => {
+      this.props.cytoscapeStore.node = null;
+      //unspreadNodes();
+      this.clear();
+      // this.clearNav();
+      this.fitAll();
     });
 
     this.cy.ready(() => {

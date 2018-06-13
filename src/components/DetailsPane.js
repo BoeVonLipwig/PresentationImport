@@ -22,7 +22,7 @@ class DetailsPane extends React.Component {
         isChecked: !entry.isChecked
       });
     });
-
+    cytoscapeStore.details = newStatus[0].isChecked;
     // assign new dictionary to the details pane select button.
     this.setState(
       Object.assign({}, this.state, {
