@@ -7,12 +7,7 @@ import { observer } from "mobx-react";
 
 class BottomBar extends React.Component {
   clickHandler(e, type) {
-    if (type === "search") {
-      aidStore.aids.search = { display: "none" };
-    }
-    if (type === "contact") {
-      aidStore.aids.contact = { display: "none" };
-    }
+    aidStore.aids.search = { display: "none" };
   }
 
   render() {

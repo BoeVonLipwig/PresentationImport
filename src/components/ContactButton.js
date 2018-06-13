@@ -3,23 +3,46 @@ import "./ContactButton.css";
 import MailIcon from "./icons/MailIcon.js";
 import HelpIcon from "./icons/HelpIcon.js";
 import GithubIcon from "./icons/GithubIcon.js";
+import aidStore from "../util/AidStore";
 
 class ContactButton extends React.Component {
   constructor(props) {
     super(props);
+    this.setWrapperRef = this.setWrapperRef.bind(this);
+    this.handleClickOutside = this.handleClickOutside.bind(this);
     this.state = {
       showMenu: false,
       selected: this.names[2]
     };
   }
+
+  componentDidMount() {
+    document.addEventListener("mousedown", this.handleClickOutside);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener("mousedown", this.handleClickOutside);
+  }
+
+  /**
+   * Set the wrapper ref
+   */
+  setWrapperRef(node) {
+    this.wrapperRef = node;
+  }
+
+  /**
+   * Alert if clicked on outside of element
+   */
+  handleClickOutside(event) {
+    if (this.wrapperRef && !this.wrapperRef.contains(event.target)) {
+      this.setState({ ...this.state, showMenu: false });
+    }
+  }
+
   names = [
     ["Help", "help", HelpIcon, ""],
-    [
-      "Request Addition",
-      "mailto",
-      MailIcon,
-      "https://mail.google.com/mail/u/0/?view=cm&fs=1&tf=1&source=mailto&su=VR+Connected+Worlds+Request&to=matt.plummer@vuw.ac.nz"
-    ],
+    ["Request Addition", "mailto", MailIcon, "mailto:matt.plummer@vuw.ac.nz"],
     [
       "Submit Issue",
       "github",
@@ -30,13 +53,18 @@ class ContactButton extends React.Component {
 
   buttonClicked = () => {
     this.setState({ ...this.state, showMenu: !this.state.showMenu });
+    aidStore.aids.contact = { display: "none" };
   };
 
   menuClicked(text) {
     for (let i = 0; i < 3; i++) {
       if (this.names[i][0] === text) {
         this.setState({ ...this.state, selected: this.names[i] });
-        window.location = this.state.selected[3];
+        if (this.names[i][3] === "") {
+          //TODO: Show help again on click
+        } else {
+          window.open(this.names[i][3]);
+        }
         break;
       }
     }
@@ -44,17 +72,28 @@ class ContactButton extends React.Component {
 
   createButton = menu => {
     const Image = this.state.selected[2];
+    let divClass = "";
+    if (this.state.showMenu) {
+      divClass = "contact-menu-selected";
+    }
     return (
-      <div id="contact-button" onClick={this.buttonClicked}>
-        <div>
-          {this.state.selected[0]}
-          <span className={this.state.selected[1]} />
-          <span id="img-option">
-            <Image colour="#fff" height="15px" />
-          </span>
+      <React.Fragment>
+        <div
+          id="contact-button"
+          className={divClass}
+          onClick={this.buttonClicked}
+          ref={this.setWrapperRef}
+        >
+          <div>
+            {this.state.selected[0]}
+            <span className={this.state.selected[1]} />
+            <span id="img-option">
+              <Image colour="#fff" height="15px" />
+            </span>
+          </div>
         </div>
         {menu ? this.createMenu() : null}
-      </div>
+      </React.Fragment>
     );
   };
 

@@ -33,6 +33,7 @@ class Views extends React.Component {
     const newViews = this.state.views.map(function(entry) {
       if (entry.id === id) {
         cytoscapeStore.layouts = layoutFactory.computeLayout(entry.id);
+        cytoscapeStore.view = entry.id;
         return Object.assign({}, entry, {
           isChecked: true
         });
