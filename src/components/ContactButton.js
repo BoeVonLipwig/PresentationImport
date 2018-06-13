@@ -8,11 +8,38 @@ import aidStore from "../util/AidStore";
 class ContactButton extends React.Component {
   constructor(props) {
     super(props);
+    this.setWrapperRef = this.setWrapperRef.bind(this);
+    this.handleClickOutside = this.handleClickOutside.bind(this);
     this.state = {
       showMenu: false,
       selected: this.names[2]
     };
   }
+
+  componentDidMount() {
+    document.addEventListener("mousedown", this.handleClickOutside);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener("mousedown", this.handleClickOutside);
+  }
+
+  /**
+   * Set the wrapper ref
+   */
+  setWrapperRef(node) {
+    this.wrapperRef = node;
+  }
+
+  /**
+   * Alert if clicked on outside of element
+   */
+  handleClickOutside(event) {
+    if (this.wrapperRef && !this.wrapperRef.contains(event.target)) {
+      this.setState({ ...this.state, showMenu: false });
+    }
+  }
+
   names = [
     ["Help", "help", HelpIcon, ""],
     ["Request Addition", "mailto", MailIcon, "mailto:matt.plummer@vuw.ac.nz"],
@@ -55,6 +82,7 @@ class ContactButton extends React.Component {
           id="contact-button"
           className={divClass}
           onClick={this.buttonClicked}
+          ref={this.setWrapperRef}
         >
           <div>
             {this.state.selected[0]}
@@ -64,7 +92,6 @@ class ContactButton extends React.Component {
             </span>
           </div>
         </div>
-
         {menu ? this.createMenu() : null}
       </React.Fragment>
     );
