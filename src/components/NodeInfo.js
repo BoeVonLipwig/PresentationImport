@@ -79,7 +79,7 @@ class NodeInfo extends React.Component {
 
     return (
       <div className="id-wrapper id-linked">
-        <a href="https://google.com" target="_blank">
+        <a href="https://google.com" target="_blank" rel="noopener noreferrer">
           <img
             className="img-crop"
             src={mediaLink}
