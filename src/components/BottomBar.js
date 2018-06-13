@@ -1,15 +1,12 @@
 import React from "react";
 import Aid from "./Aid";
+import Search from "./Search";
 import logo from "../assets/vic-logo.svg";
 import aidStore from "../util/AidStore";
 import ContactButton from "./ContactButton";
 import { observer } from "mobx-react";
 
 class BottomBar extends React.Component {
-  clickHandler(e, type) {
-    aidStore.aids.search = { display: "none" };
-  }
-
   render() {
     return (
       <div id="navbar-bottom">
@@ -18,15 +15,7 @@ class BottomBar extends React.Component {
           msg="Start Typing a Person/Project Name"
           style={aidStore.aids.search}
         />
-        <div>
-          <input
-            id="autocomplete"
-            type="text"
-            placeholder="Search Nodes"
-            spellCheck="false"
-            onClick={event => this.clickHandler(event, "search")}
-          />
-        </div>
+        <Search />
         <div id="outer-header">
           <div id="header">
             <a>Connected Worlds</a>
