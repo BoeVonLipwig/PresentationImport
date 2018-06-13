@@ -38,7 +38,11 @@ class ContactButton extends React.Component {
     for (let i = 0; i < 3; i++) {
       if (this.names[i][0] === text) {
         this.setState({ ...this.state, selected: this.names[i] });
-        window.location = this.state.selected[3];
+        if (this.names[i][3] === "") {
+          //TODO: Show help again on click
+        } else {
+          window.open(this.names[i][3]);
+        }
         break;
       }
     }
