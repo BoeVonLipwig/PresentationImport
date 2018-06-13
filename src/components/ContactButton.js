@@ -15,12 +15,7 @@ class ContactButton extends React.Component {
   }
   names = [
     ["Help", "help", HelpIcon, ""],
-    [
-      "Request Addition",
-      "mailto",
-      MailIcon,
-      "https://mail.google.com/mail/u/0/?view=cm&fs=1&tf=1&source=mailto&su=VR+Connected+Worlds+Request&to=matt.plummer@vuw.ac.nz"
-    ],
+    ["Request Addition", "mailto", MailIcon, "mailto:matt.plummer@vuw.ac.nz"],
     [
       "Submit Issue",
       "github",
