@@ -46,6 +46,7 @@ class NodeInfo extends React.Component {
       return (
         <div className="videoWrapper">
           <iframe
+            title="Youtube Vidoe"
             width="1920"
             height="1080"
             className="info-media"
@@ -64,6 +65,7 @@ class NodeInfo extends React.Component {
       return (
         <div className="videoWrapper">
           <iframe
+            title="Vimeo Video"
             width="1920"
             height="1080"
             className="info-media"
