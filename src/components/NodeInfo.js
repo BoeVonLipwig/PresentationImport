@@ -47,7 +47,7 @@ class NodeInfo extends React.Component {
       return (
         <div className="videoWrapper">
           <iframe
-            title="Youtube Vidoe"
+            title="Youtube Video"
             width="1920"
             height="1080"
             className="info-media"
@@ -141,10 +141,10 @@ class NodeInfo extends React.Component {
   }
 
   parseDates(datesActive) {
-    return datesActive ? (
+    return datesActive && datesActive !== "placeholder" ? (
       <div className="info-row">
         <p className="info-left">Dates Active |</p>
-        <p> p className="info-right">{datesActive}</p>
+        <p className="info-right">{datesActive}</p>
       </div>
     ) : null;
   }
