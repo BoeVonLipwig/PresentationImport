@@ -374,6 +374,7 @@ class Cytoscape extends React.Component {
         .removeClass("highlighted")
         .addClass("faded");
       nhood.removeClass("faded").addClass("highlighted");
+      cy.elements('[type = "key"]').removeClass("faded");
 
       // Cytoscape Canvas Dimensions
       var cyW = cy.width();
@@ -639,6 +640,9 @@ class Cytoscape extends React.Component {
         this.arrangeKey(this.cy);
         this.cy.fit(50);
       });
+      console.log("Start");
+      console.log(this.cy.json());
+      console.log("End");
     });
   }
 
