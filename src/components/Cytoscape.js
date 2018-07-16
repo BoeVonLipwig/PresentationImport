@@ -6,12 +6,14 @@ import ProjectLayout from "../layouts/ProjectLayout";
 import aidStore from "../util/AidStore";
 import Promise from "bluebird";
 import _ from "lodash";
+import "./Cytoscape.css";
 import { autorun } from "mobx";
 import { observer } from "mobx-react";
 
 class Cytoscape extends React.Component {
   constructor() {
     super();
+    this.name = "cy_default";
     this.cyDiv = React.createRef();
     this.initCy = this.initCy.bind(this);
   }
@@ -605,11 +607,13 @@ class Cytoscape extends React.Component {
     this.cy.elements('[type = "project"]').addClass("project");
 
     this.cy.on("mouseover", "node", e => {
+      this.name = "cy_pointer";
       const node = e.target;
       Cytoscape.hoverLight(node);
     });
 
     this.cy.on("mouseout", "node", e => {
+      this.name = "cy_default";
       const node = e.target;
       this.hoverNight(node, this.cy);
     });
@@ -643,7 +647,9 @@ class Cytoscape extends React.Component {
   }
 
   render() {
-    return <div ref={this.cyDiv} id="cy" />;
+    console.log("Render!");
+    console.log(this.name);
+    return <div ref={this.cyDiv} className={this.name} id="cy" />;
   }
 }
 
