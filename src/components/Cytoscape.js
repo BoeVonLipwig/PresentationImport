@@ -655,8 +655,6 @@ class Cytoscape extends React.Component {
   }
 
   render() {
-    console.log("Render!");
-    console.log(this.name);
     return <div ref={this.cyDiv} className={this.state.cursor} id="cy" />;
   }
 }
