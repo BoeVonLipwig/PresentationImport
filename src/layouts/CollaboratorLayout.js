@@ -2,6 +2,11 @@ import Layout from "./Layout";
 
 class CollaboratorLayout extends Layout {
   static getLayout() {
+    this.cy
+      .elements()
+      .selectify()
+      .grabify();
+
     this.clearStyles();
     let elesHide = this.cy.elements('[type = "project"], [type = "school"]');
     let elesFilter = this.cy.elements('[type = "project"]');
@@ -12,6 +17,7 @@ class CollaboratorLayout extends Layout {
 
     elesHide.addClass("hidden");
     elesFilter.addClass("filtered");
+    elesHide.unselectify().ungrabify();
 
     let people = activePeople.nodes('[type = "person"]');
 
