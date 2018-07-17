@@ -637,8 +637,6 @@ class Cytoscape extends React.Component {
       autorun(() => {
         this.props.cytoscapeStore.layouts.forEach(layout => {
           layout.run();
-          console.log("Start");
-          console.log(this.cy.elements(".hidden").json());
         });
         this.arrangeKey(this.cy);
         this.cy.fit(50);
