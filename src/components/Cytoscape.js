@@ -117,11 +117,13 @@ class Cytoscape extends React.Component {
   }
 
   static hoverLight(node) {
-    node.closedNeighborhood().addClass("hover-hood");
-    node.addClass("hover");
-    node.style({
-      label: node.data("name")
-    });
+    if (!node.hasClass("hidden")) {
+      node.closedNeighborhood().addClass("hover-hood");
+      node.addClass("hover");
+      node.style({
+        label: node.data("name")
+      });
+    }
   }
 
   hoverNight(node, cy) {
@@ -635,6 +637,8 @@ class Cytoscape extends React.Component {
       autorun(() => {
         this.props.cytoscapeStore.layouts.forEach(layout => {
           layout.run();
+          console.log("Start");
+          console.log(this.cy.elements(".hidden").json());
         });
         this.arrangeKey(this.cy);
         this.cy.fit(50);

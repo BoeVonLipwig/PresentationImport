@@ -7,6 +7,10 @@ class ProjectLayout extends Layout {
   static projectRadius;
 
   static init() {
+    this.cy
+      .elements()
+      .selectify()
+      .grabify();
     let elesHide = this.cy.elements('edge[type = "collab"], [type = "school"]');
     let elesFilter = this.cy.elements('edge[type = "collab"]');
 
@@ -35,6 +39,7 @@ class ProjectLayout extends Layout {
     elesFilter = elesFilter.add(emptySchoolNodes);
     elesHide.addClass("hidden");
     elesFilter.addClass("filtered");
+    elesHide.unselectify().ungrabify();
 
     if (
       this.cy

@@ -52,6 +52,11 @@ class ProgrammeLayout extends Layout {
   }
 
   static init() {
+    this.cy
+      .elements()
+      .selectify()
+      .grabify();
+
     let elesHide = this.cy.elements('edge[type = "collab"]');
     let elesFilter = this.cy.elements('[type = "null"]');
 
@@ -75,6 +80,7 @@ class ProgrammeLayout extends Layout {
 
     elesHide.addClass("hidden");
     elesFilter.addClass("filtered");
+    elesHide.unselectify().ungrabify();
 
     elesHide.position({
       x: this.cy.width() / 2,
