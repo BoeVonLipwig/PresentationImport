@@ -1,6 +1,6 @@
 import React from "react";
 import cytoscape from "cytoscape";
-import loadData from "../util/data";
+import data from "../util/NetworkRequest";
 import Layout from "../layouts/Layout";
 import ProjectLayout from "../layouts/ProjectLayout";
 import aidStore from "../util/AidStore";
@@ -585,12 +585,10 @@ class Cytoscape extends React.Component {
 
   componentDidMount() {
     // get exported json from cytoscape desktop via ajax
-    let graphP = loadData();
+    let graphP = data.getGraphP();
 
     // also get style via ajax
-    let styleP = fetch("data.cycss").then(x => {
-      return x.text();
-    });
+    let styleP = data.getStyleP();
 
     Promise.all([graphP, styleP]).spread(this.initCy);
   }

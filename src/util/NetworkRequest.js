@@ -1,6 +1,6 @@
 import loadData from "../util/data";
-import Promise from "bluebird";
 
+// This class gets the data and stores it to be called by cytoscape
 class NetworkRequest {
   constructor() {
     this.graphP = loadData();
@@ -14,6 +14,10 @@ class NetworkRequest {
   }
 
   getStyleP() {
-    return this.SytleP;
+    return this.styleP;
   }
 }
+
+const networkRequest = new NetworkRequest();
+
+export default networkRequest;
