@@ -592,10 +592,12 @@ class Cytoscape extends React.Component {
     // also get style via ajax
     let styleP = data.getStyleP();
 
-    Promise.all([graphP, styleP]).spread(this.initCy);
+    let colorP = data.getColorP();
+
+    Promise.all([graphP, styleP, colorP]).spread(this.initCy);
   }
 
-  initCy(graphP, styleP) {
+  initCy(graphP, styleP, colorP) {
     this.cy = cytoscape({
       container: this.cyDiv.current,
       style: styleP,
