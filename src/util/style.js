@@ -1,3 +1,5 @@
+import _ from "lodash";
+
 var padding = 18;
 const ogNavHeight = $("#header").height();
 const headerWidth = $("#header").width();
@@ -85,7 +87,48 @@ Array.prototype.unique = function() {
   });
 };
 
-function parseStyles(allNodes, colorList, styleList, data) {
+function parseStyles(allNodes, colorList, data) {
+  //styleList is a placeholder object with options for colorScheme selection,
+  //and override for foreground, background, highlight, and lowlight color variables
+  //as well as override for the color of nodes, and the name they should be referred to in the key
+  //ideally this object should eventually be parsed from a csv
+  //temp {
+  var styleList = {
+    colorScheme: 3, // num 0 - 3, selects one of 4 color schemes from an array defined in Colors.json(see Colors.pdf for visual guide)
+    //color overrides for css and cycss variables
+    //accepts only hex color values (#fff) empty and faulty field will use defined in the selected colorscheme
+    fg: "", //foreground color : text, tickboxes, logo etc
+    bg: "", //background color
+    hl: "", //highlight color : tooltip, html links, scrollbar hover etc
+    ll: "", //lowlight color : greyed out text, dropshadows, scrollbar track etc
+    //nodeOverride, can override automatic styling and labels (addkey) for nodes
+    // can be done by type(person, project, school) or subtype/role(Hounours Student, Academic Staff, etc)
+    nodeOverride: [
+      {
+        label: "Person", //The label to display in the key
+        subtype: ["person"], //what type or subtype(role) this rule should apply to, this can accept multiple roles/subtype, but single type, do not mix type and subtype(role)
+        color: "", //what color the node should be, can be a #hexvalue or an int to specify which array of colors(for type 0-3), or color(for subtype/role 0-5) see Colors.json or Colors.pdf for visual guide
+        shape: "" //if the shape should be a ring or full circle, default is circle
+      },
+      {
+        label: "Post-grad Student", //listed node subtype(role) should be grouped and named as post-grad in key
+        subtype: ["Honours Student", "Masters Student", "PhD Student"], //multiple subtype/role grouped under on label and one color
+        color: ""
+      },
+      {
+        label: "Programme", //school should be renamed programme in key
+        subtype: ["school"],
+        color: "",
+        shape: "ring" //Programme should be displayed as rings rather than filled in circle
+      },
+      {
+        label: "Project",
+        subtype: ["project"],
+        color: "",
+        shape: "ring"
+      }
+    ]
+  };
   var typ = allNodes.map(a => a.data("type")).unique();
   var nodeType = {};
   typ.forEach(
@@ -292,12 +335,12 @@ function parseStyles(allNodes, colorList, styleList, data) {
   });
   //
 
-  typeString = data
+  var typeString = data
     .split("/*type")
     .pop()
     .split("type*/")
     .shift();
-  ringString = data
+  var ringString = data
     .split("/*ring")
     .pop()
     .split("ring*/")

@@ -4,6 +4,7 @@ import data from "../util/NetworkRequest";
 import Layout from "../layouts/Layout";
 import ProjectLayout from "../layouts/ProjectLayout";
 import aidStore from "../util/AidStore";
+import "../util/style";
 import Promise from "bluebird";
 import _ from "lodash";
 import "./Cytoscape.css";
@@ -604,6 +605,8 @@ class Cytoscape extends React.Component {
       elements: graphP,
       wheelSensitivity: 0.5
     });
+    let styleList = parseStyles(this.cy.nodes(), colorP, styleP);
+    this.cy.style(styleList.stylesheet);
 
     this.addCollab(this.cy);
     this.addKey(this.cy);
