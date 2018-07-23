@@ -3,7 +3,9 @@ import loadData from "../util/data";
 // This class gets the data and stores it to be called by cytoscape
 class NetworkRequest {
   constructor() {
-    this.colorP = fetch("ColorSettings.json").then(resp => resp.json());
+    this.colorP = fetch("Settings/ColorSettings.json").then(resp =>
+      resp.json()
+    );
     this.graphP = loadData();
     this.styleP = fetch("data.cycss").then(x => {
       return x.text();

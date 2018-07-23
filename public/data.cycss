@@ -90,12 +90,10 @@ background-color: #287777;
 }
 
 node[role = "Honours Student"] {
-background-color: #4A3247;
 background-color: #4489A3;
 }
 
 node[role = "PhD Student"] {
-background-color: #B6AB72;
 background-color: #4489A3;
 }
 
@@ -283,8 +281,6 @@ edge.highlighted[type = "collab"] {
  	border-color : #ddd;
  	background-opacity : 0;
  	text-opacity : 0;
-
-
 
  }
 
