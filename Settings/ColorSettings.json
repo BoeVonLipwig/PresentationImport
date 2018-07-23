@@ -1,0 +1,42 @@
+{
+  "Background": "#1A2A39",
+  "Foreground": "#ddd",
+  "Highlight": "#B6AB72",
+  "Lowlight": "#3D4452",
+  "node1": {
+    "nodeBackground": "#4FB2B2",
+    "nodeForeground": "#B6AB72",
+    "nodeHighlight": "#297777",
+    "nodeLowlight": "#4D4B4A"
+  },
+  "node2": {
+    "nodeBackground": "#4489A3",
+    "nodeForeground": "#CAA85D",
+    "nodeHighlight": "#3D7A7A",
+    "nodeLowlight": "#675E5D"
+  },
+  "node3": {
+    "nodeBackground": "#4471A1",
+    "nodeForeground": "#CB9868",
+    "nodeHighlight": "#4D8774",
+    "nodeLowlight": "#806461"
+  },
+  "node4": {
+    "nodeBackground": "#2D507D",
+    "nodeForeground": "#B27759",
+    "nodeHighlight": "#467A4D",
+    "nodeLowlight": "#8C5C5C"
+  },
+  "node5": {
+    "nodeBackground": "#204373",
+    "nodeForeground": "#C06943",
+    "nodeHighlight": "#55773C",
+    "nodeLowlight": "#894D4D"
+  },
+  "node6": {
+    "nodeBackground": "#23346B",
+    "nodeForeground": "#CC5635",
+    "nodeHighlight": "#5F6D37",
+    "nodeLowlight": "#994646"
+  }
+}
