@@ -1,42 +1,43 @@
+
 {
-  "background": "#f7f8f9",
-  "foreground": "#202020",
-  "highlight": "#f2835b",
-  "lowlight": "#b3b4b4",
+  "Background": "#1A2A39",
+  "Foreground": "#ddd",
+  "Highlight": "#B6AB72",
+  "Lowlight": "#3D4452",
   "node1": {
-    "nodeBackground": "#b4d8c7",
-    "nodeForeground": "#f2835b",
-    "nodeHighlight": "#202020",
-    "nodeLowlight": "#FFF"
+    "nodeBackground": "#4FB2B2",
+    "nodeForeground": "#B6AB72",
+    "nodeHighlight": "#297777",
+    "nodeLowlight": "#4D4B4A"
   },
   "node2": {
-    "nodeBackground": "#b7d0ca",
-    "nodeForeground": "#f29861",
-    "nodeHighlight": "#424342",
-    "nodeLowlight": "#FFF"
+    "nodeBackground": "#4489A3",
+    "nodeForeground": "#CAA85D",
+    "nodeHighlight": "#3D7A7A",
+    "nodeLowlight": "#675E5D"
   },
   "node3": {
-    "nodeBackground": "#bac9cd",
-    "nodeForeground": "#f0ad66",
-    "nodeHighlight": "#616261",
-    "nodeLowlight": "#FFF"
+    "nodeBackground": "#4471A1",
+    "nodeForeground": "#CB9868",
+    "nodeHighlight": "#4D8774",
+    "nodeLowlight": "#806461"
   },
   "node4": {
-    "nodeBackground": "#bcc2cf",
-    "nodeForeground": "#efc16c",
-    "nodeHighlight": "#757576",
-    "nodeLowlight": "#FFF"
+    "nodeBackground": "#2D507D",
+    "nodeForeground": "#B27759",
+    "nodeHighlight": "#467A4D",
+    "nodeLowlight": "#8C5C5C"
   },
   "node5": {
-    "nodeBackground": "#bfbbd2",
-    "nodeForeground": "#edd672",
-    "nodeHighlight": "#9e99e",
-    "nodeLowlight": "#FFF"
+    "nodeBackground": "#204373",
+    "nodeForeground": "#C06943",
+    "nodeHighlight": "#55773C",
+    "nodeLowlight": "#894D4D"
   },
   "node6": {
-    "nodeBackground": "#c1b4d5",
-    "nodeForeground": "#eaeb77",
-    "nodeHighlight": "#bdbdbd",
-    "nodeLowlight": "#FFF"
+    "nodeBackground": "#23346B",
+    "nodeForeground": "#CC5635",
+    "nodeHighlight": "#5F6D37",
+    "nodeLowlight": "#994646"
   }
 }
