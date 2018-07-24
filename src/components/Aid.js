@@ -25,8 +25,9 @@ class Aid extends React.Component {
       case "contactAid":
         aidStore.aids.contact = { display: "none" };
         break;
+      default:
+        break;
     }
-    // this.setState({ ...this.state, display: false });
   }
 
   render() {

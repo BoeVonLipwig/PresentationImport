@@ -36,8 +36,9 @@ class GithubButton extends React.Component {
   }
 
   render() {
+    let name = this.state.menu ? "ui-menu-item-wrapper" : "";
     let html = (
-      <div className="ui-menu-item-wrapper">
+      <div className={name}>
         {this.data[0]}
         <span className={this.data[1]} />
         <span id="img-option">{this.svg()}</span>

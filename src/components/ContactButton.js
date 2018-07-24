@@ -58,12 +58,7 @@ class ContactButton extends React.Component {
     }
     return (
       <React.Fragment>
-        <div
-          id="contact-button"
-          className={divClass}
-          onClick={this.buttonClicked}
-          ref={this.setWrapperRef}
-        >
+        <div id="contact-button" className={divClass} ref={this.setWrapperRef}>
           <Selected onClick={this.buttonClicked} />
         </div>
         {menu ? this.createMenu() : null}
@@ -73,14 +68,10 @@ class ContactButton extends React.Component {
 
   createMenu = () => {
     return (
-      <div
-        className="ui-selectmenu-menu contact-menu ui-front ui-selectmenu-open contact-menu-open menu-div"
-        onClick={() => console.log("outer div clicked")}
-      >
+      <div className="ui-selectmenu-menu contact-menu ui-front ui-selectmenu-open contact-menu-open menu-div">
         <ul
           id="contact-menu"
           className="ui-menu ui-corner-bottom ui-widget ui-widget-content menu-ul"
-          onClick={() => console.log("menu clicked")}
           ref={this.setWrapperRef}
         >
           {this.buttons[0]}
