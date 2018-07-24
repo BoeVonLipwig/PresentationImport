@@ -8,8 +8,12 @@ import HelpButton from "./menu/HelpButton";
 class ContactButton extends React.Component {
   constructor(props) {
     super(props);
+    this.buttons = [
+      <HelpButton parent={this} />,
+      <MailButton parent={this} />,
+      <GithubButton parent={this} />
+    ];
     this.setWrapperRef = this.setWrapperRef.bind(this);
-    this.toggleMenu = this.toggleMenu.bind(this);
     this.handleClickOutside = this.handleClickOutside.bind(this);
     this.state = {
       showMenu: false,
@@ -60,31 +64,28 @@ class ContactButton extends React.Component {
           onClick={this.buttonClicked}
           ref={this.setWrapperRef}
         >
-          <Selected onClick={this.toggleMenu} />
+          <Selected onClick={this.buttonClicked} />
         </div>
         {menu ? this.createMenu() : null}
       </React.Fragment>
     );
   };
 
-  toggleMenu() {
-    this.setState({
-      ...this.state,
-      showMenu: !this.state.showMenu
-    });
-  }
-
   createMenu = () => {
     return (
-      <div className="ui-selectmenu-menu contact-menu ui-front ui-selectmenu-open contact-menu-open menu-div">
+      <div
+        className="ui-selectmenu-menu contact-menu ui-front ui-selectmenu-open contact-menu-open menu-div"
+        onClick={() => console.log("outer div clicked")}
+      >
         <ul
           id="contact-menu"
           className="ui-menu ui-corner-bottom ui-widget ui-widget-content menu-ul"
-          onClick={console.log("menu clicked")}
+          onClick={() => console.log("menu clicked")}
+          ref={this.setWrapperRef}
         >
-          <HelpButton />
-          <MailButton />
-          <GithubButton />
+          {this.buttons[0]}
+          {this.buttons[1]}
+          {this.buttons[2]}
         </ul>
       </div>
     );

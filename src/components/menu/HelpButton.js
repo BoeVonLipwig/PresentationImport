@@ -32,20 +32,16 @@ class HelpButton extends React.Component {
 
   onClick() {
     console.log("help clicked");
-    //TODO: Show help again on click
     aidStore.aids.contact = { display: "" };
     aidStore.aids.details = { display: "" };
     aidStore.aids.search = { display: "" };
     aidStore.aids.views = { display: "" };
-    console.log("aids");
+    this.props.parent.state.showMenu = false;
   }
 
   render() {
     let html = (
-      <div
-        className="ui-menu-item-wrapper"
-        onClick={() => console.log("div clicked")}
-      >
+      <div className="ui-menu-item-wrapper">
         {this.data[0]}
         <span className={this.data[1]} />
         <span id="img-option">{this.svg()}</span>

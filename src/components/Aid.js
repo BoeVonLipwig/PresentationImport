@@ -2,6 +2,7 @@ import React from "react";
 import "./Aid.css";
 import { observer } from "mobx-react";
 import { Fragment } from "react";
+import aidStore from "../util/AidStore";
 
 class Aid extends React.Component {
   constructor() {
@@ -11,7 +12,21 @@ class Aid extends React.Component {
   }
 
   clickHandler(e, type) {
-    this.setState({ ...this.state, display: false });
+    switch (this.props.id) {
+      case "detailAid":
+        aidStore.aids.details = { display: "none" };
+        break;
+      case "viewAid":
+        aidStore.aids.views = { display: "none" };
+        break;
+      case "searchAid":
+        aidStore.aids.search = { display: "none" };
+        break;
+      case "contactAid":
+        aidStore.aids.contact = { display: "none" };
+        break;
+    }
+    // this.setState({ ...this.state, display: false });
   }
 
   render() {
