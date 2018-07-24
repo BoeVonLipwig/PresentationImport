@@ -30,7 +30,6 @@ class GithubButton extends React.Component {
   }
 
   onClick() {
-    console.log("github clicked");
     this.props.parent.setState({ ...this.props.parent.state, showMenu: false });
     console.log(this.props.parent.state.showMenu);
     window.open(this.data[2]);

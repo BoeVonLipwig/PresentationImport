@@ -48,9 +48,7 @@ class MailButton extends React.Component {
   }
 
   onClick() {
-    console.log("mail clicked");
     this.props.parent.setState({ ...this.props.parent.state, showMenu: false });
-    console.log(this.props.parent.state.showMenu);
     window.open(this.data[2]);
   }
 

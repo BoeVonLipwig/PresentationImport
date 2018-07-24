@@ -31,7 +31,6 @@ class HelpButton extends React.Component {
   }
 
   onClick() {
-    console.log("help clicked");
     aidStore.aids.contact = { display: "" };
     aidStore.aids.details = { display: "" };
     aidStore.aids.search = { display: "" };
