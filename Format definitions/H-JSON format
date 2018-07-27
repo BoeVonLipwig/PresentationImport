@@ -1,0 +1,82 @@
+H-JSON:
+(subject to change)
+connections will be picked out in a second pass through the data
+info{} will be defined later
+
+SpecialNodeType1[
+    nameOfType:  "name1"
+    Nodes[
+        "X":{
+            connections[
+                "a",
+                "b",
+                "d"
+            ]
+            info{}
+        },
+        "Y":{
+            connections[
+                "c",
+                "d"
+            ]
+            info{}
+        }
+    ]
+
+]
+
+SpecialNodeType2{
+    nameOfType:  "name2"
+    Nodes:[
+        "Z":{
+            connections[
+                "b",
+                "c"
+            ]
+            info{}
+        }
+    ]
+}
+
+SpecialNodeType3[
+    nameOfType:  "name3"
+    Nodes: [
+        "T":{
+            connections[
+                "c",
+                "a",
+            ]
+            info{}
+        }
+    ]
+]
+
+SpecialNodeType4[
+    nameOfType: "name4"
+]
+
+Nodes[
+    nameOfType: "nameN"
+    Nodes: [
+        "a":{
+            connections[
+                "c",
+                "a",
+            ]
+            info{}
+        }
+        "b":{
+            connections[
+                "c",
+            ]
+            info{}
+        }
+        "c":{
+            connections[
+            ]
+            info{}
+        }
+    ]
+
+
+]
