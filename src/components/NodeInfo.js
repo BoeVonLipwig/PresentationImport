@@ -5,7 +5,7 @@ import "./NodeInfo.css";
 
 class NodeInfo extends React.Component {
   render() {
-    let node = cytoscapeStore.node;
+    let node = cytoscapeStore.selectedNode;
     return <Fragment>{this.nodeData(node)}</Fragment>;
   }
 

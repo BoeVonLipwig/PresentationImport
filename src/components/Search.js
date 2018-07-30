@@ -1,8 +1,8 @@
 import React from "react";
 import { observer } from "mobx-react";
 import aidStore from "../util/AidStore";
-import $ from "jquery";
-import "jquery-ui";
+import cytoscapeStore from "../util/CytoscapeStore";
+import { autorun } from "mobx";
 
 class Search extends React.Component {
   clickHandler(e, type) {
@@ -10,35 +10,43 @@ class Search extends React.Component {
   }
 
   componentDidMount() {
-    this.$node = $(this.refs.autocomplete);
+    this.$node = window.$(this.refs.autocomplete);
+    this.$node.autocomplete({
+      autoFocus: true,
+      // minLength: 2,
+      classes: {
+        "ui-autocomplete": "suggestion-menu",
+        "ui-menu-item": "suggestion-item"
+      },
+      position: {
+        my: "left bottom",
+        at: "left top",
+        collision: "flip"
+      },
+      source: [""]
+    });
+    autorun(() => {
+      this.$node.autocomplete(
+        "option",
+        "source",
+        cytoscapeStore.visNodeNames.slice()
+      );
+    });
     this.$node.on("autocompletefocus", function(event, ui) {
-      var autoName = ui.item.value;
-      var node = cy.nodes('[name = "' + ui.item.value + '"]');
-      var hovered = cy.nodes(".hover-hood, .hover");
-
-      hovered.forEach(function(n) {
-        hoverNight(n);
-      });
-
-      setLabels();
-      hoverLight(node);
+      let autoName = ui.item.value;
+      let node = cytoscapeStore.visNodesMap[autoName];
+      cytoscapeStore.hoveredNode = node;
     });
 
     this.$node.on("autocompleteselect", function(event, ui) {
-      //$( "#autocomplete" ).blur();
-      var autoName = ui.item.value;
-      var node = cy.nodes('[name = "' + autoName + '"]');
+      let autoName = ui.item.value;
+      let node = cytoscapeStore.visNodesMap[autoName];
 
-      cy.$(":selected").unselect();
-
-      node.select();
+      cytoscapeStore.selectedNode = node;
     });
 
     this.$node.on("autocompleteclose", function(event, ui) {
-      cy
-        .elements()
-        .removeClass("hover-hood")
-        .removeClass("hover");
+      cytoscapeStore.hoveredNode = null;
     });
   }
 
