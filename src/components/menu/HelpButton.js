@@ -7,13 +7,8 @@ class HelpButton extends React.Component {
 
   constructor(props) {
     super(props);
-    if (props.onClick) {
-      this.onClick = this.props.onClick;
-      this.state = { menu: false };
-    } else {
-      this.onClick = this.onClick.bind(this);
-      this.state = { menu: true };
-    }
+    this.onClick = this.onClick.bind(this);
+    this.state = { menu: this.props.menu };
   }
 
   svg() {
@@ -31,11 +26,16 @@ class HelpButton extends React.Component {
   }
 
   onClick() {
-    aidStore.aids.contact = { display: "" };
-    aidStore.aids.details = { display: "" };
-    aidStore.aids.search = { display: "" };
-    aidStore.aids.views = { display: "" };
-    this.props.parent.state.showMenu = false;
+    if (this.state.menu) {
+      aidStore.aids.contact = { display: "" };
+      aidStore.aids.details = { display: "" };
+      aidStore.aids.search = { display: "" };
+      aidStore.aids.views = { display: "" };
+      this.props.parent.setState({
+        ...this.props.parent.state,
+        showMenu: false
+      });
+    }
   }
 
   render() {

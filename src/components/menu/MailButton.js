@@ -6,13 +6,8 @@ class MailButton extends React.Component {
 
   constructor(props) {
     super(props);
-    if (props.onClick) {
-      this.onClick = this.props.onClick;
-      this.state = { menu: false };
-    } else {
-      this.onClick = this.onClick.bind(this);
-      this.state = { menu: true };
-    }
+    this.onClick = this.onClick.bind(this);
+    this.state = { menu: this.props.menu };
   }
 
   svg() {
@@ -48,8 +43,13 @@ class MailButton extends React.Component {
   }
 
   onClick() {
-    this.props.parent.setState({ ...this.props.parent.state, showMenu: false });
-    window.open(this.data[2]);
+    if (this.state.menu) {
+      this.props.parent.setState({
+        ...this.props.parent.state,
+        showMenu: false
+      });
+      window.open(this.data[2]);
+    }
   }
 
   render() {

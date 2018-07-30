@@ -9,9 +9,9 @@ class ContactButton extends React.Component {
   constructor(props) {
     super(props);
     this.buttons = [
-      <HelpButton parent={this} />,
-      <MailButton parent={this} />,
-      <GithubButton parent={this} />
+      <HelpButton parent={this} menu={true} />,
+      <MailButton parent={this} menu={true} />,
+      <GithubButton parent={this} menu={true} />
     ];
     this.setWrapperRef = this.setWrapperRef.bind(this);
     this.handleClickOutside = this.handleClickOutside.bind(this);
@@ -58,10 +58,16 @@ class ContactButton extends React.Component {
     }
     return (
       <React.Fragment>
-        <div id="contact-button" className={divClass} ref={this.setWrapperRef}>
-          <Selected onClick={this.buttonClicked} />
+        <div ref={this.setWrapperRef}>
+          <div
+            id="contact-button"
+            className={divClass}
+            onClick={this.buttonClicked}
+          >
+            <Selected parent={this} menu={false} />
+          </div>
+          {menu ? this.createMenu() : null}
         </div>
-        {menu ? this.createMenu() : null}
       </React.Fragment>
     );
   };
@@ -72,7 +78,6 @@ class ContactButton extends React.Component {
         <ul
           id="contact-menu"
           className="ui-menu ui-corner-bottom ui-widget ui-widget-content menu-ul"
-          ref={this.setWrapperRef}
         >
           {this.buttons[0]}
           {this.buttons[1]}
