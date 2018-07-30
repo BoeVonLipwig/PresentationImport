@@ -8,6 +8,9 @@ import HelpButton from "./menu/HelpButton";
 class ContactButton extends React.Component {
   constructor(props) {
     super(props);
+    if (this.props.clickHandler) {
+      this.buttonClicked = this.props.clickHandler;
+    }
     this.buttons = [
       <HelpButton parent={this} menu={true} />,
       <MailButton parent={this} menu={true} />,
@@ -40,6 +43,7 @@ class ContactButton extends React.Component {
    * Alert if clicked on outside of element
    */
   handleClickOutside(event) {
+    console.log(window.history.length);
     if (this.wrapperRef && !this.wrapperRef.contains(event.target)) {
       this.setState({ ...this.state, showMenu: false });
     }
