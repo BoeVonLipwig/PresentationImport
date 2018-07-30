@@ -6,8 +6,8 @@ info{} will be defined later
 
 Grammar:
 
-SpecialNodeType = {
-    name: "name",
+NodeType = {
+    typeName: "name",
     nodes: [Node, ...]
 }
 
@@ -20,8 +20,8 @@ Node = {
 
 Example:
 
-SpecialNodeType1[
-    nameOfType:  "name1"
+SpecialNodeType1{
+    nameOfType:  "name1",
     Nodes[
         "X":{
             connections[
@@ -40,7 +40,7 @@ SpecialNodeType1[
         }
     ]
 
-]
+}
 
 SpecialNodeType2{
     nameOfType:  "name2"
