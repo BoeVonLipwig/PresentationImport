@@ -87,43 +87,45 @@ class Cytoscape extends React.Component {
     this.props.cytoscapeStore.visNodesMap = visNodesMap;
   }
 
-  setLabels(cy) {
-    cy.nodes('[type = "person"],[type = "project"],[type = "school"]').style({
-      label: ele => {
-        return ele.data("name");
-      }
-    });
+  setLabels() {
+    this.cy
+      .nodes('[type = "person"],[type = "project"],[type = "school"]')
+      .style({
+        label: ele => {
+          return ele.data("name");
+        }
+      });
 
-    cy.nodes('[type = "project"]:unselected').style({
+    this.cy.nodes('[type = "project"]:unselected').style({
       label: ele => {
         return this.setInitials(ele, 15, 15, 2);
       }
     });
 
-    cy.nodes('[type = "school"]:unselected').style({
+    this.cy.nodes('[type = "school"]:unselected').style({
       label: ele => {
         return this.setInitials(ele, 12, 12, 2);
       }
     });
 
-    if (cy.zoom() < 1.2) {
-      cy.nodes('[type = "person"]:unselected').style({
+    if (this.cy.zoom() < 1.2) {
+      this.cy.nodes('[type = "person"]:unselected').style({
         label: ele => {
           return this.setInitials(ele, 6, 6, 1);
         }
       });
     } else {
-      cy.nodes('[type = "person"]:unselected').style({
+      this.cy.nodes('[type = "person"]:unselected').style({
         label: ele => {
           return this.setInitials(ele, 12, 12, 1);
         }
       });
     }
 
-    cy.nodes(".highlighted").style({
+    this.cy.nodes(".highlighted").style({
       label: ele => {
         if (
-          cy.nodes('.highlighted[type = "project"]').size() > 5 &&
+          this.cy.nodes('.highlighted[type = "project"]').size() > 5 &&
           ele.data("type") === "project"
         ) {
           return this.setInitials(ele, 6, 6, 1);
@@ -134,33 +136,33 @@ class Cytoscape extends React.Component {
     });
   }
 
-  static hoverLight(node) {
+  hoverLight(node) {
+    this.setLabels();
     if (!node.hasClass("hidden")) {
       node.closedNeighborhood().addClass("hover-hood");
       node.addClass("hover");
       node.style({
         label: node.data("name")
       });
-      this.setLabels();
     }
   }
 
-  hoverNight(node, cy) {
+  hoverNight(node) {
     node.closedNeighborhood().removeClass("hover-hood");
     node.removeClass("hover");
-    this.setLabels(cy);
+    this.setLabels();
   }
 
   addCollab(cy) {
-    cy.nodes('[type = "project"]').forEach(function(projectNode) {
+    cy.nodes('[type = "project"]').forEach(projectNode => {
       projectNode
         .closedNeighborhood()
         .nodes('[type = "person"]')
-        .forEach(function(person) {
+        .forEach(person => {
           projectNode
             .closedNeighborhood()
             .nodes('[type = "person"]')
-            .forEach(function(otherPerson) {
+            .forEach(otherPerson => {
               if (
                 person !== otherPerson &&
                 cy
@@ -258,7 +260,7 @@ class Cytoscape extends React.Component {
 
     let maxLabelWidthLocal = 0;
 
-    this.keys.forEach(function(n) {
+    this.keys.forEach(n => {
       let labelWidth = n.boundingBox({ includeLabels: true }).w;
 
       if (labelWidth > maxLabelWidthLocal) {
@@ -318,26 +320,23 @@ class Cytoscape extends React.Component {
 
     let view = this.props.cytoscapeStore.view;
     if (view === "showProjects" || view === "showCollab") {
-      console.log(view);
       let nschool = nhood.nodes('[type = "school"]');
-      console.log(nschool.size());
       if (nschool.size() > 1) {
         this.spreadNodes(nschool);
-        console.log(nschool);
       }
     }
   }
 
   spreadNodes(nodesToSpread) {
     nodesToSpread.style({
-      label: function(ele) {
+      label: ele => {
         return ele.data("name");
       }
     });
 
     let nodeNum = nodesToSpread.size();
 
-    nodesToSpread.forEach(function(n) {
+    nodesToSpread.forEach(n => {
       let p = n.position();
       n.data("originPos", {
         x: p.x,
@@ -372,7 +371,7 @@ class Cytoscape extends React.Component {
   getMaxLabelWidth(eles) {
     var maxLabelWidth = 0;
 
-    eles.forEach(function(n) {
+    eles.forEach(n => {
       var labelWidth = n.boundingBox({ includeLabels: true }).w;
 
       if (labelWidth > maxLabelWidth) {
@@ -387,7 +386,7 @@ class Cytoscape extends React.Component {
     let layoutPadding = Layout.layoutPadding;
     let details = this.props.cytoscapeStore.details;
 
-    cy.batch(function() {
+    cy.batch(() => {
       //batch processess multiple eles at once
       cy
         .elements()
@@ -473,7 +472,7 @@ class Cytoscape extends React.Component {
         alignment = _.orderBy(
           alignment,
           [
-            function(ali) {
+            ali => {
               return ali.area;
             }
           ],
@@ -592,8 +591,6 @@ class Cytoscape extends React.Component {
   }
 
   clear() {
-    // console.log("clear");
-    // this.unspreadNodes();
     this.cy
       .elements()
       .removeClass("highlighted")
@@ -629,8 +626,7 @@ class Cytoscape extends React.Component {
         ...this.state,
         cursor: "cy_pointer"
       });
-      const node = e.target;
-      this.props.cytoscapeStore.hoveredNode = node;
+      this.props.cytoscapeStore.hoveredNode = e.target;
     });
 
     this.cy.on("mouseout", "node", e => {
@@ -642,37 +638,37 @@ class Cytoscape extends React.Component {
     });
 
     autorun(() => {
-      if (this.props.cytoscapeStore.hoveredNode == null) {
-        let hovered = this.cy.nodes(".hover-hood, .hover");
-        hovered.forEach(n => {
-          this.hoverNight(n);
-        });
-      } else {
-        Cytoscape.hoverLight(this.props.cytoscapeStore.hoveredNode);
+      let hovered = this.cy.nodes(".hover-hood, .hover");
+      hovered.forEach(n => {
+        this.hoverNight(n);
+      });
+      if (this.props.cytoscapeStore.hoveredNode != null) {
+        this.hoverLight(this.props.cytoscapeStore.hoveredNode);
       }
     });
 
     this.cy.on("select", "node", e => {
       aidStore.aids.details = { display: "none" };
-      this.props.cytoscapeStore.selectedNodenode = e.target;
+      this.props.cytoscapeStore.selectedNode = e.target;
     });
     this.cy.on("unselect", "node", e => {
       this.props.cytoscapeStore.selectedNode = null;
     });
     autorun(() => {
+      this.clear();
       if (this.props.cytoscapeStore.selectedNode == null) {
-        this.clear();
         this.fitAll();
       } else {
         let nhood = this.highlight(this.props.cytoscapeStore.selectedNode);
         this.reframe(this.cy, nhood);
       }
+      this.setLabels();
     });
 
     this.cy.ready(() => {
       Layout.cy = this.cy;
       this.props.cytoscapeStore.layouts = ProjectLayout.getLayout();
-      this.setLabels(this.cy);
+      this.setLabels();
       autorun(() => {
         this.props.cytoscapeStore.layouts.forEach(layout => {
           layout.run();

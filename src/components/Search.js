@@ -3,6 +3,7 @@ import { observer } from "mobx-react";
 import aidStore from "../util/AidStore";
 import cytoscapeStore from "../util/CytoscapeStore";
 import { autorun } from "mobx";
+import "./Search.css";
 
 class Search extends React.Component {
   clickHandler(e, type) {
