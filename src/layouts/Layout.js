@@ -11,7 +11,7 @@ class Layout {
   }
 
   static circleRadius(collection, nodeSize = 30, padding = 25) {
-    var circum = collection.size() * nodeSize + collection.size() * padding;
+    let circum = collection.size() * nodeSize + collection.size() * padding;
     return circum / (2 * Math.PI);
   }
 
@@ -21,8 +21,8 @@ class Layout {
       order = order.reverse();
     }
     return function(a, b) {
-      var orderA = 0;
-      var orderB = 0;
+      let orderA = 0;
+      let orderB = 0;
 
       if (a.data("role") === "Academic Staff") {
         orderA = order[0];
