@@ -153,8 +153,8 @@ class Cytoscape extends React.Component {
     this.setLabels();
   }
 
-  addCollab(cy) {
-    cy.nodes('[type = "project"]').forEach(projectNode => {
+  addCollab() {
+    this.cy.nodes('[type = "project"]').forEach(projectNode => {
       projectNode
         .closedNeighborhood()
         .nodes('[type = "person"]')
@@ -165,18 +165,18 @@ class Cytoscape extends React.Component {
             .forEach(otherPerson => {
               if (
                 person !== otherPerson &&
-                cy
+                this.cy
                   .edges(
                     '[id ="' + person.id() + "to" + otherPerson.id() + '"]'
                   )
                   .size() < 1 &&
-                cy
+                this.cy
                   .edges(
                     '[id ="' + otherPerson.id() + "to" + person.id() + '"]'
                   )
                   .size() < 1
               ) {
-                cy.add({
+                this.cy.add({
                   group: "edges",
                   data: {
                     id: person.id() + "to" + otherPerson.id(),
@@ -191,35 +191,35 @@ class Cytoscape extends React.Component {
     });
   }
 
-  addKey(cy) {
+  addKey() {
     this.keyXPadding = 100;
     this.keyYPadding = 50;
 
-    this.keyBorder = cy.add({
+    this.keyBorder = this.cy.add({
       group: "nodes",
       data: { id: "keyBorder", type: "border" }
     });
 
-    cy.add({
+    this.cy.add({
       group: "nodes",
       data: { id: "titleKey", name: "NODE TYPE", type: "key" }
     });
 
-    let projectKey = cy.add({
+    let projectKey = this.cy.add({
       group: "nodes",
       data: { id: "projectKey", name: "Project", type: "key" }
     });
 
     projectKey.addClass("project");
 
-    let schoolKey = cy.add({
+    let schoolKey = this.cy.add({
       group: "nodes",
       data: { id: "schoolKey", name: "Programme", type: "key" }
     });
 
     schoolKey.addClass("school");
 
-    cy.add([
+    this.cy.add([
       {
         group: "nodes",
         data: { id: "schoolKey", name: "Programme", type: "key" }
@@ -253,7 +253,7 @@ class Cytoscape extends React.Component {
       }
     ]);
 
-    this.keys = cy.elements('[type = "key"]');
+    this.keys = this.cy.elements('[type = "key"]');
     this.keys.unselectify().ungrabify();
 
     this.keyBorder.unselectify().ungrabify();
@@ -271,13 +271,13 @@ class Cytoscape extends React.Component {
     this.maxLabelWidth = maxLabelWidthLocal;
   }
 
-  arrangeKey(cy) {
+  arrangeKey() {
     let maxLabelWidth = this.getMaxLabelWidth(this.keys);
     let nodeHeight = this.keys.height();
-    let bboxIgnore = cy.elements(
+    let bboxIgnore = this.cy.elements(
       '.hidden, .filtered, [type = "key"], [type = "border"]'
     );
-    let bbox = cy
+    let bbox = this.cy
       .elements()
       .not(bboxIgnore)
       .boundingBox({ includeLabels: true });
@@ -382,37 +382,37 @@ class Cytoscape extends React.Component {
     return maxLabelWidth;
   }
 
-  reframe(cy) {
+  reframe() {
     let nhood = this.props.cytoscapeStore.nhood;
     let layoutPadding = Layout.layoutPadding;
     let details = this.props.cytoscapeStore.details;
 
-    cy.batch(() => {
+    this.cy.batch(() => {
       //batch processess multiple eles at once
-      cy
+      this.cy
         .elements()
         .not(nhood)
         .removeClass("highlighted")
         .addClass("faded");
       nhood.removeClass("faded").addClass("highlighted");
-      cy.elements('[type = "key"]').removeClass("faded");
+      this.cy.elements('[type = "key"]').removeClass("faded");
 
       // Cytoscape Canvas Dimensions
-      var cyW = cy.width();
-      var cyH = cy.height();
+      var cyW = this.cy.width();
+      var cyH = this.cy.height();
 
       if (details) {
         if (nhood.nodes().size() < 3) {
-          nhood = cy.nodes();
+          nhood = this.cy.nodes();
         }
 
-        cy.maxZoom(100);
+        this.cy.maxZoom(100);
 
-        var ogPan = Object.assign({}, cy.pan());
-        var ogZoom = cy.zoom();
+        var ogPan = Object.assign({}, this.cy.pan());
+        var ogZoom = this.cy.zoom();
 
-        cy.stop().fit(nhood, 0);
-        var fitZoom = cy.zoom();
+        this.cy.stop().fit(nhood, 0);
+        var fitZoom = this.cy.zoom();
 
         //Highlighted Node Bouding Box Dimension before Being Resized
         var nhoodHeight = nhood.renderedBoundingBox().h;
@@ -542,15 +542,15 @@ class Cytoscape extends React.Component {
           }
         }
 
-        cy.zoom(newZoom);
-        cy.center(nhood);
-        var centerPan = Object.assign({}, cy.pan());
+        this.cy.zoom(newZoom);
+        this.cy.center(nhood);
+        var centerPan = Object.assign({}, this.cy.pan());
 
-        cy.zoom(ogZoom);
-        cy.pan(ogPan);
-        cy.pan(centerPan);
+        this.cy.zoom(ogZoom);
+        this.cy.pan(ogPan);
+        this.cy.pan(centerPan);
 
-        cy.stop().animate(
+        this.cy.stop().animate(
           {
             //frames all elements
             zoom: newZoom,
@@ -561,7 +561,7 @@ class Cytoscape extends React.Component {
           }
         );
       } else {
-        cy.stop().animate(
+        this.cy.stop().animate(
           {
             //frames all elements
             fit: {
@@ -655,7 +655,7 @@ class Cytoscape extends React.Component {
         this.props.cytoscapeStore.layouts.forEach(layout => {
           layout.run();
         });
-        this.arrangeKey(this.cy);
+        this.arrangeKey();
         this.cy.fit(50);
         this.setVisNodeNames();
       });
@@ -666,7 +666,7 @@ class Cytoscape extends React.Component {
           this.fitAll();
         } else {
           let nhood = this.highlight(this.props.cytoscapeStore.selectedNode);
-          this.reframe(this.cy, nhood);
+          this.reframe(nhood);
         }
         this.setLabels();
       });
