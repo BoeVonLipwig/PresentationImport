@@ -34,7 +34,7 @@ Number.prototype.isHexColor = function() {
 
 String.prototype.isNumber = function() {
   let target = this;
-  return !isNaN(parseInt(target));
+  return !isNaN(parseInt(target, 10));
 };
 
 Number.prototype.isNumber = function() {
@@ -142,7 +142,8 @@ class Style extends React.Component {
         nodeStyles.type[nodeStyles.type.length] = oride;
         if (oride.color.isNumber()) {
           nodeStyles.type[nodeStyles.type.length - 1].color = parseInt(
-            oride.color
+            oride.color,
+            10
           );
           colNumOride.type[colNumOride.type.length] = oride.color;
         }
@@ -196,7 +197,8 @@ class Style extends React.Component {
           getTypeBySub(oride.subtype[0]).color.isNumber()
         ) {
           nodeStyles.subtype[nodeStyles.subtype.length - 1].color = parseInt(
-            oride.color
+            oride.color,
+            10
           );
           colNumOride.subtype[getTypeBySub(oride.subtype[0]).color][
             colNumOride.subtype.length
@@ -307,7 +309,6 @@ class Style extends React.Component {
       .split("ring*/")
       .shift();
     let beforeStr = "/*ring";
-    let styleString = "";
     //Assign default styling for all nodes of a certain type
     nodeStyles.type.forEach(style => {
       let styleString =
