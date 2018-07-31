@@ -638,16 +638,6 @@ class Cytoscape extends React.Component {
       this.props.cytoscapeStore.hoveredNode = null;
     });
 
-    autorun(() => {
-      let hovered = this.cy.nodes(".hover-hood, .hover");
-      hovered.forEach(n => {
-        this.hoverNight(n);
-      });
-      if (this.props.cytoscapeStore.hoveredNode != null) {
-        this.hoverLight(this.props.cytoscapeStore.hoveredNode);
-      }
-    });
-
     this.cy.on("select", "node", e => {
       aidStore.aids.details = { display: "none" };
       this.props.cytoscapeStore.selectedNode = e.target;
@@ -655,21 +645,12 @@ class Cytoscape extends React.Component {
     this.cy.on("unselect", "node", e => {
       this.props.cytoscapeStore.selectedNode = null;
     });
-    autorun(() => {
-      this.clear();
-      if (this.props.cytoscapeStore.selectedNode == null) {
-        this.fitAll();
-      } else {
-        let nhood = this.highlight(this.props.cytoscapeStore.selectedNode);
-        this.reframe(this.cy, nhood);
-      }
-      this.setLabels();
-    });
 
     this.cy.ready(() => {
       Layout.cy = this.cy;
       this.props.cytoscapeStore.layouts = ProjectLayout.getLayout();
       this.setLabels();
+
       autorun(() => {
         this.props.cytoscapeStore.layouts.forEach(layout => {
           layout.run();
@@ -677,6 +658,27 @@ class Cytoscape extends React.Component {
         this.arrangeKey(this.cy);
         this.cy.fit(50);
         this.setVisNodeNames();
+      });
+
+      autorun(() => {
+        this.clear();
+        if (this.props.cytoscapeStore.selectedNode == null) {
+          this.fitAll();
+        } else {
+          let nhood = this.highlight(this.props.cytoscapeStore.selectedNode);
+          this.reframe(this.cy, nhood);
+        }
+        this.setLabels();
+      });
+
+      autorun(() => {
+        let hovered = this.cy.nodes(".hover-hood, .hover");
+        hovered.forEach(n => {
+          this.hoverNight(n);
+        });
+        if (this.props.cytoscapeStore.hoveredNode != null) {
+          this.hoverLight(this.props.cytoscapeStore.hoveredNode);
+        }
       });
     });
   }
