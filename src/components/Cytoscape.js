@@ -662,7 +662,7 @@ class Cytoscape extends React.Component {
 
       autorun(() => {
         this.clear();
-        if (this.props.cytoscapeStore.selectedNode == null) {
+        if (this.props.cytoscapeStore.selectedNode === null) {
           this.fitAll();
         } else {
           let nhood = this.highlight(this.props.cytoscapeStore.selectedNode);
@@ -676,7 +676,7 @@ class Cytoscape extends React.Component {
         hovered.forEach(n => {
           this.hoverNight(n);
         });
-        if (this.props.cytoscapeStore.hoveredNode != null) {
+        if (this.props.cytoscapeStore.hoveredNode !== null) {
           this.hoverLight(this.props.cytoscapeStore.hoveredNode);
         }
       });
