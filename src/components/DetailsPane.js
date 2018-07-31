@@ -51,7 +51,7 @@ class DetailsPane extends React.Component {
               clickHandler={event => this.clickHandler(event)}
             />
             <h2>Show details</h2>
-            {cytoscapeStore.node == null ? (
+            {cytoscapeStore.selectedNode === null ? (
               ""
             ) : (
               <h className="nameHeader">{this.getName()}</h>
