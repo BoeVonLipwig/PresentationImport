@@ -13,10 +13,10 @@
   bottom: 20px;
   z-index: 5;
   font: 15px roboto condensed, helvetica neue, helvetica, arial, sans-serif;
-  background-color: #1a2a39;
-  border: solid 1px #3d4452;
+  background-color: var(--bg);
+  border: solid 1px var(--ll);
   padding: 6px 20px;
-  color: #ddd;
+  color: var(--fg);
   width: 150px;
 }
 
@@ -38,31 +38,31 @@
 }
 
 #contact-button::selection {
-  background: #fff;
-  color: #1a2a39;
+  background: var(--fg);
+  color: var(--bg);
 }
 
 #contact-button::-moz-selection {
-  background: #fff;
-  color: #1a2a39;
+  background: var(--fg);
+  color: var(--bg);
 }
 .contact-menu {
   position: absolute;
   z-index: 9;
-  /*color: #ddd;*/
+  /*color: var(--fg);*/
   width: 193px;
   right: 21px;
   bottom: 57px;
   display: none;
-  /*  background-color:  #1A2A39;
-    border: solid 1px #3D4452;*/
+  /*  background-color:  var(--bg);
+    border: solid 1px var(--ll);*/
   /*padding: 0px 0px;
     margin : 0px 0px;
     list-style:none;*/
 }
 
 .contact-menu-selected {
-  outline: #ddd dotted thin;
+  outline: var(--fg) dotted thin;
 }
 
 #contact-menu {
@@ -70,10 +70,10 @@
   bottom: calc(100%);
   cursor: pointer;
   z-index: 9;
-  color: #ddd;
+  color: var(--fg);
   width: 193px;
-  background-color: #1a2a39;
-  border: solid 1px #3d4452;
+  background-color: var(--bg);
+  border: solid 1px var(--ll);
   font: 15px roboto condensed, helvetica neue, helvetica, arial, sans-serif;
   padding: 0px 0px;
   margin: 0px 0px;
@@ -84,16 +84,16 @@
 }
 
 .contact-menu::-webkit-scrollbar-track {
-  background-color: #1a2a39;
+  background-color: var(--bg);
 }
 
 .contact-menu::-webkit-scrollbar {
   width: 12px;
-  background-color: #ddd;
+  background-color: var(--fg);
 }
 
 .contact-menu::-webkit-scrollbar-thumb {
-  background-color: #ddd;
+  background-color: var(--fg);
 }
 
 .ui-menu-item-wrapper {
@@ -102,10 +102,10 @@
 }
 
 .ui-menu-item:hover {
-  background-color: white;
-  color: black;
+  background-color: var(--fg);
+  color: var(--bg);
 }
 
 .ui-menu-item:hover .svg-path {
-  fill: black;
+  fill: var(--bg);
 }

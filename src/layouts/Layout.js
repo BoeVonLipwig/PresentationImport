@@ -1,3 +1,4 @@
+import Style from "../components/Style";
 class Layout {
   static layoutPadding = 50;
   static cy;
@@ -16,31 +17,32 @@ class Layout {
   }
 
   static sortBy(arg) {
-    let order = [1, 2, 3];
-    if (arg === "reverse") {
-      order = order.reverse();
-    }
+    // let order = [1, 2, 3];
+    // if (arg === "reverse") {
+    //   order = order.reverse();
+    // }
     return function(a, b) {
-      let orderA = 0;
-      let orderB = 0;
+      // var orderA = 0;
+      // var orderB = 0;
 
-      if (a.data("role") === "Academic Staff") {
-        orderA = order[0];
-      } else if (a.data("role") === "Professional Staff") {
-        orderA = order[1];
-      } else {
-        orderA = order[2];
-      }
+      // if (a.data("role") === "Academic Staff") {
+      //   orderA = order[0];
+      // } else if (a.data("role") === "Professional Staff") {
+      //   orderA = order[1];
+      // } else {
+      //   orderA = order[2];
+      // }
 
-      if (b.data("role") === "Academic Staff") {
-        orderB = order[0];
-      } else if (b.data("role") === "Professional Staff") {
-        orderB = order[1];
-      } else {
-        orderB = order[2];
-      }
+      // if (b.data("role") === "Academic Staff") {
+      //   orderB = order[0];
+      // } else if (b.data("role") === "Professional Staff") {
+      //   orderB = order[1];
+      // } else {
+      //   orderB = order[2];
+      // }
 
-      return orderA - orderB;
+      // return orderA - orderB;
+      return Style.sortBySubType(a, b); //no reverse option
     };
   }
 }

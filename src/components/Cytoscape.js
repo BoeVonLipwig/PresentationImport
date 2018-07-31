@@ -9,6 +9,7 @@ import _ from "lodash";
 import "./Cytoscape.css";
 import { autorun } from "mobx";
 import { observer } from "mobx-react";
+import Style from "../components/Style";
 
 class Cytoscape extends React.Component {
   constructor() {
@@ -191,7 +192,7 @@ class Cytoscape extends React.Component {
     });
   }
 
-  addKey() {
+  addKey(styleList) {
     this.keyXPadding = 100;
     this.keyYPadding = 50;
 
@@ -205,53 +206,38 @@ class Cytoscape extends React.Component {
       data: { id: "titleKey", name: "NODE TYPE", type: "key" }
     });
 
-    let projectKey = this.cy.add({
-      group: "nodes",
-      data: { id: "projectKey", name: "Project", type: "key" }
-    });
-
-    projectKey.addClass("project");
-
-    let schoolKey = this.cy.add({
-      group: "nodes",
-      data: { id: "schoolKey", name: "Programme", type: "key" }
-    });
-
-    schoolKey.addClass("school");
-
-    this.cy.add([
-      {
-        group: "nodes",
-        data: { id: "schoolKey", name: "Programme", type: "key" }
-      },
-      {
-        group: "nodes",
-        data: {
-          id: "academicStaffKey",
-          name: "Academic Staff",
-          role: "Academic Staff",
-          type: "key"
-        }
-      },
-      {
-        group: "nodes",
-        data: {
-          id: "postgradKey",
-          name: "Post-Grad Student",
-          role: "Masters Student",
-          type: "key"
-        }
-      },
-      {
-        group: "nodes",
-        data: {
-          id: "professionalStaff",
-          name: "Professional Staff",
-          role: "Professional Staff",
-          type: "key"
-        }
+    var keyAr = [];
+    var subKeyStyles = [];
+    var keyStyles = _.filter(styleList.nodeStyles.type, typ => {
+      var subKeyAr = _.filter(styleList.nodeStyles.subtype, styp => {
+        return (
+          styp.type.toLowerCase() === typ.label.toLowerCase() &&
+          _.intersection(styp.subtype, typ.subtype).length < 1
+        );
+      });
+      if (subKeyAr.length > 1) {
+        subKeyStyles = subKeyStyles.concat(subKeyAr);
+        return false;
+      } else {
+        return true;
       }
-    ]);
+    });
+
+    keyStyles = keyStyles.concat(subKeyStyles);
+
+    keyStyles.forEach(stl => {
+      keyAr[keyAr.length] = {
+        group: "nodes",
+        data: {
+          id: `${stl.label}-key`,
+          name: stl.label,
+          type: "key",
+          role: stl.subtype[0]
+        }
+      };
+    });
+
+    this.cy.add(keyAr);
 
     this.keys = this.cy.elements('[type = "key"]');
     this.keys.unselectify().ungrabify();
@@ -606,19 +592,71 @@ class Cytoscape extends React.Component {
     // also get style via ajax
     let styleP = data.getStyleP();
 
-    Promise.all([graphP, styleP]).spread(this.initCy);
+    let colorP = fetch("Colors.json").then(resp => resp.json());
+
+    Promise.all([graphP, styleP, colorP]).spread(this.initCy);
   }
 
-  initCy(graphP, styleP) {
+  initCy(graphP, styleP, colorP) {
     this.cy = cytoscape({
       container: this.cyDiv.current,
-      style: styleP,
       elements: graphP,
       wheelSensitivity: 0.5
     });
 
-    this.addCollab(this.cy);
-    this.addKey(this.cy);
+    //styleMaster is a placeholder object with options for colorScheme selection,
+    //and override for foreground, background, highlight, and lowlight color variables
+    //as well as override for the color of nodes, and the name they should be referred to in the key
+    //ideally this object should eventually be parsed from a csv
+    //temp {
+    let styleMaster = {
+      colorScheme: 3, // num 0 - 3, selects one of 4 color schemes from an array defined in Colors.json(see Colors.pdf for visual guide)
+      //color overrides for css and cycss variables
+      //accepts only hex color values (#fff) empty and faulty field will use defined in the selected colorscheme
+      fg: "", //foreground color : text, tickboxes, logo etc
+      bg: "", //background color
+      hl: "", //highlight color : tooltip, html links, scrollbar hover etc
+      ll: "", //lowlight color : greyed out text, dropshadows, scrollbar track etc
+      //nodeOverride, can override automatic styling and labels (addkey) for nodes
+      // can be done by type(person, project, school) or subtype/role(Hounours Student, Academic Staff, etc)
+      nodeOverride: [
+        {
+          label: "Person", //The label to display in the key
+          subtype: ["person"], //what type or subtype(role) this rule should apply to, this can accept multiple roles/subtype, but single type, do not mix type and subtype(role)
+          color: "", //what color the node should be, can be a #hexvalue or an int to specify which array of colors(for type 0-3), or color(for subtype/role 0-5) see Colors.json or Colors.pdf for visual guide
+          shape: "" //if the shape should be a ring or full circle, default is circle
+        },
+        {
+          label: "Post-grad Student", //listed node subtype(role) should be grouped and named as post-grad in key
+          subtype: ["Honours Student", "Masters Student", "PhD Student"], //multiple subtype/role grouped under on label and one color
+          color: ""
+        },
+        {
+          label: "Programme", //school should be renamed programme in key
+          subtype: ["school"],
+          color: "",
+          shape: "ring" //Programme should be displayed as rings rather than filled in circle
+        },
+        {
+          label: "Project",
+          subtype: ["project"],
+          color: "",
+          shape: "ring"
+        }
+      ]
+    };
+
+    //}temp
+    this.styleList = Style.parseStyles(
+      this.cy.nodes(),
+      colorP,
+      styleMaster,
+      styleP
+    );
+    this.cy.style(this.styleList.stylesheet);
+
+    this.addCollab();
+    this.addKey(this.styleList);
 
     this.cy.elements('[type = "school"]').addClass("school");
     this.cy.elements('[type = "project"]').addClass("project");
