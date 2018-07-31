@@ -34,16 +34,11 @@ class Search extends React.Component {
       );
     });
     this.$node.on("autocompletefocus", function(event, ui) {
-      let autoName = ui.item.value;
-      let node = cytoscapeStore.visNodesMap[autoName];
-      cytoscapeStore.hoveredNode = node;
+      cytoscapeStore.hoveredNode = cytoscapeStore.visNodesMap[ui.item.value];
     });
 
     this.$node.on("autocompleteselect", function(event, ui) {
-      let autoName = ui.item.value;
-      let node = cytoscapeStore.visNodesMap[autoName];
-
-      cytoscapeStore.selectedNode = node;
+      cytoscapeStore.selectedNode = cytoscapeStore.visNodesMap[ui.item.value];
     });
 
     this.$node.on("autocompleteclose", function(event, ui) {

@@ -308,6 +308,7 @@ class Cytoscape extends React.Component {
   }
 
   highlight(node) {
+    node.select();
     let nhood = node.closedNeighborhood();
     this.props.cytoscapeStore.nhood = nhood;
 
