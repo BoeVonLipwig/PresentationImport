@@ -6,6 +6,19 @@ exports[`renders topbar correctly without crashing 1`] = `
     id="navbar"
   >
     <div
+      id="viewAid-label"
+      class="aid-label"
+    >
+      Click to Change Graph Layouts
+      <label
+        for="viewAid"
+      />
+    </div>
+    <div
+      id="viewAid"
+      class="aid"
+    />
+    <div
       id="controls"
       class="topnav"
     >
@@ -83,6 +96,19 @@ exports[`renders topbar correctly without crashing 1`] = `
       </div>
     </div>
     <div
+      id="detailAid-label"
+      class="aid-label"
+    >
+      Project/Personal Details Will Display Here. Can Be Toggle On/Off for Better View
+      <label
+        for="detailAid"
+      />
+    </div>
+    <div
+      id="detailAid"
+      class="aid"
+    />
+    <div
       id="detailsBar"
     >
       <div
@@ -103,15 +129,29 @@ exports[`renders topbar correctly without crashing 1`] = `
               for=""
             />
           </div>
-          <h2>
-            Show Details
-          </h2>
+          <h2 />
         </div>
+        <h2>
+          Show details
+        </h2>
       </div>
       <div
         id="nodeDetails"
         class="expanded"
-      />
+      >
+        <div
+          id="infoContainer"
+          class="info"
+        >
+          <div
+            class="container"
+          >
+            <em>
+              Select Any Node
+            </em>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
