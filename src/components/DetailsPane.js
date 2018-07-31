@@ -28,7 +28,7 @@ class DetailsPane extends React.Component {
       this.state.isChecked ? (
         <div id="infoContainer" className="info">
           <div className="container">
-            {cytoscapeStore.node === null ? (
+            {cytoscapeStore.selectedNode === null ? (
               <em>Select Any Node</em>
             ) : (
               <NodeInfo />
@@ -51,7 +51,7 @@ class DetailsPane extends React.Component {
               clickHandler={event => this.clickHandler(event)}
             />
             <h2>Show details</h2>
-            {cytoscapeStore.node == null ? (
+            {cytoscapeStore.selectedNode === null ? (
               ""
             ) : (
               <h className="nameHeader">{this.getName()}</h>
@@ -66,7 +66,9 @@ class DetailsPane extends React.Component {
   }
 
   getName() {
-    return cytoscapeStore.node === null ? "" : cytoscapeStore.node.data("name");
+    return cytoscapeStore.selectedNode === null
+      ? ""
+      : cytoscapeStore.selectedNode.data("name");
   }
 }
 
