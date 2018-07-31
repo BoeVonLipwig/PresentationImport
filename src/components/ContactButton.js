@@ -43,7 +43,6 @@ class ContactButton extends React.Component {
    * Alert if clicked on outside of element
    */
   handleClickOutside(event) {
-    console.log(window.history.length);
     if (this.wrapperRef && !this.wrapperRef.contains(event.target)) {
       this.setState({ ...this.state, showMenu: false });
     }
