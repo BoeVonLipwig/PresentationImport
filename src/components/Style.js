@@ -2,19 +2,19 @@ import React from "react";
 import _ from "lodash";
 
 String.prototype.replaceAll = function(search, replacement) {
-  var target = this;
+  let target = this;
   return target.split(search).join(replacement);
 };
 
 String.prototype.insertBefore = function(strToFind, strToInsert) {
-  var target = this;
-  var n = target.lastIndexOf(strToFind);
+  let target = this;
+  let n = target.lastIndexOf(strToFind);
   if (n < 0) return target;
   return target.substring(0, n) + strToInsert + target.substring(n);
 };
 
 String.prototype.replaceSelector = function(selStr, typeStr, colStr, zStr) {
-  var target = this;
+  let target = this;
   return target
     .replaceAll("var(--selector)", selStr)
     .replaceAll("var(--typename)", typeStr)
@@ -23,17 +23,17 @@ String.prototype.replaceSelector = function(selStr, typeStr, colStr, zStr) {
 };
 
 String.prototype.isHexColor = function() {
-  var target = this;
+  let target = this;
   return /(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i.test(target);
 };
 
 Number.prototype.isHexColor = function() {
-  var target = this;
+  let target = this;
   return target.toString().isHexColor();
 };
 
 String.prototype.isNumber = function() {
-  var target = this;
+  let target = this;
   return !isNaN(parseInt(target));
 };
 
@@ -42,43 +42,43 @@ Number.prototype.isNumber = function() {
 };
 
 Array.prototype.curbIndex = function(index) {
-  var target = this;
+  let target = this;
   return index < target.length ? target[index] : target[target.length - 1];
 };
 
 Array.prototype.caseIndexOf = function(query) {
-  var target = this;
+  let target = this;
   return target.findIndex(item => query.toLowerCase() === item.toLowerCase());
 };
 
 Array.prototype.containsAny = function(query) {
-  var target = this;
+  let target = this;
   return query.some(function(v) {
     return target.caseIndexOf(v) >= 0;
   });
 };
 
 Array.prototype.containsType = function(query) {
-  var target = this;
+  let target = this;
   return target.some(oride => oride.subtype.caseIndexOf(query) > -1);
 };
 
 Array.prototype.returnByType = function(query) {
-  var target = this;
+  let target = this;
   return target.find(or => {
     return or.subtype.caseIndexOf(query) > -1;
   });
 };
 
 Array.prototype.substractArray = function(query) {
-  var target = this;
+  let target = this;
   return target.filter(elem => {
     return query.indexOf(elem) < 0;
   });
 };
 
 Array.prototype.unique = function() {
-  var target = this;
+  let target = this;
   return target.filter(function(x, i) {
     return target.indexOf(x) === i;
   });
@@ -89,22 +89,22 @@ class Style extends React.Component {
     //
 
     //
-    var typ = allNodes.map(a => a.data("type")).unique();
-    var nodeType = {};
+    let typ = allNodes.map(a => a.data("type")).unique();
+    let nodeType = {};
     typ.forEach(
       tp =>
         (nodeType[tp] = allNodes
           .map(a => {
-            var subtype = a.nodes(`[type = "${tp}"]`).data("role");
+            let subtype = a.nodes(`[type = "${tp}"]`).data("role");
             return subtype !== undefined ? subtype : tp;
           })
           .unique())
     );
 
-    var colSchm = colorList[styleList.colorScheme];
-    var typeAr = Object.keys(nodeType);
+    let colSchm = colorList[styleList.colorScheme];
+    let typeAr = Object.keys(nodeType);
 
-    var subAr = {
+    let subAr = {
       type: _.flatMap(nodeType, (val, key) => {
         return _.map(val, v => {
           return key;
@@ -113,7 +113,7 @@ class Style extends React.Component {
       subtype: _.flatMap(nodeType)
     };
 
-    var colNum = {
+    let colNum = {
       type: _.map(colSchm.node, (val, index) => {
         return index;
       }),
@@ -124,13 +124,13 @@ class Style extends React.Component {
       })
     };
 
-    var colNumOride = {
+    let colNumOride = {
       // arrays of types and subtypes indicies that have been override
       type: [],
       subtype: colSchm.node.slice().fill([])
     };
 
-    var nodeStyles = {
+    let nodeStyles = {
       type: [],
       subtype: []
     };
@@ -152,8 +152,8 @@ class Style extends React.Component {
     // assign new node styling override into nodeStyles.type for remaining types,
     // and reassigns index for faulty "color" fields (empty, not a number/valid hexvalue)
     typeAr.forEach((key, index) => {
-      var typeOride = nodeStyles.type.returnByType(key);
-      var availColNum = colNum.type.substractArray(colNumOride.type);
+      let typeOride = nodeStyles.type.returnByType(key);
+      let availColNum = colNum.type.substractArray(colNumOride.type);
 
       if (typeOride) {
         if (
@@ -209,11 +209,12 @@ class Style extends React.Component {
     // assign new node styling override into nodeStyles.subtype for remaining subtypes,
     // and reassigns index for faulty "color" fields (empty, not a number/valid hexvalue)
     subAr.subtype.forEach((subName, index) => {
-      var typeOfSub = getTypeBySub(subName);
-      var typeColOfSub = typeOfSub.color;
-      var typeOride = nodeStyles.subtype.returnByType(subName);
+      let availColNum = [];
+      let typeOfSub = getTypeBySub(subName);
+      let typeColOfSub = typeOfSub.color;
+      let typeOride = nodeStyles.subtype.returnByType(subName);
       if (typeColOfSub.isNumber()) {
-        var availColNum = colNum.subtype[typeColOfSub].substractArray(
+        availColNum = colNum.subtype[typeColOfSub].substractArray(
           colNumOride.subtype[typeColOfSub]
         );
       }
@@ -273,7 +274,7 @@ class Style extends React.Component {
       nodeStyles.subtype.returnByType(subName).type = typeOfSub.label;
     });
 
-    var cssColors = {
+    let cssColors = {
       fg: styleList.fg.isHexColor() ? styleList.fg : colSchm.fg,
       bg: styleList.bg.isHexColor() ? styleList.bg : colSchm.bg,
       hl: styleList.hl.isHexColor() ? styleList.hl : colSchm.hl,
@@ -295,24 +296,24 @@ class Style extends React.Component {
     });
     //
 
-    var typeString = data
+    let typeString = data
       .split("/*type")
       .pop()
       .split("type*/")
       .shift();
-    var ringString = data
+    let ringString = data
       .split("/*ring")
       .pop()
       .split("ring*/")
       .shift();
-    var beforeStr = "/*ring";
-    var styleString = "";
+    let beforeStr = "/*ring";
+    let styleString = "";
     //Assign default styling for all nodes of a certain type
     nodeStyles.type.forEach(style => {
-      var styleString =
+      let styleString =
         style.shape === "ring" ? typeString + ringString : typeString;
       style.subtype.forEach(subName => {
-        var nodeColor = style.color.isNumber()
+        let nodeColor = style.color.isNumber()
           ? colSchm.node[style.color][0]
           : style.color;
         data = data.insertBefore(
@@ -329,11 +330,11 @@ class Style extends React.Component {
 
     //Assign further styling override for nodes of certain role(subtype)
     nodeStyles.subtype.forEach(style => {
-      var styleString =
+      let styleString =
         style.shape === "ring" ? typeString + ringString : typeString;
       style.subtype.forEach(subName => {
-        var typeStyle = getTypeBySub(subName);
-        var nodeColor =
+        let typeStyle = getTypeBySub(subName);
+        let nodeColor =
           typeStyle.color.isNumber() && style.color.isNumber()
             ? colSchm.node[typeStyle.color][style.color]
             : style.color.isHexColor()
@@ -362,20 +363,20 @@ class Style extends React.Component {
   }
 
   static sortBySubType(a, b) {
-    var subStyles = this.nodeStyles.subtype;
-    var typeStyles = this.nodeStyles.type;
-    var typeAr = _.map(typeStyles, typ => typ.label);
-    var subAr = _.map(subStyles, typ => typ.label);
-    var atype = a.data("type")
+    let subStyles = this.nodeStyles.subtype;
+    let typeStyles = this.nodeStyles.type;
+    let typeAr = _.map(typeStyles, typ => typ.label);
+    let subAr = _.map(subStyles, typ => typ.label);
+    let atype = a.data("type")
       ? _.find(typeStyles, typ => typ.subtype.caseIndexOf(a.data("type")) > -1)
       : undefined;
-    var btype = b.data("type")
+    let btype = b.data("type")
       ? _.find(typeStyles, typ => typ.subtype.caseIndexOf(b.data("type")) > -1)
       : undefined;
-    var aStyle = a.data("role")
+    let aStyle = a.data("role")
       ? _.find(subStyles, typ => typ.subtype.caseIndexOf(a.data("role")) > -1)
       : undefined;
-    var bStyle = b.data("role")
+    let bStyle = b.data("role")
       ? _.find(subStyles, typ => typ.subtype.caseIndexOf(b.data("role")) > -1)
       : undefined;
 

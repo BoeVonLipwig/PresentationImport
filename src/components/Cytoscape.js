@@ -192,7 +192,7 @@ class Cytoscape extends React.Component {
     });
   }
 
-  addKey(styleList) {
+  addKey() {
     this.keyXPadding = 100;
     this.keyYPadding = 50;
 
@@ -206,10 +206,10 @@ class Cytoscape extends React.Component {
       data: { id: "titleKey", name: "NODE TYPE", type: "key" }
     });
 
-    var keyAr = [];
-    var subKeyStyles = [];
-    var keyStyles = _.filter(styleList.nodeStyles.type, typ => {
-      var subKeyAr = _.filter(styleList.nodeStyles.subtype, styp => {
+    let keyAr = [];
+    let subKeyStyles = [];
+    let keyStyles = _.filter(this.styleList.nodeStyles.type, typ => {
+      let subKeyAr = _.filter(this.styleList.nodeStyles.subtype, styp => {
         return (
           styp.type.toLowerCase() === typ.label.toLowerCase() &&
           _.intersection(styp.subtype, typ.subtype).length < 1
@@ -656,7 +656,7 @@ class Cytoscape extends React.Component {
     this.cy.style(this.styleList.stylesheet);
 
     this.addCollab();
-    this.addKey(this.styleList);
+    this.addKey();
 
     this.cy.elements('[type = "school"]').addClass("school");
     this.cy.elements('[type = "project"]').addClass("project");

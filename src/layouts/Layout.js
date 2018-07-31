@@ -22,8 +22,8 @@ class Layout {
     //   order = order.reverse();
     // }
     return function(a, b) {
-      // var orderA = 0;
-      // var orderB = 0;
+      // let orderA = 0;
+      // let orderB = 0;
 
       // if (a.data("role") === "Academic Staff") {
       //   orderA = order[0];
