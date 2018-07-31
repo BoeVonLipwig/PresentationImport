@@ -8,6 +8,9 @@ import HelpButton from "./menu/HelpButton";
 class ContactButton extends React.Component {
   constructor(props) {
     super(props);
+    if (this.props.clickHandler) {
+      this.buttonClicked = this.props.clickHandler;
+    }
     this.buttons = [
       <HelpButton parent={this} menu={true} />,
       <MailButton parent={this} menu={true} />,
