@@ -370,10 +370,10 @@ class Cytoscape extends React.Component {
   }
 
   getMaxLabelWidth(eles) {
-    var maxLabelWidth = 0;
+    let maxLabelWidth = 0;
 
     eles.forEach(n => {
-      var labelWidth = n.boundingBox({ includeLabels: true }).w;
+      let labelWidth = n.boundingBox({ includeLabels: true }).w;
 
       if (labelWidth > maxLabelWidth) {
         maxLabelWidth = labelWidth;
@@ -398,8 +398,8 @@ class Cytoscape extends React.Component {
       this.cy.elements('[type = "key"]').removeClass("faded");
 
       // Cytoscape Canvas Dimensions
-      var cyW = this.cy.width();
-      var cyH = this.cy.height();
+      let cyW = this.cy.width();
+      let cyH = this.cy.height();
 
       if (details) {
         if (nhood.nodes().size() < 3) {
@@ -408,36 +408,36 @@ class Cytoscape extends React.Component {
 
         this.cy.maxZoom(100);
 
-        var ogPan = Object.assign({}, this.cy.pan());
-        var ogZoom = this.cy.zoom();
+        let ogPan = Object.assign({}, this.cy.pan());
+        let ogZoom = this.cy.zoom();
 
         this.cy.stop().fit(nhood, 0);
-        var fitZoom = this.cy.zoom();
+        let fitZoom = this.cy.zoom();
 
         //Highlighted Node Bouding Box Dimension before Being Resized
-        var nhoodHeight = nhood.renderedBoundingBox().h;
-        var nhoodWidth = nhood.renderedBoundingBox().w;
+        let nhoodHeight = nhood.renderedBoundingBox().h;
+        let nhoodWidth = nhood.renderedBoundingBox().w;
 
-        var nhoodRatio = nhoodHeight / nhoodWidth;
+        let nhoodRatio = nhoodHeight / nhoodWidth;
 
         //Info Window Dimension
-        var infoWidth = document.getElementById("infoContainer").clientWidth;
-        var infoHeight = document.getElementById("infoContainer").clientHeight;
+        let infoWidth = document.getElementById("infoContainer").clientWidth;
+        let infoHeight = document.getElementById("infoContainer").clientHeight;
 
         //Left Negative Space Dimensions minus Padding
-        var leftWidth = cyW - (infoWidth + layoutPadding * 2);
-        var leftHeight = cyH - layoutPadding * 2;
+        let leftWidth = cyW - (infoWidth + layoutPadding * 2);
+        let leftHeight = cyH - layoutPadding * 2;
 
         //Bottom Negative Space Dimensions minus Padding
-        var bottomWidth = cyW - layoutPadding * 2;
-        var bottomHeight = cyH - (infoHeight + layoutPadding * 2);
+        let bottomWidth = cyW - layoutPadding * 2;
+        let bottomHeight = cyH - (infoHeight + layoutPadding * 2);
 
-        var panOffset = { x: 0, y: 0 };
+        let panOffset = { x: 0, y: 0 };
 
         //Check Whether Left or Bottom offer Largest Possible Display Area for Nodes Bounding Box
 
         //Calc area for each alignment
-        var alignment = [];
+        let alignment = [];
         ////Align Left, Width First // Height First
         alignment[0] = {
           placement: "left",
@@ -480,7 +480,8 @@ class Cytoscape extends React.Component {
           ["desc"]
         );
 
-        var isAligned = false;
+        let isAligned = false;
+        let newZoom;
 
         for (let i = 0; i < 3 && isAligned === false; i++) {
           let curAli = alignment[i];
@@ -490,8 +491,8 @@ class Cytoscape extends React.Component {
             curAli.order === "width" &&
             curAli.height < leftHeight
           ) {
-            var scaleFactor = leftWidth / nhoodWidth;
-            var newZoom = fitZoom * scaleFactor;
+            let scaleFactor = leftWidth / nhoodWidth;
+            newZoom = fitZoom * scaleFactor;
 
             panOffset.x = -(infoWidth / 2);
             panOffset.y = 0;
@@ -504,7 +505,7 @@ class Cytoscape extends React.Component {
             curAli.order === "height" &&
             curAli.width < leftWidth
           ) {
-            scaleFactor = leftHeight / nhoodHeight;
+            let scaleFactor = leftHeight / nhoodHeight;
             newZoom = fitZoom * scaleFactor;
 
             panOffset.x = -(infoWidth / 2);
@@ -518,7 +519,7 @@ class Cytoscape extends React.Component {
             curAli.order === "width" &&
             curAli.height < bottomHeight
           ) {
-            scaleFactor = bottomWidth / nhoodWidth;
+            let scaleFactor = bottomWidth / nhoodWidth;
             newZoom = fitZoom * scaleFactor;
 
             panOffset.x = 0;
@@ -532,7 +533,7 @@ class Cytoscape extends React.Component {
             curAli.order === "height" &&
             curAli.width < bottomWidth
           ) {
-            scaleFactor = bottomHeight / nhoodHeight;
+            let scaleFactor = bottomHeight / nhoodHeight;
             newZoom = fitZoom * scaleFactor;
 
             panOffset.x = 0;
@@ -544,7 +545,7 @@ class Cytoscape extends React.Component {
 
         this.cy.zoom(newZoom);
         this.cy.center(nhood);
-        var centerPan = Object.assign({}, this.cy.pan());
+        let centerPan = Object.assign({}, this.cy.pan());
 
         this.cy.zoom(ogZoom);
         this.cy.pan(ogPan);
