@@ -43,10 +43,6 @@ function isNumber(target) {
   return false;
 }
 
-function curbIndex(target, index) {
-  return index < target.length ? target[index] : target[target.length - 1];
-}
-
 function caseIndexOf(target, query) {
   return target.findIndex(item => query.toLowerCase() === item.toLowerCase());
 }
@@ -55,10 +51,6 @@ function containsAny(target, query) {
   return query.some(function(v) {
     return caseIndexOf(target, v) >= 0;
   });
-}
-
-function containsType(target, query) {
-  return target.some(oride => caseIndexOf(oride.subtype, query) > -1);
 }
 
 function returnByType(target, query) {
