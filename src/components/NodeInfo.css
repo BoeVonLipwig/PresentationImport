@@ -13,7 +13,7 @@
   padding-left: 20px;
   padding-right: 20px;
   border-width: 0.5px;
-  border-bottom: solid 0.5px #3d4452;
+  border-bottom: solid 0.5px var(--ll);
 }
 
 .info-left {
@@ -59,7 +59,7 @@
   border-top-right-radius: 50% 50%;
   border-bottom-right-radius: 50% 50%;
   border-bottom-left-radius: 50% 50%;
-  border: solid 5px #1a2a39;
+  border: solid 5px var(--bg);
   margin-top: 20px;
   background-size: cover;
   background-position: center;

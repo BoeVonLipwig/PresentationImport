@@ -4,34 +4,34 @@
   bottom: 20px;
   z-index: 5;
   font: 15px roboto condensed, helvetica neue, helvetica, arial, sans-serif;
-  background-color: #1a2a39;
-  border: solid 1px #3d4452;
+  background-color: var(--bg);
+  border: solid 1px var(--ll);
   padding: 6px 20px;
-  color: #ddd;
+  color: var(--fg);
   width: 300px;
 }
 
 #autocomplete::selection {
-  background: #fff;
-  color: #1a2a39;
+  background: var(--fg);
+  color: var(--bg);
 }
 
 #autocomplete::-moz-selection {
-  background: #fff;
-  color: #1a2a39;
+  background: var(--fg);
+  color: var(--bg);
 }
 
 #autocomplete:focus {
-  outline-color: #ddd;
-  border-color: #ddd;
+  outline-color: var(--fg);
+  border-color: var(--fg);
 }
 
 .suggestion-menu {
   z-index: 7;
-  color: #ddd;
+  color: var(--fg);
   width: 300px;
-  background-color: #1a2a39;
-  border: solid 1px #3d4452;
+  background-color: var(--bg);
+  border: solid 1px var(--ll);
   padding: 0px 0px;
   margin: 0px 0px;
   list-style: none;
@@ -42,16 +42,16 @@
 }
 
 .suggestion-menu::-webkit-scrollbar-track {
-  background-color: #1a2a39;
+  background-color: var(--bg);
 }
 
 .suggestion-menu::-webkit-scrollbar {
   width: 12px;
-  background-color: #ddd;
+  background-color: var(--fg);
 }
 
 .suggestion-menu::-webkit-scrollbar-thumb {
-  background-color: #ddd;
+  background-color: var(--fg);
 }
 
 .ui-menu-item-wrapper {
