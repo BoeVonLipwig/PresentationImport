@@ -35,9 +35,11 @@ deploy:
   stage: deploy
   environment:
     name: production
-    url: http://connectedworldsteam10.surge.sh/
+    url: https://connectedworldsteam10.surge.sh/
   dependencies:
     - build
   script:
     - npm install surge --global
     - surge --project ./build --domain https://connectedworldsteam10.surge.sh/
+  only:
+    - master
