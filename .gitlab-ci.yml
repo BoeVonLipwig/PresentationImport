@@ -39,7 +39,5 @@ deploy:
   dependencies:
     - build
   script:
-    - npm install surge
-    - surge --project ./build --domain http://connectedworldsteam10.surge.sh/
-  only:
-    - master
+    - npm install surge --global
+    - surge --project ./build --domain https://connectedworldsteam10.surge.sh/
