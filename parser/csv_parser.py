@@ -1,6 +1,10 @@
 import sys
 import csv
 
+ID = 1
+# keys = []
+# everyNodeName = []
+
 class Node:
     # webLink -> "hdawuidhaw.com"
     # bio -> "adawoiudoiudb"
@@ -42,8 +46,34 @@ def extractFileIntoList(file):
     return instances[1:], instances[0]
 
 
-def createNodesFromFile(ID,file):
+def createNodesFromFile(file):
     nodes = list()
+    global ID
+
+    # specialNodeFileNameList = [schools.csv, projects.csv]
+    #
+    # specialNameToListOfSpecialNodesMap = {}
+    #
+    # specialPeople = ["will"]
+    #
+    # for every special file
+    #     name = name of file, e.g. schools.csv -> schools
+    #     keys.add(name);
+    #     dataFromfile = load...()
+    #     specialNodes.put(name, dataFromfile)
+    #
+    # roles = loadlist in teaching
+    # keys.add(roles)
+    #
+    # everyNodeName = getAllNamesFromNodesCsv("data/nodes/nodes.csv")
+    # generalNodes = loadGeneralNodes("data/nodes/nodes.csv")
+    #
+    # #collect in to one list
+    # nodes = generalNodes.join(specialMap.getEveryValueItemFromEveryKey)
+    #
+    # return nodes
+
+
     instances,metaData = extractFileIntoList(file)
     for i in instances:
         name = i[0]
@@ -54,17 +84,22 @@ def createNodesFromFile(ID,file):
     print(metaData)
     print(nodes[0])
 
+# def createEdges():
+    # filename = nodes.csv
+    #
+    # // go thro
+
 
 
 def createNodes(fn):
-    ID = 1
     for file in fn:
-        createNodesFromFile(ID,file)
+        createNodesFromFile(file)
 
 
 def loadData():
     filenames = getFileNames()
     nodes = createNodes(filenames)
+    # edges = createEdges(specialNodeFileNameList
 
     # check validity of data
 
