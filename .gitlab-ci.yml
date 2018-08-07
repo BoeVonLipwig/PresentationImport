@@ -29,7 +29,7 @@ build:
     paths:
       - build/
 
-deploy:
+surge:
   tags:
     - docker
   stage: deploy
