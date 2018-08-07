@@ -43,3 +43,17 @@ deploy:
     - surge --project ./build --domain https://connectedworldsteam10.surge.sh/
   only:
     - master
+ 
+pages:
+  tags:
+    - docker
+  stage: deploy
+  dependencies:
+    - build
+  script:
+  - mv build/* public/
+  artifacts:
+    paths:
+      - public
+  only:
+    - master
