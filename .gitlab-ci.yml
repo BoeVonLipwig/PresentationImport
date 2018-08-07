@@ -51,7 +51,8 @@ pages:
   dependencies:
     - build
   script:
-  - mv build/* public/
+    - rm -r public
+    - mv build/ public/
   artifacts:
     paths:
       - public
