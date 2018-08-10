@@ -1,5 +1,7 @@
 import sys
 import csv
+from os import listdir
+from os.path import isfile, join
 
 ID = 1
 # keys = []
@@ -34,19 +36,20 @@ class Edge:
 
 
 def getFileNames():
-    filenames = [arg for arg in sys.argv]
-    del filenames[0] # first entry is parser name
-    return filenames
+    specialFiles = getFileNamesFromDirectory("data/specialNodes")
+    nodeFiles = getFileNamesFromDirectory("data/nodes")
+    views = getFileNamesFromDirectory("data")
+    return specialFiles,nodeFiles,views
 
 
-def extractFileIntoList(file):
-    with open(file,'r') as f:
+def extractFileIntoList(file,path):
+    with open(path+file,'r') as f:
         reader = csv.reader(f)
         instances = list(reader)
     return instances[1:], instances[0]
 
 
-def createNodesFromFile(file):
+def createNodesFromFile(file,path):
     nodes = list()
     global ID
 
@@ -74,7 +77,7 @@ def createNodesFromFile(file):
     # return nodes
 
 
-    instances,metaData = extractFileIntoList(file)
+    instances,metaData = extractFileIntoList(file,path)
     for i in instances:
         name = i[0]
         fields = dict(zip(metaData[1:], i[1:]))
@@ -91,14 +94,20 @@ def createNodesFromFile(file):
 
 
 
-def createNodes(fn):
-    for file in fn:
-        createNodesFromFile(file)
+def createNodes(fn,path):
+    # check if we have more than one file
+    if type(fn) is list:
+        for file in fn:
+            createNodesFromFile(file,path)
+    else:
+        createNodesFromFile(fn,path)
 
 
 def loadData():
-    filenames = getFileNames()
-    nodes = createNodes(filenames)
+    special,nodes,views = getFileNames()
+    # print(nodes[0])
+    specialNodes = createNodes(special,'data/specialNodes/')
+    normalNodes = createNodes(nodes[0],'data/nodes/')
     # edges = createEdges(specialNodeFileNameList
 
     # check validity of data
@@ -113,6 +122,11 @@ def formatForCytoscape():
 
 def generateOutputFile():
     print("stub")
+
+
+def getFileNamesFromDirectory(dir):
+    onlyfiles = [f for f in listdir(dir) if isfile(join(dir, f))]
+    return onlyfiles
 
 
 if __name__ == '__main__':
