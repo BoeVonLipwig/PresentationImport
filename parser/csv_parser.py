@@ -19,7 +19,7 @@ class Node:
         return self.name == other.name
 
     def __repr__(self):
-        return "ID: %d \nName: %s\nFields: %s\n\n" % (self.id,self.name,self.fields)
+        return "Node ID: %d \nName: %s\nFields: %s\n\n" % (self.id,self.name,self.fields)
 
 
 class Edge:
@@ -32,7 +32,7 @@ class Edge:
         return (self.node1 == other.node1 and self.node2 == other.node2) or (self.node1 == other.node2 and self.node2 == other.node1)
 
     def __repr__(self):
-        return "ID: %d\nNode1: %s\nNode2: %s\n\n" % (self.id,self.node1,self.node2)
+        return "Edge ID: %d\nNode1: %s\nNode2: %s\n\n" % (self.id,self.node1,self.node2)
 
 
 def getFileNames():
@@ -101,16 +101,7 @@ def createNodesFromFile(file,path):
         nodes.append(Node(ID,name,fields))
         ID+=1
 
-    print(metaData)
-    print(nodes[0])
-
     return nodes
-
-# def createEdges():
-    # filename = nodes.csv
-    #
-    # // go thro
-
 
 
 def createNodes(fn,path):
@@ -125,6 +116,45 @@ def createNodes(fn,path):
     return nodes
 
 
+def checkSpecialEdges(specialNodes,normalNodes):
+    edges = list()
+    global ID
+    for sn in specialNodes:
+        for nn in normalNodes:
+            if(sn.name == nn.fields['project'] or sn.name == nn.fields['school']):
+                edges.append(Edge(ID,sn,nn))
+                ID+=1
+    return edges
+
+
+def checkNormalEdges(normalNodes):
+    edges = list()
+    global ID
+    for n1 in normalNodes:
+        for n2 in normalNodes:
+            if(n1.fields['collaborators'] == n2.name or n2.fields['collaborators'] == n1.name):
+                edges.append(Edge(ID,n1,n2))
+                ID+=1
+    return edges
+
+
+def createEdges(specialNodes,normalNodes):
+    edges = list()
+    global ID
+    ID = 0
+    # check againt special node and normal nodes
+    specialEdges = checkSpecialEdges(specialNodes,normalNodes)
+    if specialEdges:
+        edges.extend(specialEdges)
+
+    # check against normal node to normal node
+    normalEdges = checkNormalEdges(normalNodes)
+    if normalEdges:
+        edges.extend(normalEdges)
+
+    return edges
+
+
 def loadData():
     # create nodes
     special,nodes,views = getFileNames()
@@ -136,10 +166,11 @@ def loadData():
     keys = createKeysList(special,modifierNodes)
 
     # check validity of data
-    
+
 
     # Create edge objects
-    # edges = createEdges(specialNodeFileNameList)
+    edges = createEdges(specialNodes,normalNodes)
+    print(edges)
 
     return specialNodes,normalNodes,modifierNodes,keys,edges
 
