@@ -105,7 +105,7 @@ def checkNormalEdges(normalNodes):
     global ID
     for n1 in normalNodes:
         for n2 in normalNodes:
-            if(n1.fields['collaborators'] == n2.name or n2.fields['collaborators'] == n1.name):
+            if(n1.fields['collaborators'] == n2.name):
                 edges.append(Edge(ID,n1,n2))
                 ID+=1
     return edges
@@ -143,6 +143,7 @@ def loadData():
 
     # Create edge objects
     edges = createEdges(specialNodes,normalNodes)
+    print (edges)
 
     return specialNodes,normalNodes,modifierNodes,keys,edges
 
