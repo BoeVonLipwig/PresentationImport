@@ -4,8 +4,6 @@ from os import listdir
 from os.path import isfile, join
 
 ID = 1
-# keys = []
-# everyNodeName = []
 
 class Node:
     # webLink -> "hdawuidhaw.com"
@@ -69,31 +67,6 @@ def createKeysList(specialNodesFileNames,modifierNodes):
 def createNodesFromFile(file,path):
     nodes = list()
     global ID
-
-    # specialNodeFileNameList = [schools.csv, projects.csv]
-    #
-    # specialNameToListOfSpecialNodesMap = {}
-    #
-    # specialPeople = ["will"]
-    #
-    # for every special file
-    #     name = name of file, e.g. schools.csv -> schools
-    #     keys.add(name);
-    #     dataFromfile = load...()
-    #     specialNodes.put(name, dataFromfile)
-    #
-    # roles = loadlist in teaching
-    # keys.add(roles)
-    #
-    # everyNodeName = getAllNamesFromNodesCsv("data/nodes/nodes.csv")
-    # generalNodes = loadGeneralNodes("data/nodes/nodes.csv")
-    #
-    # #collect in to one list
-    # nodes = generalNodes.join(specialMap.getEveryValueItemFromEveryKey)
-    #
-    # return nodes
-
-
     instances,metaData = extractFileIntoList(file,path)
     for i in instances:
         name = i[0]
@@ -170,7 +143,6 @@ def loadData():
 
     # Create edge objects
     edges = createEdges(specialNodes,normalNodes)
-    print(edges)
 
     return specialNodes,normalNodes,modifierNodes,keys,edges
 
