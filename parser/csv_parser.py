@@ -49,6 +49,23 @@ def extractFileIntoList(file,path):
     return instances[1:], instances[0]
 
 
+def createKeysList(specialNodesFileNames,modifierNodes):
+    keys = list()
+    if type(specialNodesFileNames) is list:
+        for n in specialNodesFileNames:
+            keys.append(n[:-4])
+    else:
+        keys.append(specialNodesFileNames[:-4])
+
+    if type(modifierNodes) is list:
+        for n in modifierNodes:
+            keys.append(n.name)
+    else:
+        keys.append(modifierNodes.name)
+
+    return keys
+
+
 def createNodesFromFile(file,path):
     nodes = list()
     global ID
@@ -87,6 +104,8 @@ def createNodesFromFile(file,path):
     print(metaData)
     print(nodes[0])
 
+    return nodes
+
 # def createEdges():
     # filename = nodes.csv
     #
@@ -96,25 +115,33 @@ def createNodesFromFile(file,path):
 
 def createNodes(fn,path):
     # check if we have more than one file
+    nodes = list()
     if type(fn) is list:
         for file in fn:
-            createNodesFromFile(file,path)
+            nodes.extend(createNodesFromFile(file,path))
     else:
-        createNodesFromFile(fn,path)
+        nodes.extend(createNodesFromFile(fn,path))
+
+    return nodes
 
 
 def loadData():
+    # create nodes
     special,nodes,views = getFileNames()
-    # print(nodes[0])
     specialNodes = createNodes(special,'data/specialNodes/')
     normalNodes = createNodes(nodes[0],'data/nodes/')
-    # edges = createEdges(specialNodeFileNameList
+    modifierNodes = createNodes(nodes[1],'data/nodes/')
+
+    # create list of keys
+    keys = createKeysList(special,modifierNodes)
 
     # check validity of data
-
+    
 
     # Create edge objects
+    # edges = createEdges(specialNodeFileNameList)
 
+    return specialNodes,normalNodes,modifierNodes,keys,edges
 
 def formatForCytoscape():
     print("stub")
