@@ -140,21 +140,31 @@ def loadData():
     return allNodes,edges,keys
 
 
-def formatForCytoscape(nodes, edges, key):
+def formatForCytoscape(nodes, edges, keyList):
 
-    #
-    # keyCyto = "{
-    #
-    # group: "nodes",
-    # data: {
-    #   id: `${stl.label}-key`,
-    #   name: stl.label,
-    #   type: "key",
-    #   role: stl.subtype[0]
-    # }
-    #
-    #
-    #
+    keyBorder = """{
+                  group: "nodes",
+                  data: { id: "keyBorder", type: "border" }
+                }"""
+    keyTitle = """{
+                  group: "nodes",
+                  data: { id: "titleKey", name: "NODE TYPE", type: "key" }
+                }"""
+
+    keysCyto = ""
+    for key in keyList:
+        keysCyto = keysCyto + """{
+            group: "nodes",
+            data: {
+              id: %s-key,
+              name: %s,
+              type: "key"
+            }
+        }""" % (key,key)
+
+    print(keysCyto)
+
+
     # this.keyXPadding = 100;
     # this.keyYPadding = 50;
     #
@@ -217,7 +227,7 @@ def formatForCytoscape(nodes, edges, key):
     # });
     #
     # this.maxLabelWidth = maxLabelWidthLocal
-    print("stub")
+    # print("stub")
 
 
 def generateOutputFile():
@@ -230,9 +240,8 @@ def getFileNamesFromDirectory(dir):
 
 
 if __name__ == '__main__':
-    loadData()
+    nodes, edges, keys = loadData()
 
+    formatForCytoscape(nodes, edges, keys)
 
-
-    # formatForCytoscape()
     # generateOutputFile()
