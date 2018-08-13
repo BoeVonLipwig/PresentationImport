@@ -3,6 +3,7 @@ image: node:8
 stages:
   - test
   - build
+  - deploy
 
 before_script:
   - yarn install
@@ -27,3 +28,33 @@ build:
   artifacts:
     paths:
       - build/
+
+surge:
+  tags:
+    - docker
+  stage: deploy
+  environment:
+    name: production
+    url: https://connectedworldsteam10.surge.sh/
+  dependencies:
+    - build
+  script:
+    - npm install surge --global
+    - surge --project ./build --domain https://connectedworldsteam10.surge.sh/
+  only:
+    - master
+ 
+pages:
+  tags:
+    - docker
+  stage: deploy
+  dependencies:
+    - build
+  script:
+    - rm -r public
+    - mv build/ public/
+  artifacts:
+    paths:
+      - public
+  only:
+    - master
