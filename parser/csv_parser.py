@@ -12,6 +12,13 @@ class Node:
         self.id = id
         self.name = name
         self.fields = fields
+        self.formatFields()
+
+    def formatFields(self):
+        for k,v in self.fields.items():
+            if "," in v:
+                newV = v.split(",")
+                self.fields[k] = newV
 
     def equals(self, other):
         return self.name == other.name
@@ -21,16 +28,17 @@ class Node:
 
 
 class Edge:
-    def __init__(self, id, node1, node2):
+    def __init__(self, id, node1, node2, type):
         self.id = id
         self.node1 = node1
         self.node2 = node2
+        self.type = type
 
     def equals(self, other):
         return (self.node1 == other.node1 and self.node2 == other.node2) or (self.node1 == other.node2 and self.node2 == other.node1)
 
     def __repr__(self):
-        return "Edge ID: %d\nNode1: %s\nNode2: %s\n\n" % (self.id,self.node1,self.node2)
+        return "Edge ID: %d\nNode1: %s\nNode2: %s\nType: %s\n\n" % (self.id,self.node1,self.node2,self.type)
 
 
 def getFileNames():
@@ -47,10 +55,10 @@ def extractFileIntoList(file,path):
     return instances[1:], instances[0]
 
 
-def createKeysList(specialNodesFileNames,modifierNodes):
+def createKeysList(specialNodesNames,modifierNodes):
     keys = list()
-    for n in specialNodesFileNames:
-        keys.append(n[:-4]) # removes ".csv"
+    for n in specialNodesNames:
+        keys.append(n)
     for n in modifierNodes:
         keys.append(n.name)
 
@@ -79,41 +87,42 @@ def createNodes(fn,path):
     return nodes
 
 
-def checkSpecialEdges(specialNodes,normalNodes):
+def createSpecialEdges(specialNodes,normalNodes,specialTypes):
     edges = list()
     global ID
-    for sn in specialNodes:
-        for nn in normalNodes:
-            if(sn.name == nn.fields['project'] or sn.name == nn.fields['school']):
-                edges.append(Edge(ID,sn,nn))
+    for nn in normalNodes:
+        for specialType in specialTypes:
+            if type(nn.fields[specialType]) is list:
+                for sn in nn.fields[specialType]:
+                    edges.append(Edge(ID,sn,nn.name,specialType))
+                    ID+=1
+            else:
+                edges.append(Edge(ID,nn.fields[specialType],nn.name, specialType))
                 ID+=1
     return edges
 
 
-def checkNormalEdges(normalNodes):
+def createNormalEdges(normalNodes):
     edges = list()
     global ID
     for n1 in normalNodes:
         for n2 in normalNodes:
             if(n1.fields['collaborators'] == n2.name):
-                edges.append(Edge(ID,n1,n2))
+                edges.append(Edge(ID,n1.name,n2.name,"collab"))
                 ID+=1
     return edges
 
 
-def createEdges(specialNodes,normalNodes):
+def createEdges(specialNodes,normalNodes,specialTypes):
     edges = list()
     global ID
-    ID = 0
     # check againt special node and normal nodes
-    specialEdges = checkSpecialEdges(specialNodes,normalNodes)
-    if specialEdges:
-        edges.extend(specialEdges)
+    specialEdges = createSpecialEdges(specialNodes,normalNodes,specialTypes)
+    edges.extend(specialEdges)
 
     # check against normal node to normal node
-    normalEdges = checkNormalEdges(normalNodes)
-    if normalEdges:
-        edges.extend(normalEdges)
+    normalEdges = createNormalEdges(normalNodes)
+    edges.extend(normalEdges)
 
     return edges
 
@@ -121,21 +130,24 @@ def createEdges(specialNodes,normalNodes):
 def loadData():
     # create nodes
     allNodes = list()
-    special,nodes,views = getFileNames()
-    specialNodes = createNodes(special,'data/specialNodes/')
-    normalNodes = createNodes([nodes[0]],'data/nodes/')
-    modifierNodes = createNodes([nodes[1]],'data/nodes/')
+    specialFN,nodesFN,viewsFN = getFileNames()
+    specialNodes = createNodes(specialFN,'data/specialNodes/')
+    normalNodes = createNodes([nodesFN[0]],'data/nodes/')
+    modifierNodes = createNodes([nodesFN[1]],'data/nodes/')
     allNodes.extend(normalNodes)
     allNodes.extend(specialNodes)
 
+    # trim .csv
+    specialNames = [".".join(f.split(".")[:-1]).lower() for f in specialFN]
+
     # create list of keys
-    keys = createKeysList(special,modifierNodes)
+    keys = createKeysList(specialNames,modifierNodes)
 
     # check validity of data
 
 
     # Create edge objects
-    edges = createEdges(specialNodes,normalNodes)
+    edges = createEdges(specialNodes,normalNodes,specialNames)
 
     return allNodes,edges,keys
 
@@ -177,9 +189,9 @@ def formatForCytoscape(nodes, edges, keyList):
 
         nodesCyto = nodesCyto[:-1] + "}}"
 
-    edgesCyto = ""
-    for edge in edges:
-        edgesCyto = edgesCyto +
+    # edgesCyto = ""
+    # for edge in edges:
+    #     edgesCyto = edgesCyto +
 
     # this.keyXPadding = 100;
     # this.keyYPadding = 50;
