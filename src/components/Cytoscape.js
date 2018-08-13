@@ -206,6 +206,7 @@ class Cytoscape extends React.Component {
       data: { id: "titleKey", name: "NODE TYPE", type: "key" }
     });
 
+    // fetches key names and places in keyAr
     let keyAr = [];
     let subKeyStyles = [];
     let keyStyles = _.filter(this.styleList.nodeStyles.type, typ => {

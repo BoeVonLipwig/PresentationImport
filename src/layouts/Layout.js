@@ -4,7 +4,6 @@ class Layout {
   static cy;
 
   static clearStyles() {
-    console.log(this.cy);
     this.cy.elements().removeClass("filtered");
     this.cy.elements().removeClass("hidden");
     this.cy.elements().removeClass("highlighted");

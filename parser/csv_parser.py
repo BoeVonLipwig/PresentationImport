@@ -49,17 +49,10 @@ def extractFileIntoList(file,path):
 
 def createKeysList(specialNodesFileNames,modifierNodes):
     keys = list()
-    if type(specialNodesFileNames) is list:
-        for n in specialNodesFileNames:
-            keys.append(n[:-4])
-    else:
-        keys.append(specialNodesFileNames[:-4])
-
-    if type(modifierNodes) is list:
-        for n in modifierNodes:
-            keys.append(n.name)
-    else:
-        keys.append(modifierNodes.name)
+    for n in specialNodesFileNames:
+        keys.append(n[:-4]) # removes ".csv"
+    for n in modifierNodes:
+        keys.append(n.name)
 
     return keys
 
@@ -80,11 +73,8 @@ def createNodesFromFile(file,path):
 def createNodes(fn,path):
     # check if we have more than one file
     nodes = list()
-    if type(fn) is list:
-        for file in fn:
-            nodes.extend(createNodesFromFile(file,path))
-    else:
-        nodes.extend(createNodesFromFile(fn,path))
+    for file in fn:
+        nodes.extend(createNodesFromFile(file,path))
 
     return nodes
 
@@ -130,10 +120,13 @@ def createEdges(specialNodes,normalNodes):
 
 def loadData():
     # create nodes
+    allNodes = list()
     special,nodes,views = getFileNames()
     specialNodes = createNodes(special,'data/specialNodes/')
-    normalNodes = createNodes(nodes[0],'data/nodes/')
-    modifierNodes = createNodes(nodes[1],'data/nodes/')
+    normalNodes = createNodes([nodes[0]],'data/nodes/')
+    modifierNodes = createNodes([nodes[1]],'data/nodes/')
+    allNodes.extend(normalNodes)
+    allNodes.extend(specialNodes)
 
     # create list of keys
     keys = createKeysList(special,modifierNodes)
@@ -143,11 +136,87 @@ def loadData():
 
     # Create edge objects
     edges = createEdges(specialNodes,normalNodes)
-    print (edges)
 
-    return specialNodes,normalNodes,modifierNodes,keys,edges
+    return allNodes,edges,keys
 
-def formatForCytoscape():
+
+def formatForCytoscape(nodes, edges, key):
+
+    #
+    # keyCyto = "{
+    #
+    # group: "nodes",
+    # data: {
+    #   id: `${stl.label}-key`,
+    #   name: stl.label,
+    #   type: "key",
+    #   role: stl.subtype[0]
+    # }
+    #
+    #
+    #
+    # this.keyXPadding = 100;
+    # this.keyYPadding = 50;
+    #
+    # this.keyBorder = this.cy.add({
+    #   group: "nodes",
+    #   data: { id: "keyBorder", type: "border" }
+    # });
+    #
+    # this.cy.add({
+    #   group: "nodes",
+    #   data: { id: "titleKey", name: "NODE TYPE", type: "key" }
+    # });
+    #
+    # let keyAr = [];
+    # let subKeyStyles = [];
+    # let keyStyles = _.filter(this.styleList.nodeStyles.type, typ => {
+    #   let subKeyAr = _.filter(this.styleList.nodeStyles.subtype, styp => {
+    #     return (
+    #       styp.type.toLowerCase() === typ.label.toLowerCase() &&
+    #       _.intersection(styp.subtype, typ.subtype).length < 1
+    #     );
+    #   });
+    #   if (subKeyAr.length > 1) {
+    #     subKeyStyles = subKeyStyles.concat(subKeyAr);
+    #     return false;
+    #   } else {
+    #     return true;
+    #   }
+    # });
+    #
+    # keyStyles = keyStyles.concat(subKeyStyles);
+    #
+    # keyStyles.forEach(stl => {
+    #   keyAr[keyAr.length] = {
+    #     group: "nodes",
+    #     data: {
+    #       id: `${stl.label}-key`,
+    #       name: stl.label,
+    #       type: "key",
+    #       role: stl.subtype[0]
+    #     }
+    #   };
+    # });
+    #
+    # this.cy.add(keyAr);
+    #
+    # this.keys = this.cy.elements('[type = "key"]');
+    # this.keys.unselectify().ungrabify();
+    #
+    # this.keyBorder.unselectify().ungrabify();
+    #
+    # let maxLabelWidthLocal = 0;
+    #
+    # this.keys.forEach(n => {
+    #   let labelWidth = n.boundingBox({ includeLabels: true }).w;
+    #
+    #   if (labelWidth > maxLabelWidthLocal) {
+    #     maxLabelWidthLocal = labelWidth;
+    #   }
+    # });
+    #
+    # this.maxLabelWidth = maxLabelWidthLocal
     print("stub")
 
 
@@ -162,5 +231,8 @@ def getFileNamesFromDirectory(dir):
 
 if __name__ == '__main__':
     loadData()
+
+
+
     # formatForCytoscape()
     # generateOutputFile()
