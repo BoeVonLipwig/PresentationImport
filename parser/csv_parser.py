@@ -146,6 +146,7 @@ def formatForCytoscape(nodes, edges, keyList):
                   group: "nodes",
                   data: { id: "keyBorder", type: "border" }
                 }"""
+
     keyTitle = """{
                   group: "nodes",
                   data: { id: "titleKey", name: "NODE TYPE", type: "key" }
@@ -162,8 +163,23 @@ def formatForCytoscape(nodes, edges, keyList):
             }
         }""" % (key,key)
 
-    print(keysCyto)
+    nodesCyto = ""
+    for node in nodes:
+        nodesCyto = nodesCyto + """{
+            group: "nodes",
+            data: {
+                id: %d,
+                name: %s,
+        """ % (node.id, node.name)
 
+        for key,value in node.fields.items():
+            nodesCyto = nodesCyto + "%s: %s," % (key, value)
+
+        nodesCyto = nodesCyto[:-1] + "}}"
+
+    edgesCyto = ""
+    for edge in edges:
+        edgesCyto = edgesCyto +
 
     # this.keyXPadding = 100;
     # this.keyYPadding = 50;
