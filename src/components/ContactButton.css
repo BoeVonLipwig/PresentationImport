@@ -42,6 +42,10 @@
   color: var(--bg);
 }
 
+#contact-button .svg-path {
+  fill: var(--fg);
+}
+
 #contact-button::-moz-selection {
   background: var(--fg);
   color: var(--bg);
@@ -107,5 +111,9 @@
 }
 
 .ui-menu-item:hover .svg-path {
-  fill: var(--bg);
+  filter: invert(100%);
+}
+
+.ui-menu-item .svg-path {
+  fill: var(--fg);
 }
