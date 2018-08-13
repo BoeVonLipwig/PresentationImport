@@ -92,10 +92,10 @@ p {
   background: var(--bg);
 }
 
-#header > img {
+#vuw-logo {
   display: block;
   font-size: 25px;
-  color: var(--fg);
+  fill: var(--fg);
   margin-top: 10px;
   height: 20px;
   margin-left: calc((100% - ((76.5 / 35) * 20px)) / 2);
