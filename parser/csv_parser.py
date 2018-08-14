@@ -172,8 +172,10 @@ def formatForCytoscape(nodes, edges, keyList):
               id: %s-key,
               name: %s,
               type: "key"
-            }
-        }""" % (key,key)
+            },
+            selectable: false,
+            grabbable: false
+        },""" % (key,key)
 
     nodesCyto = ""
     for node in nodes:
@@ -187,76 +189,22 @@ def formatForCytoscape(nodes, edges, keyList):
         for key,value in node.fields.items():
             nodesCyto = nodesCyto + "%s: %s," % (key, value)
 
-        nodesCyto = nodesCyto[:-1] + "}}"
+        nodesCyto = nodesCyto[:-1] + "}},"
 
-    # edgesCyto = ""
-    # for edge in edges:
-    #     edgesCyto = edgesCyto +
+    edgesCyto = ""
+    for edge in edges:
+        edgesCyto = edgesCyto + """{
+            group: "edges",
+            data: {
+                id: %d
+                source: %s,
+                target: %s,
+                type: "%s"
+            }
+        },""" % (edge.id, edge.node1, edge.node2, edge.type)
 
-    # this.keyXPadding = 100;
-    # this.keyYPadding = 50;
-    #
-    # this.keyBorder = this.cy.add({
-    #   group: "nodes",
-    #   data: { id: "keyBorder", type: "border" }
-    # });
-    #
-    # this.cy.add({
-    #   group: "nodes",
-    #   data: { id: "titleKey", name: "NODE TYPE", type: "key" }
-    # });
-    #
-    # let keyAr = [];
-    # let subKeyStyles = [];
-    # let keyStyles = _.filter(this.styleList.nodeStyles.type, typ => {
-    #   let subKeyAr = _.filter(this.styleList.nodeStyles.subtype, styp => {
-    #     return (
-    #       styp.type.toLowerCase() === typ.label.toLowerCase() &&
-    #       _.intersection(styp.subtype, typ.subtype).length < 1
-    #     );
-    #   });
-    #   if (subKeyAr.length > 1) {
-    #     subKeyStyles = subKeyStyles.concat(subKeyAr);
-    #     return false;
-    #   } else {
-    #     return true;
-    #   }
-    # });
-    #
-    # keyStyles = keyStyles.concat(subKeyStyles);
-    #
-    # keyStyles.forEach(stl => {
-    #   keyAr[keyAr.length] = {
-    #     group: "nodes",
-    #     data: {
-    #       id: `${stl.label}-key`,
-    #       name: stl.label,
-    #       type: "key",
-    #       role: stl.subtype[0]
-    #     }
-    #   };
-    # });
-    #
-    # this.cy.add(keyAr);
-    #
-    # this.keys = this.cy.elements('[type = "key"]');
-    # this.keys.unselectify().ungrabify();
-    #
-    # this.keyBorder.unselectify().ungrabify();
-    #
-    # let maxLabelWidthLocal = 0;
-    #
-    # this.keys.forEach(n => {
-    #   let labelWidth = n.boundingBox({ includeLabels: true }).w;
-    #
-    #   if (labelWidth > maxLabelWidthLocal) {
-    #     maxLabelWidthLocal = labelWidth;
-    #   }
-    # });
-    #
-    # this.maxLabelWidth = maxLabelWidthLocal
-    # print("stub")
-
+    elements = '[' + keysCyto + nodesCyto + edgesCyto[:-1] + ']'
+    print(elements)
 
 def generateOutputFile():
     print("stub")
