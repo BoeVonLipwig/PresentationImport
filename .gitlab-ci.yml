@@ -1,8 +1,7 @@
 image: node:8
 
 stages:
-  - test
-  - build
+  - "Test & Build"
   - deploy
 
 before_script:
@@ -15,14 +14,14 @@ cache:
 test:
   tags:
     - docker
-  stage: test
+  stage: "Test & Build"
   script:
     - yarn test
 
 build:
   tags:
     - docker
-  stage: build
+  stage: "Test & Build"
   script:
     - yarn build
   artifacts:
