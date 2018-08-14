@@ -10,15 +10,23 @@ class Node:
     # bio -> "adawoiudoiudb"
     def __init__(self, id, name, fields):
         self.id = id
-        self.name = name
+        self.name = name.strip()
         self.fields = fields
         self.formatFields()
 
     def formatFields(self):
+        fieldNo = 0
         for k,v in self.fields.items():
-            if "," in v:
-                newV = v.split(",")
-                self.fields[k] = newV
+            newV = v.strip()
+            if fieldNo > 7:
+                if newV == '':
+                    newV = list()
+                else:
+                    newV = v.split(",")
+                    newV = map(str.strip, newV)
+                    self.fields[k] = newV
+            self.fields[k] = newV
+            fieldNo += 1
 
     def equals(self, other):
         return self.name == other.name
@@ -30,11 +38,11 @@ class Node:
 class Edge:
     def __init__(self, id, node1, node2, type):
         self.id = id
-        self.node1 = node1
-        self.node2 = node2
-        self.type = type
+        self.node1 = node1.strip()
+        self.node2 = node2.strip()
+        self.type = type.strip()
 
-    def equals(self, other):
+    def __eq__(self, other):
         return (self.node1 == other.node1 and self.node2 == other.node2) or (self.node1 == other.node2 and self.node2 == other.node1)
 
     def __repr__(self):
@@ -90,26 +98,25 @@ def createNodes(fn,path):
 def createSpecialEdges(specialNodes,normalNodes,specialTypes):
     edges = list()
     global ID
-    for nn in normalNodes:
+    for node in normalNodes:
         for specialType in specialTypes:
-            if type(nn.fields[specialType]) is list:
-                for sn in nn.fields[specialType]:
-                    edges.append(Edge(ID,sn,nn.name,specialType))
-                    ID+=1
-            else:
-                edges.append(Edge(ID,nn.fields[specialType],nn.name, specialType))
+            for sNodeName in node.fields[specialType]:
+                edges.append(Edge(ID,sNodeName,node.name,specialType))
                 ID+=1
+            del node.fields[specialType]
     return edges
 
 
 def createNormalEdges(normalNodes):
     edges = list()
     global ID
-    for n1 in normalNodes:
-        for n2 in normalNodes:
-            if(n1.fields['collaborators'] == n2.name):
-                edges.append(Edge(ID,n1.name,n2.name,"collab"))
+    for node in normalNodes:
+        for collaborator in node.fields['collaborators']:
+            newEdge = Edge(ID,node.name,collaborator,"collab")
+            if newEdge not in edges:
+                edges.append(newEdge)
                 ID+=1
+        del node.fields['collaborators']
     return edges
 
 
@@ -134,8 +141,8 @@ def loadData():
     specialNodes = createNodes(specialFN,'data/specialNodes/')
     normalNodes = createNodes([nodesFN[0]],'data/nodes/')
     modifierNodes = createNodes([nodesFN[1]],'data/nodes/')
-    allNodes.extend(normalNodes)
     allNodes.extend(specialNodes)
+    allNodes.extend(normalNodes)
 
     # trim .csv
     specialNames = [".".join(f.split(".")[:-1]).lower() for f in specialFN]
@@ -169,12 +176,12 @@ def formatForCytoscape(nodes, edges, keyList):
         keysCyto = keysCyto + """{
             group: "nodes",
             data: {
-              id: %s-key,
-              name: %s,
+              id: "%s-key",
+              name: "%s",
               type: "key"
             },
-            selectable: false,
-            grabbable: false
+            selectable: "false",
+            grabbable: "false"
         },""" % (key,key)
 
     nodesCyto = ""
@@ -182,12 +189,12 @@ def formatForCytoscape(nodes, edges, keyList):
         nodesCyto = nodesCyto + """{
             group: "nodes",
             data: {
-                id: %d,
-                name: %s,
+                id: "%d",
+                name: "%s",
         """ % (node.id, node.name)
 
         for key,value in node.fields.items():
-            nodesCyto = nodesCyto + "%s: %s," % (key, value)
+            nodesCyto = nodesCyto + "%s: \"%s\"," % (key, value)
 
         nodesCyto = nodesCyto[:-1] + "}},"
 
@@ -196,18 +203,22 @@ def formatForCytoscape(nodes, edges, keyList):
         edgesCyto = edgesCyto + """{
             group: "edges",
             data: {
-                id: %d
-                source: %s,
-                target: %s,
+                id: "%d"
+                source: "%s",
+                target: "%s",
                 type: "%s"
             }
         },""" % (edge.id, edge.node1, edge.node2, edge.type)
 
     elements = '[' + keysCyto + nodesCyto + edgesCyto[:-1] + ']'
-    print(elements)
 
-def generateOutputFile():
-    print("stub")
+    return elements
+
+def generateOutputFile(elements):
+    path = './output.json'
+    jsonFile = open(path, 'w+')
+    jsonFile.write(elements)
+    jsonFile.close()
 
 
 def getFileNamesFromDirectory(dir):
@@ -218,6 +229,6 @@ def getFileNamesFromDirectory(dir):
 if __name__ == '__main__':
     nodes, edges, keys = loadData()
 
-    formatForCytoscape(nodes, edges, keys)
+    elements = formatForCytoscape(nodes, edges, keys)
 
-    # generateOutputFile()
+    generateOutputFile(elements)
