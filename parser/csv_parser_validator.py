@@ -39,6 +39,10 @@ def check_case1(specialNodes,normalNodes, lastDetailsFieldIndex, numberOfSpecial
     trimPoint = 3 + lastDetailsFieldIndex   # plus three because of names, roles, and collab field
     specialNodeColumns = metaData[trimPoint:]
 
+    # check if tripoint is less than 1, meaning it is definitely incorrect
+    if(trimPoint < 1):
+        return false
+
     # check if left over fields are equivalent to number of special nodes
     if len(specialNodeColumns) == numberOfSpecialNodes:
         return True
