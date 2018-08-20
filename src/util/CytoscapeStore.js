@@ -2,7 +2,6 @@ import { observable, decorate } from "mobx";
 
 class CytoscapeStore {
   layouts = null;
-  view = "showProjects";
   selectedNode = null;
   nhood = null;
   details = true;
@@ -12,7 +11,6 @@ class CytoscapeStore {
 }
 decorate(CytoscapeStore, {
   layouts: observable,
-  view: observable,
   selectedNode: observable,
   nhood: observable,
   details: observable,

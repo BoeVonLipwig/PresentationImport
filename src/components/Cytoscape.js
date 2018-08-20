@@ -304,14 +304,6 @@ class Cytoscape extends React.Component {
       let indhood = nhood.closedNeighborhood('[type = "' + nhoodType + '"]');
       nhood = nhood.add(indhood);
     }
-
-    let view = this.props.cytoscapeStore.view;
-    if (view === "showProjects" || view === "showCollab") {
-      let nschool = nhood.nodes('[type = "school"]');
-      if (nschool.size() > 1) {
-        this.spreadNodes(nschool);
-      }
-    }
   }
 
   spreadNodes(nodesToSpread) {
