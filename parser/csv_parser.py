@@ -2,11 +2,13 @@ import csv
 import json
 import sys
 import csv_parser_validator
+import csv_parser_file_functions
 from os import listdir
 from os.path import isfile, join
 
 
 ID = 1
+lastsDetailsFieldIndex = 7
 
 class Node:
     # webLink -> "hdawuidhaw.com"
@@ -19,9 +21,10 @@ class Node:
 
     def formatFields(self):
         fieldNo = 0
+        global lastsDetailsFieldIndex
         for k,v in self.fields.items():
             newV = v.strip()
-            if fieldNo > 7:
+            if fieldNo > lastsDetailsFieldIndex:
                 if newV == '':
                     newV = list()
                 else:
@@ -60,20 +63,6 @@ class Key:
         self.type = "key"
 
 
-def getFileNames():
-    specialFiles = getFileNamesFromDirectory("data/specialNodes")
-    nodeFiles = getFileNamesFromDirectory("data/nodes")
-    views = getFileNamesFromDirectory("data")
-    return specialFiles,nodeFiles,views
-
-
-def extractFileIntoList(file,path):
-    with open(path+file,'r') as f:
-        reader = csv.reader(f)
-        instances = list(reader)
-    return instances[1:], instances[0]
-
-
 def createKeysList(specialNodesNames,modifierNodes):
     keys = list()
     for n in specialNodesNames:
@@ -83,7 +72,7 @@ def createKeysList(specialNodesNames,modifierNodes):
 
     return keys
 
-
+# creates nodes from files and return field names of file
 def createNodesFromFile(file,path):
     nodes = list()
     global ID
@@ -156,6 +145,9 @@ def createEdges(specialNodes,normalNodes,specialTypes):
 
 
 def loadData():
+    # init global var
+    global lastsDetailsFieldIndex
+
     # create nodes
     allNodes = list()
     specialFN,nodesFN,viewsFN = getFileNames()
@@ -172,10 +164,10 @@ def loadData():
     keys = createKeysList(specialNames,modifierNodes)
 
     # check validity of data
-    validate_data(specialNodes,normalNodes,modifierNodes)
+    validate_data(specialNodes,normalNodes,modifierNodes, len(specialFiles), specialFN,nodesFN,viewsFN)
 
     # Create edge objects
-    edges = createEdges(specialNodes,normalNodes,specialNames)
+    edges = createEdges(specialNodes,normalNodes,specialNames,lastsDetailsFieldIndex)
 
     # Remove 'fields' dict from nodeSize
     [delattr(node, 'fields') for node in allNodes]
@@ -206,17 +198,6 @@ def formatForCytoscape(nodes, edges, keyList):
         data.append({'group': "edges", 'data': edge.__dict__})
 
     return json.dumps(data, separators=(',', ':'))
-
-def generateOutputFile(elements):
-    path = './output.json'
-    jsonFile = open(path, 'w+')
-    jsonFile.write(elements)
-    jsonFile.close()
-
-
-def getFileNamesFromDirectory(dir):
-    onlyfiles = [f for f in listdir(dir) if isfile(join(dir, f))]
-    return onlyfiles
 
 
 if __name__ == '__main__':
