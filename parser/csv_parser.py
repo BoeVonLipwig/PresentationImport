@@ -56,12 +56,15 @@ class Edge:
     def __repr__(self):
         return "Edge ID: %d\nNode1: %s\nNode2: %s\nType: %s\n\n" % (self.id,self.node1,self.node2,self.type)
 
+<<<<<<< HEAD
 class Key:
     def __init__(self, name):
         self.id = '%s-key' % (name)
         self.name = name
         self.type = "key"
 
+=======
+>>>>>>> d6f422874f40c1515d3e825c6cb75c88163aacaf
 
 def createKeysList(specialNodesNames,modifierNodes):
     keys = list()
@@ -197,8 +200,11 @@ def formatForCytoscape(nodes, edges, keyList):
     for edge in edges:
         data.append({'group': "edges", 'data': edge.__dict__})
 
+<<<<<<< HEAD
     return json.dumps(data, separators=(',', ':'))
 
+=======
+>>>>>>> d6f422874f40c1515d3e825c6cb75c88163aacaf
 
 if __name__ == '__main__':
     nodes, edges, keys = loadData()
