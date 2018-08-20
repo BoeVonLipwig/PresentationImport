@@ -238,8 +238,6 @@ class Cytoscape extends React.Component {
       };
     });
 
-    console.log(keyAr);
-
     this.cy.add(keyAr);
 
     this.keys = this.cy.elements('[type = "key"]');
