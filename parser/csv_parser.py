@@ -1,7 +1,9 @@
-import sys
 import csv
+import json
+import sys
 from os import listdir
 from os.path import isfile, join
+
 
 ID = 1
 
@@ -25,6 +27,8 @@ class Node:
                     newV = v.split(",")
                     newV = map(str.strip, newV)
                     self.fields[k] = newV
+            else:
+                setattr(self, k, newV)
             self.fields[k] = newV
             fieldNo += 1
 
@@ -38,8 +42,8 @@ class Node:
 class Edge:
     def __init__(self, id, node1, node2, type):
         self.id = id
-        self.node1 = node1.strip()
-        self.node2 = node2.strip()
+        self.node1 = node1
+        self.node2 = node2
         self.type = type.strip()
 
     def __eq__(self, other):
@@ -47,6 +51,12 @@ class Edge:
 
     def __repr__(self):
         return "Edge ID: %d\nNode1: %s\nNode2: %s\nType: %s\n\n" % (self.id,self.node1,self.node2,self.type)
+
+class Key:
+    def __init__(self, name):
+        self.id = '%s-key' % (name)
+        self.name = name
+        self.type = "key"
 
 
 def getFileNames():
@@ -66,9 +76,9 @@ def extractFileIntoList(file,path):
 def createKeysList(specialNodesNames,modifierNodes):
     keys = list()
     for n in specialNodesNames:
-        keys.append(n)
+        keys.append(Key(n))
     for n in modifierNodes:
-        keys.append(n.name)
+        keys.append(Key(n.name))
 
     return keys
 
@@ -98,25 +108,35 @@ def createNodes(fn,path):
 def createSpecialEdges(specialNodes,normalNodes,specialTypes):
     edges = list()
     global ID
+
+    specialIdMap = {}
+    for specialNode in specialNodes:
+        specialIdMap[specialNode.name] = specialNode.id
+
     for node in normalNodes:
         for specialType in specialTypes:
             for sNodeName in node.fields[specialType]:
-                edges.append(Edge(ID,sNodeName,node.name,specialType))
+                specialNodeID = specialIdMap[sNodeName]
+                edges.append(Edge(ID,specialNodeID,node.id,specialType))
                 ID+=1
-            del node.fields[specialType]
     return edges
 
 
 def createNormalEdges(normalNodes):
     edges = list()
     global ID
+
+    nodeIdMap = {}
+    for node in normalNodes:
+        nodeIdMap[node.name] = node.id
+
     for node in normalNodes:
         for collaborator in node.fields['collaborators']:
-            newEdge = Edge(ID,node.name,collaborator,"collab")
+            colNodeId = nodeIdMap[collaborator]
+            newEdge = Edge(ID,node.id,colNodeId,"collab")
             if newEdge not in edges:
                 edges.append(newEdge)
                 ID+=1
-        del node.fields['collaborators']
     return edges
 
 
@@ -156,63 +176,35 @@ def loadData():
     # Create edge objects
     edges = createEdges(specialNodes,normalNodes,specialNames)
 
+    # Remove 'fields' dict from nodeSize
+    [delattr(node, 'fields') for node in allNodes]
+
     return allNodes,edges,keys
 
 
 def formatForCytoscape(nodes, edges, keyList):
 
-    keyBorder = """{
-                  group: "nodes",
-                  data: { id: "keyBorder", type: "border" }
-                }"""
+    data = []
 
-    keyTitle = """{
-                  group: "nodes",
-                  data: { id: "titleKey", name: "NODE TYPE", type: "key" }
-                }"""
+    #keyBorder
+    data.append({'group': "nodes", 'data': {'id': "keyBorder", 'type': 'border'}})
 
-    keysCyto = ""
+    #keyTitle
+    data.append({'group': "nodes", 'data': {'id': "titleKey", 'name': "NODE TYPE", 'type': 'key'}})
+
+    #keys
     for key in keyList:
-        keysCyto = keysCyto + """{
-            group: "nodes",
-            data: {
-              id: "%s-key",
-              name: "%s",
-              type: "key"
-            },
-            selectable: "false",
-            grabbable: "false"
-        },""" % (key,key)
+        data.append({'group': "nodes", 'data': key.__dict__, 'selectable': False, 'grabbable': False})
 
-    nodesCyto = ""
+    #nodes
     for node in nodes:
-        nodesCyto = nodesCyto + """{
-            group: "nodes",
-            data: {
-                id: "%d",
-                name: "%s",
-        """ % (node.id, node.name)
+        data.append({'group': "nodes", 'data': node.__dict__})
 
-        for key,value in node.fields.items():
-            nodesCyto = nodesCyto + "%s: \"%s\"," % (key, value)
-
-        nodesCyto = nodesCyto[:-1] + "}},"
-
-    edgesCyto = ""
+    #edges
     for edge in edges:
-        edgesCyto = edgesCyto + """{
-            group: "edges",
-            data: {
-                id: "%d"
-                source: "%s",
-                target: "%s",
-                type: "%s"
-            }
-        },""" % (edge.id, edge.node1, edge.node2, edge.type)
+        data.append({'group': "edges", 'data': edge.__dict__})
 
-    elements = '[' + keysCyto + nodesCyto + edgesCyto[:-1] + ']'
-
-    return elements
+    return json.dumps(data, separators=(',', ':'))
 
 def generateOutputFile(elements):
     path = './output.json'
