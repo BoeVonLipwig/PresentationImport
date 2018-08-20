@@ -1,5 +1,6 @@
 import sys
 import csv
+import csv_parser_validator
 from os import listdir
 from os.path import isfile, join
 
@@ -151,7 +152,7 @@ def loadData():
     keys = createKeysList(specialNames,modifierNodes)
 
     # check validity of data
-
+    validate_data(specialNodes,normalNodes,modifierNodes)
 
     # Create edge objects
     edges = createEdges(specialNodes,normalNodes,specialNames)
