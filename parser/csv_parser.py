@@ -29,7 +29,7 @@ class Node:
                     newV = list()
                 else:
                     newV = v.split(",")
-                    newV = map(str.strip, newV)
+                    newV = list(map(str.strip, newV))
                     self.fields[k] = newV
             else:
                 setattr(self, k, newV)
@@ -164,7 +164,7 @@ def loadData():
     keys = createKeysList(specialNames,modifierNodes)
 
     # check validity of data
-    validate_data(specialNodes,normalNodes,modifierNodes, len(specialFN), lastsDetailsFieldIndex, specialFN,nodesFN,viewsFN)
+    validate_data(specialNodes,normalNodes,modifierNodes, len(specialFN), lastsDetailsFieldIndex, specialFN,nodesFN,viewsFN, specialNames)
 
     # Create edge objects
     edges = createEdges(specialNodes,normalNodes,specialNames)

@@ -1,11 +1,11 @@
 from csv_parser_file_functions import *
 
-def validate_data(specialNodes,normalNodes,modifierNodes, numberOfSpecialNodes,lastDetailsFieldIndex,specialFN,nodesFN,viewsFN):
+def validate_data(specialNodes,normalNodes,modifierNodes, numberOfSpecialNodes,lastDetailsFieldIndex,specialFN,nodesFN,viewsFN,specialNames):
     if not check_case1(specialNodes,normalNodes,lastDetailsFieldIndex,numberOfSpecialNodes,nodesFN):
         print("case1 failed")
         return False
 
-    if not check_case2(specialNodes,normalNodes):
+    if not check_case2(specialNodes,normalNodes,specialNames):
         print("case2 failed")
         return False
 
@@ -53,12 +53,42 @@ def check_case1(specialNodes,normalNodes, lastDetailsFieldIndex, numberOfSpecial
 
 
 # check if special node values in node.csv is a valid entry in special nodes
-def check_case2(specialNodes,normalNodes):
-    return False
-    # set up variables
-
+def check_case2(specialNodes,normalNodes,specialNames):
 
     # go through every normal node
+    for nodeNode in normalNodes:
+        print("NEWWW NODE===%s====================================" % nodeNode.name)
+        # use thie boolean to determine if node contains any of the special node values
+        match = False
+
+        # go through every specialNode
+        for specialNode in specialNodes:
+
+
+            # go through every special node column in normal node
+            for specialColumnName in specialNames:
+
+                # check if normalNode special node field contains special node value
+                # print("%s" % nodeNode.fields)
+                # print("value: %s | field at %s: %s" % (specialNode.name,specialColumnName,nodeNode.fields[specialColumnName]))
+                if nodeNode.name == "Christopher Maymon":
+                    # print("value: %s | field at %s: %s" % (specialNode.name,specialColumnName,nodeNode.fields[specialColumnName]))
+                    if specialNode.name == "Engineering and Computer Science":
+                        print("value: %s | field at %s: %s" % (specialNode.name,specialColumnName,nodeNode.fields[specialColumnName]))
+                        # print (nodeNode.fields[specialColumnName])
+
+                if specialNode.name in nodeNode.fields[specialColumnName]:
+                    print("value: %s | field at %s: %s" % (specialNode.name,specialColumnName,nodeNode.fields[specialColumnName]))
+                    match = True
+
+        # if no match, failed use case 2
+        if not match:
+            print(nodeNode)
+            return False
+
+    # never found a miss-match
+    return True
+
 
 
 # check if all names of nodes and roles are unique
