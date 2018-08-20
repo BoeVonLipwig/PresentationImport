@@ -36,7 +36,7 @@ def check_case1(specialNodes,normalNodes, lastDetailsFieldIndex, numberOfSpecial
     metaData = fetch_metadata(nodesFileName,path)
 
     # trim off name and details to see the left over fields
-    trimPoint = 1 + lastDetailsFieldIndex   # plus one because of names
+    trimPoint = 3 + lastDetailsFieldIndex   # plus three because of names, roles, and collab field
     specialNodeColumns = metaData[trimPoint:]
 
     # check if left over fields are equivalent to number of special nodes
