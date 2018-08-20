@@ -1,8 +1,8 @@
 import csv
 import json
 import sys
-import csv_parser_validator
-import csv_parser_file_functions
+from csv_parser_file_functions import *
+from csv_parser_validator import *
 from os import listdir
 from os.path import isfile, join
 
@@ -164,10 +164,10 @@ def loadData():
     keys = createKeysList(specialNames,modifierNodes)
 
     # check validity of data
-    validate_data(specialNodes,normalNodes,modifierNodes, len(specialFiles), specialFN,nodesFN,viewsFN)
+    validate_data(specialNodes,normalNodes,modifierNodes, len(specialFN), lastsDetailsFieldIndex, specialFN,nodesFN,viewsFN)
 
     # Create edge objects
-    edges = createEdges(specialNodes,normalNodes,specialNames,lastsDetailsFieldIndex)
+    edges = createEdges(specialNodes,normalNodes,specialNames)
 
     # Remove 'fields' dict from nodeSize
     [delattr(node, 'fields') for node in allNodes]
@@ -203,6 +203,6 @@ def formatForCytoscape(nodes, edges, keyList):
 if __name__ == '__main__':
     nodes, edges, keys = loadData()
 
-    elements = formatForCytoscape(nodes, edges, keys)
-
-    generateOutputFile(elements)
+    # elements = formatForCytoscape(nodes, edges, keys)
+    #
+    # generateOutputFile(elements)
