@@ -41,7 +41,7 @@ def check_case1(specialNodes,normalNodes, lastDetailsFieldIndex, numberOfSpecial
 
     # check if tripoint is less than 1, meaning it is definitely incorrect
     if(trimPoint < 1):
-        return false
+        return False
 
     # check if left over fields are equivalent to number of special nodes
     if len(specialNodeColumns) == numberOfSpecialNodes:
