@@ -57,33 +57,21 @@ def check_case2(specialNodes,normalNodes,specialNames):
 
     # go through every normal node
     for nodeNode in normalNodes:
-        print("NEWWW NODE===%s====================================" % nodeNode.name)
-        # use thie boolean to determine if node contains any of the special node values
+        # use this boolean to determine if node contains any of the special node values
         match = False
 
         # go through every specialNode
         for specialNode in specialNodes:
 
-
             # go through every special node column in normal node
             for specialColumnName in specialNames:
 
-                # check if normalNode special node field contains special node value
-                # print("%s" % nodeNode.fields)
-                # print("value: %s | field at %s: %s" % (specialNode.name,specialColumnName,nodeNode.fields[specialColumnName]))
-                if nodeNode.name == "Christopher Maymon":
-                    # print("value: %s | field at %s: %s" % (specialNode.name,specialColumnName,nodeNode.fields[specialColumnName]))
-                    if specialNode.name == "Engineering and Computer Science":
-                        print("value: %s | field at %s: %s" % (specialNode.name,specialColumnName,nodeNode.fields[specialColumnName]))
-                        # print (nodeNode.fields[specialColumnName])
-
+                # if we find a match in the node's special node column, it is a valid node entry in nodes.csv
                 if specialNode.name in nodeNode.fields[specialColumnName]:
-                    print("value: %s | field at %s: %s" % (specialNode.name,specialColumnName,nodeNode.fields[specialColumnName]))
                     match = True
 
         # if no match, failed use case 2
         if not match:
-            print(nodeNode)
             return False
 
     # never found a miss-match
