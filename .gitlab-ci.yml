@@ -1,6 +1,7 @@
 image: node:8
 
 stages:
+  - lint
   - "Test & Build"
   - deploy
 
@@ -10,6 +11,16 @@ before_script:
 cache:
   paths:
     - node_modules/
+
+lint:
+  image: python:3.7
+  tags:
+    - docker
+  stage: lint
+  before_script:
+    - pip install flake8
+  script:
+    - flake8
 
 test:
   tags:
