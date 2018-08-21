@@ -81,7 +81,19 @@ def check_case2(specialNodes,normalNodes,specialNames):
 
 # check if all names of nodes and roles are unique
 def check_case3(normalNodes,modifierNodes):
-    return False
+
+    # check if normal nodes does not have unique names
+    if not contains_unique_names(normalNodes):
+        return False
+
+    # check if role nodes does not have unique names
+    if not contains_unique_names(modifierNodes):
+        return False
+
+    # both names of nodes and role a unique, pass
+    return True
+
+    
 
 # check if all files have correct schema. so they should right number of columns and column names
 def check_case4(specialNodes,normalNodes,modifierNodes):
@@ -97,3 +109,22 @@ def check_case5(normalNodes,modifierNodes):
 # gets the metadata of the file
 def fetch_metadata(filename,path):
     return extractFileIntoList(filename,path)[1]
+
+
+
+def contains_unique_names(nodesList):
+    # store a names list to keep track of names we have already processed
+    names = list()
+
+    # go through every normal node1
+    for node in nodesList:
+
+        # Found a non unique name, fail case 3
+        if node.name in names:
+            return False
+
+        # add unique name to names list
+        names.append(node.name)
+
+    # this nodes list from a file contains unique values, pass case 3
+    return True
