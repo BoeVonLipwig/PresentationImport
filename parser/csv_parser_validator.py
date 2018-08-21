@@ -13,15 +13,16 @@ def validate_data(specialNodes,normalNodes,modifierNodes, numberOfSpecialNodes,l
         print("case3 failed")
         return False
 
-    if not check_case4(specialNodes,normalNodes,modifierNodes):
-        print("case4 failed")
-        return False
+    # if not check_case4(specialNodes,normalNodes,modifierNodes):
+    #     print("case4 failed")
+    #     return False
 
     if not check_case5(normalNodes,modifierNodes):
         print("case5 failed")
         return False
 
     # passes all cases. meaning data is valid
+    print("valid data")
     return True
 
 
@@ -93,7 +94,7 @@ def check_case3(normalNodes,modifierNodes):
     # both names of nodes and role a unique, pass
     return True
 
-    
+
 
 # check if all files have correct schema. so they should right number of columns and column names
 def check_case4(specialNodes,normalNodes,modifierNodes):
@@ -102,7 +103,25 @@ def check_case4(specialNodes,normalNodes,modifierNodes):
 
 # check if roles column values in node.csv matches in roles.csv
 def check_case5(normalNodes,modifierNodes):
-    return False
+
+    # go through every normal node
+    for nodeNode in normalNodes:
+        # use this boolean to determine if node contains any of the special node values
+        match = False
+
+        # go through every specialNode
+        for modNode in modifierNodes:
+            # if we find a match in the node's special node column, it is a valid node entry in nodes.csv
+            if modNode.name == nodeNode.fields["role"]:
+
+                match = True
+
+        # if no match, failed use case 2
+        if not match:
+            return False
+
+    # never found a miss-match
+    return True
 
 
 
