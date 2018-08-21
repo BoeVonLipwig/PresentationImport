@@ -82,7 +82,7 @@ class Cytoscape extends React.Component {
       .nodes()
       .not('.hidden, .filtered, [type = "key"], [type = "border"]')
       .forEach(ele => {
-        visNodesData.push(ele);
+        visNodesData.push(ele.data());
         visNodeNames.push(ele.data("name"));
         visNodesMap[ele.data("name")] = ele;
       });
