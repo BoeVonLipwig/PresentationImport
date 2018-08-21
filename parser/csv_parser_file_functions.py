@@ -27,3 +27,9 @@ def generateOutputFile(elements):
 def getFileNamesFromDirectory(dir):
     onlyfiles = [f for f in listdir(dir) if isfile(join(dir, f))]
     return onlyfiles
+
+
+def getRawLineFromFile(file,path):
+    with open(path+file,'r') as f:
+        lines = f.readlines()
+    return lines

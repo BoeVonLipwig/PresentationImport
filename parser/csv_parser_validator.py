@@ -21,6 +21,10 @@ def validate_data(specialNodes,normalNodes,modifierNodes, numberOfSpecialNodes,l
         print("case5 failed")
         return False
 
+    if not check_case6(specialFN,nodesFN,viewsFN):
+        print("case6 failed")
+        return False
+
     # passes all cases. meaning data is valid
     print("valid data")
     return True
@@ -124,6 +128,27 @@ def check_case5(normalNodes,modifierNodes):
     return True
 
 
+# check that all csv values do not end with a comma
+def check_case6(specialFN,nodesFN,viewsFN):
+
+    # go through all files in special folder
+    for file in specialFN:
+        # if file ends with comma, failed case 6
+        if not file_has_no_end_comma(file,"data/specialNodes/"):
+            return False
+
+    # go through all files in nodes folder
+    for file in nodesFN:
+        # if file ends with comma, failed case 6
+        if not file_has_no_end_comma(file,"data/nodes/"):
+            return False
+
+    #go through views.csv in main data folder
+    # file_has_no_end_comma(viewsFN)
+
+    return True
+
+
 
 # gets the metadata of the file
 def fetch_metadata(filename,path):
@@ -146,4 +171,24 @@ def contains_unique_names(nodesList):
         names.append(node.name)
 
     # this nodes list from a file contains unique values, pass case 3
+    return True
+
+
+
+def file_has_no_end_comma(file,path):
+    # store csv entries into a list of string
+    instances = getRawLineFromFile(file,path)
+
+    # go through every csv entry
+    for instance in instances:
+
+        # get last char of csv entry
+        finalChar = instance[-1]
+
+        # check if last char is a comma
+        if finalChar == ',':
+            # csv entry ends with comma, fails case 6
+            return False
+
+    # no comma at the end of any entry, passes
     return True
