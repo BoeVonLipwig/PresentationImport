@@ -88,6 +88,8 @@ class Style extends React.Component {
         ))
     );
 
+    console.log(nodeType);
+
     let colSchm = colorList[styleList.colorScheme];
     let typeAr = Object.keys(nodeType);
 
@@ -99,6 +101,8 @@ class Style extends React.Component {
       }),
       subtype: _.flatMap(nodeType)
     };
+
+    console.log(subAr);
 
     let colNum = {
       type: _.map(colSchm.node, (val, index) => {
@@ -172,9 +176,12 @@ class Style extends React.Component {
       );
     }
 
+    console.log("Hi");
+
     // copy all existing node styling override for subtypes into nodeStyles.subtype,
     // fill corresponding subtypeArrays in colNumOride with subtype indices that have been override
     styleList.nodeOverride.forEach(oride => {
+      console.log(oride);
       if (
         containsAny(oride.subtype, subAr.subtype) &&
         !containsAny(oride.subtype, typeAr)
@@ -195,6 +202,8 @@ class Style extends React.Component {
         }
       }
     });
+
+    console.log("Bye");
 
     // assign new node styling override into nodeStyles.subtype for remaining subtypes,
     // and reassigns index for faulty "color" fields (empty, not a number/valid hexvalue)

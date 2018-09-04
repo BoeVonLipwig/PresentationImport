@@ -44,13 +44,13 @@ class Node:
 class Edge:
     def __init__(self, id, node1, node2, type):
         self.id = id
-        self.node1 = node1
-        self.node2 = node2
+        self.source = node1
+        self.target = node2
         self.type = type.strip()
 
     def __eq__(self, other):
-        return ((self.node1 == other.node1 and self.node2 == other.node2) or
-                (self.node1 == other.node2 and self.node2 == other.node1))
+        return ((self.source == other.source and self.target == other.target) or
+                (self.source == other.target and self.target == other.source))
 
     def __repr__(self):
         return """Edge ID: %d\n
