@@ -31,7 +31,9 @@ parse:
     - cd parser
   script:
     - python csv_parser.py
-    
+  artifacts:
+    paths:
+      - public/
   
 test:
   tags:
@@ -44,6 +46,8 @@ build:
   tags:
     - docker
   stage: "Test & Build"
+  dependencies:
+    - parse
   script:
     - yarn build
   artifacts:
