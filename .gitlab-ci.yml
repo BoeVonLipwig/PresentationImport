@@ -30,7 +30,7 @@ parse:
   before_script:
     - cd parser
   script:
-    - ./csv_parser.py
+    - python csv_parser.py
     
   
 test:
