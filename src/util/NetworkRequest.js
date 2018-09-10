@@ -1,4 +1,5 @@
 import loadData from "../util/data";
+import filter from "../util/DataFilter";
 
 // This class gets the data and stores it to be called by cytoscape
 class NetworkRequest {
@@ -13,6 +14,8 @@ class NetworkRequest {
     this.styleP = fetch("data.cycss").then(x => {
       return x.text();
     });
+
+    this.filterNames = filter.parseElementsToGetFilterNames(getGraphP());
   }
 
   getGraphP() {
@@ -21,6 +24,10 @@ class NetworkRequest {
 
   getStyleP() {
     return this.styleP;
+  }
+
+  getFilterNames() {
+    return this.filterNames;
   }
 }
 
