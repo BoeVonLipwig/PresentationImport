@@ -10,9 +10,10 @@ ID = 1
 class Node:
     # webLink -> "hdawuidhaw.com"
     # bio -> "adawoiudoiudb"
-    def __init__(self, id, name, fields):
+    def __init__(self, id, name, type, fields):
         self.id = id
         self.name = name.strip()
+        self.type = type.strip()
         self.fields = fields
         self.formatFields()
 
@@ -97,8 +98,9 @@ def createNodesFromFile(file, path):
     instances, metaData = extractFileIntoList(file, path)
     for i in instances:
         name = i[0]
+        type = file[:-4].lower()
         fields = dict(zip(metaData[1:], i[1:]))
-        nodes.append(Node(ID, name, fields))
+        nodes.append(Node(ID, name, type, fields))
         ID += 1
 
     return nodes
@@ -167,8 +169,10 @@ def loadData():
     allNodes = list()
     specialFN, nodesFN, viewsFN = getFileNames()
     specialNodes = createNodes(specialFN, 'data/specialNodes/')
-    normalNodes = createNodes([nodesFN[0]], 'data/nodes/')
-    modifierNodes = createNodes([nodesFN[1]], 'data/nodes/')
+    normalNodes = createNodes([nodesFN[1]], 'data/nodes/')
+    for node in normalNodes:
+        node.role = node.role.lower()
+    modifierNodes = createNodes([nodesFN[0]], 'data/nodes/')
     allNodes.extend(specialNodes)
     allNodes.extend(normalNodes)
 

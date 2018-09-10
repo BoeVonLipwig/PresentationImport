@@ -545,12 +545,9 @@ class Cytoscape extends React.Component {
       ]
     };
 
-    console.log(this.cy.nodes());
-    console.log(this.cy.nodes('[type != "key"][type != "border"]'));
-    console.log(this.cy.nodes('[type != "key"]'));
-    //}temp
+    console.log(this.cy.nodes().jsons());
     this.styleList = Style.parseStyles(
-      this.cy.nodes(),
+      this.cy.nodes('[type != "key"][type != "border"]'),
       colorP,
       styleMaster,
       styleP
@@ -621,6 +618,7 @@ class Cytoscape extends React.Component {
         }
       });
     });
+    console.log(this.cy.style());
   }
 
   render() {

@@ -48,6 +48,8 @@ function caseIndexOf(target, query) {
 }
 
 function containsAny(target, query) {
+  console.log(target);
+  console.log(query);
   return query.some(function(v) {
     return caseIndexOf(target, v) >= 0;
   });
@@ -73,9 +75,8 @@ function unique(array) {
 
 class Style extends React.Component {
   static parseStyles(allNodes, colorList, styleList, data) {
-    //
-
-    //
+    // Creates an object that maps types to subtypes based on roles. If
+    // no role exists, then the subtype is the type. Eg. Project -> Project.
     let typ = unique(allNodes.map(a => a.data("type")));
     let nodeType = {};
     typ.forEach(
@@ -87,8 +88,6 @@ class Style extends React.Component {
           })
         ))
     );
-
-    console.log(nodeType);
 
     let colSchm = colorList[styleList.colorScheme];
     let typeAr = Object.keys(nodeType);
@@ -115,16 +114,22 @@ class Style extends React.Component {
       })
     };
 
+    console.log(colNum);
+
     let colNumOride = {
       // arrays of types and subtypes indicies that have been override
       type: [],
       subtype: colSchm.node.slice().fill([])
     };
 
+    console.log(colNumOride);
+
     let nodeStyles = {
       type: [],
       subtype: []
     };
+
+    console.log(nodeStyles);
 
     // copy all existing node styling override for Types into nodeStyles.type,
     // fill colNumOride with type indices that have been override
@@ -177,6 +182,7 @@ class Style extends React.Component {
     }
 
     console.log("Hi");
+    console.log(typeAr);
 
     // copy all existing node styling override for subtypes into nodeStyles.subtype,
     // fill corresponding subtypeArrays in colNumOride with subtype indices that have been override
@@ -230,6 +236,7 @@ class Style extends React.Component {
             : typeColOfSub,
           shape: typeOfSub.shape ? typeOfSub.shape : "circle"
         };
+        console.log(nodeStyles);
 
         if (caseIndexOf(typeAr, subName) > -1) {
           nodeStyles.subtype[nodeStyles.subtype.length - 1].color = isHexColor(
@@ -281,18 +288,16 @@ class Style extends React.Component {
       ll: isHexColor(styleList.ll) ? styleList.ll : colSchm.ll
     };
 
-    // Styles Css
+    // Replaces occurrences of fg, bg, hl, ll in data.cycss with values
+    // from colors.json
     Object.keys(cssColors).forEach(value => {
       if (cssColors[value].constructor !== Array) {
         document.documentElement.style.setProperty(
-          "--" + replaceAll(value, ".", "-"),
+          "--" + value,
           cssColors[value]
         );
-        data = replaceAll(
-          data,
-          "var(--" + replaceAll(value, ".", "-") + ")",
-          cssColors[value]
-        );
+        console.log(value);
+        data = replaceAll(data, "var(--" + value + ")", cssColors[value]);
       }
     });
     //
