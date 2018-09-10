@@ -606,7 +606,7 @@ class Cytoscape extends React.Component {
     //ideally this object should eventually be parsed from a csv
     //temp {
     let styleMaster = {
-      colorScheme: 3, // num 0 - 3, selects one of 4 color schemes from an array defined in Colors.json(see Colors.pdf for visual guide)
+      colorScheme: 0, // num 0 - 3, selects one of 4 color schemes from an array defined in Colors.json(see Colors.pdf for visual guide)
       //color overrides for css and cycss variables
       //accepts only hex color values (#fff) empty and faulty field will use defined in the selected colorscheme
       fg: "", //foreground color : text, tickboxes, logo etc
