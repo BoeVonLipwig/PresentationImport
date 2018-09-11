@@ -89,8 +89,8 @@ class Style extends React.Component {
         ))
     );
 
-    let colSchm = colorList[styleList.colorScheme];
-    let typeAr = Object.keys(nodeType);
+    let colSchm = colorList[styleList.colorScheme]; // an object from colors.json
+    let typeAr = Object.keys(nodeType); // person, school and project
 
     let subAr = {
       type: _.flatMap(nodeType, (val, key) => {
@@ -129,6 +129,8 @@ class Style extends React.Component {
       subtype: []
     };
 
+    //colNum, colNumOride, and nodeStyles all have the same form going from all information to no information
+
     console.log(nodeStyles);
 
     // copy all existing node styling override for Types into nodeStyles.type,
@@ -145,6 +147,8 @@ class Style extends React.Component {
         }
       }
     });
+
+    // nodeStlyes.type will now be filled where the oride.subtype is in typeAr. So person, school, project
 
     // assign new node styling override into nodeStyles.type for remaining types,
     // and reassigns index for faulty "color" fields (empty, not a number/valid hexvalue)
@@ -209,7 +213,8 @@ class Style extends React.Component {
       }
     });
 
-    console.log("Bye");
+    console.log(nodeStyles);
+    // exactly the same for original data and new data
 
     // assign new node styling override into nodeStyles.subtype for remaining subtypes,
     // and reassigns index for faulty "color" fields (empty, not a number/valid hexvalue)
