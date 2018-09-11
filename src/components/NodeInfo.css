@@ -65,6 +65,29 @@
   background-position: center;
 }
 
+/**
+ * CSS image crop. Forces image to specific aspect ratio cropping at the middle.
+ * http://dabblet.com/gist/4711695
+ */
+
+.id-wrapper {
+  width: 150px;
+  height: 150px;
+  padding-left: calc((100% - 150px) / 2);
+}
+
+.id-linked :hover {
+  border-color: var(--fg);
+}
+
+@media (max-width: 1160px) and (min-width: 0px) {
+  .info-right {
+    padding-right: 20px;
+
+    float: right;
+  }
+}
+
 /*.img-crop{
  overflow: hidden;
 }
