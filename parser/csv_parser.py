@@ -169,10 +169,11 @@ def loadData():
     allNodes = list()
     specialFN, nodesFN, viewsFN = getFileNames()
     specialNodes = createNodes(specialFN, 'data/specialNodes/')
-    normalNodes = createNodes([nodesFN[1]], 'data/nodes/')
+    normalNodes = createNodes([nodesFN[0]], 'data/nodes/')
+    print(normalNodes);
     for node in normalNodes:
         node.role = node.role.lower()
-    modifierNodes = createNodes([nodesFN[0]], 'data/nodes/')
+    modifierNodes = createNodes([nodesFN[1]], 'data/nodes/')
     allNodes.extend(specialNodes)
     allNodes.extend(normalNodes)
 
