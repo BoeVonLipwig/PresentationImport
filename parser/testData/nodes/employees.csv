@@ -1,0 +1,27 @@
+name,programme,email,staffSiteLink,siteName,siteLink,mediaLink,bio,role,collaborators,businessAreas,clients,teams
+Alfa,,alfa@ecs.vuw.ac.nz,,,,,Hi,"grad dev","Bravo, Charlie, Delta",Development,"Good Company Institute, Crud Code Corp",Allyoop
+Bravo,,bravo@ecs.vuw.ac.nz,,,,,Hello,"junior dev","Alfa, Uniform",Development,"Good Company Institute",Allyoop
+Charlie,,charlie@ecs.vuw.ac.nz,,,,,"How are ya","senior dev",Alfa,Development,"Good Company Institute",Allyoop
+Delta,,delta@ecs.vuw.ac.nz,,,,,"I'm good","grad analyst","Alfa, Zulu",Analyst,"Reality Software Peeps",Allyoop
+Echo,,echo@ecs.vuw.ac.nz,,,,,"That's good","junior analyst",,Analyst,"Reality Software Peeps",Allyoop
+Foxtrot,,foxtrot@ecs.vuw.ac.nz,,,,,"Yeah, how are you?","senior analyst",,Analyst,"Reality Software Peeps",Allyoop
+Golf,,golf@ecs.vuw.ac.nz,,,,,Good,"grad dev",,Development,"Reality Software Peeps",Dundee
+Hotel,,hotel@ecs.vuw.ac.nz,,,,,Good,"junior dev","India, Mike, Lima",Development,"Reality Software Peeps",Dundee
+India,,india@ecs.vuw.ac.nz,,,,,Sweet,"senior dev",Hotel,Development,"Reality Software Peeps",Dundee
+Juliett,,juliett@ecs.vuw.ac.nz,,,,,"This doesn't seem like a bio","grad analyst",,Analyst,,Dundee
+Kilo,,kilo@ecs.vuw.ac.nz,,,,,Yeah,"junior analyst",,Analyst,"Good Company Institute",
+Lima,,lima@ecs.vuw.ac.nz,,,,,"But rather an ongoing conversation across multiple employees","senior analyst",Hotel,Analyst,,
+Mike,,mike@ecs.vuw.ac.nz,,,,,Interesting,"grad dev",Hoel,Development,,
+November,,november@ecs.vuw.ac.nz,,,,,"Don't you think?","junior dev",,Development,,
+Oscar,,oscar@ecs.vuw.ac.nz,,,,,"I think that this is a ploy","senior dev",,Development,"Good Company Institute",
+Papa,,papa@ecs.vuw.ac.nz,,,,,"Mhm, go on","grad analyst",Quebec,Analyst,"Crud Code Corp",
+Quebec,,quebec@ecs.vuw.ac.nz,,,,,"A ploy to fill the bios of these people","junior analyst",Papa,Analyst,"Crud Code Corp",
+Romeo,,romeo@ecs.vuw.ac.nz,,,,,Exactly!,"senior analyst",,"Human Resources",,
+Sierra,,sierra@ecs.vuw.ac.nz,,,,,"But there may be a hidden meaning","general staff",,Management,,
+Tango,,tango@ecs.vuw.ac.nz,,,,,"And that is?","general staff",,Finance,,
+Uniform,,uniform@ecs.vuw.ac.nz,,,,,"That there is really a narrator behind this all","senior dev","Victor, Whiskey, Bravo",Development,"Crud Code Corp",
+Victor,,victor@ecs.vuw.ac.nz,,,,,"...Putting the words in to our mouths!","grad analyst",Uniform,Analyst,"Crud Code Corp",
+Whiskey,,whiskey@ecs.vuw.ac.nz,,,,,"Right on!","junior analyst",Uniform,Analyst,"Good Company Institute",Dundee
+X-ray,,x-ray@ecs.vuw.ac.nz,,,,,"Do you think the narrator is watching this conversation right now?","senior analyst",,Analyst,"Good Company Institute",
+Yankee,,yankee@ecs.vuw.ac.nz,,,,,"Who knows","grad dev",,Development,"Crud Code Corp",
+Zulu,,zulu@ecs.vuw.ac.nz,,,,,*shudders*,"junior dev",Alfa,Development,"Crud Code Corp",
