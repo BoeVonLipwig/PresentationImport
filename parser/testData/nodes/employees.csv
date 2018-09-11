@@ -1,4 +1,4 @@
-name,programme,email,staffSiteLink,siteName,siteLink,mediaLink,bio,role,collaborators,businessAreas,clients,teams
+name,programme,email,staffSiteLink,siteName,siteLink,mediaLink,bio,role,collaborators,businessareas,clients,teams
 Alfa,,alfa@ecs.vuw.ac.nz,,,,,Hi,"grad dev","Bravo, Charlie, Delta",Development,"Good Company Institute, Crud Code Corp",Allyoop
 Bravo,,bravo@ecs.vuw.ac.nz,,,,,Hello,"junior dev","Alfa, Uniform",Development,"Good Company Institute",Allyoop
 Charlie,,charlie@ecs.vuw.ac.nz,,,,,"How are ya","senior dev",Alfa,Development,"Good Company Institute",Allyoop
@@ -11,7 +11,7 @@ India,,india@ecs.vuw.ac.nz,,,,,Sweet,"senior dev",Hotel,Development,"Reality Sof
 Juliett,,juliett@ecs.vuw.ac.nz,,,,,"This doesn't seem like a bio","grad analyst",,Analyst,,Dundee
 Kilo,,kilo@ecs.vuw.ac.nz,,,,,Yeah,"junior analyst",,Analyst,"Good Company Institute",
 Lima,,lima@ecs.vuw.ac.nz,,,,,"But rather an ongoing conversation across multiple employees","senior analyst",Hotel,Analyst,,
-Mike,,mike@ecs.vuw.ac.nz,,,,,Interesting,"grad dev",Hoel,Development,,
+Mike,,mike@ecs.vuw.ac.nz,,,,,Interesting,"grad dev",Hotel,Development,,
 November,,november@ecs.vuw.ac.nz,,,,,"Don't you think?","junior dev",,Development,,
 Oscar,,oscar@ecs.vuw.ac.nz,,,,,"I think that this is a ploy","senior dev",,Development,"Good Company Institute",
 Papa,,papa@ecs.vuw.ac.nz,,,,,"Mhm, go on","grad analyst",Quebec,Analyst,"Crud Code Corp",
