@@ -2,6 +2,7 @@ image: node:8
 
 stages:
   - lint
+  - parse
   - "Test & Build"
   - deploy
 
@@ -21,7 +22,19 @@ lint:
     - pip install flake8
   script:
     - flake8
-
+parse:
+  image: python:3.7
+  tags:
+    - docker
+  stage: parse
+  before_script:
+    - cd parser
+  script:
+    - python csv_parser.py
+  artifacts:
+    paths:
+      - public/
+  
 test:
   tags:
     - docker
@@ -33,6 +46,8 @@ build:
   tags:
     - docker
   stage: "Test & Build"
+  dependencies:
+    - parse
   script:
     - yarn build
   artifacts:

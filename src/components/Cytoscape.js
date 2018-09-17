@@ -157,108 +157,11 @@ class Cytoscape extends React.Component {
     this.setLabels();
   }
 
-  addCollab() {
-    this.cy.nodes('[type = "project"]').forEach(projectNode => {
-      projectNode
-        .closedNeighborhood()
-        .nodes('[type = "person"]')
-        .forEach(person => {
-          projectNode
-            .closedNeighborhood()
-            .nodes('[type = "person"]')
-            .forEach(otherPerson => {
-              if (
-                person !== otherPerson &&
-                this.cy
-                  .edges(
-                    '[id ="' + person.id() + "to" + otherPerson.id() + '"]'
-                  )
-                  .size() < 1 &&
-                this.cy
-                  .edges(
-                    '[id ="' + otherPerson.id() + "to" + person.id() + '"]'
-                  )
-                  .size() < 1
-              ) {
-                this.cy.add({
-                  group: "edges",
-                  data: {
-                    id: person.id() + "to" + otherPerson.id(),
-                    source: person.id(),
-                    target: otherPerson.id(),
-                    type: "collab"
-                  }
-                });
-              }
-            });
-        });
-    });
-  }
-
   addKey() {
     this.keyXPadding = 100;
     this.keyYPadding = 50;
-
-    this.keyBorder = this.cy.add({
-      group: "nodes",
-      data: { id: "keyBorder", type: "border" }
-    });
-
-    this.cy.add({
-      group: "nodes",
-      data: { id: "titleKey", name: "NODE TYPE", type: "key" }
-    });
-
-    // fetches key names and places in keyAr
-    let keyAr = [];
-    let subKeyStyles = [];
-    let keyStyles = _.filter(this.styleList.nodeStyles.type, typ => {
-      let subKeyAr = _.filter(this.styleList.nodeStyles.subtype, styp => {
-        return (
-          styp.type.toLowerCase() === typ.label.toLowerCase() &&
-          _.intersection(styp.subtype, typ.subtype).length < 1
-        );
-      });
-      if (subKeyAr.length > 1) {
-        subKeyStyles = subKeyStyles.concat(subKeyAr);
-        return false;
-      } else {
-        return true;
-      }
-    });
-
-    keyStyles = keyStyles.concat(subKeyStyles);
-
-    keyStyles.forEach(stl => {
-      keyAr[keyAr.length] = {
-        group: "nodes",
-        data: {
-          id: `${stl.label}-key`,
-          name: stl.label,
-          type: "key",
-          role: stl.subtype[0]
-        }
-      };
-    });
-
-    this.cy.add(keyAr);
-
     this.keys = this.cy.elements('[type = "key"]');
-    this.keys.unselectify().ungrabify();
-
-    this.keyBorder.unselectify().ungrabify();
-
-    let maxLabelWidthLocal = 0;
-
-    this.keys.forEach(n => {
-      let labelWidth = n.boundingBox({ includeLabels: true }).w;
-
-      if (labelWidth > maxLabelWidthLocal) {
-        maxLabelWidthLocal = labelWidth;
-      }
-    });
-
-    this.maxLabelWidth = maxLabelWidthLocal;
+    this.keyBorder = this.cy.elements('[type = "border"]');
   }
 
   arrangeKey() {
@@ -642,16 +545,15 @@ class Cytoscape extends React.Component {
       ]
     };
 
-    //}temp
+    console.log(this.cy.nodes().jsons());
     this.styleList = Style.parseStyles(
-      this.cy.nodes(),
+      this.cy.nodes('[type != "key"][type != "border"]'),
       colorP,
       styleMaster,
       styleP
     );
     this.cy.style(this.styleList.stylesheet);
 
-    this.addCollab();
     this.addKey();
 
     this.cy.elements('[type = "school"]').addClass("school");
@@ -716,6 +618,7 @@ class Cytoscape extends React.Component {
         }
       });
     });
+    console.log(this.cy.style());
   }
 
   render() {

@@ -10,9 +10,10 @@ ID = 1
 class Node:
     # webLink -> "hdawuidhaw.com"
     # bio -> "adawoiudoiudb"
-    def __init__(self, id, name, fields):
+    def __init__(self, id, name, type, fields):
         self.id = id
         self.name = name.strip()
+        self.type = type.strip()
         self.fields = fields
         self.formatFields()
 
@@ -44,13 +45,13 @@ class Node:
 class Edge:
     def __init__(self, id, node1, node2, type):
         self.id = id
-        self.node1 = node1
-        self.node2 = node2
+        self.source = node1
+        self.target = node2
         self.type = type.strip()
 
     def __eq__(self, other):
-        return ((self.node1 == other.node1 and self.node2 == other.node2) or
-                (self.node1 == other.node2 and self.node2 == other.node1))
+        return ((self.source == other.source and self.target == other.target) or
+                (self.source == other.target and self.target == other.source))
 
     def __repr__(self):
         return """Edge ID: %d\n
@@ -97,8 +98,9 @@ def createNodesFromFile(file, path):
     instances, metaData = extractFileIntoList(file, path)
     for i in instances:
         name = i[0]
+        type = file[:-4].lower()
         fields = dict(zip(metaData[1:], i[1:]))
-        nodes.append(Node(ID, name, fields))
+        nodes.append(Node(ID, name, type, fields))
         ID += 1
 
     return nodes
@@ -168,6 +170,8 @@ def loadData():
     specialFN, nodesFN, viewsFN = getFileNames()
     specialNodes = createNodes(specialFN, 'data/specialNodes/')
     normalNodes = createNodes([nodesFN[0]], 'data/nodes/')
+    for node in normalNodes:
+        node.role = node.role.lower()
     modifierNodes = createNodes([nodesFN[1]], 'data/nodes/')
     allNodes.extend(specialNodes)
     allNodes.extend(normalNodes)
