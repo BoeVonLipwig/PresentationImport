@@ -1,4 +1,4 @@
-from csv_parser_file_functions import *
+# from csv_parser_file_functions import *
 
 def validate_data(specialNodes, normalNodes, modifierNodes, numberOfSpecialNodes, lastDetailsFieldIndex, specialFN, nodesFN, viewsFN, specialNames):
     if not check_case1(specialNodes, normalNodes, lastDetailsFieldIndex, numberOfSpecialNodes, nodesFN):
@@ -29,7 +29,6 @@ def validate_data(specialNodes, normalNodes, modifierNodes, numberOfSpecialNodes
     print("valid data")
     return True
 
-
 # check if nodes.csv has same amount special node columns as number of special node files
 # node.csv should always have "lastDetailsFieldIndex" amount of fields reserved for name and details
 def check_case1(specialNodes, normalNodes, lastDetailsFieldIndex, numberOfSpecialNodes, nodesFN):
@@ -54,8 +53,6 @@ def check_case1(specialNodes, normalNodes, lastDetailsFieldIndex, numberOfSpecia
 
     # failed use case 1
     return False
-
-
 
 # check if special node values in node.csv is a valid entry in special nodes
 def check_case2(specialNodes, normalNodes, specialNames):
@@ -82,8 +79,6 @@ def check_case2(specialNodes, normalNodes, specialNames):
     # never found a miss-match
     return True
 
-
-
 # check if all names of nodes and roles are unique
 def check_case3(normalNodes, modifierNodes):
 
@@ -98,12 +93,9 @@ def check_case3(normalNodes, modifierNodes):
     # both names of nodes and role a unique, pass
     return True
 
-
-
 # check if all files have correct schema. so they should right number of columns and column names
 def check_case4(specialNodes, normalNodes, modifierNodes):
     return False
-
 
 # check if roles column values in node.csv matches in roles.csv
 def check_case5(normalNodes, modifierNodes):
@@ -127,7 +119,6 @@ def check_case5(normalNodes, modifierNodes):
     # never found a miss-match
     return True
 
-
 # check that all csv values do not end with a comma
 def check_case6(specialFN, nodesFN, viewsFN):
 
@@ -148,13 +139,9 @@ def check_case6(specialFN, nodesFN, viewsFN):
 
     return True
 
-
-
 # gets the metadata of the file
 def fetch_metadata(filename, path):
     return extractFileIntoList(filename, path)[1]
-
-
 
 def contains_unique_names(nodesList):
     # store a names list to keep track of names we have already processed
@@ -172,8 +159,6 @@ def contains_unique_names(nodesList):
 
     # this nodes list from a file contains unique values, pass case 3
     return True
-
-
 
 def file_has_no_end_comma(file, path):
     # store csv entries into a list of string
