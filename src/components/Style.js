@@ -48,8 +48,6 @@ function caseIndexOf(target, query) {
 }
 
 function containsAny(target, query) {
-  console.log(target);
-  console.log(query);
   return query.some(function(v) {
     return caseIndexOf(target, v) >= 0;
   });
@@ -101,8 +99,6 @@ class Style extends React.Component {
       subtype: _.flatMap(nodeType)
     };
 
-    console.log(subAr);
-
     let colNum = {
       type: _.map(colSchm.node, (val, index) => {
         return index;
@@ -114,15 +110,11 @@ class Style extends React.Component {
       })
     };
 
-    console.log(colNum);
-
     let colNumOride = {
       // arrays of types and subtypes indicies that have been override
       type: [],
       subtype: colSchm.node.slice().fill([])
     };
-
-    console.log(colNumOride);
 
     let nodeStyles = {
       type: [],
@@ -130,8 +122,6 @@ class Style extends React.Component {
     };
 
     //colNum, colNumOride, and nodeStyles all have the same form going from all information to no information
-
-    console.log(nodeStyles);
 
     // copy all existing node styling override for Types into nodeStyles.type,
     // fill colNumOride with type indices that have been override
@@ -185,13 +175,9 @@ class Style extends React.Component {
       );
     }
 
-    console.log("Hi");
-    console.log(typeAr);
-
     // copy all existing node styling override for subtypes into nodeStyles.subtype,
     // fill corresponding subtypeArrays in colNumOride with subtype indices that have been override
     styleList.nodeOverride.forEach(oride => {
-      console.log(oride);
       if (
         containsAny(oride.subtype, subAr.subtype) &&
         !containsAny(oride.subtype, typeAr)
@@ -213,7 +199,6 @@ class Style extends React.Component {
       }
     });
 
-    console.log(nodeStyles);
     // exactly the same for original data and new data
 
     // assign new node styling override into nodeStyles.subtype for remaining subtypes,
@@ -241,7 +226,6 @@ class Style extends React.Component {
             : typeColOfSub,
           shape: typeOfSub.shape ? typeOfSub.shape : "circle"
         };
-        console.log(nodeStyles);
 
         if (caseIndexOf(typeAr, subName) > -1) {
           nodeStyles.subtype[nodeStyles.subtype.length - 1].color = isHexColor(
@@ -301,7 +285,6 @@ class Style extends React.Component {
           "--" + value,
           cssColors[value]
         );
-        console.log(value);
         data = replaceAll(data, "var(--" + value + ")", cssColors[value]);
       }
     });

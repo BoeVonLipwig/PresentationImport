@@ -160,51 +160,6 @@ class Cytoscape extends React.Component {
   addKey() {
     this.keyXPadding = 100;
     this.keyYPadding = 50;
-
-    this.keyBorder = this.cy.add({
-      group: "nodes",
-      data: { id: "keyBorder", type: "border" }
-    });
-
-    this.cy.add({
-      group: "nodes",
-      data: { id: "titleKey", name: "NODE TYPE", type: "key" }
-    });
-
-    // fetches key names and places in keyAr
-    let keyAr = [];
-    let subKeyStyles = [];
-    let keyStyles = _.filter(this.styleList.nodeStyles.type, typ => {
-      let subKeyAr = _.filter(this.styleList.nodeStyles.subtype, styp => {
-        return (
-          styp.type.toLowerCase() === typ.label.toLowerCase() &&
-          _.intersection(styp.subtype, typ.subtype).length < 1
-        );
-      });
-      if (subKeyAr.length > 1) {
-        subKeyStyles = subKeyStyles.concat(subKeyAr);
-        return false;
-      } else {
-        return true;
-      }
-    });
-
-    keyStyles = keyStyles.concat(subKeyStyles);
-
-    keyStyles.forEach(stl => {
-      keyAr[keyAr.length] = {
-        group: "nodes",
-        data: {
-          id: `${stl.label}-key`,
-          name: stl.label,
-          type: "key",
-          role: stl.subtype[0]
-        }
-      };
-    });
-
-    this.cy.add(keyAr);
-
     this.keys = this.cy.elements('[type = "key"]');
     this.keyBorder = this.cy.elements('[type = "border"]');
   }
@@ -254,6 +209,7 @@ class Cytoscape extends React.Component {
     if (dataType === "project" || dataType === "school") {
       let nhoodType = dataType === "project" ? "school" : "project";
       let indhood = nhood.closedNeighborhood('[type = "' + nhoodType + '"]');
+      console.log(indhood.jsons());
       nhood = nhood.add(indhood);
     }
   }
@@ -530,29 +486,39 @@ class Cytoscape extends React.Component {
   }
 
   componentDidMount() {
-    // get exported json from cytoscape desktop via ajax
     let graphP = data.getGraphP();
-
-    // also get style via ajax
     let styleP = data.getStyleP();
-
     let colorP = fetch("Colors.json").then(resp => resp.json());
+    let typesP = data.getFilterNames();
 
-    Promise.all([graphP, styleP, colorP]).spread(this.initCy);
+    Promise.all([graphP, styleP, colorP, typesP]).spread(this.initCy);
   }
 
-  initCy(graphP, styleP, colorP) {
+  initCy(graph, style, color, types) {
     this.cy = cytoscape({
       container: this.cyDiv.current,
-      elements: graphP,
+      elements: graph,
       wheelSensitivity: 0.5
     });
+
+    this.specialTypes = types.filter(
+      type => !["key", "border", "person", "collab"].includes(type)
+    );
 
     //styleMaster is a placeholder object with options for colorScheme selection,
     //and override for foreground, background, highlight, and lowlight color variables
     //as well as override for the color of nodes, and the name they should be referred to in the key
     //ideally this object should eventually be parsed from a csv
     //temp {
+    let nodeOverrides = [];
+    this.specialTypes.forEach(type => {
+      nodeOverrides.push({
+        label: type,
+        subtype: [type],
+        color: "",
+        shape: "ring"
+      });
+    });
     let styleMaster = {
       colorScheme: 0, // num 0 - 3, selects one of 4 color schemes from an array defined in Colors.json(see Colors.pdf for visual guide)
       //color overrides for css and cycss variables
@@ -563,46 +529,22 @@ class Cytoscape extends React.Component {
       ll: "", //lowlight color : greyed out text, dropshadows, scrollbar track etc
       //nodeOverride, can override automatic styling and labels (addkey) for nodes
       // can be done by type(person, project, school) or subtype/role(Hounours Student, Academic Staff, etc)
-      nodeOverride: [
-        {
-          label: "Person", //The label to display in the key
-          subtype: ["person"], //what type or subtype(role) this rule should apply to, this can accept multiple roles/subtype, but single type, do not mix type and subtype(role)
-          color: "", //what color the node should be, can be a #hexvalue or an int to specify which array of colors(for type 0-3), or color(for subtype/role 0-5) see Colors.json or Colors.pdf for visual guide
-          shape: "" //if the shape should be a ring or full circle, default is circle
-        },
-        {
-          label: "Post-grad Student", //listed node subtype(role) should be grouped and named as post-grad in key
-          subtype: ["Honours Student", "Masters Student", "PhD Student"], //multiple subtype/role grouped under on label and one color
-          color: ""
-        },
-        {
-          label: "Programme", //school should be renamed programme in key
-          subtype: ["school"],
-          color: "",
-          shape: "ring" //Programme should be displayed as rings rather than filled in circle
-        },
-        {
-          label: "Project",
-          subtype: ["project"],
-          color: "",
-          shape: "ring"
-        }
-      ]
+      nodeOverride: nodeOverrides
     };
 
-    console.log(this.cy.nodes().jsons());
     this.styleList = Style.parseStyles(
       this.cy.nodes('[type != "key"][type != "border"]'),
-      colorP,
+      color,
       styleMaster,
-      styleP
+      style
     );
     this.cy.style(this.styleList.stylesheet);
 
     this.addKey();
 
-    this.cy.elements('[type = "school"]').addClass("school");
-    this.cy.elements('[type = "project"]').addClass("project");
+    this.specialTypes.forEach(type => {
+      let filter = `[type = "${type}"]`;
+    });
 
     this.cy.on("mouseover", "node", e => {
       this.setState({
@@ -663,7 +605,6 @@ class Cytoscape extends React.Component {
         }
       });
     });
-    console.log(this.cy.style());
   }
 
   render() {
