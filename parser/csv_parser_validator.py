@@ -2,7 +2,7 @@ from csv_parser_file_functions import extractFileIntoList, getRawLineFromFile
 
 
 def validate_data(specialNodes, normalNodes, modifierNodes, numberOfSpecialNodes, lastDetailsFieldIndex, specialFN,
-    nodesFN, viewsFN, specialNames):
+                  nodesFN, viewsFN, specialNames):
     if not check_case1(specialNodes, normalNodes, lastDetailsFieldIndex, numberOfSpecialNodes, nodesFN):
         print("case1 failed")
         return False
