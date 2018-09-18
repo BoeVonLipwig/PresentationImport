@@ -1,27 +1,27 @@
 from csv_parser_file_functions import *
 
-def validate_data(specialNodes,normalNodes,modifierNodes, numberOfSpecialNodes,lastDetailsFieldIndex,specialFN,nodesFN,viewsFN,specialNames):
-    if not check_case1(specialNodes,normalNodes,lastDetailsFieldIndex,numberOfSpecialNodes,nodesFN):
+def validate_data(specialNodes, normalNodes, modifierNodes, numberOfSpecialNodes, lastDetailsFieldIndex, specialFN, nodesFN, viewsFN, specialNames):
+    if not check_case1(specialNodes, normalNodes, lastDetailsFieldIndex, numberOfSpecialNodes, nodesFN):
         print("case1 failed")
         return False
 
-    if not check_case2(specialNodes,normalNodes,specialNames):
+    if not check_case2(specialNodes, normalNodes, specialNames):
         print("case2 failed")
         return False
 
-    if not check_case3(normalNodes,modifierNodes):
+    if not check_case3(normalNodes, modifierNodes):
         print("case3 failed")
         return False
 
-    # if not check_case4(specialNodes,normalNodes,modifierNodes):
+    # if not check_case4(specialNodes, normalNodes, modifierNodes):
     #     print("case4 failed")
     #     return False
 
-    if not check_case5(normalNodes,modifierNodes):
+    if not check_case5(normalNodes, modifierNodes):
         print("case5 failed")
         return False
 
-    if not check_case6(specialFN,nodesFN,viewsFN):
+    if not check_case6(specialFN, nodesFN, viewsFN):
         print("case6 failed")
         return False
 
@@ -32,13 +32,13 @@ def validate_data(specialNodes,normalNodes,modifierNodes, numberOfSpecialNodes,l
 
 # check if nodes.csv has same amount special node columns as number of special node files
 # node.csv should always have "lastDetailsFieldIndex" amount of fields reserved for name and details
-def check_case1(specialNodes,normalNodes, lastDetailsFieldIndex, numberOfSpecialNodes,nodesFN):
+def check_case1(specialNodes, normalNodes, lastDetailsFieldIndex, numberOfSpecialNodes, nodesFN):
     # get path details to open file
     nodesFileName = nodesFN[0]
     path = 'data/nodes/'
 
     # get fields names inside nodes.csv
-    metaData = fetch_metadata(nodesFileName,path)
+    metaData = fetch_metadata(nodesFileName, path)
 
     # trim off name and details to see the left over fields
     trimPoint = 3 + lastDetailsFieldIndex   # plus three because of names, roles, and collab field
@@ -58,7 +58,7 @@ def check_case1(specialNodes,normalNodes, lastDetailsFieldIndex, numberOfSpecial
 
 
 # check if special node values in node.csv is a valid entry in special nodes
-def check_case2(specialNodes,normalNodes,specialNames):
+def check_case2(specialNodes, normalNodes, specialNames):
 
     # go through every normal node
     for nodeNode in normalNodes:
@@ -85,7 +85,7 @@ def check_case2(specialNodes,normalNodes,specialNames):
 
 
 # check if all names of nodes and roles are unique
-def check_case3(normalNodes,modifierNodes):
+def check_case3(normalNodes, modifierNodes):
 
     # check if normal nodes does not have unique names
     if not contains_unique_names(normalNodes):
@@ -101,12 +101,12 @@ def check_case3(normalNodes,modifierNodes):
 
 
 # check if all files have correct schema. so they should right number of columns and column names
-def check_case4(specialNodes,normalNodes,modifierNodes):
+def check_case4(specialNodes, normalNodes, modifierNodes):
     return False
 
 
 # check if roles column values in node.csv matches in roles.csv
-def check_case5(normalNodes,modifierNodes):
+def check_case5(normalNodes, modifierNodes):
 
     # go through every normal node
     for nodeNode in normalNodes:
@@ -129,18 +129,18 @@ def check_case5(normalNodes,modifierNodes):
 
 
 # check that all csv values do not end with a comma
-def check_case6(specialFN,nodesFN,viewsFN):
+def check_case6(specialFN, nodesFN, viewsFN):
 
     # go through all files in special folder
     for file in specialFN:
         # if file ends with comma, failed case 6
-        if not file_has_no_end_comma(file,"data/specialNodes/"):
+        if not file_has_no_end_comma(file, "data/specialNodes/"):
             return False
 
     # go through all files in nodes folder
     for file in nodesFN:
         # if file ends with comma, failed case 6
-        if not file_has_no_end_comma(file,"data/nodes/"):
+        if not file_has_no_end_comma(file, "data/nodes/"):
             return False
 
     #go through views.csv in main data folder
@@ -151,8 +151,8 @@ def check_case6(specialFN,nodesFN,viewsFN):
 
 
 # gets the metadata of the file
-def fetch_metadata(filename,path):
-    return extractFileIntoList(filename,path)[1]
+def fetch_metadata(filename, path):
+    return extractFileIntoList(filename, path)[1]
 
 
 
@@ -175,9 +175,9 @@ def contains_unique_names(nodesList):
 
 
 
-def file_has_no_end_comma(file,path):
+def file_has_no_end_comma(file, path):
     # store csv entries into a list of string
-    instances = getRawLineFromFile(file,path)
+    instances = getRawLineFromFile(file, path)
 
     # go through every csv entry
     for instance in instances:
