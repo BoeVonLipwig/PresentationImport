@@ -2,6 +2,7 @@ import csv
 from os import listdir
 from os.path import isfile, join
 
+
 def getFileNames():
     specialFiles = getFileNamesFromDirectory("data/specialNodes")
     nodeFiles = getFileNamesFromDirectory("data/nodes")

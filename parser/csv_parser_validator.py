@@ -1,7 +1,9 @@
-from csv_parser_file_functions import getRawLineFromFile
+from csv_parser_file_functions import *
 
 
-def validate_data(specialNodes, normalNodes, modifierNodes, numberOfSpecialNodes, lastDetailsFieldIndex, specialFN, nodesFN, viewsFN, specialNames):
+def validate_data(specialNodes, normalNodes, modifierNodes,
+numberOfSpecialNodes, lastDetailsFieldIndex, specialFN,
+nodesFN, viewsFN, specialNames):
     if not check_case1(specialNodes, normalNodes, lastDetailsFieldIndex, numberOfSpecialNodes, nodesFN):
         print("case1 failed")
         return False
@@ -141,7 +143,7 @@ def check_case6(specialFN, nodesFN, viewsFN):
         if not file_has_no_end_comma(file, "data/nodes/"):
             return False
 
-    #go through views.csv in main data folder
+    # go through views.csv in main data folder
     # file_has_no_end_comma(viewsFN)
 
     return True
