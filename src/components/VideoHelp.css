@@ -1,0 +1,29 @@
+#videoBackground {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: rgba(220, 220, 220, 0.5);
+  top: 0;
+  left: 0;
+  z-index: 20;
+}
+
+.helpVideoWrapper {
+  position: relative;
+  padding-bottom: 20.25%; /* 16:9 */
+  margin-top: 10%;
+  margin-left: 30%;
+  height: 0;
+  width: 40%;
+  background-color: yellow;
+}
+
+.helpVideoWrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}

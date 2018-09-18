@@ -1,14 +1,11 @@
 import React from "react";
 import { observer } from "mobx-react";
-import aidStore from "../util/AidStore";
 import cytoscapeStore from "../util/CytoscapeStore";
 import { autorun } from "mobx";
 import "./Search.css";
 
 class Search extends React.Component {
-  clickHandler(e, type) {
-    aidStore.aids.search = { display: "none" };
-  }
+  clickHandler(e, type) {}
 
   componentDidMount() {
     this.$node = window.$(this.refs.autocomplete);

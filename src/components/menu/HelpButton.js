@@ -1,6 +1,5 @@
 import React from "react";
 import "../ContactButton.css";
-import aidStore from "../../util/AidStore";
 
 class HelpButton extends React.Component {
   data = ["Help", "help", ""];
@@ -27,10 +26,6 @@ class HelpButton extends React.Component {
 
   onClick() {
     if (this.state.menu) {
-      aidStore.aids.contact = { display: "" };
-      aidStore.aids.details = { display: "" };
-      aidStore.aids.search = { display: "" };
-      aidStore.aids.views = { display: "" };
       this.props.parent.setState({
         ...this.props.parent.state,
         showMenu: false

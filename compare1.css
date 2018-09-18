@@ -1,0 +1,398 @@
+/*  Color variables are defined/set in style.js as the object : colors : {}*/
+/* They can be called like regular CSS var : colors.colorname --> var(--colorname) */
+/* For variables nested in objects, simply replace dot notation by dashes : colors.object.colorname --> var(--object-colorname)*/
+/* the function to edit this stylesheet with actual colorvalues ( colorStyleCycss() ) is called before cytoscape init in initCy() function*/
+
+.filtered {
+  display: none;
+  events: no;
+}
+
+core {
+  active-bg-color: #ddd;
+  active-bg-opacity: 0.333;
+}
+
+edge {
+  events: no;
+  curve-style: bezier;
+  target-endpoint: outside-to-line;
+  source-endpoint: outside-to-line;
+  /*line-style: dotted;*/
+  /*haystack-radius: 0;*/
+  opacity: 0.2;
+  line-color: #ddd;
+  width: 1;
+  z-index: 0;
+  overlay-opacity: 0;
+  line-style: solid;
+}
+
+edge.curved {
+  curve-style: unbundled-bezier;
+  control-point-distances: 20;
+  control-point-weight: 0.75;
+  edge-distances: node-position;
+  target-endpoint: outside-to-line;
+  source-endpoint: outside-to-line;
+}
+
+node {
+  text-transform: uppercase;
+  width: 30;
+  height: 30;
+
+  font-family: roboto condensed, helvetica, sans serif;
+  font-size: 10;
+
+  text-margin-y: 1px;
+
+  font-weight: 300;
+  content: data(name);
+
+  text-valign: center;
+  text-halign: center;
+
+  color: #ddd;
+  background-color: #b6ab72;
+
+  text-outline-width: 1;
+  text-outline-color: #1a2a39;
+  text-outline-opacity: 1;
+  overlay-color: #ddd;
+  border-opacity: 1;
+}
+
+/*type
+
+node[var(--selector) = "var(--typename)"] {
+	background-color: var(--nodecolor);
+	border-color: var(--nodecolor);
+}
+
+edge[var(--selector) = "var(--typename)"] {
+	line-color: var(--nodecolor);	
+	z-index: var(--zindex);
+	opacity: 0.25;
+}
+	
+type*/
+
+node[type="person"] {
+  background-color: #4fb2b2;
+  border-color: #4fb2b2;
+}
+
+edge[type="person"] {
+  line-color: #4fb2b2;
+  z-index: 1;
+  opacity: 0.25;
+}
+
+node[type="school"] {
+  background-color: #297777;
+  border-color: #297777;
+}
+
+edge[type="school"] {
+  line-color: #297777;
+  z-index: 3;
+  opacity: 0.25;
+}
+
+node[type="school"] {
+  shape: ellipse;
+  text-margin-y: 1px;
+  font-weight: 300;
+  font-style: normal;
+  text-outline-width: 2;
+  background-color: #1a2a39;
+  text-valign: center;
+  background-opacity: 1;
+  border-width: 2px;
+}
+
+node[type="school"].faded {
+  opacity: 1;
+  background-opacity: 1;
+  border-opacity: 0.5;
+}
+
+node[type="project"] {
+  background-color: #b6ab72;
+  border-color: #b6ab72;
+}
+
+edge[type="project"] {
+  line-color: #b6ab72;
+  z-index: 2;
+  opacity: 0.25;
+}
+
+node[type="project"] {
+  shape: ellipse;
+  text-margin-y: 1px;
+  font-weight: 300;
+  font-style: normal;
+  text-outline-width: 2;
+  background-color: #1a2a39;
+  text-valign: center;
+  background-opacity: 1;
+  border-width: 2px;
+}
+
+node[type="project"].faded {
+  opacity: 1;
+  background-opacity: 1;
+  border-opacity: 0.5;
+}
+
+node[role="Honours Student"] {
+  background-color: #4489a3;
+  border-color: #4489a3;
+}
+
+edge[role="Honours Student"] {
+  line-color: #4489a3;
+  z-index: 1;
+  opacity: 0.25;
+}
+
+node[role="Masters Student"] {
+  background-color: #4489a3;
+  border-color: #4489a3;
+}
+
+edge[role="Masters Student"] {
+  line-color: #4489a3;
+  z-index: 1;
+  opacity: 0.25;
+}
+
+node[role="PhD Student"] {
+  background-color: #4489a3;
+  border-color: #4489a3;
+}
+
+edge[role="PhD Student"] {
+  line-color: #4489a3;
+  z-index: 1;
+  opacity: 0.25;
+}
+
+node[role="Academic Staff"] {
+  background-color: #4fb2b2;
+  border-color: #4fb2b2;
+}
+
+edge[role="Academic Staff"] {
+  line-color: #4fb2b2;
+  z-index: 1;
+  opacity: 0.25;
+}
+
+node[role="Professional Staff"] {
+  background-color: #4471a1;
+  border-color: #4471a1;
+}
+
+edge[role="Professional Staff"] {
+  line-color: #4471a1;
+  z-index: 1;
+  opacity: 0.25;
+}
+
+node[role="person"] {
+  background-color: #4fb2b2;
+  border-color: #4fb2b2;
+}
+
+edge[role="person"] {
+  line-color: #4fb2b2;
+  z-index: 1;
+  opacity: 0.25;
+}
+
+node[role="project"] {
+  background-color: #b6ab72;
+  border-color: #b6ab72;
+}
+
+edge[role="project"] {
+  line-color: #b6ab72;
+  z-index: 2;
+  opacity: 0.25;
+}
+
+node[role="project"] {
+  shape: ellipse;
+  text-margin-y: 1px;
+  font-weight: 300;
+  font-style: normal;
+  text-outline-width: 2;
+  background-color: #1a2a39;
+  text-valign: center;
+  background-opacity: 1;
+  border-width: 2px;
+}
+
+node[role="project"].faded {
+  opacity: 1;
+  background-opacity: 1;
+  border-opacity: 0.5;
+}
+
+node[role="school"] {
+  background-color: #297777;
+  border-color: #297777;
+}
+
+edge[role="school"] {
+  line-color: #297777;
+  z-index: 3;
+  opacity: 0.25;
+}
+
+node[role="school"] {
+  shape: ellipse;
+  text-margin-y: 1px;
+  font-weight: 300;
+  font-style: normal;
+  text-outline-width: 2;
+  background-color: #1a2a39;
+  text-valign: center;
+  background-opacity: 1;
+  border-width: 2px;
+}
+
+node[role="school"].faded {
+  opacity: 1;
+  background-opacity: 1;
+  border-opacity: 0.5;
+}
+/*ring
+node[var(--selector) = "var(--typename)"]{
+shape : ellipse;
+text-margin-y : 1px;
+font-weight: 300;
+font-style: normal;
+text-outline-width: 2;
+background-color: #1A2A39;
+text-valign: center;
+background-opacity : 1;
+border-width: 2px;
+}
+
+node[var(--selector) = "var(--typename)"].faded{
+	opacity : 1;
+	background-opacity : 1;
+	border-opacity : 0.5;
+}
+ring*/
+
+node[type="center"] {
+  opacity: 0;
+}
+
+edge.faded {
+  opacity: 0.1;
+}
+
+node.faded {
+  opacity: 0.5;
+  text-opacity: 0;
+}
+
+node[type="center"].faded {
+  opacity: 0;
+}
+
+node.hidden {
+  opacity: 0;
+}
+
+node.highlighted {
+  text-outline-width: 2;
+  text-outline-opacity: 1;
+  z-index: 6;
+  line-color: #ddd;
+  opacity: 1;
+  border-opacity: 1;
+}
+
+node.hover-hood {
+  text-outline-opacity: 1;
+  opacity: 1;
+  border-opacity: 1;
+}
+
+node:selected {
+  width: 30;
+  height: 30;
+  border-color: #ddd;
+  border-opacity: 1;
+  border-width: 2px;
+  opacity: 1;
+  z-index: 7;
+  border-opacity: 1;
+}
+
+node.hover {
+  text-opacity: 1;
+  border-color: #ddd;
+  border-width: 2px;
+  text-outline-width: 2;
+  font-size: 16;
+  z-index: 8;
+}
+
+node[type="key"] {
+  opacity: 1;
+  text-opacity: 1;
+  events: no;
+}
+
+edge.hidden {
+  opacity: 0;
+}
+
+edge.highlighted {
+  opacity: 1;
+  width: 1;
+}
+
+edge.hover-hood {
+  opacity: 1;
+  width: 1;
+}
+
+edge.hover-hood[type="collab"] {
+  opacity: 1;
+  line-color: #ddd;
+  z-index: 10;
+}
+
+edge.highlighted[type="collab"] {
+  opacity: 1;
+  line-color: #ddd;
+}
+
+#titleKey {
+  font-weight: 300;
+  font-style: normal;
+  font-size: 20;
+  text-margin-y: 15px;
+
+  border-width: 0px;
+  background-color: #1a2a39;
+  text-valign: top;
+}
+
+#keyBorder {
+  events: no;
+  shape: rectangle;
+  border-width: 0.5px;
+  border-color: #ddd;
+  background-opacity: 0;
+  text-opacity: 0;
+}
