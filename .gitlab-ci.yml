@@ -33,8 +33,8 @@ parse:
     - python csv_parser.py
   artifacts:
     paths:
-      - public/
-  
+      - parser/output/
+
 test:
   tags:
     - docker
@@ -49,6 +49,7 @@ build:
   dependencies:
     - parse
   script:
+    - mv parser/output/output.json src/assets
     - yarn build
   artifacts:
     paths:
@@ -66,7 +67,7 @@ surge:
   script:
     - npm install surge --global
     - surge --project ./build --domain $URL
- 
+
 pages:
   tags:
     - docker
