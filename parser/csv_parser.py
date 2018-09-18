@@ -223,6 +223,8 @@ def formatForCytoscape(nodes, edges, keyList):
 
 
 def generateOutputFile(elements):
+    if not os.path.exists('./output'):
+        os.makedirs('./output')
     path = './output/output.json'
     jsonFile = open(path, 'w+')
     jsonFile.write(elements)
