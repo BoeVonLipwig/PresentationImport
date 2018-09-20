@@ -206,11 +206,16 @@ class Cytoscape extends React.Component {
     this.props.cytoscapeStore.nhood = nhood;
 
     let dataType = node.data("type");
-    if (dataType === "project" || dataType === "school") {
-      let nhoodType = dataType === "project" ? "school" : "project";
-      let indhood = nhood.closedNeighborhood('[type = "' + nhoodType + '"]');
-      console.log(indhood.jsons());
-      nhood = nhood.add(indhood);
+    if (this.specialTypes.includes(dataType)) {
+      let unselectedSpecialFilters = this.specialTypes
+        .filter(type => type !== dataType)
+        .map(type => `[type = '${type}']`);
+      let jointFilter = unselectedSpecialFilters.join(",");
+      let relatedSpecialNodes = nhood.closedNeighborhood(jointFilter).nodes();
+
+      this.spreadNodes(relatedSpecialNodes);
+      nhood = nhood.add(relatedSpecialNodes);
+      this.props.cytoscapeStore.nhood = nhood;
     }
   }
 
@@ -253,6 +258,16 @@ class Cytoscape extends React.Component {
     });
 
     layout.run();
+  }
+
+  unspreadNodes() {
+    this.cy.nodes().forEach(n => {
+      if (n.data("originPos")) {
+        let pos = n.data("originPos");
+        n.position({ x: pos.x, y: pos.y });
+        n.removeData("originPos");
+      }
+    });
   }
 
   getMaxLabelWidth(eles) {
@@ -483,6 +498,7 @@ class Cytoscape extends React.Component {
       .elements()
       .removeClass("highlighted")
       .removeClass("faded");
+    this.unspreadNodes();
   }
 
   componentDidMount() {
@@ -541,10 +557,6 @@ class Cytoscape extends React.Component {
     this.cy.style(this.styleList.stylesheet);
 
     this.addKey();
-
-    this.specialTypes.forEach(type => {
-      let filter = `[type = "${type}"]`;
-    });
 
     this.cy.on("mouseover", "node", e => {
       this.setState({
