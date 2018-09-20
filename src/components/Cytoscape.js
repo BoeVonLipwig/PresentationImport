@@ -92,51 +92,30 @@ class Cytoscape extends React.Component {
   }
 
   setLabels() {
+    this.cy.nodes('[type != "key"][type != "border"]').style({
+      label: ele => {
+        return ele.data("name");
+      }
+    });
+
     this.cy
-      .nodes('[type = "person"],[type = "project"],[type = "school"]')
+      .nodes('[type != "person"][type != "key"][type != "border"]:unselected')
       .style({
-        label: ele => {
-          return ele.data("name");
-        }
+        label: ele => this.setInitials(ele, 15, 15, 2)
       });
-
-    this.cy.nodes('[type = "project"]:unselected').style({
-      label: ele => {
-        return this.setInitials(ele, 15, 15, 2);
-      }
-    });
-
-    this.cy.nodes('[type = "school"]:unselected').style({
-      label: ele => {
-        return this.setInitials(ele, 12, 12, 2);
-      }
-    });
 
     if (this.cy.zoom() < 1.2) {
       this.cy.nodes('[type = "person"]:unselected').style({
-        label: ele => {
-          return this.setInitials(ele, 6, 6, 1);
-        }
+        label: ele => this.setInitials(ele, 6, 6, 1)
       });
     } else {
       this.cy.nodes('[type = "person"]:unselected').style({
-        label: ele => {
-          return this.setInitials(ele, 12, 12, 1);
-        }
+        label: ele => this.setInitials(ele, 12, 12, 1)
       });
     }
 
     this.cy.nodes(".highlighted").style({
-      label: ele => {
-        if (
-          this.cy.nodes('.highlighted[type = "project"]').size() > 5 &&
-          ele.data("type") === "project"
-        ) {
-          return this.setInitials(ele, 6, 6, 1);
-        } else {
-          return ele.data("name");
-        }
-      }
+      label: ele => ele.data("name")
     });
   }
 
@@ -585,7 +564,6 @@ class Cytoscape extends React.Component {
     this.cy.ready(() => {
       Layout.cy = this.cy;
       this.props.cytoscapeStore.layouts = ProjectLayout.getLayout();
-      this.setLabels();
 
       autorun(() => {
         this.props.cytoscapeStore.layouts.forEach(layout => {
