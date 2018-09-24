@@ -163,51 +163,6 @@ class Cytoscape extends React.Component {
   addKey() {
     this.keyXPadding = 100;
     this.keyYPadding = 50;
-
-    this.keyBorder = this.cy.add({
-      group: "nodes",
-      data: { id: "keyBorder", type: "border" }
-    });
-
-    this.cy.add({
-      group: "nodes",
-      data: { id: "titleKey", name: "NODE TYPE", type: "key" }
-    });
-
-    // fetches key names and places in keyAr
-    let keyAr = [];
-    let subKeyStyles = [];
-    let keyStyles = _.filter(this.styleList.nodeStyles.type, typ => {
-      let subKeyAr = _.filter(this.styleList.nodeStyles.subtype, styp => {
-        return (
-          styp.type.toLowerCase() === typ.label.toLowerCase() &&
-          _.intersection(styp.subtype, typ.subtype).length < 1
-        );
-      });
-      if (subKeyAr.length > 1) {
-        subKeyStyles = subKeyStyles.concat(subKeyAr);
-        return false;
-      } else {
-        return true;
-      }
-    });
-
-    keyStyles = keyStyles.concat(subKeyStyles);
-
-    keyStyles.forEach(stl => {
-      keyAr[keyAr.length] = {
-        group: "nodes",
-        data: {
-          id: `${stl.label}-key`,
-          name: stl.label,
-          type: "key",
-          role: stl.subtype[0]
-        }
-      };
-    });
-
-    this.cy.add(keyAr);
-
     this.keys = this.cy.elements('[type = "key"]');
     this.keyBorder = this.cy.elements('[type = "border"]');
   }
