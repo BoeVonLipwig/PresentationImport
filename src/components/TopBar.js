@@ -9,7 +9,6 @@ import "./TopBar.css";
 class TopBar extends React.Component {
   clickHandler(e) {
     const newDict = { display: "none" };
-    console.log(this);
     this.setState(Object.assign({}, this.state, newDict));
     alert("Hello");
   }

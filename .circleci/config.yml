@@ -7,6 +7,18 @@ jobs:
       - checkout
       - run: pip install flake8
       - run: flake8
+  parse:
+    - image python:3.7
+    steps:
+      - run: cd parser
+      - run: python csv_parser.py
+      - persist_to_workspace:
+          root: ~/project
+          paths: 
+            - public/*
+    
+    
+    
   test:
     docker:
       - image: node:8
@@ -14,6 +26,7 @@ jobs:
       - checkout
       - run: yarn install
       - run: yarn test
+      
   build:
     docker: 
       - image: node:8
@@ -40,8 +53,11 @@ workflows:
   test-build-deploy:
     jobs:
       - lint
+      - parse
       - test
-      - build
+      - build:
+        requires:
+          - parse
       - deploy:
           requires:
             - test

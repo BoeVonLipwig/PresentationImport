@@ -10,7 +10,7 @@ class NodeInfo extends React.Component {
   }
 
   nodeData(node) {
-    let brief = node.data("brief");
+    let bio = node.data("bio");
     let infoSchool = node.data("school");
     let mediaLink = node.data("mediaLink");
     let siteLink = node.data("siteLink");
@@ -32,7 +32,7 @@ class NodeInfo extends React.Component {
         {this.parseProgram(infoSchool)}
         {this.parseSite(siteName, siteLink, staffSiteLink)}
         {this.parseDates(datesActive)}
-        {this.parseBrief(brief)}
+        {this.parseBio(bio)}
       </Fragment>
     );
   }
@@ -149,11 +149,11 @@ class NodeInfo extends React.Component {
     ) : null;
   }
 
-  parseBrief(brief) {
-    return brief ? (
+  parseBio(bio) {
+    return bio ? (
       <div className="info-row">
         <hr />
-        <p className="info-brief">{brief}</p>
+        <p className="info-bio">{bio}</p>
       </div>
     ) : null;
   }
