@@ -26,6 +26,9 @@ class HelpButton extends React.Component {
 
   onClick() {
     if (this.state.menu) {
+      console.log("update cytostore");
+      this.props.cytostore.showTutorial = true;
+
       this.props.parent.setState({
         ...this.props.parent.state,
         showMenu: false

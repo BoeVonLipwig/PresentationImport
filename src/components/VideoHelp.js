@@ -1,24 +1,19 @@
 import React, { Fragment } from "react";
-// import { observer } from "mobx-react";
+import { observer } from "mobx-react";
 import "./VideoHelp.css";
 
 class VideoHelp extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      showTutorial: true
-    };
+    this.cytostore = props.cytostore;
   }
 
   clickHandler = (e, type) => {
-    console.log("stub");
-
-    // TODO close video when clicking on X area or grey area
-    this.setState({ ...this.state, showTutorial: false });
+    this.cytostore.showTutorial = false;
   };
 
   visibility() {
-    if (this.state.showTutorial) {
+    if (this.cytostore.showTutorial) {
       return { display: "" };
     }
     return { display: "none" };
@@ -41,6 +36,7 @@ class VideoHelp extends React.Component {
   }
 
   render() {
+    console.log(this.cytostore.showTutorial);
     return (
       <div
         id="videoBackground"
@@ -53,4 +49,4 @@ class VideoHelp extends React.Component {
   }
 }
 
-export default VideoHelp;
+export default observer(VideoHelp);
