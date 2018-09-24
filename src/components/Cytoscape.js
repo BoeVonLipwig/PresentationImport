@@ -185,8 +185,8 @@ class Cytoscape extends React.Component {
     this.props.cytoscapeStore.nhood = nhood;
 
     let dataType = node.data("type");
-    if (this.specialTypes.includes(dataType)) {
-      let unselectedSpecialFilters = this.specialTypes
+    if (this.props.cytoscapeStore.specialTypes.includes(dataType)) {
+      let unselectedSpecialFilters = this.props.cytoscapeStore.specialTypes
         .filter(type => type !== dataType)
         .map(type => `[type = '${type}']`);
       let jointFilter = unselectedSpecialFilters.join(",");
@@ -496,7 +496,7 @@ class Cytoscape extends React.Component {
       wheelSensitivity: 0.5
     });
 
-    this.specialTypes = types.filter(
+    this.props.cytoscapeStore.specialTypes = types.filter(
       type => !["key", "border", "person", "collab"].includes(type)
     );
 
@@ -506,7 +506,7 @@ class Cytoscape extends React.Component {
     //ideally this object should eventually be parsed from a csv
     //temp {
     let nodeOverrides = [];
-    this.specialTypes.forEach(type => {
+    this.props.cytoscapeStore.specialTypes.forEach(type => {
       nodeOverrides.push({
         label: type,
         subtype: [type],
@@ -563,6 +563,7 @@ class Cytoscape extends React.Component {
 
     this.cy.ready(() => {
       Layout.cy = this.cy;
+      Layout.specialTypes = this.props.cytoscapeStore.specialTypes;
       this.props.cytoscapeStore.layouts = ProjectLayout.getLayout();
 
       autorun(() => {

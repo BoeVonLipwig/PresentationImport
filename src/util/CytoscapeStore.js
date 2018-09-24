@@ -9,6 +9,7 @@ class CytoscapeStore {
   visNodeNames = [];
   visNodesMap = {};
   visNodesData = [];
+  specialTypes = [];
 }
 decorate(CytoscapeStore, {
   layouts: observable,
