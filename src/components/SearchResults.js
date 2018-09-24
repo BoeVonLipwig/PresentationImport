@@ -1,5 +1,6 @@
 import React from "react";
 import SearchItem from "./SearchItem";
+import "./SearchResults.css";
 
 function SearchResults(props) {
   if (!props.results || props.results.length === 0) return null;
