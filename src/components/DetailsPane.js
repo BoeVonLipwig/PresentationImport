@@ -54,7 +54,7 @@ class DetailsPane extends React.Component {
             {cytoscapeStore.selectedNode === null ? (
               ""
             ) : (
-              <h className="nameHeader">{this.getName()}</h>
+              <h1 className="nameHeader">{this.getName()}</h1>
             )}
           </Fragment>
         </div>
