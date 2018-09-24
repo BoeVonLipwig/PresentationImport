@@ -81,8 +81,8 @@ class Search extends React.Component {
           onSelect={this.handleSelect}
         />
         <input
-          id="autocomplete"
           type="text"
+          id="autocomplete"
           placeholder="Search Nodes"
           spellCheck="false"
           value={this.state.value}

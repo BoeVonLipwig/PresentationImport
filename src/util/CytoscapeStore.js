@@ -6,7 +6,6 @@ class CytoscapeStore {
   nhood = null;
   details = true;
   hoveredNode = null;
-  visNodeNames = [];
   visNodesMap = {};
   visNodesData = [];
 }
@@ -16,7 +15,6 @@ decorate(CytoscapeStore, {
   nhood: observable,
   details: observable,
   hoveredNode: observable,
-  visNodeNames: observable,
   visNodesMap: observable,
   visNodesData: observable
 });
