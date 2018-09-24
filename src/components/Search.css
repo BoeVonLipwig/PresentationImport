@@ -27,9 +27,13 @@
 }
 
 .suggestion-menu {
+  position: absolute;
+  bottom: calc(100%);
+  width: 340px;
+  left: 20px;
+  bottom: 55px;
   z-index: 7;
   color: var(--fg);
-  width: 300px;
   background-color: var(--bg);
   border: solid 1px var(--ll);
   padding: 0px 0px;
