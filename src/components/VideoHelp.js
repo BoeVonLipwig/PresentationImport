@@ -6,15 +6,16 @@ class VideoHelp extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      showTutorial: false
+      showTutorial: true
     };
   }
 
-  clickHandler(e, type) {
+  clickHandler = (e, type) => {
     console.log("stub");
 
     // TODO close video when clicking on X area or grey area
-  }
+    this.setState({ ...this.state, showTutorial: false });
+  };
 
   visibility() {
     if (this.state.showTutorial) {
@@ -41,7 +42,11 @@ class VideoHelp extends React.Component {
 
   render() {
     return (
-      <div id="videoBackground" style={this.visibility()}>
+      <div
+        id="videoBackground"
+        style={this.visibility()}
+        onClick={this.clickHandler}
+      >
         <Fragment> {this.renderVideo()}</Fragment>
       </div>
     );
