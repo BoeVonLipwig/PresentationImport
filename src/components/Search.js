@@ -19,13 +19,6 @@ class Search extends React.Component {
       results: [],
       value: ""
     };
-
-    this.handleChange = this.handleChange.bind(this);
-    this.setWrapperRef = this.setWrapperRef.bind(this);
-    this.handleClickOutside = this.handleClickOutside.bind(this);
-    this.handleNodeHover = this.handleNodeHover.bind(this);
-    this.handleNodeUnHover = this.handleNodeUnHover.bind(this);
-    this.handleSelect = this.handleSelect.bind(this);
   }
 
   clickHandler(e, type) {
@@ -43,7 +36,7 @@ class Search extends React.Component {
     document.removeEventListener("mousedown", this.handleClickOutside);
   }
 
-  handleChange(event) {
+  handleChange = event => {
     let results = this.fuse.search(event.target.value);
     this.setState({
       ...this.state,
@@ -51,31 +44,31 @@ class Search extends React.Component {
       displayResults: true,
       value: event.target.value
     });
-  }
+  };
 
-  setWrapperRef(node) {
+  setWrapperRef = node => {
     this.wrapperRef = node;
-  }
+  };
 
-  handleClickOutside(event) {
+  handleClickOutside = event => {
     if (this.wrapperRef && !this.wrapperRef.contains(event.target)) {
       this.setState({ ...this.state, displayResults: false });
     }
-  }
+  };
 
-  handleNodeHover(item) {
+  handleNodeHover = item => {
     cytoscapeStore.hoveredNode = cytoscapeStore.visNodesMap[item.id];
-  }
+  };
 
-  handleNodeUnHover() {
+  handleNodeUnHover = () => {
     cytoscapeStore.hoveredNode = null;
-  }
+  };
 
-  handleSelect(item) {
+  handleSelect = item => {
     cytoscapeStore.hoveredNode = null;
     cytoscapeStore.selectedNode = cytoscapeStore.visNodesMap[item.id];
     this.setState({ ...this.state, displayResults: false, value: item.name });
-  }
+  };
 
   render() {
     return (
