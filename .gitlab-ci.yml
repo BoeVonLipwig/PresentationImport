@@ -76,6 +76,8 @@ surge:
   script:
     - npm install surge --global
     - surge --project ./build --domain $URL
+  only:
+    - master
 
 pages:
   tags:
