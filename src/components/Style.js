@@ -73,9 +73,8 @@ function unique(array) {
 
 class Style extends React.Component {
   static parseStyles(allNodes, colorList, styleList, data) {
-    //
-
-    //
+    // Creates an object that maps types to subtypes based on roles. If
+    // no role exists, then the subtype is the type. Eg. Project -> Project.
     let typ = unique(allNodes.map(a => a.data("type")));
     let nodeType = {};
     typ.forEach(
@@ -88,8 +87,8 @@ class Style extends React.Component {
         ))
     );
 
-    let colSchm = colorList[styleList.colorScheme];
-    let typeAr = Object.keys(nodeType);
+    let colSchm = colorList[styleList.colorScheme]; // an object from colors.json
+    let typeAr = Object.keys(nodeType); // person, school and project
 
     let subAr = {
       type: _.flatMap(nodeType, (val, key) => {
@@ -122,6 +121,8 @@ class Style extends React.Component {
       subtype: []
     };
 
+    //colNum, colNumOride, and nodeStyles all have the same form going from all information to no information
+
     // copy all existing node styling override for Types into nodeStyles.type,
     // fill colNumOride with type indices that have been override
     styleList.nodeOverride.forEach(oride => {
@@ -136,6 +137,8 @@ class Style extends React.Component {
         }
       }
     });
+
+    // nodeStlyes.type will now be filled where the oride.subtype is in typeAr. So person, school, project
 
     // assign new node styling override into nodeStyles.type for remaining types,
     // and reassigns index for faulty "color" fields (empty, not a number/valid hexvalue)
@@ -195,6 +198,8 @@ class Style extends React.Component {
         }
       }
     });
+
+    // exactly the same for original data and new data
 
     // assign new node styling override into nodeStyles.subtype for remaining subtypes,
     // and reassigns index for faulty "color" fields (empty, not a number/valid hexvalue)
@@ -272,18 +277,15 @@ class Style extends React.Component {
       ll: isHexColor(styleList.ll) ? styleList.ll : colSchm.ll
     };
 
-    // Styles Css
+    // Replaces occurrences of fg, bg, hl, ll in data.cycss with values
+    // from colors.json
     Object.keys(cssColors).forEach(value => {
       if (cssColors[value].constructor !== Array) {
         document.documentElement.style.setProperty(
-          "--" + replaceAll(value, ".", "-"),
+          "--" + value,
           cssColors[value]
         );
-        data = replaceAll(
-          data,
-          "var(--" + replaceAll(value, ".", "-") + ")",
-          cssColors[value]
-        );
+        data = replaceAll(data, "var(--" + value + ")", cssColors[value]);
       }
     });
     //

@@ -2,6 +2,7 @@ image: node:8
 
 stages:
   - lint
+  - parse
   - "Test & Build"
   - deploy
 
@@ -21,6 +22,18 @@ lint:
     - pip install flake8
   script:
     - flake8
+parse:
+  image: python:3.7
+  tags:
+    - docker
+  stage: parse
+  before_script:
+    - cd parser
+  script:
+    - python csv_parser.py
+  artifacts:
+    paths:
+      - parser/output/
 
 test:
   tags:
@@ -33,6 +46,8 @@ build:
   tags:
     - docker
   stage: "Test & Build"
+  dependencies:
+    - parse
   script:
     - apt-get update && apt-get install -yq libgconf-2-4
     - apt-get update && apt-get install -y wget --no-install-recommends
@@ -43,6 +58,7 @@ build:
     - rm -rf /var/lib/apt/lists/*
     - apt-get purge --auto-remove -y curl
     - rm -rf /src/*.deb
+    - mv parser/output/output.json src/assets
     - yarn build
   artifacts:
     paths:
@@ -62,7 +78,7 @@ surge:
     - surge --project ./build --domain $URL
   only:
     - master
- 
+
 pages:
   tags:
     - docker
