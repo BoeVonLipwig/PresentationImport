@@ -10,12 +10,15 @@ import "./Cytoscape.css";
 import { autorun } from "mobx";
 import { observer } from "mobx-react";
 import Style from "../components/Style";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSync } from "@fortawesome/free-solid-svg-icons";
 
 class Cytoscape extends React.Component {
   constructor() {
     super();
     this.state = {
-      cursor: "cy_default"
+      cursor: "cy_default",
+      loading: true
     };
     this.cyDiv = React.createRef();
     this.initCy = this.initCy.bind(this);
@@ -542,6 +545,10 @@ class Cytoscape extends React.Component {
   }
 
   initCy(graphP, styleP, colorP) {
+    this.setState({
+      ...this.state,
+      loading: false
+    });
     this.cy = cytoscape({
       container: this.cyDiv.current,
       elements: graphP,
@@ -667,6 +674,12 @@ class Cytoscape extends React.Component {
   }
 
   render() {
+    if (this.state.loading)
+      return (
+        <div id="loading">
+          <FontAwesomeIcon icon={faSync} spin />
+        </div>
+      );
     return <div ref={this.cyDiv} className={this.state.cursor} id="cy" />;
   }
 }
