@@ -9,9 +9,10 @@ import _ from "lodash";
 import "./Cytoscape.css";
 import { autorun } from "mobx";
 import { observer } from "mobx-react";
-import Style from "../components/Style";
+import Style from "./StyleCytoscape";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSync } from "@fortawesome/free-solid-svg-icons";
+import colorP from "../assets/colors.json";
 
 class Cytoscape extends React.Component {
   constructor() {
@@ -494,12 +495,10 @@ class Cytoscape extends React.Component {
     // also get style via ajax
     let styleP = data.getStyleP();
 
-    let colorP = fetch("Colors.json").then(resp => resp.json());
-
-    Promise.all([graphP, styleP, colorP]).spread(this.initCy);
+    Promise.all([graphP, styleP]).spread(this.initCy);
   }
 
-  initCy(graphP, styleP, colorP) {
+  initCy(graphP, styleP) {
     this.setState({
       ...this.state,
       loading: false
@@ -531,11 +530,6 @@ class Cytoscape extends React.Component {
           subtype: ["person"], //what type or subtype(role) this rule should apply to, this can accept multiple roles/subtype, but single type, do not mix type and subtype(role)
           color: "", //what color the node should be, can be a #hexvalue or an int to specify which array of colors(for type 0-3), or color(for subtype/role 0-5) see Colors.json or Colors.pdf for visual guide
           shape: "" //if the shape should be a ring or full circle, default is circle
-        },
-        {
-          label: "Post-grad Student", //listed node subtype(role) should be grouped and named as post-grad in key
-          subtype: ["Honours Student", "Masters Student", "PhD Student"], //multiple subtype/role grouped under on label and one color
-          color: ""
         },
         {
           label: "Programme", //school should be renamed programme in key
