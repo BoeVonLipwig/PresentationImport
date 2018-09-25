@@ -54,9 +54,13 @@ class Views extends React.Component {
     this.toggleCheck(id);
     if (
       cytoscapeStore.selectedNode != null &&
-      !cytoscapeStore.selectedNode.visible()
+      cytoscapeStore.visNodesMap[cytoscapeStore.selectedNode] === null
     ) {
       cytoscapeStore.selectedNode = null;
+    } else {
+      let node = cytoscapeStore.selectedNode;
+      cytoscapeStore.selectedNode = null;
+      cytoscapeStore.selectedNode = node;
     }
   }
 
