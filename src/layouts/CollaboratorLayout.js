@@ -8,10 +8,13 @@ class CollaboratorLayout extends Layout {
       .grabify();
 
     this.clearStyles();
-    let elesHide = this.cy.elements('[type = "project"], [type = "school"]');
-    let elesFilter = this.cy.elements('[type = "project"]');
+    let specialFilter = this.specialTypes
+      .map(type => `[type = '${type}']`)
+      .join(",");
+    let elesHide = this.cy.elements(specialFilter);
+    let elesFilter = this.cy.elements(specialFilter);
 
-    let activePeople = this.cy.nodes('[type = "project"]').closedNeighborhood();
+    let activePeople = this.cy.edges('[type = "collab"]').connectedNodes();
     let nonActivePeople = this.cy.nodes('[type = "person"]').not(activePeople);
     elesFilter = elesFilter.add(nonActivePeople);
 
@@ -19,13 +22,11 @@ class CollaboratorLayout extends Layout {
     elesFilter.addClass("filtered");
     elesHide.unselectify().ungrabify();
 
-    let people = activePeople.nodes('[type = "person"]');
-
-    let layout = people.layout({
+    let layout = activePeople.layout({
       name: "circle",
       avoidOverlap: false,
       padding: this.layoutPadding,
-      radius: this.circleRadius(people),
+      radius: this.circleRadius(activePeople),
       nodeDimensionsIncludeLabels: false,
       sort: this.sortBy("reverse")
     });
@@ -34,7 +35,7 @@ class CollaboratorLayout extends Layout {
 
     this.cy
       .nodes()
-      .not(people)
+      .not(activePeople)
       .position({
         x: this.cy.width() / 2,
         y: this.cy.height() / 2

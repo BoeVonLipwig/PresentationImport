@@ -7,7 +7,7 @@ class DataFilter {
         let dataInstance = graphData[i];
         set.add(dataInstance.data.type);
       }
-      return set;
+      return [...set];
     });
     return filterNames;
   }

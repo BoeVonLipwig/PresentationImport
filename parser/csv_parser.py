@@ -67,6 +67,7 @@ class Key:
         self.id = '%s-key' % (name)
         self.name = name
         self.type = "key"
+        self.role = name.lower()
 
 
 def getFileNames():

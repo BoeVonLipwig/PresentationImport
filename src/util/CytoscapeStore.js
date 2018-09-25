@@ -7,6 +7,7 @@ class CytoscapeStore {
   hoveredNode = null;
   visNodesMap = {};
   visNodesData = [];
+  specialTypes = [];
   showTutorial = false;
 }
 decorate(CytoscapeStore, {
