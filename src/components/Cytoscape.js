@@ -480,7 +480,6 @@ class Cytoscape extends React.Component {
   }
 
   clear() {
-    console.log("This runs right");
     this.cy
       .elements()
       .removeClass("highlighted")
