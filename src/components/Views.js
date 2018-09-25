@@ -57,6 +57,10 @@ class Views extends React.Component {
       cytoscapeStore.visNodesMap[cytoscapeStore.selectedNode] === null
     ) {
       cytoscapeStore.selectedNode = null;
+    } else {
+      let node = cytoscapeStore.selectedNode;
+      cytoscapeStore.selectedNode = null;
+      cytoscapeStore.selectedNode = node;
     }
   }
 
