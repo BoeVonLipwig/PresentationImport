@@ -22,6 +22,8 @@ class Cytoscape extends React.Component {
     };
     this.cyDiv = React.createRef();
     this.initCy = this.initCy.bind(this);
+    this.nodeMap = {};
+    this.nhood = null;
   }
 
   setInitials(ele, cutoff01, cutoff02, space) {
@@ -80,15 +82,19 @@ class Cytoscape extends React.Component {
   setVisNodes() {
     let visNodesMap = {};
     let visNodesData = [];
+    let nodeMap = {};
     this.cy
       .nodes()
       .not('.hidden, .filtered, [type = "key"], [type = "border"]')
       .forEach(ele => {
-        visNodesData.push(ele.data());
-        visNodesMap[ele.data("id")] = ele;
+        let node = ele.data();
+        visNodesData.push(node);
+        visNodesMap[node.id] = node;
+        nodeMap[node.id] = ele;
       });
     this.props.cytoscapeStore.visNodesMap = visNodesMap;
     this.props.cytoscapeStore.visNodesData = visNodesData;
+    this.nodeMap = nodeMap;
   }
 
   setLabels() {
@@ -203,7 +209,7 @@ class Cytoscape extends React.Component {
   highlight(node) {
     node.select();
     let nhood = node.closedNeighborhood();
-    this.props.cytoscapeStore.nhood = nhood;
+    this.nhood = nhood;
 
     let dataType = node.data("type");
     if (dataType === "project" || dataType === "school") {
@@ -268,7 +274,7 @@ class Cytoscape extends React.Component {
   }
 
   reframe() {
-    let nhood = this.props.cytoscapeStore.nhood;
+    let nhood = this.nhood;
     let layoutPadding = Layout.layoutPadding;
     let details = this.props.cytoscapeStore.details;
 
@@ -478,6 +484,7 @@ class Cytoscape extends React.Component {
   }
 
   clear() {
+    console.log("This runs right");
     this.cy
       .elements()
       .removeClass("highlighted")
@@ -566,7 +573,7 @@ class Cytoscape extends React.Component {
         ...this.state,
         cursor: "cy_pointer"
       });
-      this.props.cytoscapeStore.hoveredNode = e.target;
+      this.props.cytoscapeStore.hoveredNode = e.target.data("id");
     });
 
     this.cy.on("mouseout", "node", e => {
@@ -579,7 +586,7 @@ class Cytoscape extends React.Component {
 
     this.cy.on("select", "node", e => {
       aidStore.aids.details = { display: "none" };
-      this.props.cytoscapeStore.selectedNode = e.target;
+      this.props.cytoscapeStore.selectedNode = e.target.data("id");
     });
     this.cy.on("unselect", "node", e => {
       this.props.cytoscapeStore.selectedNode = null;
@@ -604,7 +611,9 @@ class Cytoscape extends React.Component {
         if (this.props.cytoscapeStore.selectedNode === null) {
           this.fitAll();
         } else {
-          let nhood = this.highlight(this.props.cytoscapeStore.selectedNode);
+          let nhood = this.highlight(
+            this.nodeMap[this.props.cytoscapeStore.selectedNode]
+          );
           this.reframe(nhood);
         }
         this.setLabels();
@@ -616,7 +625,7 @@ class Cytoscape extends React.Component {
           this.hoverNight(n);
         });
         if (this.props.cytoscapeStore.hoveredNode !== null) {
-          this.hoverLight(this.props.cytoscapeStore.hoveredNode);
+          this.hoverLight(this.nodeMap[this.props.cytoscapeStore.hoveredNode]);
         }
       });
     });

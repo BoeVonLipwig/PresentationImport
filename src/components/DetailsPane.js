@@ -68,7 +68,7 @@ class DetailsPane extends React.Component {
   getName() {
     return cytoscapeStore.selectedNode === null
       ? ""
-      : cytoscapeStore.selectedNode.data("name");
+      : cytoscapeStore.selectedNode.name;
   }
 }
 

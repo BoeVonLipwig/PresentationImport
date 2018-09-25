@@ -57,7 +57,7 @@ class Search extends React.Component {
   };
 
   handleNodeHover = item => {
-    cytoscapeStore.hoveredNode = cytoscapeStore.visNodesMap[item.id];
+    cytoscapeStore.hoveredNode = item.id;
   };
 
   handleNodeUnHover = () => {
@@ -66,7 +66,7 @@ class Search extends React.Component {
 
   handleSelect = item => {
     cytoscapeStore.hoveredNode = null;
-    cytoscapeStore.selectedNode = cytoscapeStore.visNodesMap[item.id];
+    cytoscapeStore.selectedNode = item.id;
     this.setState({ ...this.state, displayResults: false, value: item.name });
   };
 
