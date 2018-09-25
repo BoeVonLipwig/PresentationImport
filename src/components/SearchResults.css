@@ -1,31 +1,3 @@
-#autocomplete {
-  position: fixed;
-  left: 20px;
-  bottom: 20px;
-  z-index: 5;
-  font: 15px roboto condensed, helvetica neue, helvetica, arial, sans-serif;
-  background-color: var(--bg);
-  border: solid 1px var(--ll);
-  padding: 6px 20px;
-  color: var(--fg);
-  width: 300px;
-}
-
-#autocomplete::selection {
-  background: var(--fg);
-  color: var(--bg);
-}
-
-#autocomplete::-moz-selection {
-  background: var(--fg);
-  color: var(--bg);
-}
-
-#autocomplete:focus {
-  outline-color: var(--fg);
-  border-color: var(--fg);
-}
-
 .suggestion-menu {
   position: absolute;
   bottom: calc(100%);
@@ -58,23 +30,7 @@
   background-color: var(--fg);
 }
 
-.ui-menu-item-wrapper {
-  padding: 12px 20px;
-  padding-bottom: 12px;
-}
-
-.ui-menu-item:hover {
-  background-color: white;
-  color: black;
-}
-
 @media (max-width: 1160px) and (min-width: 0px) {
-  #autocomplete {
-    bottom: 75px;
-    left: 2px;
-    width: calc(100% - 44px);
-  }
-
   .suggestion-menu {
     max-height: calc(41px * 4);
     width: calc(100% - 42px);

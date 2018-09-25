@@ -5,6 +5,7 @@ import logo from "../assets/vic-logo.svg";
 import aidStore from "../util/AidStore";
 import ContactButton from "./ContactButton";
 import { observer } from "mobx-react";
+import "./BottomBar.css";
 
 class BottomBar extends React.Component {
   render() {

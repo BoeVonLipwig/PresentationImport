@@ -4,11 +4,11 @@ import Aid from "./Aid";
 import aidStore from "../util/AidStore";
 import DetailsPane from "./DetailsPane";
 import { observer } from "mobx-react";
+import "./TopBar.css";
 
 class TopBar extends React.Component {
   clickHandler(e) {
     const newDict = { display: "none" };
-    console.log(this);
     this.setState(Object.assign({}, this.state, newDict));
     alert("Hello");
   }
@@ -41,7 +41,6 @@ class TopBar extends React.Component {
           <a onClick={event => this.clickHandler(event)}>
             <div id="view" className="">
               <h1>VIEW</h1>
-              <h3 className="icon">&#9776;</h3>
             </div>
           </a>
           <Views />

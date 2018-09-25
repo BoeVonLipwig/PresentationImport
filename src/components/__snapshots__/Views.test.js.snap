@@ -12,6 +12,7 @@ exports[`renders views correctly without crashing 1`] = `
         id="showProjects"
         type="checkbox"
         readonly=""
+        checked=""
       />
       <label
         for="showProjects"

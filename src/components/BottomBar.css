@@ -1,0 +1,81 @@
+#vuw-logo {
+  display: block;
+  font-size: 25px;
+  fill: var(--fg);
+  margin-top: 10px;
+  height: 20px;
+  margin-left: calc((100% - ((76.5 / 35) * 20px)) / 2);
+}
+
+#header {
+  position: absolute;
+  z-index: 4;
+  float: left;
+  width: 600px;
+  height: 65px;
+  left: calc((100% - 600px) / 2);
+  right: 20px;
+  top: auto;
+  bottom: 0px;
+  text-align: center;
+}
+
+#header > a {
+  display: inline-block;
+  text-align: center;
+  font-size: 18px;
+  color: var(--fg);
+  background: var(--bg);
+}
+
+#header > span {
+  display: inline-block;
+  text-align: center;
+  font-size: 18px;
+  color: var(--fg);
+  background: var(--bg);
+}
+
+#navbar-bottom {
+  position: absolute;
+  border-top: solid 1px var(--ll);
+  height: 75px;
+  width: 100%;
+  background-color: var(--bg);
+  z-index: 2;
+  top: calc(100% - 76px);
+}
+
+@media (max-width: 1160px) and (min-width: 0px) {
+  #header > span {
+    display: none;
+  }
+
+  #header {
+    width: 200px;
+    left: calc((100% - 200px) / 2);
+  }
+}
+
+@media (max-width: 800px) {
+  #header {
+    left: 20px;
+    width: 135px;
+  }
+}
+
+@media (max-width: 380px) {
+  #header > a {
+    text-align: center;
+    font-size: 15px;
+  }
+
+  #header {
+    height: 70px;
+    width: 65px;
+  }
+
+  #header > img {
+    margin-top: 5px;
+  }
+}

@@ -1,4 +1,3 @@
-import React from "react";
 import _ from "lodash";
 
 function replaceAll(target, search, replacement) {
@@ -71,7 +70,7 @@ function unique(array) {
   });
 }
 
-class Style extends React.Component {
+class StyleCytoscape {
   static parseStyles(allNodes, colorList, styleList, data) {
     // Creates an object that maps types to subtypes based on roles. If
     // no role exists, then the subtype is the type. Eg. Project -> Project.
@@ -193,8 +192,7 @@ class Style extends React.Component {
           );
           colNumOride.subtype[getTypeBySub(oride.subtype[0]).color][
             colNumOride.subtype.length
-          ] =
-            oride.color;
+          ] = oride.color;
         }
       }
     });
@@ -238,8 +236,7 @@ class Style extends React.Component {
         if (availColNum) {
           colNumOride.subtype[typeColOfSub][
             colNumOride.subtype[typeColOfSub].length
-          ] =
-            availColNum[0];
+          ] = availColNum[0];
         }
       }
 
@@ -256,8 +253,7 @@ class Style extends React.Component {
                 : colNum.subtype[typeColOfSub][0];
             colNumOride.subtype[typeColOfSub][
               colNumOride.subtype[typeColOfSub].length
-            ] =
-              availColNum[0];
+            ] = availColNum[0];
           }
         } else if (!isHexColor(typeOride.color)) {
           returnByType(nodeStyles.subtype, subName).color = typeColOfSub;
@@ -271,24 +267,19 @@ class Style extends React.Component {
     });
 
     let cssColors = {
-      fg: isHexColor(styleList.fg) ? styleList.fg : colSchm.fg,
-      bg: isHexColor(styleList.bg) ? styleList.bg : colSchm.bg,
-      hl: isHexColor(styleList.hl) ? styleList.hl : colSchm.hl,
-      ll: isHexColor(styleList.ll) ? styleList.ll : colSchm.ll
+      fg: colSchm.fg,
+      bg: colSchm.bg,
+      hl: colSchm.hl,
+      ll: colSchm.ll
     };
 
     // Replaces occurrences of fg, bg, hl, ll in data.cycss with values
     // from colors.json
     Object.keys(cssColors).forEach(value => {
       if (cssColors[value].constructor !== Array) {
-        document.documentElement.style.setProperty(
-          "--" + value,
-          cssColors[value]
-        );
         data = replaceAll(data, "var(--" + value + ")", cssColors[value]);
       }
     });
-    //
 
     let typeString = data
       .split("/*type")
@@ -354,6 +345,8 @@ class Style extends React.Component {
 
     this.nodeStyles = nodeStyles;
 
+    console.log(data);
+
     return {
       stylesheet: data,
       nodeStyles: nodeStyles
@@ -415,4 +408,4 @@ class Style extends React.Component {
     }
   }
 }
-export default Style;
+export default StyleCytoscape;

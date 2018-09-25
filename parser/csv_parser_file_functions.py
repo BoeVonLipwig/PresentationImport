@@ -1,17 +1,17 @@
-import sys
 import csv
 from os import listdir
 from os.path import isfile, join
+
 
 def getFileNames():
     specialFiles = getFileNamesFromDirectory("data/specialNodes")
     nodeFiles = getFileNamesFromDirectory("data/nodes")
     views = getFileNamesFromDirectory("data")
-    return specialFiles,nodeFiles,views
+    return specialFiles, nodeFiles, views
 
 
-def extractFileIntoList(file,path):
-    with open(path+file,'r') as f:
+def extractFileIntoList(file, path):
+    with open(path+file, 'r') as f:
         reader = csv.reader(f)
         instances = list(reader)
     return instances[1:], instances[0]
@@ -29,7 +29,7 @@ def getFileNamesFromDirectory(dir):
     return onlyfiles
 
 
-def getRawLineFromFile(file,path):
-    with open(path+file,'r') as f:
+def getRawLineFromFile(file, path):
+    with open(path+file, 'r') as f:
         lines = f.readlines()
     return lines
