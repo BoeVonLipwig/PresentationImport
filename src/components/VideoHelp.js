@@ -24,8 +24,6 @@ class VideoHelp extends React.Component {
       <div className="helpVideoWrapper">
         <iframe
           title="Youtube Video"
-          width="560"
-          height="315"
           src="https://www.youtube.com/embed/ScMzIvxBSi4"
           frameborder="0"
           allow="autoplay; encrypted-media"
