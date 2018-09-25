@@ -93,7 +93,8 @@ class Cytoscape extends React.Component {
     this.props.cytoscapeStore.visNodesData = visNodesData;
   }
 
-  setLabels() {
+  setLabels(caller) {
+    console.log(caller);
     this.cy.nodes('[type != "key"][type != "border"]').style({
       label: ele => {
         return ele.data("name");
@@ -122,9 +123,10 @@ class Cytoscape extends React.Component {
   }
 
   hoverLight(node) {
-    this.setLabels();
+    //this.setLabels('hoverLight');
     if (!node.hasClass("hidden")) {
       node.closedNeighborhood().addClass("hover-hood");
+      console.log(node.closedNeighborhood().size());
       node.addClass("hover");
       node.style({
         label: node.data("name")
@@ -134,8 +136,9 @@ class Cytoscape extends React.Component {
 
   hoverNight(node) {
     node.closedNeighborhood().removeClass("hover-hood");
+    console.log(node.closedNeighborhood().size());
     node.removeClass("hover");
-    this.setLabels();
+    this.setLabels("hoverNight");
   }
 
   addKey() {
@@ -548,6 +551,7 @@ class Cytoscape extends React.Component {
         ...this.state,
         cursor: "cy_pointer"
       });
+      this.hoverLight(e.target);
       this.props.cytoscapeStore.hoveredNode = e.target.data("id");
     });
 
@@ -556,14 +560,21 @@ class Cytoscape extends React.Component {
         ...this.state,
         cursor: "cy_default"
       });
+      this.hoverNight(e.target);
       this.props.cytoscapeStore.hoveredNode = null;
     });
 
     this.cy.on("select", "node", e => {
       this.props.cytoscapeStore.selectedNode = e.target.data("id");
     });
+
     this.cy.on("unselect", "node", e => {
       this.props.cytoscapeStore.selectedNode = null;
+    });
+
+    this.cy.on("zoom", () => {
+      console.log(this.cy.zoom());
+      this.setLabels("zoom");
     });
 
     this.cy.ready(() => {
@@ -590,17 +601,17 @@ class Cytoscape extends React.Component {
           );
           this.reframe(nhood);
         }
-        this.setLabels();
+        this.setLabels("autorun - selected node");
       });
 
       autorun(() => {
-        let hovered = this.cy.nodes(".hover-hood, .hover");
-        hovered.forEach(n => {
-          this.hoverNight(n);
-        });
-        if (this.props.cytoscapeStore.hoveredNode !== null) {
-          this.hoverLight(this.cy.$id(this.props.cytoscapeStore.hoveredNode));
-        }
+        // let hovered = this.cy.nodes(".hover-hood, .hover");
+        // hovered.forEach(n => {
+        //   this.hoverNight(n);
+        // });
+        // if (this.props.cytoscapeStore.hoveredNode !== null) {
+        //   this.hoverLight(this.cy.$id(this.props.cytoscapeStore.hoveredNode));
+        // }
       });
     });
   }
