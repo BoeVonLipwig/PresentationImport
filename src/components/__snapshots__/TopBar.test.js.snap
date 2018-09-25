@@ -29,7 +29,6 @@ exports[`renders topbar correctly without crashing 1`] = `
             id="showProjects"
             type="checkbox"
             readonly=""
-            checked=""
           />
           <label
             for="showProjects"
@@ -94,7 +93,6 @@ exports[`renders topbar correctly without crashing 1`] = `
               id=""
               type="checkbox"
               readonly=""
-              checked=""
             />
             <label
               for=""
