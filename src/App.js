@@ -16,8 +16,8 @@ class App extends Component {
       <div className="App">
         <TopBar />
         <Cytoscape cytoscapeStore={cytoscapeStore} />
-        <BottomBar cytostore={cytoscapeStore} />
-        <Tutorial cytostore={cytoscapeStore} />
+        <BottomBar />
+        <Tutorial />
       </div>
     );
   }

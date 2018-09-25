@@ -18,7 +18,7 @@ class BottomBar extends React.Component {
           </div>
         </div>
 
-        <ContactButton cytostore={this.props.cytostore} />
+        <ContactButton />
       </div>
     );
   }

@@ -1,4 +1,5 @@
 import React from "react";
+import cytoscapeStore from "../../util/CytoscapeStore";
 import "../ContactButton.css";
 
 class HelpButton extends React.Component {
@@ -27,7 +28,7 @@ class HelpButton extends React.Component {
   onClick() {
     if (this.state.menu) {
       console.log("update cytostore");
-      this.props.cytostore.showTutorial = true;
+      cytoscapeStore.showTutorial = true;
 
       this.props.parent.setState({
         ...this.props.parent.state,

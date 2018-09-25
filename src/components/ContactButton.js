@@ -11,7 +11,7 @@ class ContactButton extends React.Component {
       this.buttonClicked = this.props.clickHandler;
     }
     this.buttons = [
-      <HelpButton parent={this} menu={true} cytostore={this.props.cytostore} />,
+      <HelpButton parent={this} menu={true} />,
       <MailButton parent={this} menu={true} />,
       <GithubButton parent={this} menu={true} />
     ];

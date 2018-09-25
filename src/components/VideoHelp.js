@@ -1,23 +1,12 @@
 import React, { Fragment } from "react";
 import { observer } from "mobx-react";
+import cytoscapeStore from "../util/CytoscapeStore";
 import "./VideoHelp.css";
 
 class VideoHelp extends React.Component {
-  constructor(props) {
-    super(props);
-    this.cytostore = props.cytostore;
-  }
-
   clickHandler = (e, type) => {
-    this.cytostore.showTutorial = false;
+    cytoscapeStore.showTutorial = false;
   };
-
-  visibility() {
-    if (this.cytostore.showTutorial) {
-      return { display: "" };
-    }
-    return { display: "none" };
-  }
 
   renderVideo() {
     return (
@@ -34,13 +23,11 @@ class VideoHelp extends React.Component {
   }
 
   render() {
-    console.log(this.cytostore.showTutorial);
+    if (!cytoscapeStore.showTutorial) {
+      return null;
+    }
     return (
-      <div
-        id="videoBackground"
-        style={this.visibility()}
-        onClick={this.clickHandler}
-      >
+      <div id="videoBackground" onClick={this.clickHandler}>
         <Fragment> {this.renderVideo()}</Fragment>
       </div>
     );
