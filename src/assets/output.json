@@ -6,13 +6,23 @@
   },
   {
     "group": "nodes",
-    "data": { "id": "project-key", "name": "project", "type": "key" },
+    "data": {
+      "id": "project-key",
+      "name": "project",
+      "type": "key",
+      "role": "project"
+    },
     "selectable": false,
     "grabbable": false
   },
   {
     "group": "nodes",
-    "data": { "id": "school-key", "name": "school", "type": "key" },
+    "data": {
+      "id": "school-key",
+      "name": "school",
+      "type": "key",
+      "role": "school"
+    },
     "selectable": false,
     "grabbable": false
   },
@@ -21,7 +31,8 @@
     "data": {
       "id": "Academic Staff-key",
       "name": "Academic Staff",
-      "type": "key"
+      "type": "key",
+      "role": "academic staff"
     },
     "selectable": false,
     "grabbable": false
@@ -31,14 +42,20 @@
     "data": {
       "id": "Masters Student-key",
       "name": "Masters Student",
-      "type": "key"
+      "type": "key",
+      "role": "masters student"
     },
     "selectable": false,
     "grabbable": false
   },
   {
     "group": "nodes",
-    "data": { "id": "PhD Student-key", "name": "PhD Student", "type": "key" },
+    "data": {
+      "id": "PhD Student-key",
+      "name": "PhD Student",
+      "type": "key",
+      "role": "phd student"
+    },
     "selectable": false,
     "grabbable": false
   },
@@ -47,7 +64,8 @@
     "data": {
       "id": "Professional Staff-key",
       "name": "Professional Staff",
-      "type": "key"
+      "type": "key",
+      "role": "professional staff"
     },
     "selectable": false,
     "grabbable": false
@@ -57,7 +75,8 @@
     "data": {
       "id": "Honours Student-key",
       "name": "Honours Student",
-      "type": "key"
+      "type": "key",
+      "role": "honours student"
     },
     "selectable": false,
     "grabbable": false
@@ -735,7 +754,7 @@
       "siteLink": "https://github.com/Mystfit",
       "mediaLink": "https://www.youtube.com/watch?v=Ddw2TsNeWr8",
       "bio": "Byron Mallett is a creative coder and designer who combines interaction design with animation, VR and audio/visual elements. He graduated from Victoria University's School of Design in 2011 with a degree in Design specializing in Digital Media, and completed his Masters of Design Innovation in 2015 focusing on Virtual Reality and musical interfaces.\u00a0\u00a0Byron\u2019s main interests revolve around the construction of tools that use Virtual Reality to help build media experiences.",
-      "role": "professional staff"
+      "role": "academic staff"
     }
   },
   {
@@ -847,7 +866,7 @@
       "siteLink": "https://www.linkedin.com/in/kromond/",
       "mediaLink": "http://computergraphics.ac.nz/assets/people/kevin_romond.jpg",
       "bio": "",
-      "role": "professional staff"
+      "role": "academic staff"
     }
   },
   {
@@ -1055,7 +1074,7 @@
       "siteLink": "http://dianasiwiak.com/",
       "mediaLink": "http://www.victoria.ac.nz/images/staffpics/diana-siwiak.jpg",
       "bio": "",
-      "role": "professional staff"
+      "role": "phd student"
     }
   },
   {
