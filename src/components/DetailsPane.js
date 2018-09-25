@@ -4,7 +4,6 @@ import cytoscapeStore from "../util/CytoscapeStore";
 import { observer } from "mobx-react";
 import NodeInfo from "./NodeInfo";
 import "./DetailsPane.css";
-import aidStore from "../util/AidStore";
 
 class DetailsPane extends React.Component {
   constructor(props) {
@@ -15,7 +14,6 @@ class DetailsPane extends React.Component {
   }
 
   clickHandler(e) {
-    aidStore.aids.details = { display: "none" };
     this.setState({
       ...this.state,
       isChecked: !this.state.isChecked

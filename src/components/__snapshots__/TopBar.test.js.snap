@@ -6,19 +6,6 @@ exports[`renders topbar correctly without crashing 1`] = `
     id="navbar"
   >
     <div
-      id="viewAid-label"
-      class="aid-label"
-    >
-      Click to Change Graph Layouts
-      <label
-        for="viewAid"
-      />
-    </div>
-    <div
-      id="viewAid"
-      class="aid"
-    />
-    <div
       id="controls"
       class="topnav"
     >
@@ -91,19 +78,6 @@ exports[`renders topbar correctly without crashing 1`] = `
         </h2>
       </div>
     </div>
-    <div
-      id="detailAid-label"
-      class="aid-label"
-    >
-      Project/Personal Details Will Display Here. Can Be Toggle On/Off for Better View
-      <label
-        for="detailAid"
-      />
-    </div>
-    <div
-      id="detailAid"
-      class="aid"
-    />
     <div
       id="detailsBar"
     >
