@@ -22,7 +22,6 @@ class Cytoscape extends React.Component {
     };
     this.cyDiv = React.createRef();
     this.initCy = this.initCy.bind(this);
-    this.nodeMap = {};
     this.nhood = null;
   }
 
@@ -82,7 +81,6 @@ class Cytoscape extends React.Component {
   setVisNodes() {
     let visNodesMap = {};
     let visNodesData = [];
-    let nodeMap = {};
     this.cy
       .nodes()
       .not('.hidden, .filtered, [type = "key"], [type = "border"]')
@@ -90,11 +88,9 @@ class Cytoscape extends React.Component {
         let node = ele.data();
         visNodesData.push(node);
         visNodesMap[node.id] = node;
-        nodeMap[node.id] = ele;
       });
     this.props.cytoscapeStore.visNodesMap = visNodesMap;
     this.props.cytoscapeStore.visNodesData = visNodesData;
-    this.nodeMap = nodeMap;
   }
 
   setLabels() {
@@ -612,7 +608,7 @@ class Cytoscape extends React.Component {
           this.fitAll();
         } else {
           let nhood = this.highlight(
-            this.nodeMap[this.props.cytoscapeStore.selectedNode]
+            this.cy.$id(this.props.cytoscapeStore.selectedNode)
           );
           this.reframe(nhood);
         }
@@ -625,7 +621,7 @@ class Cytoscape extends React.Component {
           this.hoverNight(n);
         });
         if (this.props.cytoscapeStore.hoveredNode !== null) {
-          this.hoverLight(this.nodeMap[this.props.cytoscapeStore.hoveredNode]);
+          this.hoverLight(this.cy.$id(this.props.cytoscapeStore.hoveredNode));
         }
       });
     });
