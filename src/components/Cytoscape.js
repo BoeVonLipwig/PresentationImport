@@ -578,6 +578,7 @@ class Cytoscape extends React.Component {
         this.arrangeKey();
         this.cy.fit(50);
         this.setVisNodes();
+        if (this.props.cytoscapeStore.selectedNode !== null) this.reframe();
       });
 
       autorun(() => {
@@ -585,10 +586,9 @@ class Cytoscape extends React.Component {
         if (this.props.cytoscapeStore.selectedNode === null) {
           this.fitAll();
         } else {
-          let nhood = this.highlight(
-            this.cy.$id(this.props.cytoscapeStore.selectedNode)
-          );
-          this.reframe(nhood);
+          this.highlight(this.cy.$id(this.props.cytoscapeStore.selectedNode));
+          console.log("reframe");
+          this.reframe();
         }
         this.setLabels();
       });
