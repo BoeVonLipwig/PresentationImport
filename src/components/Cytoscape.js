@@ -8,13 +8,17 @@ import _ from "lodash";
 import "./Cytoscape.css";
 import { autorun } from "mobx";
 import { observer } from "mobx-react";
-import Style from "../components/Style";
+import Style from "./StyleCytoscape";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSync } from "@fortawesome/free-solid-svg-icons";
+import colorP from "../assets/colors.json";
 
 class Cytoscape extends React.Component {
   constructor() {
     super();
     this.state = {
-      cursor: "cy_default"
+      cursor: "cy_default",
+      loading: true
     };
     this.cyDiv = React.createRef();
     this.initCy = this.initCy.bind(this);
@@ -490,12 +494,14 @@ class Cytoscape extends React.Component {
     // also get style via ajax
     let styleP = data.getStyleP();
 
-    let colorP = fetch("Colors.json").then(resp => resp.json());
-
-    Promise.all([graphP, styleP, colorP]).spread(this.initCy);
+    Promise.all([graphP, styleP]).spread(this.initCy);
   }
 
-  initCy(graphP, styleP, colorP) {
+  initCy(graphP, styleP) {
+    this.setState({
+      ...this.state,
+      loading: false
+    });
     this.cy = cytoscape({
       container: this.cyDiv.current,
       elements: graphP,
@@ -525,11 +531,6 @@ class Cytoscape extends React.Component {
           shape: "" //if the shape should be a ring or full circle, default is circle
         },
         {
-          label: "Post-grad Student", //listed node subtype(role) should be grouped and named as post-grad in key
-          subtype: ["Honours Student", "Masters Student", "PhD Student"], //multiple subtype/role grouped under on label and one color
-          color: ""
-        },
-        {
           label: "Programme", //school should be renamed programme in key
           subtype: ["school"],
           color: "",
@@ -543,8 +544,6 @@ class Cytoscape extends React.Component {
         }
       ]
     };
-
-    console.log(this.cy.nodes().jsons());
     this.styleList = Style.parseStyles(
       this.cy.nodes('[type != "key"][type != "border"]'),
       colorP,
@@ -616,10 +615,15 @@ class Cytoscape extends React.Component {
         }
       });
     });
-    console.log(this.cy.style());
   }
 
   render() {
+    if (this.state.loading)
+      return (
+        <div id="loading">
+          <FontAwesomeIcon icon={faSync} spin />
+        </div>
+      );
     return <div ref={this.cyDiv} className={this.state.cursor} id="cy" />;
   }
 }

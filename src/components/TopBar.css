@@ -1,0 +1,71 @@
+#view h1 {
+  float: left;
+  font-size: 20px;
+  font-weight: 500;
+  padding-top: 7px;
+  margin-left: 20px;
+  margin-right: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+#view {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  height: 38px;
+
+  color: var(--fg);
+  float: left;
+}
+
+#controls > input {
+  margin-left: 20px;
+}
+
+#navbar {
+  border-bottom: solid 1px var(--ll);
+  height: 58px;
+  width: 100%;
+  background-color: var(--bg);
+  z-index: 2;
+}
+
+.topnav {
+  position: relative;
+  display: inline-block;
+  background-color: var(--bg);
+  color: var(--fg);
+  text-transform: uppercase;
+  width: 100%;
+  left: 0px;
+  border-bottom: solid 1px var(--ll);
+}
+
+.topnav {
+  /*overflow: hidden;*/
+  z-index: 6;
+}
+
+@media screen and (max-width: 700px) {
+  #view:hover {
+    background-color: var(--fg);
+    color: var(--bg);
+  }
+
+  #view {
+    width: 100%;
+  }
+
+  .topnav.responsive {
+    position: relative;
+    border-bottom: solid 1px var(--ll);
+    z-index: 9;
+  }
+}
+
+@media (max-width: 1160px) and (min-width: 0px) {
+  #navbar {
+    height: 115px;
+    border-bottom: solid 1px var(--ll);
+  }
+}

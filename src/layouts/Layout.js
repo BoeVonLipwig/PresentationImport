@@ -1,4 +1,4 @@
-import Style from "../components/Style";
+import Style from "../components/StyleCytoscape";
 class Layout {
   static layoutPadding = 50;
   static cy;

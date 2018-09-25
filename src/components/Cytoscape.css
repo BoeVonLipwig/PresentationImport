@@ -5,3 +5,19 @@
 .cy_pointer {
   cursor: pointer;
 }
+
+#cy {
+  height: calc(100% - 58px - 76px);
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: 58px;
+  background: var(--bg);
+}
+
+@media (max-width: 1160px) and (min-width: 0px) {
+  #cy {
+    height: calc(100% - 116px - 76px - 32px);
+    top: 116px;
+  }
+}

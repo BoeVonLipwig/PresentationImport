@@ -12,7 +12,9 @@
 .info-row hr {
   padding-left: 20px;
   padding-right: 20px;
+  /*noinspection CssFloatPxLength*/
   border-width: 0.5px;
+  /*noinspection CssUnresolvedCustomProperty,CssFloatPxLength*/
   border-bottom: solid 0.5px var(--ll);
 }
 
@@ -28,7 +30,7 @@
   float: right;
 }
 
-.info-brief {
+.info-bio {
   display: block;
   text-align: center;
   padding: 8px 20px;
@@ -53,36 +55,36 @@
 .img-crop {
   width: 100%;
   height: 100%;
-  padding-left: 0px;
+  padding-left: 0;
   display: block;
-  border-top-left-radius: 50% 50%;
-  border-top-right-radius: 50% 50%;
-  border-bottom-right-radius: 50% 50%;
-  border-bottom-left-radius: 50% 50%;
+  border-radius: 50% 50%;
+  /*noinspection CssUnresolvedCustomProperty*/
   border: solid 5px var(--bg);
   margin-top: 20px;
   background-size: cover;
   background-position: center;
 }
 
-/*.img-crop{
- overflow: hidden;
+/**
+ * CSS image crop. Forces image to specific aspect ratio cropping at the middle.
+ * http://dabblet.com/gist/4711695
+ */
+
+.id-wrapper {
+  width: 150px;
+  height: 150px;
+  padding-left: calc((100% - 150px) / 2);
 }
 
-.img-crop:before,
-.img-crop img{
-  display: inline-block;
-  vertical-align: middle;
+.id-linked :hover {
+  /*noinspection CssUnresolvedCustomProperty*/
+  border-color: var(--fg);
 }
 
-.img-crop:before{
-  content: "";
-  padding-top: 100%;
+@media (max-width: 1160px) and (min-width: 0px) {
+  .info-right {
+    padding-right: 20px;
+
+    float: right;
+  }
 }
-
-.img-crop img{
-
-  width: 100%;
-  padding-left: 100%;
-  margin: -999em -100%;
-}*/

@@ -1,5 +1,6 @@
 import csv
 import json
+import os
 from os import listdir
 from os.path import isfile, join
 
@@ -223,7 +224,9 @@ def formatForCytoscape(nodes, edges, keyList):
 
 
 def generateOutputFile(elements):
-    path = './output.json'
+    if not os.path.exists('./output'):
+        os.makedirs('./output')
+    path = './output/output.json'
     jsonFile = open(path, 'w+')
     jsonFile.write(elements)
     jsonFile.close()

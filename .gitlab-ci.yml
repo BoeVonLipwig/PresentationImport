@@ -7,11 +7,11 @@ stages:
   - deploy
 
 before_script:
-  - yarn install
+  - yarn install --pure-lockfile --cache-folder .yarn-cache
 
 cache:
   paths:
-    - node_modules/
+    - .yarn-cache
 
 lint:
   image: python:3.7
@@ -33,8 +33,8 @@ parse:
     - python csv_parser.py
   artifacts:
     paths:
-      - public/
-  
+      - parser/output/
+
 test:
   tags:
     - docker
@@ -49,6 +49,16 @@ build:
   dependencies:
     - parse
   script:
+    - apt-get update && apt-get install -yq libgconf-2-4
+    - apt-get update && apt-get install -y wget --no-install-recommends
+    - wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -
+    - sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
+    - apt-get update
+    - apt-get install -y google-chrome-unstable fonts-ipafont-gothic fonts-wqy-zenhei fonts-thai-tlwg fonts-kacst ttf-freefont --no-install-recommends
+    - rm -rf /var/lib/apt/lists/*
+    - apt-get purge --auto-remove -y curl
+    - rm -rf /src/*.deb
+    - mv parser/output/output.json src/assets
     - yarn build
   artifacts:
     paths:
@@ -60,15 +70,15 @@ surge:
   stage: deploy
   environment:
     name: production
-    url: https://connectedworldsteam10.surge.sh/
+    url: $URL
   dependencies:
     - build
   script:
     - npm install surge --global
-    - surge --project ./build --domain https://connectedworldsteam10.surge.sh/
+    - surge --project ./build --domain $URL
   only:
     - master
- 
+
 pages:
   tags:
     - docker
