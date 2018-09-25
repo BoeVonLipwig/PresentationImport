@@ -345,8 +345,6 @@ class StyleCytoscape {
 
     this.nodeStyles = nodeStyles;
 
-    console.log(data);
-
     return {
       stylesheet: data,
       nodeStyles: nodeStyles
