@@ -5,8 +5,6 @@ import { autorun } from "mobx";
 import "./Search.css";
 
 class Search extends React.Component {
-  clickHandler(e, type) {}
-
   componentDidMount() {
     this.$node = window.$(this.refs.autocomplete);
     this.$node.autocomplete({
@@ -61,7 +59,6 @@ class Search extends React.Component {
           type="text"
           placeholder="Search Nodes"
           spellCheck="false"
-          onClick={event => this.clickHandler(event, "search")}
         />
       </div>
     );
