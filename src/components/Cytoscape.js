@@ -3,7 +3,6 @@ import cytoscape from "cytoscape";
 import data from "../util/NetworkRequest";
 import Layout from "../layouts/Layout";
 import ProjectLayout from "../layouts/ProjectLayout";
-import aidStore from "../util/AidStore";
 import Promise from "bluebird";
 import _ from "lodash";
 import "./Cytoscape.css";
@@ -574,7 +573,6 @@ class Cytoscape extends React.Component {
     });
 
     this.cy.on("select", "node", e => {
-      aidStore.aids.details = { display: "none" };
       this.props.cytoscapeStore.selectedNode = e.target.data("id");
     });
     this.cy.on("unselect", "node", e => {

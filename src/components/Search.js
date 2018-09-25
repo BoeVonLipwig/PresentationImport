@@ -1,6 +1,5 @@
 import React from "react";
 import { observer } from "mobx-react";
-import aidStore from "../util/AidStore";
 import cytoscapeStore from "../util/CytoscapeStore";
 import { autorun } from "mobx";
 import "./Search.css";
@@ -19,10 +18,6 @@ class Search extends React.Component {
       results: [],
       value: ""
     };
-  }
-
-  clickHandler(e, type) {
-    aidStore.aids.search = { display: "none" };
   }
 
   componentDidMount() {
@@ -87,9 +82,6 @@ class Search extends React.Component {
           spellCheck="false"
           value={this.state.value}
           onChange={this.handleChange}
-          onClick={event => {
-            aidStore.aids.search = { display: "none" };
-          }}
         />
       </div>
     );
