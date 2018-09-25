@@ -587,7 +587,6 @@ class Cytoscape extends React.Component {
           this.fitAll();
         } else {
           this.highlight(this.cy.$id(this.props.cytoscapeStore.selectedNode));
-          console.log("reframe");
           this.reframe();
         }
         this.setLabels();
