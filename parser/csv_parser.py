@@ -69,6 +69,7 @@ class Key:
         self.type = "key"
         self.role = name.lower()
 
+
 def getFileNames():
     specialFiles = getFileNamesFromDirectory("data/specialNodes")
     nodeFiles = getFileNamesFromDirectory("data/nodes")
