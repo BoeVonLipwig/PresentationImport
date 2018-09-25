@@ -3,62 +3,85 @@ import { observer } from "mobx-react";
 import cytoscapeStore from "../util/CytoscapeStore";
 import { autorun } from "mobx";
 import "./Search.css";
+import Fuse from "fuse.js";
+import SearchResults from "./SearchResults";
 
 class Search extends React.Component {
-  componentDidMount() {
-    this.$node = window.$(this.refs.autocomplete);
-    this.$node.autocomplete({
-      autoFocus: true,
-      // minLength: 2,
-      classes: {
-        "ui-autocomplete": "suggestion-menu",
-        "ui-menu-item": "suggestion-item"
-      },
-      position: {
-        my: "left bottom",
-        at: "left top",
-        collision: "flip"
-      },
-      source: [""]
-    });
-    autorun(() => {
-      this.$node.autocomplete(
-        "option",
-        "source",
-        cytoscapeStore.visNodeNames.slice()
-      );
-    });
-    this.$node.on("autocompletefocus", function(event, ui) {
-      cytoscapeStore.hoveredNode = cytoscapeStore.visNodesMap[ui.item.value];
-    });
-
-    this.$node.on("autocompleteselect", function(event, ui) {
-      cytoscapeStore.selectedNode = cytoscapeStore.visNodesMap[ui.item.value];
-    });
-
-    this.$node.on("autocompleteclose", function(event, ui) {
-      cytoscapeStore.hoveredNode = null;
-    });
+  constructor() {
+    super();
+    let options = {
+      keys: ["name"]
+    };
+    this.fuse = new Fuse(cytoscapeStore.visNodesData, options);
+    this.state = {
+      displayResults: true,
+      results: [],
+      value: ""
+    };
   }
 
-  shouldComponentUpdate() {
-    return false;
+  componentDidMount() {
+    autorun(() => {
+      this.fuse.setCollection(cytoscapeStore.visNodesData);
+    });
+    document.addEventListener("mousedown", this.handleClickOutside);
   }
 
   componentWillUnmount() {
-    // Clean up the mess when the component unmounts
-    this.$node.autocomplete("destroy");
+    document.removeEventListener("mousedown", this.handleClickOutside);
   }
+
+  handleChange = event => {
+    let results = this.fuse.search(event.target.value);
+    this.setState({
+      ...this.state,
+      results: results,
+      displayResults: true,
+      value: event.target.value
+    });
+  };
+
+  setWrapperRef = node => {
+    this.wrapperRef = node;
+  };
+
+  handleClickOutside = event => {
+    if (this.wrapperRef && !this.wrapperRef.contains(event.target)) {
+      this.setState({ ...this.state, displayResults: false });
+    }
+  };
+
+  handleNodeHover = item => {
+    cytoscapeStore.hoveredNode = item.id;
+  };
+
+  handleNodeUnHover = () => {
+    cytoscapeStore.hoveredNode = null;
+  };
+
+  handleSelect = item => {
+    cytoscapeStore.hoveredNode = null;
+    cytoscapeStore.selectedNode = item.id;
+    this.setState({ ...this.state, displayResults: false, value: item.name });
+  };
 
   render() {
     return (
-      <div>
+      <div ref={this.setWrapperRef}>
+        <SearchResults
+          displayed={this.state.displayResults}
+          results={this.state.results}
+          onHover={this.handleNodeHover}
+          onUnHover={this.handleNodeUnHover}
+          onSelect={this.handleSelect}
+        />
         <input
-          ref="autocomplete"
-          id="autocomplete"
           type="text"
+          id="autocomplete"
           placeholder="Search Nodes"
           spellCheck="false"
+          value={this.state.value}
+          onChange={this.handleChange}
         />
       </div>
     );

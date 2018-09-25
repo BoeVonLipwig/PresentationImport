@@ -5,22 +5,20 @@ import "./NodeInfo.css";
 
 class NodeInfo extends React.Component {
   render() {
-    let node = cytoscapeStore.selectedNode;
+    let node = cytoscapeStore.visNodesMap[cytoscapeStore.selectedNode];
     return <Fragment>{this.nodeData(node)}</Fragment>;
   }
 
   nodeData(node) {
-    let bio = node.data("bio");
-    let infoSchool = node.data("school");
-    let mediaLink = node.data("mediaLink");
-    let siteLink = node.data("siteLink");
-    let staffSiteLink = node.data("staffSiteLink");
-    let siteName = !node.data("siteName")
-      ? node.data("name")
-      : node.data("siteName");
-    let nodeType = node.data("type");
-    let role = node.data("role");
-    let datesActive = node.data("datesActive");
+    let bio = node.bio;
+    let infoSchool = node.school;
+    let mediaLink = node.mediaLink;
+    let siteLink = node.siteLink;
+    let staffSiteLink = node.staffSiteLink;
+    let siteName = !node.siteName ? node.name : node.siteName;
+    let nodeType = node.type;
+    let role = node.role;
+    let datesActive = node.datesActive;
     if (nodeType === "person" && !mediaLink) {
       mediaLink = idImg;
     }
