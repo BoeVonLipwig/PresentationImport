@@ -4,6 +4,7 @@ import Search from "./Search";
 import logo from "../assets/vic-logo.svg";
 import aidStore from "../util/AidStore";
 import ContactButton from "./ContactButton";
+import DataSwitch from "./DataSwitch";
 import { observer } from "mobx-react";
 import "./BottomBar.css";
 
@@ -30,6 +31,9 @@ class BottomBar extends React.Component {
           msg="Click Through to Request an Addition to the Dataset, Report an Issue Through GitHub or Bring Up Tooltip"
           style={aidStore.aids.contact}
         />
+        <div class="sliderContainer">
+          <DataSwitch />
+        </div>
         <ContactButton />
       </div>
     );
