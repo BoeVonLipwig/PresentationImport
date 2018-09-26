@@ -47,7 +47,7 @@ class Cytoscape extends React.Component {
 
   static getInitials(string, initNum, space) {
     const names = string.split(" ");
-    _.pull(names, "of", "the", "&");
+    _.pull(names, "of", "the", "&", "and");
     let initials = names[0].substring(0, 1).toUpperCase();
     let kerning;
     if (space === 1) {
@@ -94,10 +94,8 @@ class Cytoscape extends React.Component {
   }
 
   setLabels() {
-    this.cy.nodes('[type != "key"][type != "border"]').style({
-      label: ele => {
-        return ele.data("name");
-      }
+    this.cy.nodes().forEach(ele => {
+      ele.style("label", ele.data("name"));
     });
 
     this.cy
@@ -122,7 +120,6 @@ class Cytoscape extends React.Component {
   }
 
   hoverLight(node) {
-    this.setLabels();
     if (!node.hasClass("hidden")) {
       node.closedNeighborhood().addClass("hover-hood");
       node.addClass("hover");
@@ -548,6 +545,7 @@ class Cytoscape extends React.Component {
         ...this.state,
         cursor: "cy_pointer"
       });
+      this.hoverLight(e.target);
       this.props.cytoscapeStore.hoveredNode = e.target.data("id");
     });
 
@@ -556,14 +554,20 @@ class Cytoscape extends React.Component {
         ...this.state,
         cursor: "cy_default"
       });
+      this.hoverNight(e.target);
       this.props.cytoscapeStore.hoveredNode = null;
     });
 
     this.cy.on("select", "node", e => {
       this.props.cytoscapeStore.selectedNode = e.target.data("id");
     });
+
     this.cy.on("unselect", "node", e => {
       this.props.cytoscapeStore.selectedNode = null;
+    });
+
+    this.cy.on("zoom", () => {
+      this.setLabels();
     });
 
     this.cy.ready(() => {
@@ -591,7 +595,6 @@ class Cytoscape extends React.Component {
         }
         this.setLabels();
       });
-
       autorun(() => {
         let hovered = this.cy.nodes(".hover-hood, .hover");
         hovered.forEach(n => {
