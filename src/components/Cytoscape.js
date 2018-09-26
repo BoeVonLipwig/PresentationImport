@@ -596,6 +596,15 @@ class Cytoscape extends React.Component {
         }
         this.setLabels();
       });
+      autorun(() => {
+        let hovered = this.cy.nodes(".hover-hood, .hover");
+        hovered.forEach(n => {
+          this.hoverNight(n);
+        });
+        if (this.props.cytoscapeStore.hoveredNode !== null) {
+          this.hoverLight(this.cy.$id(this.props.cytoscapeStore.hoveredNode));
+        }
+      });
     });
   }
 
