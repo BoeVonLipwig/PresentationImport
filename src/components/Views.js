@@ -50,16 +50,6 @@ class Views extends React.Component {
 
   clickHandler(e, id) {
     this.toggleCheck(id);
-    if (
-      cytoscapeStore.selectedNode != null &&
-      cytoscapeStore.visNodesMap[cytoscapeStore.selectedNode] === null
-    ) {
-      cytoscapeStore.selectedNode = null;
-    } else {
-      let node = cytoscapeStore.selectedNode;
-      cytoscapeStore.selectedNode = null;
-      cytoscapeStore.selectedNode = node;
-    }
   }
 
   render() {

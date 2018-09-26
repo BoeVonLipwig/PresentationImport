@@ -20,17 +20,13 @@ class DetailsPane extends React.Component {
     });
   }
 
-  infoPane() {
+  infoPane(node) {
     return (
       //Checks if a node is selected and displays the info if it is
       this.state.isChecked ? (
         <div id="infoContainer" className="info">
           <div className="container">
-            {cytoscapeStore.selectedNode === null ? (
-              <em>Select Any Node</em>
-            ) : (
-              <NodeInfo />
-            )}
+            {node ? <NodeInfo /> : <em>Select Any Node</em>}
           </div>
         </div>
       ) : null
@@ -38,6 +34,7 @@ class DetailsPane extends React.Component {
   }
 
   render() {
+    let node = cytoscapeStore.visNodesMap[cytoscapeStore.selectedNode];
     return (
       <div id="detailsBar">
         <div id="toggle">
@@ -49,24 +46,14 @@ class DetailsPane extends React.Component {
               clickHandler={event => this.clickHandler(event)}
             />
             <h2>Show details</h2>
-            {cytoscapeStore.selectedNode === null ? (
-              ""
-            ) : (
-              <h1 className="nameHeader">{this.getName()}</h1>
-            )}
+            {node ? <h1 className="nameHeader">{node.name}</h1> : null}
           </Fragment>
         </div>
         <div id="nodeDetails" className="expanded">
-          {this.infoPane()}
+          {this.infoPane(node)}
         </div>
       </div>
     );
-  }
-
-  getName() {
-    return cytoscapeStore.selectedNode === null
-      ? ""
-      : cytoscapeStore.selectedNode.name;
   }
 }
 
