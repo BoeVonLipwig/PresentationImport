@@ -138,13 +138,28 @@ class Cytoscape extends React.Component {
   addKey() {
     this.keyXPadding = 100;
     this.keyYPadding = 50;
-    this.keys = this.cy.elements('[type = "key"]');
+    this.keys = this.cy.elements('[type = "key"]').not(".hidden");
     this.keyBorder = this.cy.elements('[type = "border"]');
   }
 
   arrangeKey() {
+    let hiddenTypes = [];
+    this.cy.elements(".hidden").forEach(ele => {
+      if (!hiddenTypes.includes(ele.data("type"))) {
+        hiddenTypes.push(ele.data("type"));
+      }
+    });
+    this.keys.forEach(key => {
+      if (hiddenTypes.includes(key.data("role"))) {
+        key.addClass("hidden");
+      }
+    });
+    console.log(this.keys.size());
+    this.keys = this.cy.elements('[type = "key"]').not(".hidden");
+    console.log(this.keys.size());
     let maxLabelWidth = this.getMaxLabelWidth(this.keys);
     let nodeHeight = this.keys.height();
+
     let bboxIgnore = this.cy.elements(
       '.hidden, .filtered, [type = "key"], [type = "border"]'
     );
@@ -577,9 +592,12 @@ class Cytoscape extends React.Component {
         this.props.cytoscapeStore.layouts.forEach(layout => {
           layout.run();
         });
-        this.arrangeKey();
+        this.cy
+          .elements('[type = "key"]')
+          .forEach(key => key.removeClass("hidden"));
         this.cy.fit(50);
         this.setVisNodes();
+        this.arrangeKey();
         if (this.props.cytoscapeStore.selectedNode !== null) this.reframe();
       });
 
