@@ -545,7 +545,6 @@ class Cytoscape extends React.Component {
         ...this.state,
         cursor: "cy_pointer"
       });
-      this.hoverLight(e.target);
       this.props.cytoscapeStore.hoveredNode = e.target.data("id");
     });
 
@@ -554,7 +553,6 @@ class Cytoscape extends React.Component {
         ...this.state,
         cursor: "cy_default"
       });
-      this.hoverNight(e.target);
       this.props.cytoscapeStore.hoveredNode = null;
     });
 
@@ -595,11 +593,10 @@ class Cytoscape extends React.Component {
         }
         this.setLabels();
       });
+
       autorun(() => {
-        let hovered = this.cy.nodes(".hover-hood, .hover");
-        hovered.forEach(n => {
-          this.hoverNight(n);
-        });
+        let hoveredNode = this.cy.$(".hover");
+        if (hoveredNode) this.hoverNight(hoveredNode);
         if (this.props.cytoscapeStore.hoveredNode !== null) {
           this.hoverLight(this.cy.$id(this.props.cytoscapeStore.hoveredNode));
         }
