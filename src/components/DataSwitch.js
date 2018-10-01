@@ -1,6 +1,8 @@
 import React from "react";
 import { observer } from "mobx-react";
-// import cytoscapeStore from "../util/CytoscapeStore";
+import cytoscapeStore from "../util/CytoscapeStore";
+import { Range } from "rc-slider";
+import "rc-slider/assets/index.css";
 // import { autorun } from "mobx";
 import "./DataSwitch.css";
 
@@ -18,6 +20,9 @@ class DataSwitch extends React.Component {
       value: event.target.value
     });
     console.log(this.state.value);
+
+    // update the global store to notify which data should be filtered
+    cytoscapeStore.filterDataToDisplay = this.state.value;
   };
 
   handleSelect = item => {
@@ -26,14 +31,15 @@ class DataSwitch extends React.Component {
 
   render() {
     return (
-      <input
-        type="range"
-        class="slider"
-        min="0"
-        max="100"
-        value={this.state.value}
-        onChange={this.handleChange}
-      />
+      <div class="wrapper">
+        <p>Range with custom handle</p>
+        <Range
+          min={0}
+          max={20}
+          defaultValue={[3, 10]}
+          tipFormatter={value => `${value}%`}
+        />
+      </div>
     );
   }
 }
