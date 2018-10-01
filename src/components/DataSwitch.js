@@ -1,6 +1,6 @@
 import React from "react";
 import { observer } from "mobx-react";
-import cytoscapeStore from "../util/CytoscapeStore";
+// import cytoscapeStore from "../util/CytoscapeStore";
 // import { autorun } from "mobx";
 import "./DataSwitch.css";
 
@@ -12,16 +12,6 @@ class DataSwitch extends React.Component {
     };
   }
 
-  clickHandler(e, type) {}
-
-  componentDidMount() {
-    document.addEventListener("mousedown", this.handleClickOutside);
-  }
-
-  componentWillUnmount() {
-    document.removeEventListener("mousedown", this.handleClickOutside);
-  }
-
   handleChange = event => {
     this.setState({
       ...this.state,
@@ -30,27 +20,7 @@ class DataSwitch extends React.Component {
     console.log(this.state.value);
   };
 
-  setWrapperRef = node => {
-    this.wrapperRef = node;
-  };
-
-  handleClickOutside = event => {
-    if (this.wrapperRef && !this.wrapperRef.contains(event.target)) {
-      this.setState({ ...this.state, displayResults: false });
-    }
-  };
-
-  handleNodeHover = item => {
-    cytoscapeStore.hoveredNode = item.id;
-  };
-
-  handleNodeUnHover = () => {
-    cytoscapeStore.hoveredNode = null;
-  };
-
   handleSelect = item => {
-    cytoscapeStore.hoveredNode = null;
-    cytoscapeStore.selectedNode = item.id;
     this.setState({ ...this.state, displayResults: false, value: item.name });
   };
 
