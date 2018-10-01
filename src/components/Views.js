@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import SelectButton from "./SelectButton";
 import cytoscapeStore from "../util/CytoscapeStore";
 import layoutFactory from "../util/LayoutFactory";
@@ -9,13 +9,13 @@ class Views extends React.Component {
     this.state = {
       views: [
         {
-          name: "Projects",
-          id: "showProjects",
+          name: "Semi-Circle",
+          id: "showSegment",
           isChecked: true
         },
         {
-          name: "Programme",
-          id: "showSchools",
+          name: "Many-Circle",
+          id: "showCircles",
           isChecked: false
         },
         {
@@ -53,8 +53,25 @@ class Views extends React.Component {
   }
 
   render() {
+    let colabView = this.state.views[this.state.views.length - 1];
+    return (
+      <Fragment>
+        {this.createRadio()}
+        {/*{this.createMenu()}*/}
+        <SelectButton
+          key={colabView.id}
+          name={colabView.name}
+          id={colabView.id}
+          isChecked={colabView.isChecked}
+          clickHandler={event => this.clickHandler(event, colabView.id)}
+        />
+      </Fragment>
+    );
+  }
+
+  createRadio() {
     return this.state.views.map(elem => {
-      return (
+      return elem.name !== "Collaborators" ? (
         <SelectButton
           key={elem.id}
           name={elem.name}
@@ -62,7 +79,7 @@ class Views extends React.Component {
           isChecked={elem.isChecked}
           clickHandler={event => this.clickHandler(event, elem.id)}
         />
-      );
+      ) : null;
     });
   }
 }

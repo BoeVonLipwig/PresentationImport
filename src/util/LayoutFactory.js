@@ -17,9 +17,9 @@ class LayoutFactory {
 
   static computeLayout(l) {
     switch (l) {
-      case "showProjects":
+      case "showSegment":
         return this.projectLayout();
-      case "showSchools":
+      case "showCircles":
         return this.programmeLayout();
       case "showCollab":
         return this.collaboratorLayout();

@@ -1,7 +1,9 @@
 import { observable, decorate } from "mobx";
 
 class CytoscapeStore {
+  //stores the current layout
   layouts = null;
+  //stores the current special node type thats being focused on
   focusType = null;
   selectedNode = null;
   details = true;
