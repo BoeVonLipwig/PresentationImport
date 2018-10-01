@@ -29,3 +29,12 @@
   background: #4caf50;
   cursor: pointer;
 }
+
+.wrapper {
+  width: 30%;
+  margin: 50;
+}
+
+.wrapper p {
+  color: white;
+}

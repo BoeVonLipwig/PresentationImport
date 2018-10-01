@@ -1,86 +1,54 @@
 import React from "react";
 import { observer } from "mobx-react";
-import aidStore from "../util/AidStore";
 import cytoscapeStore from "../util/CytoscapeStore";
-import { autorun } from "mobx";
+import Slider from "rc-slider";
+import "rc-tooltip/assets/bootstrap.css";
+import "rc-slider/assets/index.css";
+// import { autorun } from "mobx";
 import "./DataSwitch.css";
-import Fuse from "fuse.js";
-import SearchResults from "./SearchResults";
+
+const createSliderWithTooltip = Slider.createSliderWithTooltip;
+const Range = createSliderWithTooltip(Slider.Range);
 
 class DataSwitch extends React.Component {
   constructor() {
     super();
-    let options = {
-      keys: ["name"]
-    };
-    this.fuse = new Fuse(cytoscapeStore.visNodesData, options);
     this.state = {
-      displayResults: true,
-      results: [],
       value: ""
     };
-  }
 
-  clickHandler(e, type) {
-    aidStore.aids.search = { display: "none" };
-  }
-
-  componentDidMount() {
-    autorun(() => {
-      this.fuse.setCollection(cytoscapeStore.visNodesData);
-    });
-    document.addEventListener("mousedown", this.handleClickOutside);
-  }
-
-  componentWillUnmount() {
-    document.removeEventListener("mousedown", this.handleClickOutside);
+    this.min = 0;
+    this.max = 1;
+    // hard coded currently, will change upon parser finishing
+    this.years = ["2016", "2017", "2018"];
   }
 
   handleChange = event => {
-    let results = this.fuse.search(event.target.value);
-    this.setState({
-      ...this.state,
-      results: results,
-      displayResults: true,
-      value: event.target.value
-    });
-    console.log(this.state.value);
-  };
+    this.min = event[0];
+    this.max = event[1];
 
-  setWrapperRef = node => {
-    this.wrapperRef = node;
-  };
-
-  handleClickOutside = event => {
-    if (this.wrapperRef && !this.wrapperRef.contains(event.target)) {
-      this.setState({ ...this.state, displayResults: false });
-    }
-  };
-
-  handleNodeHover = item => {
-    cytoscapeStore.hoveredNode = item.id;
-  };
-
-  handleNodeUnHover = () => {
-    cytoscapeStore.hoveredNode = null;
+    // update the global store to notify which data should be filtered
+    cytoscapeStore.minYear = this.years[event[0]];
+    cytoscapeStore.maxYear = this.years[event[1]];
   };
 
   handleSelect = item => {
-    cytoscapeStore.hoveredNode = null;
-    cytoscapeStore.selectedNode = item.id;
     this.setState({ ...this.state, displayResults: false, value: item.name });
   };
 
   render() {
     return (
-      <input
-        type="range"
-        class="slider"
-        min="0"
-        max="100"
-        value={this.state.value}
-        onChange={this.handleChange}
-      />
+      <div class="wrapper">
+        <p>
+          Range: {cytoscapeStore.minYear} - {cytoscapeStore.maxYear}
+        </p>
+        <Range
+          min={0}
+          max={2}
+          defaultValue={[0, 1]}
+          onChange={this.handleChange}
+        />
+      </div>
     );
   }
 }
