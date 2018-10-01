@@ -2,7 +2,7 @@ import csv
 import json
 import os
 from os import listdir
-from os.path import isfile, join
+from os.path import isfile, join, isdir
 
 
 ID = 1
@@ -11,10 +11,11 @@ ID = 1
 class Node:
     # webLink -> "hdawuidhaw.com"
     # bio -> "adawoiudoiudb"
-    def __init__(self, id, name, type, fields):
+    def __init__(self, id, name, type, year, fields):
         self.id = id
         self.name = name.strip()
         self.type = type.strip()
+        self.year = year
         self.fields = fields
         self.formatFields()
 
@@ -33,6 +34,11 @@ class Node:
                 setattr(self, k, newV)
             self.fields[k] = newV
             fieldNo += 1
+
+    def addYear(self, year):
+        if (self.name == 'Miriam Ross'):
+            print(year)
+        self.year = self.year + ',' + str(year)
 
     def equals(self, other):
         return self.name == other.name
@@ -69,15 +75,20 @@ class Key:
         self.type = "key"
 
 
-def getFileNames():
-    specialFiles = getFileNamesFromDirectory("data/specialNodes")
-    nodeFiles = getFileNamesFromDirectory("data/nodes")
-    views = getFileNamesFromDirectory("data")
-    return specialFiles, nodeFiles, views
+def getFileNamesFromDirectory(dir):
+    onlyfiles = [f for f in listdir(dir) if isfile(join(dir, f))]
+    return onlyfiles
+
+
+def getFileNames(dir):
+    specialFiles = getFileNamesFromDirectory(join(dir, "specialNodes"))
+    nodeFiles = getFileNamesFromDirectory(join(dir, "nodes"))
+    nodeFiles = [fileName for fileName in nodeFiles if fileName != 'roles.csv']
+    return specialFiles, nodeFiles
 
 
 def extractFileIntoList(file, path):
-    with open(path+file, 'r') as f:
+    with open(join(path,file), 'r') as f:
         reader = csv.reader(f)
         instances = list(reader)
     return instances[1:], instances[0]
@@ -93,25 +104,34 @@ def createKeysList(specialNodesNames, modifierNodes):
     return keys
 
 
-def createNodesFromFile(file, path):
+def updateExistingNode(allNodes, name, year):
+    for node in allNodes:
+        if node.name == name:
+            node.addYear(year)
+            return True
+    return False
+
+
+def createNodesFromFile(allNodes, year, file, path):
     nodes = list()
     global ID
     instances, metaData = extractFileIntoList(file, path)
     for i in instances:
         name = i[0]
-        type = file[:-4].lower()
-        fields = dict(zip(metaData[1:], i[1:]))
-        nodes.append(Node(ID, name, type, fields))
-        ID += 1
+        if (not updateExistingNode(allNodes, name, year)):
+            type = file[:-4].lower()
+            fields = dict(zip(metaData[1:], i[1:]))
+            nodes.append(Node(ID, name, type, year, fields))
+            ID += 1
 
     return nodes
 
 
-def createNodes(fn, path):
+def createNodes(allNodes, year, fileNames, path):
     # check if we have more than one file
     nodes = list()
-    for file in fn:
-        nodes.extend(createNodesFromFile(file, path))
+    for file in fileNames:
+        nodes.extend(createNodesFromFile(allNodes, year, file, path))
 
     return nodes
 
@@ -165,33 +185,43 @@ def createEdges(specialNodes, normalNodes, specialTypes):
     return edges
 
 
-def loadData():
-    # create nodes
+def loadData(dir):
     allNodes = list()
-    specialFN, nodesFN, viewsFN = getFileNames()
-    specialNodes = createNodes(specialFN, 'data/specialNodes/')
-    normalNodes = createNodes([nodesFN[0]], 'data/nodes/')
-    for node in normalNodes:
-        node.role = node.role.lower()
-    modifierNodes = createNodes([nodesFN[1]], 'data/nodes/')
-    allNodes.extend(specialNodes)
-    allNodes.extend(normalNodes)
+    allEdges = list()
+
+    years = [f for f in listdir(dir) if isdir(join(dir, f))]
+    specialFileNames, nodesFileNames = getFileNames(join(dir, years[0]))
+
+    modifierNodes = createNodes(allNodes, years[0], ['roles.csv'], join(dir, years[0], 'nodes'))
 
     # trim .csv
-    specialNames = [".".join(f.split(".")[:-1]).lower() for f in specialFN]
+    specialNames = [".".join(f.split(".")[:-1]).lower() for f in specialFileNames]
 
     # create list of keys
     keys = createKeysList(specialNames, modifierNodes)
 
-    # check validity of data
+    for year in years:
+        specialNodes = createNodes(allNodes, year, specialFileNames, join(dir, year, 'specialNodes'))
 
-    # Create edge objects
-    edges = createEdges(specialNodes, normalNodes, specialNames)
+        normalNodes = createNodes(allNodes, year, [nodesFileNames[0]], join(dir, year, 'nodes'))
+        for node in normalNodes:
+            node.role = node.role.lower()
+
+        # Check if the node already exists, same edge
+
+        allNodes.extend(specialNodes)
+        allNodes.extend(normalNodes)
+
+        # Create edge objects
+        #edges = createEdges(specialNodes, normalNodes, specialNames)
+
+        #allEdges.extend(edges)
+
 
     # Remove 'fields' dict from nodeSize
     [delattr(node, 'fields') for node in allNodes]
 
-    return allNodes, edges, keys
+    return allNodes, allEdges, keys
 
 
 def formatForCytoscape(nodes, edges, keyList):
@@ -232,13 +262,8 @@ def generateOutputFile(elements):
     jsonFile.close()
 
 
-def getFileNamesFromDirectory(dir):
-    onlyfiles = [f for f in listdir(dir) if isfile(join(dir, f))]
-    return onlyfiles
-
-
 if __name__ == '__main__':
-    nodes, edges, keys = loadData()
+    nodes, edges, keys = loadData('data')
 
     elements = formatForCytoscape(nodes, edges, keys)
 
