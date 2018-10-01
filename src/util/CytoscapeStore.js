@@ -2,6 +2,7 @@ import { observable, decorate } from "mobx";
 
 class CytoscapeStore {
   layouts = null;
+  focusType = null;
   selectedNode = null;
   details = true;
   hoveredNode = null;
@@ -10,8 +11,10 @@ class CytoscapeStore {
   specialTypes = [];
   showTutorial = false;
 }
+
 decorate(CytoscapeStore, {
   layouts: observable,
+  focusType: observable,
   selectedNode: observable,
   details: observable,
   hoveredNode: observable,

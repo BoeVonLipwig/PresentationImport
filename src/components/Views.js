@@ -53,7 +53,7 @@ class Views extends React.Component {
   }
 
   render() {
-    const items = this.state.views.map(elem => {
+    return this.state.views.map(elem => {
       return (
         <SelectButton
           key={elem.id}
@@ -64,7 +64,6 @@ class Views extends React.Component {
         />
       );
     });
-    return items;
   }
 }
 
