@@ -9,6 +9,8 @@ class CytoscapeStore {
   visNodesData = [];
   specialTypes = [];
   showTutorial = false;
+  minYear = 2016;
+  maxYear = 2017;
 }
 decorate(CytoscapeStore, {
   layouts: observable,
@@ -17,7 +19,9 @@ decorate(CytoscapeStore, {
   hoveredNode: observable,
   visNodesMap: observable,
   visNodesData: observable,
-  showTutorial: observable
+  showTutorial: observable,
+  minYear: observable,
+  maxYear: observable
 });
 
 const cytoscapeStore = new CytoscapeStore();

@@ -499,6 +499,9 @@ class Cytoscape extends React.Component {
       wheelSensitivity: 0.5
     });
 
+    this.props.cytoscapeStore.minYear = 2016;
+    this.props.cytoscapeStore.maxYear = 2018;
+
     this.props.cytoscapeStore.specialTypes = types.filter(
       type => !["key", "border", "person", "collab"].includes(type)
     );
@@ -581,6 +584,21 @@ class Cytoscape extends React.Component {
         this.cy.fit(50);
         this.setVisNodes();
         if (this.props.cytoscapeStore.selectedNode !== null) this.reframe();
+      });
+
+      autorun(() => {
+        this.cy.elements().forEach(ele => {
+          let years = ele.data("years").split(",");
+          for (let year in years) {
+            if (
+              year < this.props.cytoscapeStore.minYear ||
+              year > this.props.cytoscapeStore.maxYear
+            ) {
+              ele.addClass("filtered");
+              break;
+            }
+          }
+        });
       });
 
       autorun(() => {
