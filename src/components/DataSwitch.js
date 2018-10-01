@@ -1,34 +1,20 @@
 import React from "react";
 import { observer } from "mobx-react";
-import aidStore from "../util/AidStore";
 import cytoscapeStore from "../util/CytoscapeStore";
-import { autorun } from "mobx";
+// import { autorun } from "mobx";
 import "./DataSwitch.css";
-import Fuse from "fuse.js";
-import SearchResults from "./SearchResults";
 
 class DataSwitch extends React.Component {
   constructor() {
     super();
-    let options = {
-      keys: ["name"]
-    };
-    this.fuse = new Fuse(cytoscapeStore.visNodesData, options);
     this.state = {
-      displayResults: true,
-      results: [],
       value: ""
     };
   }
 
-  clickHandler(e, type) {
-    aidStore.aids.search = { display: "none" };
-  }
+  clickHandler(e, type) {}
 
   componentDidMount() {
-    autorun(() => {
-      this.fuse.setCollection(cytoscapeStore.visNodesData);
-    });
     document.addEventListener("mousedown", this.handleClickOutside);
   }
 
@@ -37,11 +23,8 @@ class DataSwitch extends React.Component {
   }
 
   handleChange = event => {
-    let results = this.fuse.search(event.target.value);
     this.setState({
       ...this.state,
-      results: results,
-      displayResults: true,
       value: event.target.value
     });
     console.log(this.state.value);
