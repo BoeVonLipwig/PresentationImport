@@ -8,12 +8,24 @@ class ProgrammeLayout extends Layout {
   static schoolBB;
   static maxClusterSize;
 
-  static spreadSchools(forceRadius) {
+  static determineFocusGroup(focus) {
+    if (focus === "school") {
+      return this.schoolNodes;
+    } else if (focus === "project") {
+      return this.projectNodes;
+    }
+    console.log("failed focus check");
+    return this.schoolNodes;
+  }
+
+  static spreadFocusGroup(forceRadius, focus) {
     this.schoolBB.w = 0;
     this.schoolBB.h = 0;
     let mSC = 0;
 
-    this.schoolNodes.forEach(function(ele) {
+    let nodesToSpread = this.determineFocusGroup(focus);
+
+    nodesToSpread.forEach(function(ele) {
       let node = ele;
       let nhood = node.closedNeighborhood();
       let npos = node.position();
@@ -51,7 +63,7 @@ class ProgrammeLayout extends Layout {
     });
   }
 
-  static init() {
+  static init(focus) {
     this.cy
       .elements()
       .selectify()
@@ -61,6 +73,7 @@ class ProgrammeLayout extends Layout {
     let elesFilter = this.cy.elements('[type = "null"]');
 
     this.schoolNodes = this.cy.nodes('[type = "school"]');
+    this.projectNodes = this.cy.nodes('[type = "project"]');
 
     let emptySchoolNodes = this.schoolNodes.filter(function(ele) {
       return (
@@ -90,12 +103,12 @@ class ProgrammeLayout extends Layout {
     this.schoolBB = { w: 0, h: 0 };
     this.maxClusterSize = 0;
 
-    this.spreadSchools();
+    this.spreadFocusGroup(false, focus);
 
-    this.projectRadius = this.circleRadius(this.cy.nodes('[type = "project"]'));
+    // this.projectRadius = this.circleRadius(this.projectNodes);
 
     this.schoolRadius = this.circleRadius(
-      this.schoolNodes,
+      this.determineFocusGroup(focus),
       this.maxClusterSize,
       200
     );
@@ -120,15 +133,16 @@ class ProgrammeLayout extends Layout {
     });
   }
 
-  static getLayout() {
+  static getLayout(focus) {
     this.clearStyles();
-    this.init();
-    let schoolLayout = this.cy.elements('[type = "school"]').layout({
+    this.init(focus);
+    let circleLayout = this.determineFocusGroup(focus).layout({
       name: "circle",
       avoidOverlap: false,
       padding: this.layoutPadding,
       startAngle:
-        Math.PI * 2 / this.schoolNodes.size() / 2 * (this.schoolNum % 2) +
+        ((Math.PI * 2) / this.determineFocusGroup(focus).size() / 2) *
+          (this.schoolNum % 2) +
         Math.PI / 2,
       boundingBox: {
         x1: 0 - this.schoolRadius,
@@ -142,26 +156,26 @@ class ProgrammeLayout extends Layout {
         return a.data("order") - b.data("order");
       }
     });
-    let projectLayout = this.cy.nodes('[type = "project"]').layout({
-      name: "circle",
-      avoidOverlap: false,
-      padding: this.layoutPadding,
-      boundingBox: {
-        x1: 0 - this.projectRadius,
-        y1: 0 - this.projectRadius,
-        w: this.projectRadius * 2,
-        h: this.projectRadius * 2
-      },
-      radius: this.projectRadius,
-      nodeDimensionsIncludeLabels: false
-    });
+    // let projectLayout = this.cy.nodes('[type = "project"]').layout({
+    //   name: "circle",
+    //   avoidOverlap: false,
+    //   padding: this.layoutPadding,
+    //   boundingBox: {
+    //     x1: 0 - this.projectRadius,
+    //     y1: 0 - this.projectRadius,
+    //     w: this.projectRadius * 2,
+    //     h: this.projectRadius * 2
+    //   },
+    //   radius: this.projectRadius,
+    //   nodeDimensionsIncludeLabels: false
+    // });
 
-    projectLayout.run();
-    schoolLayout.run();
+    // projectLayout.run();
+    circleLayout.run();
 
-    this.spreadSchools(this.maxClusterSize / 2);
+    this.spreadFocusGroup(this.maxClusterSize / 2, focus);
 
-    return [schoolLayout, projectLayout];
+    return [circleLayout];
   }
 }
 
