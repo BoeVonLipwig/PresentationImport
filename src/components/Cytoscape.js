@@ -515,7 +515,7 @@ class Cytoscape extends React.Component {
       wheelSensitivity: 0.5
     });
 
-    this.props.cytoscapeStore.minYear = 2016;
+    this.props.cytoscapeStore.minYear = 2017;
     this.props.cytoscapeStore.maxYear = 2018;
 
     this.props.cytoscapeStore.specialTypes = types.filter(
@@ -599,22 +599,16 @@ class Cytoscape extends React.Component {
         this.cy.fit(50);
         this.setVisNodes();
         this.arrangeKey();
+        this.checkYears();
         if (this.props.cytoscapeStore.selectedNode !== null) this.reframe();
       });
 
       autorun(() => {
-        this.cy.elements().forEach(ele => {
-          let years = ele.data("years").split(",");
-          for (let year in years) {
-            if (
-              year < this.props.cytoscapeStore.minYear ||
-              year > this.props.cytoscapeStore.maxYear
-            ) {
-              ele.addClass("filtered");
-              break;
-            }
-          }
-        });
+        if (
+          this.props.cytoscapeStore.minYear <= this.props.cytoscapeStore.maxYear
+        ) {
+          this.checkYears();
+        }
       });
 
       autorun(() => {
@@ -635,6 +629,21 @@ class Cytoscape extends React.Component {
           this.hoverLight(this.cy.$id(this.props.cytoscapeStore.hoveredNode));
         }
       });
+    });
+  }
+
+  checkYears() {
+    this.cy.nodes().forEach(ele => {
+      let years = ele.data("years").split(",");
+      for (let year in years) {
+        if (
+          year < this.props.cytoscapeStore.minYear ||
+          year > this.props.cytoscapeStore.maxYear
+        ) {
+          ele.addClass("filtered");
+          break;
+        }
+      }
     });
   }
 
