@@ -1,6 +1,7 @@
 import React, { Fragment } from "react";
 import "./DropDownMenu.css";
 import HelpButton from "./HelpButton";
+import Button from "./Button";
 
 class DropDownMenu extends React.Component {
   constructor(props) {
@@ -46,6 +47,10 @@ class DropDownMenu extends React.Component {
     this.setState({ ...this.state, showMenu: !this.state.showMenu });
   };
 
+  render() {
+    return this.createButton(this.state.showMenu);
+  }
+
   createButton = menu => {
     const Selected = this.state.selected;
     let divClass = "";
@@ -81,19 +86,11 @@ class DropDownMenu extends React.Component {
     );
   };
 
-  render() {
-    return this.createButton(this.state.showMenu);
-  }
-
   allButtons(buttons) {
-    return buttons.forEach(button => {
-      <div className="" id={"contact-button"} onClick={this.onClick}>
-        {button.data}
-      </div>;
+    return buttons.forEach(name => {
+      <Button name />;
     });
   }
-
-  onClick() {}
 }
 
 export default DropDownMenu;
