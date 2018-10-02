@@ -70,10 +70,15 @@ class ProgrammeLayout extends Layout {
     let nonFocus = this.determineNonFocusGroup(focus);
     let nonFocusString = '[type = "' + nonFocus + '"]';
     let focusString = '[type = "' + focus + '"]';
-    let elesHide = this.cy.elements('edge[type = "collab"]');
-    let elesFilter = this.cy.elements('[type = "null"]');
+    let elesFilter = this.cy.elements(nonFocusString);
 
     this.focusNodes = this.cy.nodes(focusString);
+
+    let activePeople = this.cy
+      .nodes(focusString)
+      .closedNeighborhood()
+      .nodes('[type = "person"]');
+    let nonActivePeople = this.cy.nodes('[type = "person"]').not(activePeople);
 
     let emptyFocusNodes = this.focusNodes.filter(function(ele) {
       return (
@@ -89,16 +94,8 @@ class ProgrammeLayout extends Layout {
     this.focusNum = this.focusNodes.size();
     let sn = this.focusNodes.size();
 
-    elesFilter = elesFilter.add(emptyFocusNodes);
-
-    elesHide.addClass("hidden");
+    elesFilter = elesFilter.add(nonActivePeople);
     elesFilter.addClass("filtered");
-    elesHide.unselectify().ungrabify();
-
-    elesHide.position({
-      x: this.cy.width() / 2,
-      y: -50
-    });
 
     this.schoolBB = { w: 0, h: 0 };
     this.maxClusterSize = 0;
@@ -131,6 +128,9 @@ class ProgrammeLayout extends Layout {
         ((i % 2) * -2 + 1) * (Math.ceil(sn / 2) - Math.ceil(i / 2));
       node.data("order", order);
     });
+
+    // let hiddenNodes = this.cy.nodes().not(this.focusNodes);
+    // hiddenNodes.addClass("filtered");
   }
 
   static getLayout() {
