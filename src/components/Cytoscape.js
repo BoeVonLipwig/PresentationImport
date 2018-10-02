@@ -574,6 +574,7 @@ class Cytoscape extends React.Component {
       this.props.cytoscapeStore.layouts = ProjectLayout.getLayout();
 
       autorun(() => {
+        console.log("run next layout");
         this.props.cytoscapeStore.layouts.forEach(layout => {
           layout.run();
         });

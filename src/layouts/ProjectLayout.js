@@ -6,7 +6,7 @@ class ProjectLayout extends Layout {
   static personRadius;
   static projectRadius;
 
-  static init() {
+  static init(focus) {
     this.cy
       .elements()
       .selectify()
@@ -48,23 +48,32 @@ class ProjectLayout extends Layout {
         })
         .anySame(nonActivePeople) === true
     ) {
-      this.cy.elements('[type = "school"]').addClass("filtered");
+      this.cy
+        .nodes("[type = " + this.getNonFocus(focus) + "]")
+        .addClass("filtered");
       // this.cy.$(':selected').removeClass('filtered').addClass('hidden')
     }
 
     this.personRadius = this.circleRadius(this.activePeople) * 2;
-    this.projectRadius =
-      this.circleRadius(this.cy.nodes('[type = "project"]')) * 2;
+    this.focusGroupRadius =
+      this.circleRadius(this.cy.nodes("[type = " + focus + "]")) * 2;
 
-    if (this.projectRadius < this.personRadius + 250) {
-      this.projectRadius = this.personRadius + 250;
+    if (this.focusGroupRadius < this.personRadius + 250) {
+      this.focusGroupRadius = this.personRadius + 250;
     }
   }
 
-  static getLayout() {
+  static getNonFocus(focus) {
+    if (focus === "school") {
+      return "project";
+    }
+    return "school";
+  }
+
+  static getLayout(focus) {
     this.clearStyles();
     this.cy.nodes().positions({ x: 0, y: 0 });
-    this.init();
+    this.init(focus);
 
     return [
       this.activePeople.layout({
@@ -83,7 +92,7 @@ class ProjectLayout extends Layout {
         nodeDimensionsIncludeLabels: false,
         sort: this.sortBy("normal")
       }),
-      this.projects.layout({
+      this.cy.nodes("[type = " + focus + "]").layout({
         name: "circle",
         avoidOverlap: false,
         padding: this.layoutPadding,
