@@ -2,11 +2,14 @@ import React, { Fragment } from "react";
 import SelectButton from "./SelectButton";
 import cytoscapeStore from "../util/CytoscapeStore";
 import layoutFactory from "../util/LayoutFactory";
+import { observer } from "mobx-react";
+import DropDownMenu from "./DropDownMenu";
 
 class Views extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      hasTypes: false,
       views: [
         {
           name: "Semi-Circle",
@@ -57,7 +60,7 @@ class Views extends React.Component {
     return (
       <Fragment>
         {this.createRadio()}
-        {/*{this.createMenu()}*/}
+        {this.createMenu(cytoscapeStore.specialTypes.$mobx.values)}
         <SelectButton
           key={colabView.id}
           name={colabView.name}
@@ -70,7 +73,6 @@ class Views extends React.Component {
   }
 
   createRadio() {
-    console.log(cytoscapeStore.specialTypes);
     return this.state.views.map(elem => {
       return elem.name !== "Collaborators" ? (
         <SelectButton
@@ -83,6 +85,11 @@ class Views extends React.Component {
       ) : null;
     });
   }
+
+  createMenu(cyArray) {
+    console.log(cyArray);
+    return cyArray.length <= 0 ? <DropDownMenu data={cyArray} /> : null;
+  }
 }
 
-export default Views;
+export default observer(Views);

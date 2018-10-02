@@ -1,14 +1,14 @@
-import React from "react";
-import "./ContactButton.css";
+import React, { Fragment } from "react";
+import "./DropDownMenu.css";
 import HelpButton from "./HelpButton";
 
-class ContactButton extends React.Component {
+class DropDownMenu extends React.Component {
   constructor(props) {
     super(props);
     if (this.props.clickHandler) {
       this.buttonClicked = this.props.clickHandler;
     }
-    this.buttons = [<HelpButton parent={this} menu={true} />];
+    this.buttons = this.props.data;
     this.setWrapperRef = this.setWrapperRef.bind(this);
     this.handleClickOutside = this.handleClickOutside.bind(this);
     this.state = {
@@ -53,7 +53,7 @@ class ContactButton extends React.Component {
       divClass = "contact-menu-selected";
     }
     return (
-      <React.Fragment>
+      <Fragment>
         <div ref={this.setWrapperRef}>
           <div
             id="contact-button"
@@ -64,7 +64,7 @@ class ContactButton extends React.Component {
           </div>
           {menu ? this.createMenu() : null}
         </div>
-      </React.Fragment>
+      </Fragment>
     );
   };
 
@@ -85,7 +85,15 @@ class ContactButton extends React.Component {
     return this.createButton(this.state.showMenu);
   }
 
-  allButtons(buttons) {}
+  allButtons(buttons) {
+    return buttons.forEach(button => {
+      <div className="" id={"contact-button"} onClick={this.onClick}>
+        {button.data}
+      </div>;
+    });
+  }
+
+  onClick() {}
 }
 
-export default ContactButton;
+export default DropDownMenu;

@@ -22,6 +22,7 @@ decorate(CytoscapeStore, {
   hoveredNode: observable,
   visNodesMap: observable,
   visNodesData: observable,
+  specialTypes: observable,
   showTutorial: observable
 });
 

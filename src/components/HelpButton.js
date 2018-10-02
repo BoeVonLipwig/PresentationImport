@@ -1,6 +1,7 @@
 import React from "react";
 import cytoscapeStore from "../util/CytoscapeStore";
 import "./HelpButton.css";
+import "./Button.css";
 
 class HelpButton extends React.Component {
   svg() {
