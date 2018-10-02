@@ -2,30 +2,43 @@ import Layout from "./Layout";
 
 class ProjectLayout extends Layout {
   static activePeople;
-  static projects;
+  static focus;
   static personRadius;
   static projectRadius;
 
+  static determineNonFocusGroup(focus) {
+    if (focus === "school") {
+      return "project";
+    } else if (focus === "project") {
+      return "school";
+    }
+    console.log("failed focus check");
+    return "project";
+  }
+
   static init(focus) {
+    let focusString = '[type = "' + focus + '"]';
+    let nonFocus = this.determineNonFocusGroup(focus);
+    let nonFocusString = '[type = "' + nonFocus + '"]';
     this.cy
       .elements()
       .selectify()
       .grabify();
-    let elesHide = this.cy.elements('edge[type = "collab"], [type = "school"]');
+    let elesHide = this.cy.elements('edge[type = "collab"], ' + nonFocusString);
     let elesFilter = this.cy.elements('edge[type = "collab"]');
 
     this.activePeople = this.cy
-      .nodes('[type = "project"]')
+      .nodes(focusString)
       .closedNeighborhood()
       .nodes('[type = "person"]');
     let nonActivePeople = this.cy
       .nodes('[type = "person"]')
       .not(this.activePeople);
 
-    this.projects = this.cy.nodes('[type = "project"]');
+    this.focus = this.cy.nodes(focusString);
 
-    let emptySchoolNodes = this.cy
-      .elements('[type = "school"]')
+    let emptyNonFocusNodes = this.cy
+      .elements(nonFocusString)
       .filter(function(ele) {
         return (
           ele
@@ -36,7 +49,7 @@ class ProjectLayout extends Layout {
       });
 
     elesFilter = elesFilter.add(nonActivePeople);
-    elesFilter = elesFilter.add(emptySchoolNodes);
+    elesFilter = elesFilter.add(emptyNonFocusNodes);
     elesHide.addClass("hidden");
     elesFilter.addClass("filtered");
     elesHide.unselectify().ungrabify();
@@ -48,29 +61,20 @@ class ProjectLayout extends Layout {
         })
         .anySame(nonActivePeople) === true
     ) {
-      this.cy
-        .nodes("[type = " + this.getNonFocus(focus) + "]")
-        .addClass("filtered");
+      this.cy.elements(nonFocusString).addClass("filtered");
       // this.cy.$(':selected').removeClass('filtered').addClass('hidden')
     }
 
     this.personRadius = this.circleRadius(this.activePeople) * 2;
-    this.focusGroupRadius =
-      this.circleRadius(this.cy.nodes("[type = " + focus + "]")) * 2;
+    this.projectRadius = this.circleRadius(this.cy.nodes(focusString)) * 2;
 
-    if (this.focusGroupRadius < this.personRadius + 250) {
-      this.focusGroupRadius = this.personRadius + 250;
+    if (this.projectRadius < this.personRadius + 250) {
+      this.projectRadius = this.personRadius + 250;
     }
   }
 
-  static getNonFocus(focus) {
-    if (focus === "school") {
-      return "project";
-    }
-    return "school";
-  }
-
-  static getLayout(focus) {
+  static getLayout() {
+    let focus = "project";
     this.clearStyles();
     this.cy.nodes().positions({ x: 0, y: 0 });
     this.init(focus);
@@ -92,7 +96,7 @@ class ProjectLayout extends Layout {
         nodeDimensionsIncludeLabels: false,
         sort: this.sortBy("normal")
       }),
-      this.cy.nodes("[type = " + focus + "]").layout({
+      this.focus.layout({
         name: "circle",
         avoidOverlap: false,
         padding: this.layoutPadding,
