@@ -5,10 +5,9 @@ import { observer } from "mobx-react";
 import "./TopBar.css";
 
 class TopBar extends React.Component {
-  clickHandler(e) {
+  clickHandler() {
     const newDict = { display: "none" };
     this.setState(Object.assign({}, this.state, newDict));
-    alert("Hello");
   }
 
   render() {

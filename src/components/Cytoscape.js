@@ -1,4 +1,5 @@
 import React from "react";
+import cytoscapeStore from "../util/CytoscapeStore";
 import cytoscape from "cytoscape";
 import data from "../util/NetworkRequest";
 import Layout from "../layouts/Layout";
@@ -89,8 +90,8 @@ class Cytoscape extends React.Component {
         visNodesData.push(node);
         visNodesMap[node.id] = node;
       });
-    this.props.cytoscapeStore.visNodesMap = visNodesMap;
-    this.props.cytoscapeStore.visNodesData = visNodesData;
+    cytoscapeStore.visNodesMap = visNodesMap;
+    cytoscapeStore.visNodesData = visNodesData;
   }
 
   setLabels() {
@@ -200,8 +201,8 @@ class Cytoscape extends React.Component {
     this.nhood = nhood;
 
     let dataType = node.data("type");
-    if (this.props.cytoscapeStore.specialTypes.includes(dataType)) {
-      let unselectedSpecialFilters = this.props.cytoscapeStore.specialTypes
+    if (cytoscapeStore.specialTypes.includes(dataType)) {
+      let unselectedSpecialFilters = cytoscapeStore.specialTypes
         .filter(type => type !== dataType)
         .map(type => `[type = '${type}']`);
       let jointFilter = unselectedSpecialFilters.join(",");
@@ -209,7 +210,7 @@ class Cytoscape extends React.Component {
 
       this.spreadNodes(relatedSpecialNodes);
       nhood = nhood.add(relatedSpecialNodes);
-      this.props.cytoscapeStore.nhood = nhood;
+      cytoscapeStore.nhood = nhood;
     }
   }
 
@@ -280,7 +281,7 @@ class Cytoscape extends React.Component {
   reframe() {
     let nhood = this.nhood;
     let layoutPadding = Layout.layoutPadding;
-    let details = this.props.cytoscapeStore.details;
+    let details = cytoscapeStore.details;
 
     this.cy.batch(() => {
       //batch processess multiple eles at once
@@ -515,7 +516,7 @@ class Cytoscape extends React.Component {
       wheelSensitivity: 0.5
     });
 
-    this.props.cytoscapeStore.specialTypes = types.filter(
+    cytoscapeStore.specialTypes = types.filter(
       type => !["key", "border", "person", "collab"].includes(type)
     );
 
@@ -525,7 +526,7 @@ class Cytoscape extends React.Component {
     //ideally this object should eventually be parsed from a csv
     //temp {
     let nodeOverrides = [];
-    this.props.cytoscapeStore.specialTypes.forEach(type => {
+    cytoscapeStore.specialTypes.forEach(type => {
       nodeOverrides.push({
         label: type,
         subtype: [type],
@@ -536,13 +537,13 @@ class Cytoscape extends React.Component {
     let styleMaster = {
       colorScheme: 0, // num 0 - 3, selects one of 4 color schemes from an array defined in Colors.json(see Colors.pdf for visual guide)
       //color overrides for css and cycss variables
-      //accepts only hex color values (#fff) empty and faulty field will use defined in the selected colorscheme
+      //accepts only hex color values (#fff) empty and faulty field will use defined in the selected colorScheme
       fg: "", //foreground color : text, tickboxes, logo etc
       bg: "", //background color
       hl: "", //highlight color : tooltip, html links, scrollbar hover etc
-      ll: "", //lowlight color : greyed out text, dropshadows, scrollbar track etc
-      //nodeOverride, can override automatic styling and labels (addkey) for nodes
-      // can be done by type(person, project, school) or subtype/role(Hounours Student, Academic Staff, etc)
+      ll: "", //lowlight color : greyed out text, drop shadows, scrollbar track etc
+      //nodeOverride, can override automatic styling and labels (addKey) for nodes
+      // can be done by type(person, project, school) or subtype/role(Honours Student, Academic Staff, etc)
       nodeOverride: nodeOverrides
     };
 
@@ -561,7 +562,7 @@ class Cytoscape extends React.Component {
         ...this.state,
         cursor: "cy_pointer"
       });
-      this.props.cytoscapeStore.hoveredNode = e.target.data("id");
+      cytoscapeStore.hoveredNode = e.target.data("id");
     });
 
     this.cy.on("mouseout", "node", e => {
@@ -569,15 +570,15 @@ class Cytoscape extends React.Component {
         ...this.state,
         cursor: "cy_default"
       });
-      this.props.cytoscapeStore.hoveredNode = null;
+      cytoscapeStore.hoveredNode = null;
     });
 
     this.cy.on("select", "node", e => {
-      this.props.cytoscapeStore.selectedNode = e.target.data("id");
+      cytoscapeStore.selectedNode = e.target.data("id");
     });
 
     this.cy.on("unselect", "node", e => {
-      this.props.cytoscapeStore.selectedNode = null;
+      cytoscapeStore.selectedNode = null;
     });
 
     this.cy.on("zoom", () => {
@@ -586,25 +587,25 @@ class Cytoscape extends React.Component {
 
     this.cy.ready(() => {
       Layout.cy = this.cy;
-      Layout.specialTypes = this.props.cytoscapeStore.specialTypes;
-      this.props.cytoscapeStore.layouts = ProjectLayout.getLayout();
+      Layout.specialTypes = cytoscapeStore.specialTypes;
+      cytoscapeStore.layouts = ProjectLayout.getLayout();
 
       autorun(() => {
-        this.props.cytoscapeStore.layouts.forEach(layout => {
+        cytoscapeStore.layouts.forEach(layout => {
           layout.run();
         });
         this.arrangeKey();
         this.cy.fit(50);
         this.setVisNodes();
-        if (this.props.cytoscapeStore.selectedNode !== null) this.reframe();
+        if (cytoscapeStore.selectedNode !== null) this.reframe();
       });
 
       autorun(() => {
         this.clear();
-        if (this.props.cytoscapeStore.selectedNode === null) {
+        if (cytoscapeStore.selectedNode === null) {
           this.fitAll();
         } else {
-          this.highlight(this.cy.$id(this.props.cytoscapeStore.selectedNode));
+          this.highlight(this.cy.$id(cytoscapeStore.selectedNode));
           this.reframe();
         }
         this.setLabels();
@@ -613,8 +614,8 @@ class Cytoscape extends React.Component {
       autorun(() => {
         let hoveredNode = this.cy.$(".hover");
         if (hoveredNode) this.hoverNight(hoveredNode);
-        if (this.props.cytoscapeStore.hoveredNode !== null) {
-          this.hoverLight(this.cy.$id(this.props.cytoscapeStore.hoveredNode));
+        if (cytoscapeStore.hoveredNode !== null) {
+          this.hoverLight(this.cy.$id(cytoscapeStore.hoveredNode));
         }
       });
     });
