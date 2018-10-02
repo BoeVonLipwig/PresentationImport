@@ -1,4 +1,5 @@
 import Layout from "./Layout";
+import cytoscapeStore from "../util/CytoscapeStore";
 
 class ProgrammeLayout extends Layout {
   static focusNodes;
@@ -134,7 +135,7 @@ class ProgrammeLayout extends Layout {
   }
 
   static getLayout() {
-    let focus = "school";
+    let focus = cytoscapeStore.focusType;
     let nonFocus = this.determineNonFocusGroup(focus);
 
     this.clearStyles();

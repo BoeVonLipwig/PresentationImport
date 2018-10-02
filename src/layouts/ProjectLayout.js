@@ -1,4 +1,5 @@
 import Layout from "./Layout";
+import cytoscapeStore from "../util/CytoscapeStore";
 
 class ProjectLayout extends Layout {
   static activePeople;
@@ -74,7 +75,7 @@ class ProjectLayout extends Layout {
   }
 
   static getLayout() {
-    let focus = "project";
+    let focus = cytoscapeStore.focusType;
     this.clearStyles();
     this.cy.nodes().positions({ x: 0, y: 0 });
     this.init(focus);
