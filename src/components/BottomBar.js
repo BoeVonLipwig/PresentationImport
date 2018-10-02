@@ -1,9 +1,9 @@
 import React from "react";
 import Search from "./Search";
 import logo from "../assets/vic-logo.svg";
-import ContactButton from "./ContactButton";
 import { observer } from "mobx-react";
 import "./BottomBar.css";
+import HelpButton from "./HelpButton";
 
 class BottomBar extends React.Component {
   render() {
@@ -17,8 +17,7 @@ class BottomBar extends React.Component {
             <img src={logo} id="vuw-logo" alt="Connected Worlds Logo" />
           </div>
         </div>
-
-        <ContactButton />
+        <HelpButton />
       </div>
     );
   }
