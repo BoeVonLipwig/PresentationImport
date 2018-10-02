@@ -1,8 +1,6 @@
 import React from "react";
 import "./ContactButton.css";
-import GithubButton from "./menu/GithubButton";
-import MailButton from "./menu/MailButton";
-import HelpButton from "./menu/HelpButton";
+import HelpButton from "./HelpButton";
 
 class ContactButton extends React.Component {
   constructor(props) {
@@ -10,16 +8,12 @@ class ContactButton extends React.Component {
     if (this.props.clickHandler) {
       this.buttonClicked = this.props.clickHandler;
     }
-    this.buttons = [
-      <HelpButton parent={this} menu={true} />,
-      <MailButton parent={this} menu={true} />,
-      <GithubButton parent={this} menu={true} />
-    ];
+    this.buttons = [<HelpButton parent={this} menu={true} />];
     this.setWrapperRef = this.setWrapperRef.bind(this);
     this.handleClickOutside = this.handleClickOutside.bind(this);
     this.state = {
       showMenu: false,
-      selected: GithubButton
+      selected: HelpButton
     };
   }
 
@@ -27,6 +21,7 @@ class ContactButton extends React.Component {
     document.addEventListener("mousedown", this.handleClickOutside);
   }
 
+  // noinspection SpellCheckingInspection
   componentWillUnmount() {
     document.removeEventListener("mousedown", this.handleClickOutside);
   }
@@ -80,9 +75,7 @@ class ContactButton extends React.Component {
           id="contact-menu"
           className="ui-menu ui-corner-bottom ui-widget ui-widget-content menu-ul"
         >
-          {this.buttons[0]}
-          {this.buttons[1]}
-          {this.buttons[2]}
+          {this.allButtons(this.buttons)}
         </ul>
       </div>
     );
@@ -91,6 +84,8 @@ class ContactButton extends React.Component {
   render() {
     return this.createButton(this.state.showMenu);
   }
+
+  allButtons(buttons) {}
 }
 
 export default ContactButton;
