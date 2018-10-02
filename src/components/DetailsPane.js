@@ -13,7 +13,7 @@ class DetailsPane extends React.Component {
     };
   }
 
-  clickHandler(e) {
+  clickHandler() {
     this.setState({
       ...this.state,
       isChecked: !this.state.isChecked

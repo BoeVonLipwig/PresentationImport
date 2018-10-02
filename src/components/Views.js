@@ -70,6 +70,7 @@ class Views extends React.Component {
   }
 
   createRadio() {
+    console.log(cytoscapeStore.specialTypes);
     return this.state.views.map(elem => {
       return elem.name !== "Collaborators" ? (
         <SelectButton

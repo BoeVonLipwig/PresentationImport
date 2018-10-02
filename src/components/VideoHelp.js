@@ -4,7 +4,7 @@ import cytoscapeStore from "../util/CytoscapeStore";
 import "./VideoHelp.css";
 
 class VideoHelp extends React.Component {
-  clickHandler = (e, type) => {
+  clickHandler = () => {
     cytoscapeStore.showTutorial = false;
   };
 
@@ -14,9 +14,9 @@ class VideoHelp extends React.Component {
         <iframe
           title="Youtube Video"
           src="https://www.youtube.com/embed/ScMzIvxBSi4"
-          frameborder="0"
+          frameBorder="0"
           allow="autoplay; encrypted-media"
-          allowfullscreen
+          allowFullScreen
         />
       </div>
     );
