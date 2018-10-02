@@ -28,7 +28,7 @@ class Node:
                     newV = list()
                 else:
                     newV = v.split(",")
-                    newV = map(str.strip, newV)
+                    newV = list(map(str.strip, newV))
                     self.fields[k] = newV
             else:
                 setattr(self, k, newV)
@@ -111,21 +111,17 @@ def createNormalEdges(allEdges, normalNodes, year):
     for node in normalNodes:
         nodeIdMap[node.name] = node.id
 
-    # print("-------------------")
-    # print(normalNodes)
-
     for node in normalNodes:
-        if node.id == 40:
-            print(node)
         for collaborator in node.fields['collaborators']:
-            print(collaborator)
-            colNodeId = nodeIdMap[collaborator]
+            try:
+                colNodeId = nodeIdMap[collaborator]
+            except KeyError:
+                print(node)
+                print(collaborator)
             edge = Edge(ID, node.id, colNodeId, "collab", year)
             ID += 1
             #print(edge)
             if edge in allEdges:
-                #print('---')
-                #print(edge)
                 existingEdge = allEdges[allEdges.index(edge)]
                 existingEdge.addYear(year)
             elif edge not in edges:
@@ -277,7 +273,7 @@ def loadData(dir):
 
     for year in years:
         # Create node objects
-        print("----" + year + "------")
+        print("\n\n----" + year + "------\n\n")
         specialNodes = createSpecialNodes(allNodes, year, specialFileNames, join(dir, year, 'specialNodes'))
         normalNodes = createNodes(allNodes, allEdges, specialNodes, year, [nodesFileNames[0]], join(dir, year, 'nodes'))
         for node in normalNodes:
@@ -285,6 +281,8 @@ def loadData(dir):
 
         # Create edge objects
         createNormalEdges(allEdges, normalNodes, year)
+
+
 
     # Remove 'fields' dict from nodeSize
     [delattr(node, 'fields') for node in allNodes]
