@@ -143,8 +143,24 @@ class Cytoscape extends React.Component {
   }
 
   arrangeKey() {
+    let hiddenTypes = [];
+    // Get the types of nodes that are hidden using the "type" tag in the data
+    this.cy.elements(".hidden").forEach(ele => {
+      if (!hiddenTypes.includes(ele.data("type"))) {
+        hiddenTypes.push(ele.data("type"));
+      }
+    });
+    //The "role" tag on the keys corresponds to the "type" tag of the data it represents,
+    //so hide all keys the have "role" tags corresponding to a hidden nodes "type" tag
+    this.keys.forEach(key => {
+      if (hiddenTypes.includes(key.data("role"))) {
+        key.addClass("filtered");
+      }
+    });
+    this.keys = this.cy.elements('[type = "key"]').not(".filtered");
     let maxLabelWidth = this.getMaxLabelWidth(this.keys);
     let nodeHeight = this.keys.height();
+
     let bboxIgnore = this.cy.elements(
       '.hidden, .filtered, [type = "key"], [type = "border"]'
     );
@@ -580,9 +596,9 @@ class Cytoscape extends React.Component {
         this.props.cytoscapeStore.layouts.forEach(layout => {
           layout.run();
         });
-        this.arrangeKey();
         this.cy.fit(50);
         this.setVisNodes();
+        this.arrangeKey();
         if (this.props.cytoscapeStore.selectedNode !== null) this.reframe();
       });
 
