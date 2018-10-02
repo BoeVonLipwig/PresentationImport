@@ -36,11 +36,9 @@ class Node:
             fieldNo += 1
 
     def addYear(self, year):
-        if (self.name == 'Miriam Ross'):
-            print(year)
         self.year = self.year + ',' + str(year)
 
-    def equals(self, other):
+    def __eq__(self, other):
         return self.name == other.name
 
     def __repr__(self):
@@ -50,22 +48,23 @@ class Node:
 
 
 class Edge:
-    def __init__(self, id, node1, node2, type):
+    def __init__(self, id, node1, node2, type, year):
         self.id = id
         self.source = node1
         self.target = node2
         self.type = type.strip()
+        self.year = year
+
+    def addYear(self, year):
+        self.year = self.year + ',' + str(year)
 
     def __eq__(self, other):
         return ((self.source == other.source and self.target == other.target) or
                 (self.source == other.target and self.target == other.source))
 
     def __repr__(self):
-        return """Edge ID: %d\n
-                  Node1: %s\n
-                  Node2: %s\n
-                  Type: %s\n\n""" % (self.id, self.node1,
-                                     self.node2, self.type)
+        return """Edge ID: %d, Node1: %s, Node2: %s, Type: %s,
+            Year: %s\n""" % (self.id, self.source, self.target, self.type, self.year)
 
 
 class Key:
@@ -104,86 +103,162 @@ def createKeysList(specialNodesNames, modifierNodes):
     return keys
 
 
-def updateExistingNode(allNodes, name, year):
-    for node in allNodes:
-        if node.name == name:
-            node.addYear(year)
-            return True
-    return False
-
-
-def createNodesFromFile(allNodes, year, file, path):
-    nodes = list()
+def createNormalEdges(allEdges, normalNodes, year):
     global ID
-    instances, metaData = extractFileIntoList(file, path)
-    for i in instances:
-        name = i[0]
-        if (not updateExistingNode(allNodes, name, year)):
-            type = file[:-4].lower()
-            fields = dict(zip(metaData[1:], i[1:]))
-            nodes.append(Node(ID, name, type, year, fields))
-            ID += 1
-
-    return nodes
-
-
-def createNodes(allNodes, year, fileNames, path):
-    # check if we have more than one file
-    nodes = list()
-    for file in fileNames:
-        nodes.extend(createNodesFromFile(allNodes, year, file, path))
-
-    return nodes
-
-
-def createSpecialEdges(specialNodes, normalNodes, specialTypes):
     edges = list()
-    global ID
-
-    specialIdMap = {}
-    for specialNode in specialNodes:
-        specialIdMap[specialNode.name] = specialNode.id
-
-    for node in normalNodes:
-        for specialType in specialTypes:
-            for sNodeName in node.fields[specialType]:
-                specialNodeID = specialIdMap[sNodeName]
-                edges.append(Edge(ID, specialNodeID, node.id, specialType))
-                ID += 1
-    return edges
-
-
-def createNormalEdges(normalNodes):
-    edges = list()
-    global ID
 
     nodeIdMap = {}
     for node in normalNodes:
         nodeIdMap[node.name] = node.id
 
+    # print("-------------------")
+    # print(normalNodes)
+
     for node in normalNodes:
+        if node.id == 40:
+            print(node)
         for collaborator in node.fields['collaborators']:
+            print(collaborator)
             colNodeId = nodeIdMap[collaborator]
-            newEdge = Edge(ID, node.id, colNodeId, "collab")
-            if newEdge not in edges:
-                edges.append(newEdge)
-                ID += 1
-    return edges
+            edge = Edge(ID, node.id, colNodeId, "collab", year)
+            ID += 1
+            #print(edge)
+            if edge in allEdges:
+                #print('---')
+                #print(edge)
+                existingEdge = allEdges[allEdges.index(edge)]
+                existingEdge.addYear(year)
+            elif edge not in edges:
+                edges.append(edge)
+
+    allEdges.extend(edges)
 
 
-def createEdges(specialNodes, normalNodes, specialTypes):
-    edges = list()
+def createSpecialEdges(allEdges, specialNodes, node, year):
     global ID
-    # check againt special node and normal nodes
-    specialEdges = createSpecialEdges(specialNodes, normalNodes, specialTypes)
-    edges.extend(specialEdges)
 
-    # check against normal node to normal node
-    normalEdges = createNormalEdges(normalNodes)
-    edges.extend(normalEdges)
+    for specialNode in specialNodes:
+        specialType = specialNode.type
+        specialNodeID = specialNode.id
+        for sNodeName in node.fields[specialType]:
+            if sNodeName == specialNode.name:
+                edge = Edge(ID, specialNodeID, node.id, specialType, year)
+                ID += 1
+                if edge in allEdges:
+                    existingEdge = allEdges[allEdges.index(edge)]
+                    existingEdge.addYear(year)
+                else:
+                    allEdges.append(edge)
 
-    return edges
 
+def createNodesFromFile(allNodes, allEdges, specialNodes, year, file, path):
+    nodes = list() # existing and new
+    global ID
+    instances, metaData = extractFileIntoList(file, path)
+    for i in instances:
+        name = i[0]
+        type = file[:-4].lower()
+        fields = dict(zip(metaData[1:], i[1:]))
+        node = Node(ID, name, type, year, fields)
+        ID += 1
+        if node in allNodes:
+            existingNode = allNodes[allNodes.index(node)]
+            existingNode.addYear(year)
+            nodes.append(existingNode)
+            node = existingNode
+        else:
+            nodes.append(node)
+            allNodes.append(node)
+        createSpecialEdges(allEdges, specialNodes, node, year)
+
+    return nodes
+
+
+def createSpecialNodesFromFile(allNodes, year, file, path):
+    nodes = list()
+    global ID
+    instances, metaData = extractFileIntoList(file, path)
+    for i in instances:
+        name = i[0]
+        type = file[:-4].lower()
+        fields = dict(zip(metaData[1:], i[1:]))
+        node = Node(ID, name, type, year, fields)
+        ID += 1
+        if node in allNodes:
+            existingNode = allNodes[allNodes.index(node)]
+            existingNode.addYear(year)
+            nodes.append(existingNode)
+        else:
+            nodes.append(node)
+            allNodes.append(node)
+
+    return nodes
+
+
+def createNodes(allNodes, allEdges, specialNodes, year, fileNames, path):
+    # check if we have more than one file
+    nodes = list()
+    for file in fileNames:
+        nodes.extend(createNodesFromFile(allNodes, allEdges, specialNodes, year, file, path))
+    return nodes
+
+def createSpecialNodes(allNodes, year, specialFiles, path):
+    # check if we have more than one file
+    nodes = list()
+    for file in specialFiles:
+        nodes.extend(createSpecialNodesFromFile(allNodes, year, file, path))
+
+    return nodes
+#
+# # deprecated
+# def createSpecialEdges(specialNodes, normalNodes, specialTypes):
+#     edges = list()
+#     global ID
+#
+#     specialIdMap = {}
+#     for specialNode in specialNodes:
+#         specialIdMap[specialNode.name] = specialNode.id
+#
+#     for node in normalNodes:
+#         for specialType in specialTypes:
+#             for sNodeName in node.fields[specialType]:
+#                 specialNodeID = specialIdMap[sNodeName]
+#                 edges.append(Edge(ID, specialNodeID, node.id, specialType))
+#                 ID += 1
+#     return edges
+#
+# # deprecated
+# def createNormalEdges(normalNodes):
+#     edges = list()
+#     global ID
+#
+#     nodeIdMap = {}
+#     for node in normalNodes:
+#         nodeIdMap[node.name] = node.id
+#
+#     for node in normalNodes:
+#         for collaborator in node.fields['collaborators']:
+#             colNodeId = nodeIdMap[collaborator]
+#             newEdge = Edge(ID, node.id, colNodeId, "collab")
+#             if newEdge not in edges:
+#                 edges.append(newEdge)
+#                 ID += 1
+#     return edges
+#
+# # deprecated
+# def createEdges(specialNodes, normalNodes, specialTypes):
+#     edges = list()
+#     global ID
+#     # check againt special node and normal nodes
+#     specialEdges = createSpecialEdges(specialNodes, normalNodes, specialTypes)
+#     edges.extend(specialEdges)
+#
+#     # check against normal node to normal node
+#     normalEdges = createNormalEdges(normalNodes)
+#     edges.extend(normalEdges)
+#
+#     return edges
+#
 
 def loadData(dir):
     allNodes = list()
@@ -192,7 +267,7 @@ def loadData(dir):
     years = [f for f in listdir(dir) if isdir(join(dir, f))]
     specialFileNames, nodesFileNames = getFileNames(join(dir, years[0]))
 
-    modifierNodes = createNodes(allNodes, years[0], ['roles.csv'], join(dir, years[0], 'nodes'))
+    modifierNodes = createNodes(allNodes, list(), list(), years[0], ['roles.csv'], join(dir, years[0], 'nodes'))
 
     # trim .csv
     specialNames = [".".join(f.split(".")[:-1]).lower() for f in specialFileNames]
@@ -201,22 +276,15 @@ def loadData(dir):
     keys = createKeysList(specialNames, modifierNodes)
 
     for year in years:
-        specialNodes = createNodes(allNodes, year, specialFileNames, join(dir, year, 'specialNodes'))
-
-        normalNodes = createNodes(allNodes, year, [nodesFileNames[0]], join(dir, year, 'nodes'))
+        # Create node objects
+        print("----" + year + "------")
+        specialNodes = createSpecialNodes(allNodes, year, specialFileNames, join(dir, year, 'specialNodes'))
+        normalNodes = createNodes(allNodes, allEdges, specialNodes, year, [nodesFileNames[0]], join(dir, year, 'nodes'))
         for node in normalNodes:
             node.role = node.role.lower()
 
-        # Check if the node already exists, same edge
-
-        allNodes.extend(specialNodes)
-        allNodes.extend(normalNodes)
-
         # Create edge objects
-        #edges = createEdges(specialNodes, normalNodes, specialNames)
-
-        #allEdges.extend(edges)
-
+        createNormalEdges(allEdges, normalNodes, year)
 
     # Remove 'fields' dict from nodeSize
     [delattr(node, 'fields') for node in allNodes]
