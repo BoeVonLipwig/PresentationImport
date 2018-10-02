@@ -93,9 +93,16 @@ class NodeInfo extends React.Component {
     return role ? (
       <div className="info-row">
         <p className="info-left">Role |</p>
-        <p className="info-right">{role}</p>
+        <p className="info-right">{this.capitaliseRole(role)}</p>
       </div>
     ) : null;
+  }
+
+  capitaliseRole(role) {
+    return role
+      .split(" ")
+      .map(s => s.charAt(0).toUpperCase() + s.substring(1))
+      .join(" ");
   }
 
   parseProgram(infoSchool) {
