@@ -213,7 +213,7 @@ def loadData(dir):
     years = [f for f in listdir(dir) if isdir(join(dir, f))]
     specialFileNames, nodesFileNames = getFileNames(join(dir, years[0]))
 
-    modifierNodes = createNodes(allNodes, list(), list(), years[0], ['roles.csv'], join(dir, years[0], 'nodes'))
+    modifierNodes = createNodes(list(), list(), list(), years[0], ['roles.csv'], join(dir, years[0], 'nodes'))
 
     # trim .csv
     specialNames = [".".join(f.split(".")[:-1]).lower() for f in specialFileNames]
