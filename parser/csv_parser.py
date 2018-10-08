@@ -9,8 +9,6 @@ ID = 1
 
 
 class Node:
-    # webLink -> "hdawuidhaw.com"
-    # bio -> "adawoiudoiudb"
     def __init__(self, id, name, type, year, fields):
         self.id = id
         self.name = name.strip()
@@ -34,6 +32,9 @@ class Node:
                 setattr(self, k, newV)
             self.fields[k] = newV
             fieldNo += 1
+
+    def replaceConnections(self, newNode):
+        self.fields = newNode.fields
 
     def addYear(self, year):
         self.year = self.year + ',' + str(year)
@@ -113,14 +114,9 @@ def createNormalEdges(allEdges, normalNodes, year):
 
     for node in normalNodes:
         for collaborator in node.fields['collaborators']:
-            try:
-                colNodeId = nodeIdMap[collaborator]
-            except KeyError:
-                print(node)
-                print(collaborator)
+            colNodeId = nodeIdMap[collaborator]
             edge = Edge(ID, node.id, colNodeId, "collab", year)
             ID += 1
-            #print(edge)
             if edge in allEdges:
                 existingEdge = allEdges[allEdges.index(edge)]
                 existingEdge.addYear(year)
@@ -161,6 +157,7 @@ def createNodesFromFile(allNodes, allEdges, specialNodes, year, file, path):
             existingNode = allNodes[allNodes.index(node)]
             existingNode.addYear(year)
             nodes.append(existingNode)
+            existingNode.replaceConnections(node)
             node = existingNode
         else:
             nodes.append(node)
@@ -273,7 +270,6 @@ def loadData(dir):
 
     for year in years:
         # Create node objects
-        print("\n\n----" + year + "------\n\n")
         specialNodes = createSpecialNodes(allNodes, year, specialFileNames, join(dir, year, 'specialNodes'))
         normalNodes = createNodes(allNodes, allEdges, specialNodes, year, [nodesFileNames[0]], join(dir, year, 'nodes'))
         for node in normalNodes:
