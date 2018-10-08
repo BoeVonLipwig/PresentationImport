@@ -3,7 +3,6 @@ import cytoscape from "cytoscape";
 import data from "../util/NetworkRequest";
 import Layout from "../layouts/Layout";
 import ProjectLayout from "../layouts/ProjectLayout";
-import aidStore from "../util/AidStore";
 import Promise from "bluebird";
 import _ from "lodash";
 import "./Cytoscape.css";
@@ -12,7 +11,7 @@ import { observer } from "mobx-react";
 import Style from "./StyleCytoscape";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSync } from "@fortawesome/free-solid-svg-icons";
-import colorP from "../assets/colors.json";
+import color from "../assets/colors.json";
 
 class Cytoscape extends React.Component {
   constructor() {
@@ -48,7 +47,7 @@ class Cytoscape extends React.Component {
 
   static getInitials(string, initNum, space) {
     const names = string.split(" ");
-    _.pull(names, "of", "the", "&");
+    _.pull(names, "of", "the", "&", "and");
     let initials = names[0].substring(0, 1).toUpperCase();
     let kerning;
     if (space === 1) {
@@ -95,56 +94,32 @@ class Cytoscape extends React.Component {
   }
 
   setLabels() {
+    this.cy.nodes().forEach(ele => {
+      ele.style("label", ele.data("name"));
+    });
+
     this.cy
-      .nodes('[type = "person"],[type = "project"],[type = "school"]')
+      .nodes('[type != "person"][type != "key"][type != "border"]:unselected')
       .style({
-        label: ele => {
-          return ele.data("name");
-        }
+        label: ele => this.setInitials(ele, 15, 15, 2)
       });
-
-    this.cy.nodes('[type = "project"]:unselected').style({
-      label: ele => {
-        return this.setInitials(ele, 15, 15, 2);
-      }
-    });
-
-    this.cy.nodes('[type = "school"]:unselected').style({
-      label: ele => {
-        return this.setInitials(ele, 12, 12, 2);
-      }
-    });
 
     if (this.cy.zoom() < 1.2) {
       this.cy.nodes('[type = "person"]:unselected').style({
-        label: ele => {
-          return this.setInitials(ele, 6, 6, 1);
-        }
+        label: ele => this.setInitials(ele, 6, 6, 1)
       });
     } else {
       this.cy.nodes('[type = "person"]:unselected').style({
-        label: ele => {
-          return this.setInitials(ele, 12, 12, 1);
-        }
+        label: ele => this.setInitials(ele, 12, 12, 1)
       });
     }
 
     this.cy.nodes(".highlighted").style({
-      label: ele => {
-        if (
-          this.cy.nodes('.highlighted[type = "project"]').size() > 5 &&
-          ele.data("type") === "project"
-        ) {
-          return this.setInitials(ele, 6, 6, 1);
-        } else {
-          return ele.data("name");
-        }
-      }
+      label: ele => ele.data("name")
     });
   }
 
   hoverLight(node) {
-    this.setLabels();
     if (!node.hasClass("hidden")) {
       node.closedNeighborhood().addClass("hover-hood");
       node.addClass("hover");
@@ -209,10 +184,16 @@ class Cytoscape extends React.Component {
     this.nhood = nhood;
 
     let dataType = node.data("type");
-    if (dataType === "project" || dataType === "school") {
-      let nhoodType = dataType === "project" ? "school" : "project";
-      let indhood = nhood.closedNeighborhood('[type = "' + nhoodType + '"]');
-      nhood = nhood.add(indhood);
+    if (this.props.cytoscapeStore.specialTypes.includes(dataType)) {
+      let unselectedSpecialFilters = this.props.cytoscapeStore.specialTypes
+        .filter(type => type !== dataType)
+        .map(type => `[type = '${type}']`);
+      let jointFilter = unselectedSpecialFilters.join(",");
+      let relatedSpecialNodes = nhood.closedNeighborhood(jointFilter).nodes();
+
+      this.spreadNodes(relatedSpecialNodes);
+      nhood = nhood.add(relatedSpecialNodes);
+      this.props.cytoscapeStore.nhood = nhood;
     }
   }
 
@@ -255,6 +236,16 @@ class Cytoscape extends React.Component {
     });
 
     layout.run();
+  }
+
+  unspreadNodes() {
+    this.cy.nodes().forEach(n => {
+      if (n.data("originPos")) {
+        let pos = n.data("originPos");
+        n.position({ x: pos.x, y: pos.y });
+        n.removeData("originPos");
+      }
+    });
   }
 
   getMaxLabelWidth(eles) {
@@ -485,34 +476,47 @@ class Cytoscape extends React.Component {
       .elements()
       .removeClass("highlighted")
       .removeClass("faded");
+    this.unspreadNodes();
   }
 
   componentDidMount() {
-    // get exported json from cytoscape desktop via ajax
     let graphP = data.getGraphP();
-
-    // also get style via ajax
     let styleP = data.getStyleP();
 
-    Promise.all([graphP, styleP]).spread(this.initCy);
+    let typesP = data.getFilterNames();
+
+    Promise.all([graphP, styleP, typesP]).spread(this.initCy);
   }
 
-  initCy(graphP, styleP) {
+  initCy(graph, style, types) {
     this.setState({
       ...this.state,
       loading: false
     });
     this.cy = cytoscape({
       container: this.cyDiv.current,
-      elements: graphP,
+      elements: graph,
       wheelSensitivity: 0.5
     });
+
+    this.props.cytoscapeStore.specialTypes = types.filter(
+      type => !["key", "border", "person", "collab"].includes(type)
+    );
 
     //styleMaster is a placeholder object with options for colorScheme selection,
     //and override for foreground, background, highlight, and lowlight color variables
     //as well as override for the color of nodes, and the name they should be referred to in the key
     //ideally this object should eventually be parsed from a csv
     //temp {
+    let nodeOverrides = [];
+    this.props.cytoscapeStore.specialTypes.forEach(type => {
+      nodeOverrides.push({
+        label: type,
+        subtype: [type],
+        color: "",
+        shape: "ring"
+      });
+    });
     let styleMaster = {
       colorScheme: 0, // num 0 - 3, selects one of 4 color schemes from an array defined in Colors.json(see Colors.pdf for visual guide)
       //color overrides for css and cycss variables
@@ -523,39 +527,18 @@ class Cytoscape extends React.Component {
       ll: "", //lowlight color : greyed out text, dropshadows, scrollbar track etc
       //nodeOverride, can override automatic styling and labels (addkey) for nodes
       // can be done by type(person, project, school) or subtype/role(Hounours Student, Academic Staff, etc)
-      nodeOverride: [
-        {
-          label: "Person", //The label to display in the key
-          subtype: ["person"], //what type or subtype(role) this rule should apply to, this can accept multiple roles/subtype, but single type, do not mix type and subtype(role)
-          color: "", //what color the node should be, can be a #hexvalue or an int to specify which array of colors(for type 0-3), or color(for subtype/role 0-5) see Colors.json or Colors.pdf for visual guide
-          shape: "" //if the shape should be a ring or full circle, default is circle
-        },
-        {
-          label: "Programme", //school should be renamed programme in key
-          subtype: ["school"],
-          color: "",
-          shape: "ring" //Programme should be displayed as rings rather than filled in circle
-        },
-        {
-          label: "Project",
-          subtype: ["project"],
-          color: "",
-          shape: "ring"
-        }
-      ]
+      nodeOverride: nodeOverrides
     };
+
     this.styleList = Style.parseStyles(
       this.cy.nodes('[type != "key"][type != "border"]'),
-      colorP,
+      color,
       styleMaster,
-      styleP
+      style
     );
     this.cy.style(this.styleList.stylesheet);
 
     this.addKey();
-
-    this.cy.elements('[type = "school"]').addClass("school");
-    this.cy.elements('[type = "project"]').addClass("project");
 
     this.cy.on("mouseover", "node", e => {
       this.setState({
@@ -574,17 +557,21 @@ class Cytoscape extends React.Component {
     });
 
     this.cy.on("select", "node", e => {
-      aidStore.aids.details = { display: "none" };
       this.props.cytoscapeStore.selectedNode = e.target.data("id");
     });
+
     this.cy.on("unselect", "node", e => {
       this.props.cytoscapeStore.selectedNode = null;
     });
 
+    this.cy.on("zoom", () => {
+      this.setLabels();
+    });
+
     this.cy.ready(() => {
       Layout.cy = this.cy;
+      Layout.specialTypes = this.props.cytoscapeStore.specialTypes;
       this.props.cytoscapeStore.layouts = ProjectLayout.getLayout();
-      this.setLabels();
 
       autorun(() => {
         this.props.cytoscapeStore.layouts.forEach(layout => {
@@ -593,6 +580,7 @@ class Cytoscape extends React.Component {
         this.arrangeKey();
         this.cy.fit(50);
         this.setVisNodes();
+        if (this.props.cytoscapeStore.selectedNode !== null) this.reframe();
       });
 
       autorun(() => {
@@ -600,19 +588,15 @@ class Cytoscape extends React.Component {
         if (this.props.cytoscapeStore.selectedNode === null) {
           this.fitAll();
         } else {
-          let nhood = this.highlight(
-            this.cy.$id(this.props.cytoscapeStore.selectedNode)
-          );
-          this.reframe(nhood);
+          this.highlight(this.cy.$id(this.props.cytoscapeStore.selectedNode));
+          this.reframe();
         }
         this.setLabels();
       });
 
       autorun(() => {
-        let hovered = this.cy.nodes(".hover-hood, .hover");
-        hovered.forEach(n => {
-          this.hoverNight(n);
-        });
+        let hoveredNode = this.cy.$(".hover");
+        if (hoveredNode) this.hoverNight(hoveredNode);
         if (this.props.cytoscapeStore.hoveredNode !== null) {
           this.hoverLight(this.cy.$id(this.props.cytoscapeStore.hoveredNode));
         }

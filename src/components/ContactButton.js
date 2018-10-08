@@ -1,6 +1,5 @@
 import React from "react";
 import "./ContactButton.css";
-import aidStore from "../util/AidStore";
 import GithubButton from "./menu/GithubButton";
 import MailButton from "./menu/MailButton";
 import HelpButton from "./menu/HelpButton";
@@ -50,7 +49,6 @@ class ContactButton extends React.Component {
 
   buttonClicked = () => {
     this.setState({ ...this.state, showMenu: !this.state.showMenu });
-    aidStore.aids.contact = { display: "none" };
   };
 
   createButton = menu => {
