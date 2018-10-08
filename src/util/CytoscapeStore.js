@@ -7,8 +7,8 @@ class CytoscapeStore {
   hoveredNode = null;
   visNodesMap = {};
   visNodesData = [];
-  minYear = 2016;
-  maxYear = 2017;
+  minYear = null;
+  maxYear = null;
   specialTypes = [];
   showTutorial = false;
 }
