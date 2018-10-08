@@ -88,7 +88,7 @@ def getFileNames(dir):
 
 
 def extractFileIntoList(file, path):
-    with open(join(path,file), 'r') as f:
+    with open(join(path, file), 'r') as f:
         reader = csv.reader(f)
         instances = list(reader)
     return instances[1:], instances[0]
@@ -144,7 +144,7 @@ def createSpecialEdges(allEdges, specialNodes, node, year):
 
 
 def createNodesFromFile(allNodes, allEdges, specialNodes, year, file, path):
-    nodes = list() # existing and new
+    nodes = list()
     global ID
     instances, metaData = extractFileIntoList(file, path)
     for i in instances:
@@ -195,6 +195,7 @@ def createNodes(allNodes, allEdges, specialNodes, year, fileNames, path):
         nodes.extend(createNodesFromFile(allNodes, allEdges, specialNodes, year, file, path))
     return nodes
 
+
 def createSpecialNodes(allNodes, year, specialFiles, path):
     # check if we have more than one file
     nodes = list()
@@ -202,56 +203,7 @@ def createSpecialNodes(allNodes, year, specialFiles, path):
         nodes.extend(createSpecialNodesFromFile(allNodes, year, file, path))
 
     return nodes
-#
-# # deprecated
-# def createSpecialEdges(specialNodes, normalNodes, specialTypes):
-#     edges = list()
-#     global ID
-#
-#     specialIdMap = {}
-#     for specialNode in specialNodes:
-#         specialIdMap[specialNode.name] = specialNode.id
-#
-#     for node in normalNodes:
-#         for specialType in specialTypes:
-#             for sNodeName in node.fields[specialType]:
-#                 specialNodeID = specialIdMap[sNodeName]
-#                 edges.append(Edge(ID, specialNodeID, node.id, specialType))
-#                 ID += 1
-#     return edges
-#
-# # deprecated
-# def createNormalEdges(normalNodes):
-#     edges = list()
-#     global ID
-#
-#     nodeIdMap = {}
-#     for node in normalNodes:
-#         nodeIdMap[node.name] = node.id
-#
-#     for node in normalNodes:
-#         for collaborator in node.fields['collaborators']:
-#             colNodeId = nodeIdMap[collaborator]
-#             newEdge = Edge(ID, node.id, colNodeId, "collab")
-#             if newEdge not in edges:
-#                 edges.append(newEdge)
-#                 ID += 1
-#     return edges
-#
-# # deprecated
-# def createEdges(specialNodes, normalNodes, specialTypes):
-#     edges = list()
-#     global ID
-#     # check againt special node and normal nodes
-#     specialEdges = createSpecialEdges(specialNodes, normalNodes, specialTypes)
-#     edges.extend(specialEdges)
-#
-#     # check against normal node to normal node
-#     normalEdges = createNormalEdges(normalNodes)
-#     edges.extend(normalEdges)
-#
-#     return edges
-#
+
 
 def loadData(dir):
     allNodes = list()
@@ -277,8 +229,6 @@ def loadData(dir):
 
         # Create edge objects
         createNormalEdges(allEdges, normalNodes, year)
-
-
 
     # Remove 'fields' dict from nodeSize
     [delattr(node, 'fields') for node in allNodes]
