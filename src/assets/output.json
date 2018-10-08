@@ -85,8 +85,49 @@
     "group": "nodes",
     "data": {
       "id": 1,
+      "name": "Academic Staff",
+      "type": "roles",
+      "year": "2018"
+    }
+  },
+  {
+    "group": "nodes",
+    "data": {
+      "id": 2,
+      "name": "Masters Student",
+      "type": "roles",
+      "year": "2018"
+    }
+  },
+  {
+    "group": "nodes",
+    "data": { "id": 3, "name": "PhD Student", "type": "roles", "year": "2018" }
+  },
+  {
+    "group": "nodes",
+    "data": {
+      "id": 4,
+      "name": "Professional Staff",
+      "type": "roles",
+      "year": "2018"
+    }
+  },
+  {
+    "group": "nodes",
+    "data": {
+      "id": 5,
+      "name": "Honours Student",
+      "type": "roles",
+      "year": "2018"
+    }
+  },
+  {
+    "group": "nodes",
+    "data": {
+      "id": 6,
       "name": "Colliding Conversations 4",
       "type": "project",
+      "year": "2018,2016,2017",
       "mediaLink": "https://www.youtube.com/watch?v=97MZY8LiBrI",
       "siteName": "",
       "siteLink": "https://www.victoria.ac.nz/about/strengths/digital-futures/research-projects",
@@ -96,9 +137,10 @@
   {
     "group": "nodes",
     "data": {
-      "id": 2,
+      "id": 7,
       "name": "Colliding Conversations 5",
       "type": "project",
+      "year": "2018,2016,2017",
       "mediaLink": "https://www.youtube.com/watch?v=q-kzYX8PaTw",
       "siteName": "",
       "siteLink": "https://www.victoria.ac.nz/about/strengths/digital-futures/research-projects",
@@ -108,9 +150,10 @@
   {
     "group": "nodes",
     "data": {
-      "id": 3,
+      "id": 8,
       "name": "Colliding Conversations 1",
       "type": "project",
+      "year": "2018,2016,2017",
       "mediaLink": "https://www.youtube.com/watch?v=DYe38u-fYLQ",
       "siteName": "",
       "siteLink": "https://www.victoria.ac.nz/about/strengths/digital-futures/research-projects",
@@ -120,9 +163,10 @@
   {
     "group": "nodes",
     "data": {
-      "id": 4,
+      "id": 9,
       "name": "Colliding Conversations 3",
       "type": "project",
+      "year": "2018,2016,2017",
       "mediaLink": "https://www.youtube.com/watch?v=pT4n3J23kd0",
       "siteName": "",
       "siteLink": "https://www.victoria.ac.nz/about/strengths/digital-futures/research-projects",
@@ -132,9 +176,10 @@
   {
     "group": "nodes",
     "data": {
-      "id": 5,
+      "id": 10,
       "name": "Colliding Conversations 2",
       "type": "project",
+      "year": "2018,2016,2017",
       "mediaLink": "https://www.youtube.com/watch?v=eTMUboxXzAs",
       "siteName": "",
       "siteLink": "https://www.victoria.ac.nz/about/strengths/digital-futures/research-projects",
@@ -144,9 +189,10 @@
   {
     "group": "nodes",
     "data": {
-      "id": 6,
+      "id": 11,
       "name": "Circle v Square",
       "type": "project",
+      "year": "2018,2016,2017",
       "mediaLink": "https://www.youtube.com/watch?v=DI2-piw2PaA",
       "siteName": "",
       "siteLink": "http://circlevsquare.xyz/",
@@ -156,9 +202,10 @@
   {
     "group": "nodes",
     "data": {
-      "id": 7,
+      "id": 12,
       "name": "HDI24D",
       "type": "project",
+      "year": "2018,2016,2017",
       "mediaLink": "http://computergraphics.ac.nz/hdi4d/images/HDI4D_logo.png",
       "siteName": "",
       "siteLink": "http://computergraphics.ac.nz/hdi4d/",
@@ -168,9 +215,10 @@
   {
     "group": "nodes",
     "data": {
-      "id": 8,
+      "id": 13,
       "name": "LitAtlas",
       "type": "project",
+      "year": "2018,2016,2017",
       "mediaLink": "https://www.youtube.com/watch?v=PQcH4YF2eME",
       "siteName": "",
       "siteLink": "https://biq0yqqjoejz8e9tp4wo.vuw-test.sandcats.io/",
@@ -180,9 +228,10 @@
   {
     "group": "nodes",
     "data": {
-      "id": 9,
+      "id": 14,
       "name": "VR in Humanities",
       "type": "project",
+      "year": "2018,2016,2017",
       "mediaLink": "https://vimeo.com/205496513",
       "siteName": "",
       "siteLink": "http://forvrresearch.wixsite.com/vrhumanities",
@@ -192,9 +241,10 @@
   {
     "group": "nodes",
     "data": {
-      "id": 10,
+      "id": 15,
       "name": "Virtual World Lab",
       "type": "project",
+      "year": "2018,2016,2017",
       "mediaLink": "https://www.victoria.ac.nz/__data/assets/image/0006/422538/rsz_design-research-virtual-world-lab.jpg",
       "siteName": "",
       "siteLink": "https://www.victoria.ac.nz/design/research/virtual-world-lab",
@@ -204,9 +254,10 @@
   {
     "group": "nodes",
     "data": {
-      "id": 11,
+      "id": 16,
       "name": "Yasawa Island Virtual Tourism",
       "type": "project",
+      "year": "2018,2016,2017",
       "mediaLink": "https://api.services.trvl.com/backgrounds/images/yasawa-islands_1.jpg",
       "siteName": "",
       "siteLink": "https://www.researchgate.net/profile/Christian_Schott2/publication/275275670_Bringing_the_world_to_the_classroom_-_towards_%27virtual_reality%27_pedagogies_for_international_education/links/5580a0c908ae47061e5f33bb/Bringing-the-world-to-the-classroom-towards-virtual-reality-pedagogies-for-international-education.pdf",
@@ -216,9 +267,10 @@
   {
     "group": "nodes",
     "data": {
-      "id": 12,
+      "id": 17,
       "name": "Stereoscopic Media",
       "type": "project",
+      "year": "2018,2016,2017",
       "mediaLink": "https://www.youtube.com/watch?v=1g9WEpbSWUs",
       "siteName": "",
       "siteLink": "http://www.stereoscopicmedia.org/",
@@ -228,9 +280,10 @@
   {
     "group": "nodes",
     "data": {
-      "id": 13,
+      "id": 18,
       "name": "AR Rhino",
       "type": "project",
+      "year": "2018,2016,2017",
       "mediaLink": "https://4kpjg26vvp4yt70oow5u.vuw-test.sandcats.io/wp-content/uploads/2017/03/Park-mock-up.jpg",
       "siteName": "",
       "siteLink": "https://4kpjg26vvp4yt70oow5u.vuw-test.sandcats.io/",
@@ -240,9 +293,10 @@
   {
     "group": "nodes",
     "data": {
-      "id": 14,
+      "id": 19,
       "name": "MRX",
       "type": "project",
+      "year": "2018,2016,2017",
       "mediaLink": "https://www.youtube.com/watch?v=t_iDRwOQMi8",
       "siteName": "",
       "siteLink": "http://computergraphics.ac.nz/mrx/",
@@ -252,9 +306,10 @@
   {
     "group": "nodes",
     "data": {
-      "id": 15,
+      "id": 20,
       "name": "Until Jesse",
       "type": "project",
+      "year": "2018,2016,2017",
       "mediaLink": "https://www.youtube.com/watch?v=WFaCSHVh1w0",
       "siteName": "",
       "siteLink": "https://miriamruthross.wordpress.com/until-jesse-360/",
@@ -264,9 +319,10 @@
   {
     "group": "nodes",
     "data": {
-      "id": 16,
+      "id": 21,
       "name": "Colliding Worlds",
       "type": "project",
+      "year": "2018,2016,2017",
       "mediaLink": "https://www.youtube.com/watch?v=u8K5meExnfU",
       "siteName": "",
       "siteLink": "https://www.victoria.ac.nz/about/strengths/digital-futures/research-projects",
@@ -276,9 +332,10 @@
   {
     "group": "nodes",
     "data": {
-      "id": 17,
+      "id": 22,
       "name": "Trash Praxis",
       "type": "project",
+      "year": "2018,2016,2017",
       "mediaLink": "https://www.youtube.com/watch?v=y6R-Jx9W5c0",
       "siteName": "",
       "siteLink": "https://www.youtube.com/watch?v=Rrm8o45W_dI",
@@ -288,9 +345,10 @@
   {
     "group": "nodes",
     "data": {
-      "id": 18,
+      "id": 23,
       "name": "Virtual Reality Showcase",
       "type": "project",
+      "year": "2018,2016,2017",
       "mediaLink": "https://www.tepapa.govt.nz/sites/default/files/styles/hero_image_1800x900/public/tepapa-talks-1800x700.jpg",
       "siteName": "",
       "siteLink": "https://www.victoria.ac.nz/fad/about/news/victoria-university-and-te-papa-team-up-to-bring-virtual-reality-to-life",
@@ -300,9 +358,10 @@
   {
     "group": "nodes",
     "data": {
-      "id": 19,
+      "id": 24,
       "name": "Dream Flux",
       "type": "project",
+      "year": "2018,2016,2017",
       "mediaLink": "https://www.youtube.com/watch?v=DR2Qf3ShGAg",
       "siteName": "",
       "siteLink": "https://www.dreamflux.io/",
@@ -312,9 +371,10 @@
   {
     "group": "nodes",
     "data": {
-      "id": 20,
+      "id": 25,
       "name": "ModRule",
       "type": "project",
+      "year": "2018,2016,2017",
       "mediaLink": "https://vimeo.com/244142266",
       "siteName": "",
       "siteLink": "https://www.victoria.ac.nz/architecture/research/current-phd-research/sky-lo-tian-tian",
@@ -324,9 +384,10 @@
   {
     "group": "nodes",
     "data": {
-      "id": 21,
+      "id": 26,
       "name": "The Museum of Gamers",
       "type": "project",
+      "year": "2018,2016,2017",
       "mediaLink": "https://www.youtube.com/watch?v=ZkU6dO17bus",
       "siteName": "",
       "siteLink": "http://www.themuseumofgamers.org/",
@@ -336,9 +397,10 @@
   {
     "group": "nodes",
     "data": {
-      "id": 22,
+      "id": 27,
       "name": "VRroom Driving Simulator",
       "type": "project",
+      "year": "2018,2016,2017",
       "mediaLink": "",
       "siteName": "",
       "siteLink": "",
@@ -348,9 +410,10 @@
   {
     "group": "nodes",
     "data": {
-      "id": 23,
+      "id": 28,
       "name": "Landscape-scale AR",
       "type": "project",
+      "year": "2018,2016,2017",
       "mediaLink": "",
       "siteName": "",
       "siteLink": "",
@@ -360,9 +423,10 @@
   {
     "group": "nodes",
     "data": {
-      "id": 24,
+      "id": 29,
       "name": "Training Novice Conductors",
       "type": "project",
+      "year": "2018,2016,2017",
       "mediaLink": "",
       "siteName": "",
       "siteLink": "",
@@ -372,69 +436,10 @@
   {
     "group": "nodes",
     "data": {
-      "id": 25,
+      "id": 30,
       "name": "Architecture",
       "type": "school",
-      "mediaLink": "",
-      "siteName": "",
-      "siteLink": "",
-      "bio": ""
-    }
-  },
-  {
-    "group": "nodes",
-    "data": {
-      "id": 26,
-      "name": "Central Service Unit",
-      "type": "school",
-      "mediaLink": "",
-      "siteName": "",
-      "siteLink": "",
-      "bio": ""
-    }
-  },
-  {
-    "group": "nodes",
-    "data": {
-      "id": 27,
-      "name": "Design",
-      "type": "school",
-      "mediaLink": "",
-      "siteName": "",
-      "siteLink": "",
-      "bio": ""
-    }
-  },
-  {
-    "group": "nodes",
-    "data": {
-      "id": 28,
-      "name": "Engineering and Computer Science",
-      "type": "school",
-      "mediaLink": "",
-      "siteName": "",
-      "siteLink": "",
-      "bio": ""
-    }
-  },
-  {
-    "group": "nodes",
-    "data": {
-      "id": 29,
-      "name": "Humanities and Social Sciences",
-      "type": "school",
-      "mediaLink": "",
-      "siteName": "",
-      "siteLink": "",
-      "bio": ""
-    }
-  },
-  {
-    "group": "nodes",
-    "data": {
-      "id": 30,
-      "name": "Victoria Business School",
-      "type": "school",
+      "year": "2018,2016,2017",
       "mediaLink": "",
       "siteName": "",
       "siteLink": "",
@@ -445,8 +450,9 @@
     "group": "nodes",
     "data": {
       "id": 31,
-      "name": "Other",
+      "name": "Central Service Unit",
       "type": "school",
+      "year": "2018,2016,2017",
       "mediaLink": "",
       "siteName": "",
       "siteLink": "",
@@ -457,8 +463,74 @@
     "group": "nodes",
     "data": {
       "id": 32,
+      "name": "Design",
+      "type": "school",
+      "year": "2018,2016,2017",
+      "mediaLink": "",
+      "siteName": "",
+      "siteLink": "",
+      "bio": ""
+    }
+  },
+  {
+    "group": "nodes",
+    "data": {
+      "id": 33,
+      "name": "Engineering and Computer Science",
+      "type": "school",
+      "year": "2018,2016,2017",
+      "mediaLink": "",
+      "siteName": "",
+      "siteLink": "",
+      "bio": ""
+    }
+  },
+  {
+    "group": "nodes",
+    "data": {
+      "id": 34,
+      "name": "Humanities and Social Sciences",
+      "type": "school",
+      "year": "2018,2016,2017",
+      "mediaLink": "",
+      "siteName": "",
+      "siteLink": "",
+      "bio": ""
+    }
+  },
+  {
+    "group": "nodes",
+    "data": {
+      "id": 35,
+      "name": "Victoria Business School",
+      "type": "school",
+      "year": "2018,2016,2017",
+      "mediaLink": "",
+      "siteName": "",
+      "siteLink": "",
+      "bio": ""
+    }
+  },
+  {
+    "group": "nodes",
+    "data": {
+      "id": 36,
+      "name": "Other",
+      "type": "school",
+      "year": "2018,2016,2017",
+      "mediaLink": "",
+      "siteName": "",
+      "siteLink": "",
+      "bio": ""
+    }
+  },
+  {
+    "group": "nodes",
+    "data": {
+      "id": 37,
       "name": "Miriam Ross",
       "type": "person",
+      "year": "2018,2016,2017",
       "programme": "Film",
       "email": "Miriam.Ross@vuw.ac.nz",
       "staffSiteLink": "https://www.victoria.ac.nz/seftms/about/staff/miriam-ross",
@@ -472,9 +544,10 @@
   {
     "group": "nodes",
     "data": {
-      "id": 33,
+      "id": 40,
       "name": "Lohit Petikam",
       "type": "person",
+      "year": "2018,2016,2017",
       "programme": "Engineering and Computer Science",
       "email": "",
       "staffSiteLink": "https://ecs.victoria.ac.nz/Main/GradLohitPetikam",
@@ -488,9 +561,10 @@
   {
     "group": "nodes",
     "data": {
-      "id": 34,
+      "id": 44,
       "name": "Taehyun Rhee",
       "type": "person",
+      "year": "2018,2016,2017",
       "programme": "Computer Graphics",
       "email": "taehyun.rhee@ecs.vuw.ac.nz",
       "staffSiteLink": "http://ecs.victoria.ac.nz/Main/TaehyunRhee",
@@ -504,9 +578,10 @@
   {
     "group": "nodes",
     "data": {
-      "id": 35,
+      "id": 48,
       "name": "Neil Dodgson",
       "type": "person",
+      "year": "2018,2016,2017",
       "programme": "Computer Graphics",
       "email": "neil.dodgson@vuw.ac.nz",
       "staffSiteLink": "http://ecs.victoria.ac.nz/Main/NeilDodgson",
@@ -520,9 +595,10 @@
   {
     "group": "nodes",
     "data": {
-      "id": 36,
+      "id": 50,
       "name": "Serdar Aydin",
       "type": "person",
+      "year": "2018,2016,2017",
       "programme": "Architecture",
       "email": "Serdar.Aydin@vuw.ac.nz",
       "staffSiteLink": "https://www.victoria.ac.nz/architecture/research/current-phd-research/serdar-aydin",
@@ -536,9 +612,10 @@
   {
     "group": "nodes",
     "data": {
-      "id": 37,
+      "id": 52,
       "name": "Ryan Sumner",
       "type": "person",
+      "year": "2018,2016,2017",
       "programme": "Computer Graphics",
       "email": "",
       "staffSiteLink": "https://ecs.victoria.ac.nz/Main/GradRyanSumner",
@@ -552,9 +629,10 @@
   {
     "group": "nodes",
     "data": {
-      "id": 38,
+      "id": 54,
       "name": "Andre Geldenhuis",
       "type": "person",
+      "year": "2018,2016,2017",
       "programme": "Learning and Research Technology Team",
       "email": "andre.geldenhuis@vuw.ac.nz",
       "staffSiteLink": "https://www.victoria.ac.nz/its/about/learning-and-research-technology-team",
@@ -568,9 +646,10 @@
   {
     "group": "nodes",
     "data": {
-      "id": 39,
+      "id": 58,
       "name": "Jasim Azhar",
       "type": "person",
+      "year": "2018,2016,2017",
       "programme": "Architecture",
       "email": "jasimazhar@hotmail.com",
       "staffSiteLink": "https://www.victoria.ac.nz/architecture/research/current-phd-research/jasim-azhar",
@@ -584,9 +663,10 @@
   {
     "group": "nodes",
     "data": {
-      "id": 40,
+      "id": 60,
       "name": "Claudia van Velthooven",
       "type": "person",
+      "year": "2018,2016,2017",
       "programme": "Architecture",
       "email": "claudia.vanvelthooven@live.com",
       "staffSiteLink": "https://www.victoria.ac.nz/explore/postgraduate-programmes/master-of-architecture-professional/people#claudia-van-velthooven",
@@ -600,9 +680,10 @@
   {
     "group": "nodes",
     "data": {
-      "id": 41,
+      "id": 63,
       "name": "Stuart Haselden",
       "type": "person",
+      "year": "2018,2016,2017",
       "programme": "Directorate",
       "email": "Stuart.Haselden@vuw.ac.nz",
       "staffSiteLink": "https://www.victoria.ac.nz/its/about#directorate",
@@ -616,9 +697,10 @@
   {
     "group": "nodes",
     "data": {
-      "id": 42,
+      "id": 66,
       "name": "Scott Meekings",
       "type": "person",
+      "year": "2018,2016,2017",
       "programme": "Architecture",
       "email": "",
       "staffSiteLink": "http://researcharchive.vuw.ac.nz/xmlui/handle/10063/6613",
@@ -632,9 +714,10 @@
   {
     "group": "nodes",
     "data": {
-      "id": 43,
+      "id": 68,
       "name": "James Holth",
       "type": "person",
+      "year": "2018,2016,2017",
       "programme": "Architecture",
       "email": "james.r.holth@gmail.com",
       "staffSiteLink": "",
@@ -648,9 +731,10 @@
   {
     "group": "nodes",
     "data": {
-      "id": 44,
+      "id": 139,
       "name": "T. J. Moleta",
       "type": "person",
+      "year": "2016,2017",
       "programme": "Architecture",
       "email": "tane.moleta@vuw.ac.nz",
       "staffSiteLink": "https://www.victoria.ac.nz/architecture/about/staff/tane-moleta",
@@ -664,9 +748,10 @@
   {
     "group": "nodes",
     "data": {
-      "id": 45,
+      "id": 141,
       "name": "James De Bono",
       "type": "person",
+      "year": "2016,2017",
       "programme": "Architecture",
       "email": "jamman52@hotmail.com",
       "staffSiteLink": "",
@@ -680,9 +765,10 @@
   {
     "group": "nodes",
     "data": {
-      "id": 46,
+      "id": 143,
       "name": "Christen Kruger",
       "type": "person",
+      "year": "2016,2017",
       "programme": "Architecture",
       "email": "kruggs12@gmail.com",
       "staffSiteLink": "",
@@ -696,9 +782,10 @@
   {
     "group": "nodes",
     "data": {
-      "id": 47,
+      "id": 145,
       "name": "Marc Aurel Schnabel",
       "type": "person",
+      "year": "2016,2017",
       "programme": "Architecture",
       "email": "marcaurel.schnabel@vuw.ac.nz",
       "staffSiteLink": "https://www.victoria.ac.nz/fad/about/staff/marcaurel-schnabel",
@@ -712,9 +799,10 @@
   {
     "group": "nodes",
     "data": {
-      "id": 48,
+      "id": 148,
       "name": "Kieran Carnegie",
       "type": "person",
+      "year": "2016,2017",
       "programme": "Engineering and Computer Science",
       "email": "kotarou@ecs.vuw.ac.nz",
       "staffSiteLink": "https://www.victoria.ac.nz/explore/postgraduate-subjects/computer-graphics/people#kieran-carnegie",
@@ -728,9 +816,10 @@
   {
     "group": "nodes",
     "data": {
-      "id": 49,
+      "id": 150,
       "name": "Blaire Haslop",
       "type": "person",
+      "year": "2016,2017",
       "programme": "Architecture",
       "email": "",
       "staffSiteLink": "",
@@ -744,9 +833,10 @@
   {
     "group": "nodes",
     "data": {
-      "id": 50,
+      "id": 153,
       "name": "Byron Mallett",
       "type": "person",
+      "year": "2016,2017",
       "programme": "Media Design",
       "email": "byron.mallett@vuw.ac.nz",
       "staffSiteLink": "https://www.victoria.ac.nz/design/about/staff/byron-mallett",
@@ -760,9 +850,10 @@
   {
     "group": "nodes",
     "data": {
-      "id": 51,
+      "id": 155,
       "name": "Andrew Chalmers",
       "type": "person",
+      "year": "2016,2017",
       "programme": "Computer Graphics",
       "email": "andrewchalmers26@gmail.com",
       "staffSiteLink": "https://ecs.victoria.ac.nz/Main/GradAndrewChalmers",
@@ -776,9 +867,10 @@
   {
     "group": "nodes",
     "data": {
-      "id": 52,
+      "id": 157,
       "name": "Sky Lo Tian Tian",
       "type": "person",
+      "year": "2016,2017",
       "programme": "Architecture",
       "email": "Skyduo@hotmail.com",
       "staffSiteLink": "https://www.victoria.ac.nz/architecture/research/current-phd-research/sky-lo-tian-tian",
@@ -792,9 +884,10 @@
   {
     "group": "nodes",
     "data": {
-      "id": 53,
+      "id": 159,
       "name": "Bryden Frizzell",
       "type": "person",
+      "year": "2016,2017",
       "programme": "Software Engineering",
       "email": "bryden.frizzell@gmail.com",
       "staffSiteLink": "",
@@ -808,9 +901,10 @@
   {
     "group": "nodes",
     "data": {
-      "id": 54,
+      "id": 161,
       "name": "Philip Calvert",
       "type": "person",
+      "year": "2016,2017",
       "programme": "Information Managment",
       "email": "philip.calvert@vuw.ac.nz",
       "staffSiteLink": "https://www.victoria.ac.nz/sim/about/staff/philip-calvert",
@@ -824,9 +918,10 @@
   {
     "group": "nodes",
     "data": {
-      "id": 55,
+      "id": 163,
       "name": "Oli Wright",
       "type": "person",
+      "year": "2016,2017",
       "programme": "Architecture",
       "email": "Owright13@gmail.com",
       "staffSiteLink": "",
@@ -840,9 +935,10 @@
   {
     "group": "nodes",
     "data": {
-      "id": 56,
+      "id": 165,
       "name": "Christian Schott",
       "type": "person",
+      "year": "2016,2017",
       "programme": "Management",
       "email": "christian.schott@vuw.ac.nz",
       "staffSiteLink": "https://www.victoria.ac.nz/som/about/staff/christian-schott",
@@ -856,9 +952,10 @@
   {
     "group": "nodes",
     "data": {
-      "id": 57,
+      "id": 169,
       "name": "Kevin Romond",
       "type": "person",
+      "year": "2016,2017",
       "programme": "Design",
       "email": "",
       "staffSiteLink": "http://computergraphics.ac.nz/people/",
@@ -872,9 +969,10 @@
   {
     "group": "nodes",
     "data": {
-      "id": 58,
+      "id": 172,
       "name": "Raqi Syed",
       "type": "person",
+      "year": "2016,2017",
       "programme": "Design",
       "email": "raqi.syed@vuw.ac.nz",
       "staffSiteLink": "https://www.victoria.ac.nz/design/about/staff/raqi-syed",
@@ -888,9 +986,10 @@
   {
     "group": "nodes",
     "data": {
-      "id": 59,
+      "id": 176,
       "name": "Joseph Hendren",
       "type": "person",
+      "year": "2016,2017",
       "programme": "School of English, Film, Theatre and Media Studies",
       "email": "joseph.hendren@gmail.com",
       "staffSiteLink": "",
@@ -904,9 +1003,10 @@
   {
     "group": "nodes",
     "data": {
-      "id": 60,
+      "id": 180,
       "name": "Heidi Stedman",
       "type": "person",
+      "year": "2016,2017",
       "programme": "Engagement and Alumni",
       "email": "Heidi.Stedman@vuw.ac.nz",
       "staffSiteLink": "",
@@ -920,9 +1020,10 @@
   {
     "group": "nodes",
     "data": {
-      "id": 61,
+      "id": 186,
       "name": "Ocean Mercier",
       "type": "person",
+      "year": "2016,2017",
       "programme": "Te Kawa a M\u0101ui",
       "email": "ocean.mercier@vuw.ac.nz",
       "staffSiteLink": "https://www.victoria.ac.nz/maori/about/staff/ocean-mercier",
@@ -936,9 +1037,10 @@
   {
     "group": "nodes",
     "data": {
-      "id": 62,
+      "id": 191,
       "name": "Mary Ellen Gordon",
       "type": "person",
+      "year": "2016",
       "programme": "Information Managment",
       "email": "maryellen.gordon@vuw.ac.nz",
       "staffSiteLink": "https://www.victoria.ac.nz/sim/about/staff/maryellen-gordon",
@@ -952,9 +1054,10 @@
   {
     "group": "nodes",
     "data": {
-      "id": 63,
+      "id": 193,
       "name": "Louise Starkey",
       "type": "person",
+      "year": "2016",
       "programme": "Education",
       "email": "louise.starkey@vuw.ac.nz",
       "staffSiteLink": "https://www.victoria.ac.nz/education/about/staff/louise-starkey",
@@ -968,9 +1071,10 @@
   {
     "group": "nodes",
     "data": {
-      "id": 64,
+      "id": 198,
       "name": "Beth Smith",
       "type": "person",
+      "year": "2016",
       "programme": "Learning and Research Technology Team",
       "email": "",
       "staffSiteLink": "https://www.victoria.ac.nz/its/about/learning-and-research-technology-team",
@@ -984,9 +1088,10 @@
   {
     "group": "nodes",
     "data": {
-      "id": 65,
+      "id": 202,
       "name": "Kristina Keogh",
       "type": "person",
+      "year": "2016",
       "programme": "Communications and Marketing",
       "email": "",
       "staffSiteLink": "",
@@ -1000,9 +1105,10 @@
   {
     "group": "nodes",
     "data": {
-      "id": 66,
+      "id": 204,
       "name": "Sarah Hoyte",
       "type": "person",
+      "year": "2016",
       "programme": "Learning and Research Technology Team",
       "email": "",
       "staffSiteLink": "https://www.victoria.ac.nz/its/about/learning-and-research-technology-team",
@@ -1016,9 +1122,10 @@
   {
     "group": "nodes",
     "data": {
-      "id": 67,
+      "id": 209,
       "name": "Roger Cliffe",
       "type": "person",
+      "year": "2016",
       "programme": "Engineering and Computer Science",
       "email": "",
       "staffSiteLink": "http://ecs.victoria.ac.nz/Main/RogerCliffe",
@@ -1032,9 +1139,10 @@
   {
     "group": "nodes",
     "data": {
-      "id": 68,
+      "id": 211,
       "name": "Steve Lamb",
       "type": "person",
+      "year": "2016",
       "programme": "Architecture",
       "email": "steve.lamb@vuw.ac.nz",
       "staffSiteLink": "",
@@ -1048,9 +1156,10 @@
   {
     "group": "nodes",
     "data": {
-      "id": 69,
+      "id": 218,
       "name": "Gerry Keating",
       "type": "person",
+      "year": "2016",
       "programme": "Image services",
       "email": "",
       "staffSiteLink": "",
@@ -1064,9 +1173,10 @@
   {
     "group": "nodes",
     "data": {
-      "id": 70,
+      "id": 227,
       "name": "Diana Siwiak",
       "type": "person",
+      "year": "2016",
       "programme": "New Zealand School of Music",
       "email": "",
       "staffSiteLink": "https://ecs.victoria.ac.nz/Main/GradDianaSiwiak",
@@ -1080,9 +1190,10 @@
   {
     "group": "nodes",
     "data": {
-      "id": 71,
+      "id": 231,
       "name": "Matt Plummer",
       "type": "person",
+      "year": "2016,2017",
       "programme": "Learning and Research Technology Team",
       "email": "matt.plummer@vuw.ac.nz",
       "staffSiteLink": "https://www.victoria.ac.nz/its/about/learning-and-research-technology-team",
@@ -1096,9 +1207,10 @@
   {
     "group": "nodes",
     "data": {
-      "id": 72,
+      "id": 240,
       "name": "Paul Hillier",
       "type": "person",
+      "year": "2016",
       "programme": "Architecture& design",
       "email": "paul.hillier@vuw.ac.nz",
       "staffSiteLink": "https://www.victoria.ac.nz/fad/about/staff/paul-hillier",
@@ -1112,9 +1224,10 @@
   {
     "group": "nodes",
     "data": {
-      "id": 73,
+      "id": 243,
       "name": "Alfio Leotta",
       "type": "person",
+      "year": "2016",
       "programme": "Film",
       "email": "alfio.leotta@vuw.ac.nz",
       "staffSiteLink": "https://www.victoria.ac.nz/seftms/about/staff/alfio-leotta",
@@ -1128,9 +1241,10 @@
   {
     "group": "nodes",
     "data": {
-      "id": 74,
+      "id": 245,
       "name": "Jonathan Flutey",
       "type": "person",
+      "year": "2016",
       "programme": "Learning and Research Technology Team",
       "email": "jonathan.flutey@vuw.ac.nz",
       "staffSiteLink": "https://www.victoria.ac.nz/its/about/learning-and-research-technology-team",
@@ -1144,9 +1258,10 @@
   {
     "group": "nodes",
     "data": {
-      "id": 75,
+      "id": 247,
       "name": "Dylan Anderson",
       "type": "person",
+      "year": "2016",
       "programme": "Victoria International",
       "email": "",
       "staffSiteLink": "",
@@ -1160,9 +1275,10 @@
   {
     "group": "nodes",
     "data": {
-      "id": 76,
+      "id": 249,
       "name": "Warren Butcher",
       "type": "person",
+      "year": "2016",
       "programme": "Image services",
       "email": "warren.butcher@vuw.ac.nz",
       "staffSiteLink": "",
@@ -1176,9 +1292,10 @@
   {
     "group": "nodes",
     "data": {
-      "id": 77,
+      "id": 256,
       "name": "Nathan Stewart",
       "type": "person",
+      "year": "2016",
       "programme": "Image Services",
       "email": "nathan.stewart@vuw.ac.nz",
       "staffSiteLink": "",
@@ -1192,9 +1309,10 @@
   {
     "group": "nodes",
     "data": {
-      "id": 78,
+      "id": 258,
       "name": "Christopher Maymon",
       "type": "person",
+      "year": "2016",
       "programme": "Psychology",
       "email": "cnmaymon1@gmail.com",
       "staffSiteLink": "https://www.victoria.ac.nz/psyc/research/phd-students/christopher-maymon",
@@ -1208,9 +1326,10 @@
   {
     "group": "nodes",
     "data": {
-      "id": 79,
+      "id": 260,
       "name": "David Lin",
       "type": "person",
+      "year": "2016",
       "programme": "Malaghan Institute",
       "email": "dlin@malaghan.org.nz",
       "staffSiteLink": "http://www.malaghan.org.nz/our-history/our-people/finance-team/",
@@ -1224,9 +1343,10 @@
   {
     "group": "nodes",
     "data": {
-      "id": 80,
+      "id": 262,
       "name": "Jeff Jones",
       "type": "person",
+      "year": "2016",
       "programme": "Media Design",
       "email": "jeffjonesproductions@gmail.com",
       "staffSiteLink": "",
@@ -1240,9 +1360,10 @@
   {
     "group": "nodes",
     "data": {
-      "id": 81,
+      "id": 264,
       "name": "Regan Petrie",
       "type": "person",
+      "year": "2016",
       "programme": "school of design",
       "email": "petrie.regan@gmail.com",
       "staffSiteLink": "",
@@ -1256,9 +1377,10 @@
   {
     "group": "nodes",
     "data": {
-      "id": 82,
+      "id": 266,
       "name": "Stefan Peacock",
       "type": "person",
+      "year": "2016",
       "programme": "School of Design",
       "email": "stef.peacock@gmail.com",
       "staffSiteLink": "",
@@ -1272,9 +1394,10 @@
   {
     "group": "nodes",
     "data": {
-      "id": 83,
+      "id": 270,
       "name": "Jonathon Bishop",
       "type": "person",
+      "year": "2016",
       "programme": "Design and  Innovation",
       "email": "jonobishop@gmail.com",
       "staffSiteLink": "",
@@ -1288,9 +1411,10 @@
   {
     "group": "nodes",
     "data": {
-      "id": 84,
+      "id": 273,
       "name": "Helen Sargent",
       "type": "person",
+      "year": "2016",
       "programme": "Research Development Office",
       "email": "helen.sargent@vuw.ac.nz",
       "staffSiteLink": "",
@@ -1304,9 +1428,10 @@
   {
     "group": "nodes",
     "data": {
-      "id": 85,
+      "id": 276,
       "name": "Craig Anslow",
       "type": "person",
+      "year": "2016",
       "programme": "Engineering and Computer Science",
       "email": "craig@ecs.vuw.ac.nz",
       "staffSiteLink": "http://ecs.victoria.ac.nz/Main/CraigAnslow",
@@ -1320,9 +1445,10 @@
   {
     "group": "nodes",
     "data": {
-      "id": 86,
+      "id": 279,
       "name": "Geoffrey Batchen",
       "type": "person",
+      "year": "2016",
       "programme": "Art History",
       "email": "",
       "staffSiteLink": "https://www.victoria.ac.nz/sacr/about/staff/geoffrey-batchen",
@@ -1336,9 +1462,10 @@
   {
     "group": "nodes",
     "data": {
-      "id": 87,
+      "id": 281,
       "name": "Syndey Shep",
       "type": "person",
+      "year": "2016",
       "programme": "Wai-te-ata Press",
       "email": "",
       "staffSiteLink": "https://www.victoria.ac.nz/wtapress/about/staff/sydney-shep",
@@ -1352,9 +1479,10 @@
   {
     "group": "nodes",
     "data": {
-      "id": 88,
+      "id": 283,
       "name": "Leon Gurevitch",
       "type": "person",
+      "year": "2016",
       "programme": "Design",
       "email": "",
       "staffSiteLink": "https://www.victoria.ac.nz/design/about/staff/leon-gurevitch",
@@ -1368,9 +1496,10 @@
   {
     "group": "nodes",
     "data": {
-      "id": 89,
+      "id": 286,
       "name": "Douglas Easterly",
       "type": "person",
+      "year": "2016",
       "programme": "Design",
       "email": "",
       "staffSiteLink": "https://www.victoria.ac.nz/design/about/staff/douglas-easterly",
@@ -1384,9 +1513,10 @@
   {
     "group": "nodes",
     "data": {
-      "id": 90,
+      "id": 291,
       "name": "Walter Langelaar",
       "type": "person",
+      "year": "2016",
       "programme": "Media Design",
       "email": "",
       "staffSiteLink": "https://www.victoria.ac.nz/design/about/staff/walter-langelaar",
@@ -1400,9 +1530,10 @@
   {
     "group": "nodes",
     "data": {
-      "id": 91,
+      "id": 296,
       "name": "Sebastian Paz",
       "type": "person",
+      "year": "2016",
       "programme": "Design",
       "email": "",
       "staffSiteLink": "",
@@ -1416,9 +1547,10 @@
   {
     "group": "nodes",
     "data": {
-      "id": 92,
+      "id": 299,
       "name": "Daniel Innes",
       "type": "person",
+      "year": "2016",
       "programme": "Architecture",
       "email": "",
       "staffSiteLink": "",
@@ -1431,842 +1563,2102 @@
   },
   {
     "group": "edges",
-    "data": { "id": 98, "source": 17, "target": 32, "type": "project" }
+    "data": {
+      "id": 38,
+      "source": 22,
+      "target": 37,
+      "type": "project",
+      "year": "2018,2016,2017"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 99, "source": 29, "target": 32, "type": "school" }
+    "data": {
+      "id": 39,
+      "source": 34,
+      "target": 37,
+      "type": "school",
+      "year": "2018,2016,2017"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 100, "source": 4, "target": 33, "type": "project" }
+    "data": {
+      "id": 41,
+      "source": 9,
+      "target": 40,
+      "type": "project",
+      "year": "2018,2016,2017"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 101, "source": 11, "target": 33, "type": "project" }
+    "data": {
+      "id": 42,
+      "source": 16,
+      "target": 40,
+      "type": "project",
+      "year": "2018,2016,2017"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 102, "source": 26, "target": 33, "type": "school" }
+    "data": {
+      "id": 43,
+      "source": 31,
+      "target": 40,
+      "type": "school",
+      "year": "2018,2016,2017"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 103, "source": 14, "target": 34, "type": "project" }
+    "data": {
+      "id": 45,
+      "source": 19,
+      "target": 44,
+      "type": "project",
+      "year": "2018,2016,2017"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 104, "source": 19, "target": 34, "type": "project" }
+    "data": {
+      "id": 46,
+      "source": 24,
+      "target": 44,
+      "type": "project",
+      "year": "2018,2016,2017"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 105, "source": 28, "target": 34, "type": "school" }
+    "data": {
+      "id": 47,
+      "source": 33,
+      "target": 44,
+      "type": "school",
+      "year": "2018,2016,2017"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 106, "source": 26, "target": 35, "type": "school" }
+    "data": {
+      "id": 49,
+      "source": 31,
+      "target": 48,
+      "type": "school",
+      "year": "2018,2016,2017"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 107, "source": 25, "target": 36, "type": "school" }
+    "data": {
+      "id": 51,
+      "source": 30,
+      "target": 50,
+      "type": "school",
+      "year": "2018,2016,2017"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 108, "source": 28, "target": 37, "type": "school" }
+    "data": {
+      "id": 53,
+      "source": 33,
+      "target": 52,
+      "type": "school",
+      "year": "2018,2016,2017"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 109, "source": 1, "target": 38, "type": "project" }
+    "data": {
+      "id": 55,
+      "source": 6,
+      "target": 54,
+      "type": "project",
+      "year": "2018,2016,2017"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 110, "source": 10, "target": 38, "type": "project" }
+    "data": {
+      "id": 56,
+      "source": 15,
+      "target": 54,
+      "type": "project",
+      "year": "2018,2016,2017"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 111, "source": 28, "target": 38, "type": "school" }
+    "data": {
+      "id": 57,
+      "source": 33,
+      "target": 54,
+      "type": "school",
+      "year": "2018,2016,2017"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 112, "source": 25, "target": 39, "type": "school" }
+    "data": {
+      "id": 59,
+      "source": 30,
+      "target": 58,
+      "type": "school",
+      "year": "2018,2016,2017"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 113, "source": 11, "target": 40, "type": "project" }
+    "data": {
+      "id": 61,
+      "source": 16,
+      "target": 60,
+      "type": "project",
+      "year": "2018,2016,2017"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 114, "source": 30, "target": 40, "type": "school" }
+    "data": {
+      "id": 62,
+      "source": 35,
+      "target": 60,
+      "type": "school",
+      "year": "2018,2016,2017"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 115, "source": 4, "target": 41, "type": "project" }
+    "data": {
+      "id": 64,
+      "source": 9,
+      "target": 63,
+      "type": "project",
+      "year": "2018,2016,2017"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 116, "source": 31, "target": 41, "type": "school" }
+    "data": {
+      "id": 65,
+      "source": 36,
+      "target": 63,
+      "type": "school",
+      "year": "2018,2016,2017"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 117, "source": 25, "target": 42, "type": "school" }
+    "data": {
+      "id": 67,
+      "source": 30,
+      "target": 66,
+      "type": "school",
+      "year": "2018,2016,2017"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 118, "source": 28, "target": 43, "type": "school" }
+    "data": {
+      "id": 69,
+      "source": 33,
+      "target": 68,
+      "type": "school",
+      "year": "2018,2016,2017"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 119, "source": 25, "target": 44, "type": "school" }
+    "data": {
+      "id": 70,
+      "source": 40,
+      "target": 44,
+      "type": "collab",
+      "year": "2018,2016,2016,2017,2017"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 120, "source": 31, "target": 45, "type": "school" }
+    "data": {
+      "id": 71,
+      "source": 44,
+      "target": 48,
+      "type": "collab",
+      "year": "2018,2016,2016,2017,2017"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 121, "source": 31, "target": 46, "type": "school" }
+    "data": {
+      "id": 73,
+      "source": 48,
+      "target": 37,
+      "type": "collab",
+      "year": "2018,2016,2016,2017,2017"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 122, "source": 18, "target": 47, "type": "project" }
+    "data": {
+      "id": 140,
+      "source": 30,
+      "target": 139,
+      "type": "school",
+      "year": "2016,2017"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 123, "source": 27, "target": 47, "type": "school" }
+    "data": {
+      "id": 142,
+      "source": 36,
+      "target": 141,
+      "type": "school",
+      "year": "2016,2017"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 124, "source": 31, "target": 48, "type": "school" }
+    "data": {
+      "id": 144,
+      "source": 36,
+      "target": 143,
+      "type": "school",
+      "year": "2016,2017"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 125, "source": 5, "target": 49, "type": "project" }
+    "data": {
+      "id": 146,
+      "source": 23,
+      "target": 145,
+      "type": "project",
+      "year": "2016,2017"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 126, "source": 29, "target": 49, "type": "school" }
+    "data": {
+      "id": 147,
+      "source": 32,
+      "target": 145,
+      "type": "school",
+      "year": "2016,2017"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 127, "source": 26, "target": 50, "type": "school" }
+    "data": {
+      "id": 149,
+      "source": 36,
+      "target": 148,
+      "type": "school",
+      "year": "2016,2017"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 128, "source": 26, "target": 51, "type": "school" }
+    "data": {
+      "id": 151,
+      "source": 10,
+      "target": 150,
+      "type": "project",
+      "year": "2016,2017"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 129, "source": 26, "target": 52, "type": "school" }
+    "data": {
+      "id": 152,
+      "source": 34,
+      "target": 150,
+      "type": "school",
+      "year": "2016,2017"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 130, "source": 25, "target": 53, "type": "school" }
+    "data": {
+      "id": 154,
+      "source": 31,
+      "target": 153,
+      "type": "school",
+      "year": "2016,2017"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 131, "source": 25, "target": 54, "type": "school" }
+    "data": {
+      "id": 156,
+      "source": 31,
+      "target": 155,
+      "type": "school",
+      "year": "2016,2017"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 132, "source": 25, "target": 55, "type": "school" }
+    "data": {
+      "id": 158,
+      "source": 31,
+      "target": 157,
+      "type": "school",
+      "year": "2016,2017"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 133, "source": 8, "target": 56, "type": "project" }
+    "data": {
+      "id": 160,
+      "source": 30,
+      "target": 159,
+      "type": "school",
+      "year": "2016,2017"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 134, "source": 13, "target": 56, "type": "project" }
+    "data": {
+      "id": 162,
+      "source": 30,
+      "target": 161,
+      "type": "school",
+      "year": "2016,2017"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 135, "source": 27, "target": 56, "type": "school" }
+    "data": {
+      "id": 164,
+      "source": 30,
+      "target": 163,
+      "type": "school",
+      "year": "2016,2017"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 136, "source": 11, "target": 57, "type": "project" }
+    "data": {
+      "id": 166,
+      "source": 13,
+      "target": 165,
+      "type": "project",
+      "year": "2016,2017"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 137, "source": 26, "target": 57, "type": "school" }
+    "data": {
+      "id": 167,
+      "source": 18,
+      "target": 165,
+      "type": "project",
+      "year": "2016,2017"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 138, "source": 8, "target": 58, "type": "project" }
+    "data": {
+      "id": 168,
+      "source": 32,
+      "target": 165,
+      "type": "school",
+      "year": "2016,2017"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 139, "source": 13, "target": 58, "type": "project" }
+    "data": {
+      "id": 170,
+      "source": 16,
+      "target": 169,
+      "type": "project",
+      "year": "2016,2017"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 140, "source": 27, "target": 58, "type": "school" }
+    "data": {
+      "id": 171,
+      "source": 31,
+      "target": 169,
+      "type": "school",
+      "year": "2016,2017"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 141, "source": 9, "target": 59, "type": "project" }
+    "data": {
+      "id": 173,
+      "source": 13,
+      "target": 172,
+      "type": "project",
+      "year": "2016,2017"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 142, "source": 15, "target": 59, "type": "project" }
+    "data": {
+      "id": 174,
+      "source": 18,
+      "target": 172,
+      "type": "project",
+      "year": "2016,2017"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 143, "source": 29, "target": 59, "type": "school" }
+    "data": {
+      "id": 175,
+      "source": 32,
+      "target": 172,
+      "type": "school",
+      "year": "2016,2017"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 144, "source": 6, "target": 60, "type": "project" }
+    "data": {
+      "id": 177,
+      "source": 14,
+      "target": 176,
+      "type": "project",
+      "year": "2016,2017"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 145, "source": 7, "target": 60, "type": "project" }
+    "data": {
+      "id": 178,
+      "source": 20,
+      "target": 176,
+      "type": "project",
+      "year": "2016,2017"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 146, "source": 15, "target": 60, "type": "project" }
+    "data": {
+      "id": 179,
+      "source": 34,
+      "target": 176,
+      "type": "school",
+      "year": "2016,2017"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 147, "source": 17, "target": 60, "type": "project" }
+    "data": {
+      "id": 181,
+      "source": 11,
+      "target": 180,
+      "type": "project",
+      "year": "2016,2017"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 148, "source": 27, "target": 60, "type": "school" }
+    "data": {
+      "id": 182,
+      "source": 12,
+      "target": 180,
+      "type": "project",
+      "year": "2016,2017"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 149, "source": 1, "target": 61, "type": "project" }
+    "data": {
+      "id": 183,
+      "source": 20,
+      "target": 180,
+      "type": "project",
+      "year": "2016,2017"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 150, "source": 7, "target": 61, "type": "project" }
+    "data": {
+      "id": 184,
+      "source": 22,
+      "target": 180,
+      "type": "project",
+      "year": "2016,2017"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 151, "source": 14, "target": 61, "type": "project" }
+    "data": {
+      "id": 185,
+      "source": 32,
+      "target": 180,
+      "type": "school",
+      "year": "2016,2017"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 152, "source": 28, "target": 61, "type": "school" }
+    "data": {
+      "id": 187,
+      "source": 6,
+      "target": 186,
+      "type": "project",
+      "year": "2016,2017"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 153, "source": 26, "target": 62, "type": "school" }
+    "data": {
+      "id": 188,
+      "source": 12,
+      "target": 186,
+      "type": "project",
+      "year": "2016,2017"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 154, "source": 10, "target": 63, "type": "project" }
+    "data": {
+      "id": 189,
+      "source": 19,
+      "target": 186,
+      "type": "project",
+      "year": "2016,2017"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 155, "source": 12, "target": 63, "type": "project" }
+    "data": {
+      "id": 190,
+      "source": 33,
+      "target": 186,
+      "type": "school",
+      "year": "2016,2017"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 156, "source": 18, "target": 63, "type": "project" }
+    "data": {
+      "id": 192,
+      "source": 31,
+      "target": 191,
+      "type": "school",
+      "year": "2016"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 157, "source": 27, "target": 63, "type": "school" }
+    "data": {
+      "id": 194,
+      "source": 15,
+      "target": 193,
+      "type": "project",
+      "year": "2016"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 158, "source": 14, "target": 64, "type": "project" }
+    "data": {
+      "id": 195,
+      "source": 17,
+      "target": 193,
+      "type": "project",
+      "year": "2016"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 159, "source": 19, "target": 64, "type": "project" }
+    "data": {
+      "id": 196,
+      "source": 23,
+      "target": 193,
+      "type": "project",
+      "year": "2016"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 160, "source": 28, "target": 64, "type": "school" }
+    "data": {
+      "id": 197,
+      "source": 32,
+      "target": 193,
+      "type": "school",
+      "year": "2016"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 161, "source": 31, "target": 65, "type": "school" }
+    "data": {
+      "id": 199,
+      "source": 19,
+      "target": 198,
+      "type": "project",
+      "year": "2016"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 162, "source": 2, "target": 66, "type": "project" }
+    "data": {
+      "id": 200,
+      "source": 24,
+      "target": 198,
+      "type": "project",
+      "year": "2016"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 163, "source": 20, "target": 66, "type": "project" }
+    "data": {
+      "id": 201,
+      "source": 33,
+      "target": 198,
+      "type": "school",
+      "year": "2016"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 164, "source": 21, "target": 66, "type": "project" }
+    "data": {
+      "id": 203,
+      "source": 36,
+      "target": 202,
+      "type": "school",
+      "year": "2016"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 165, "source": 25, "target": 66, "type": "school" }
+    "data": {
+      "id": 205,
+      "source": 7,
+      "target": 204,
+      "type": "project",
+      "year": "2016"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 166, "source": 30, "target": 67, "type": "school" }
+    "data": {
+      "id": 206,
+      "source": 25,
+      "target": 204,
+      "type": "project",
+      "year": "2016"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 167, "source": 3, "target": 68, "type": "project" }
+    "data": {
+      "id": 207,
+      "source": 26,
+      "target": 204,
+      "type": "project",
+      "year": "2016"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 168, "source": 4, "target": 68, "type": "project" }
+    "data": {
+      "id": 208,
+      "source": 30,
+      "target": 204,
+      "type": "school",
+      "year": "2016"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 169, "source": 5, "target": 68, "type": "project" }
+    "data": {
+      "id": 210,
+      "source": 35,
+      "target": 209,
+      "type": "school",
+      "year": "2016"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 170, "source": 8, "target": 68, "type": "project" }
+    "data": {
+      "id": 212,
+      "source": 8,
+      "target": 211,
+      "type": "project",
+      "year": "2016"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 171, "source": 16, "target": 68, "type": "project" }
+    "data": {
+      "id": 213,
+      "source": 9,
+      "target": 211,
+      "type": "project",
+      "year": "2016"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 172, "source": 26, "target": 68, "type": "school" }
+    "data": {
+      "id": 214,
+      "source": 10,
+      "target": 211,
+      "type": "project",
+      "year": "2016"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 173, "source": 3, "target": 69, "type": "project" }
+    "data": {
+      "id": 215,
+      "source": 13,
+      "target": 211,
+      "type": "project",
+      "year": "2016"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 174, "source": 6, "target": 69, "type": "project" }
+    "data": {
+      "id": 216,
+      "source": 21,
+      "target": 211,
+      "type": "project",
+      "year": "2016"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 175, "source": 7, "target": 69, "type": "project" }
+    "data": {
+      "id": 217,
+      "source": 31,
+      "target": 211,
+      "type": "school",
+      "year": "2016"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 176, "source": 9, "target": 69, "type": "project" }
+    "data": {
+      "id": 219,
+      "source": 8,
+      "target": 218,
+      "type": "project",
+      "year": "2016"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 177, "source": 12, "target": 69, "type": "project" }
+    "data": {
+      "id": 220,
+      "source": 11,
+      "target": 218,
+      "type": "project",
+      "year": "2016"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 178, "source": 15, "target": 69, "type": "project" }
+    "data": {
+      "id": 221,
+      "source": 12,
+      "target": 218,
+      "type": "project",
+      "year": "2016"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 179, "source": 16, "target": 69, "type": "project" }
+    "data": {
+      "id": 222,
+      "source": 14,
+      "target": 218,
+      "type": "project",
+      "year": "2016"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 180, "source": 29, "target": 69, "type": "school" }
+    "data": {
+      "id": 223,
+      "source": 17,
+      "target": 218,
+      "type": "project",
+      "year": "2016"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 181, "source": 3, "target": 70, "type": "project" }
+    "data": {
+      "id": 224,
+      "source": 20,
+      "target": 218,
+      "type": "project",
+      "year": "2016"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 182, "source": 5, "target": 70, "type": "project" }
+    "data": {
+      "id": 225,
+      "source": 21,
+      "target": 218,
+      "type": "project",
+      "year": "2016"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 183, "source": 26, "target": 70, "type": "school" }
+    "data": {
+      "id": 226,
+      "source": 34,
+      "target": 218,
+      "type": "school",
+      "year": "2016"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 184, "source": 3, "target": 71, "type": "project" }
+    "data": {
+      "id": 228,
+      "source": 8,
+      "target": 227,
+      "type": "project",
+      "year": "2016"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 185, "source": 7, "target": 71, "type": "project" }
+    "data": {
+      "id": 229,
+      "source": 10,
+      "target": 227,
+      "type": "project",
+      "year": "2016"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 186, "source": 14, "target": 71, "type": "project" }
+    "data": {
+      "id": 230,
+      "source": 31,
+      "target": 227,
+      "type": "school",
+      "year": "2016"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 187, "source": 16, "target": 71, "type": "project" }
+    "data": {
+      "id": 232,
+      "source": 8,
+      "target": 231,
+      "type": "project",
+      "year": "2016,2017"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 188, "source": 22, "target": 71, "type": "project" }
+    "data": {
+      "id": 233,
+      "source": 12,
+      "target": 231,
+      "type": "project",
+      "year": "2016,2017"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 189, "source": 23, "target": 71, "type": "project" }
+    "data": {
+      "id": 234,
+      "source": 19,
+      "target": 231,
+      "type": "project",
+      "year": "2016,2017"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 190, "source": 24, "target": 71, "type": "project" }
+    "data": {
+      "id": 235,
+      "source": 21,
+      "target": 231,
+      "type": "project",
+      "year": "2016,2017"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 191, "source": 28, "target": 71, "type": "school" }
+    "data": {
+      "id": 236,
+      "source": 27,
+      "target": 231,
+      "type": "project",
+      "year": "2016,2017"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 192, "source": 2, "target": 72, "type": "project" }
+    "data": {
+      "id": 237,
+      "source": 28,
+      "target": 231,
+      "type": "project",
+      "year": "2016,2017"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 193, "source": 29, "target": 72, "type": "school" }
+    "data": {
+      "id": 238,
+      "source": 29,
+      "target": 231,
+      "type": "project",
+      "year": "2016,2017"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 194, "source": 25, "target": 73, "type": "school" }
+    "data": {
+      "id": 239,
+      "source": 33,
+      "target": 231,
+      "type": "school",
+      "year": "2016,2017"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 195, "source": 27, "target": 74, "type": "school" }
+    "data": {
+      "id": 241,
+      "source": 7,
+      "target": 240,
+      "type": "project",
+      "year": "2016"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 196, "source": 30, "target": 75, "type": "school" }
+    "data": {
+      "id": 242,
+      "source": 34,
+      "target": 240,
+      "type": "school",
+      "year": "2016"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 197, "source": 5, "target": 76, "type": "project" }
+    "data": {
+      "id": 244,
+      "source": 30,
+      "target": 243,
+      "type": "school",
+      "year": "2016"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 198, "source": 6, "target": 76, "type": "project" }
+    "data": {
+      "id": 246,
+      "source": 32,
+      "target": 245,
+      "type": "school",
+      "year": "2016"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 199, "source": 10, "target": 76, "type": "project" }
+    "data": {
+      "id": 248,
+      "source": 35,
+      "target": 247,
+      "type": "school",
+      "year": "2016"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 200, "source": 15, "target": 76, "type": "project" }
+    "data": {
+      "id": 250,
+      "source": 10,
+      "target": 249,
+      "type": "project",
+      "year": "2016"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 201, "source": 17, "target": 76, "type": "project" }
+    "data": {
+      "id": 251,
+      "source": 11,
+      "target": 249,
+      "type": "project",
+      "year": "2016"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 202, "source": 27, "target": 76, "type": "school" }
+    "data": {
+      "id": 252,
+      "source": 15,
+      "target": 249,
+      "type": "project",
+      "year": "2016"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 203, "source": 27, "target": 77, "type": "school" }
+    "data": {
+      "id": 253,
+      "source": 20,
+      "target": 249,
+      "type": "project",
+      "year": "2016"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 204, "source": 28, "target": 78, "type": "school" }
+    "data": {
+      "id": 254,
+      "source": 22,
+      "target": 249,
+      "type": "project",
+      "year": "2016"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 205, "source": 28, "target": 79, "type": "school" }
+    "data": {
+      "id": 255,
+      "source": 32,
+      "target": 249,
+      "type": "school",
+      "year": "2016"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 206, "source": 26, "target": 80, "type": "school" }
+    "data": {
+      "id": 257,
+      "source": 32,
+      "target": 256,
+      "type": "school",
+      "year": "2016"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 207, "source": 25, "target": 81, "type": "school" }
+    "data": {
+      "id": 259,
+      "source": 33,
+      "target": 258,
+      "type": "school",
+      "year": "2016"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 208, "source": 8, "target": 82, "type": "project" }
+    "data": {
+      "id": 261,
+      "source": 33,
+      "target": 260,
+      "type": "school",
+      "year": "2016"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 209, "source": 13, "target": 82, "type": "project" }
+    "data": {
+      "id": 263,
+      "source": 31,
+      "target": 262,
+      "type": "school",
+      "year": "2016"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 210, "source": 27, "target": 82, "type": "school" }
+    "data": {
+      "id": 265,
+      "source": 30,
+      "target": 264,
+      "type": "school",
+      "year": "2016"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 211, "source": 21, "target": 83, "type": "project" }
+    "data": {
+      "id": 267,
+      "source": 13,
+      "target": 266,
+      "type": "project",
+      "year": "2016"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 212, "source": 27, "target": 83, "type": "school" }
+    "data": {
+      "id": 268,
+      "source": 18,
+      "target": 266,
+      "type": "project",
+      "year": "2016"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 213, "source": 20, "target": 84, "type": "project" }
+    "data": {
+      "id": 269,
+      "source": 32,
+      "target": 266,
+      "type": "school",
+      "year": "2016"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 214, "source": 25, "target": 84, "type": "school" }
+    "data": {
+      "id": 271,
+      "source": 26,
+      "target": 270,
+      "type": "project",
+      "year": "2016"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 215, "source": 13, "target": 85, "type": "project" }
+    "data": {
+      "id": 272,
+      "source": 32,
+      "target": 270,
+      "type": "school",
+      "year": "2016"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 216, "source": 27, "target": 85, "type": "school" }
+    "data": {
+      "id": 274,
+      "source": 25,
+      "target": 273,
+      "type": "project",
+      "year": "2016"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 217, "source": 25, "target": 86, "type": "school" }
+    "data": {
+      "id": 275,
+      "source": 30,
+      "target": 273,
+      "type": "school",
+      "year": "2016"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 218, "source": 26, "target": 87, "type": "school" }
+    "data": {
+      "id": 277,
+      "source": 18,
+      "target": 276,
+      "type": "project",
+      "year": "2016"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 219, "source": 8, "target": 88, "type": "project" }
+    "data": {
+      "id": 278,
+      "source": 32,
+      "target": 276,
+      "type": "school",
+      "year": "2016"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 220, "source": 29, "target": 88, "type": "school" }
+    "data": {
+      "id": 280,
+      "source": 30,
+      "target": 279,
+      "type": "school",
+      "year": "2016"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 221, "source": 7, "target": 89, "type": "project" }
+    "data": {
+      "id": 282,
+      "source": 31,
+      "target": 281,
+      "type": "school",
+      "year": "2016"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 222, "source": 14, "target": 89, "type": "project" }
+    "data": {
+      "id": 284,
+      "source": 13,
+      "target": 283,
+      "type": "project",
+      "year": "2016"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 223, "source": 19, "target": 89, "type": "project" }
+    "data": {
+      "id": 285,
+      "source": 34,
+      "target": 283,
+      "type": "school",
+      "year": "2016"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 224, "source": 28, "target": 89, "type": "school" }
+    "data": {
+      "id": 287,
+      "source": 12,
+      "target": 286,
+      "type": "project",
+      "year": "2016"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 225, "source": 18, "target": 90, "type": "project" }
+    "data": {
+      "id": 288,
+      "source": 19,
+      "target": 286,
+      "type": "project",
+      "year": "2016"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 226, "source": 20, "target": 90, "type": "project" }
+    "data": {
+      "id": 289,
+      "source": 24,
+      "target": 286,
+      "type": "project",
+      "year": "2016"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 227, "source": 21, "target": 90, "type": "project" }
+    "data": {
+      "id": 290,
+      "source": 33,
+      "target": 286,
+      "type": "school",
+      "year": "2016"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 228, "source": 25, "target": 90, "type": "school" }
+    "data": {
+      "id": 292,
+      "source": 23,
+      "target": 291,
+      "type": "project",
+      "year": "2016"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 229, "source": 8, "target": 91, "type": "project" }
+    "data": {
+      "id": 293,
+      "source": 25,
+      "target": 291,
+      "type": "project",
+      "year": "2016"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 230, "source": 27, "target": 91, "type": "school" }
+    "data": {
+      "id": 294,
+      "source": 26,
+      "target": 291,
+      "type": "project",
+      "year": "2016"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 231, "source": 4, "target": 92, "type": "project" }
+    "data": {
+      "id": 295,
+      "source": 30,
+      "target": 291,
+      "type": "school",
+      "year": "2016"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 232, "source": 26, "target": 92, "type": "school" }
+    "data": {
+      "id": 297,
+      "source": 13,
+      "target": 296,
+      "type": "project",
+      "year": "2016"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 233, "source": 32, "target": 35, "type": "collab" }
+    "data": {
+      "id": 298,
+      "source": 32,
+      "target": 296,
+      "type": "school",
+      "year": "2016"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 234, "source": 32, "target": 71, "type": "collab" }
+    "data": {
+      "id": 300,
+      "source": 9,
+      "target": 299,
+      "type": "project",
+      "year": "2016"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 235, "source": 32, "target": 58, "type": "collab" }
+    "data": {
+      "id": 301,
+      "source": 31,
+      "target": 299,
+      "type": "school",
+      "year": "2016"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 236, "source": 33, "target": 51, "type": "collab" }
+    "data": {
+      "id": 303,
+      "source": 37,
+      "target": 231,
+      "type": "collab",
+      "year": "2016,2017,2017"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 237, "source": 33, "target": 48, "type": "collab" }
+    "data": {
+      "id": 304,
+      "source": 37,
+      "target": 172,
+      "type": "collab",
+      "year": "2016,2017,2017"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 238, "source": 33, "target": 34, "type": "collab" }
+    "data": {
+      "id": 305,
+      "source": 40,
+      "target": 155,
+      "type": "collab",
+      "year": "2016,2017"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 239, "source": 34, "target": 35, "type": "collab" }
+    "data": {
+      "id": 306,
+      "source": 40,
+      "target": 148,
+      "type": "collab",
+      "year": "2016,2017,2017"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 240, "source": 34, "target": 71, "type": "collab" }
+    "data": {
+      "id": 309,
+      "source": 44,
+      "target": 231,
+      "type": "collab",
+      "year": "2016,2017"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 241, "source": 34, "target": 58, "type": "collab" }
+    "data": {
+      "id": 310,
+      "source": 44,
+      "target": 172,
+      "type": "collab",
+      "year": "2016,2017"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 242, "source": 34, "target": 51, "type": "collab" }
+    "data": {
+      "id": 311,
+      "source": 44,
+      "target": 155,
+      "type": "collab",
+      "year": "2016,2017"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 243, "source": 34, "target": 48, "type": "collab" }
+    "data": {
+      "id": 313,
+      "source": 44,
+      "target": 148,
+      "type": "collab",
+      "year": "2016,2017,2017"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 244, "source": 35, "target": 71, "type": "collab" }
+    "data": {
+      "id": 315,
+      "source": 48,
+      "target": 231,
+      "type": "collab",
+      "year": "2016,2017,2017"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 245, "source": 36, "target": 47, "type": "collab" }
+    "data": {
+      "id": 317,
+      "source": 50,
+      "target": 145,
+      "type": "collab",
+      "year": "2016,2017"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 246, "source": 36, "target": 44, "type": "collab" }
+    "data": {
+      "id": 318,
+      "source": 50,
+      "target": 139,
+      "type": "collab",
+      "year": "2016,2017"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 247, "source": 37, "target": 48, "type": "collab" }
+    "data": {
+      "id": 319,
+      "source": 52,
+      "target": 148,
+      "type": "collab",
+      "year": "2016,2017,2017"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 248, "source": 38, "target": 71, "type": "collab" }
+    "data": {
+      "id": 320,
+      "source": 54,
+      "target": 231,
+      "type": "collab",
+      "year": "2016,2017,2017"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 249, "source": 38, "target": 74, "type": "collab" }
+    "data": {
+      "id": 321,
+      "source": 54,
+      "target": 245,
+      "type": "collab",
+      "year": "2016"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 250, "source": 38, "target": 56, "type": "collab" }
+    "data": {
+      "id": 322,
+      "source": 54,
+      "target": 165,
+      "type": "collab",
+      "year": "2016,2017,2017"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 251, "source": 42, "target": 47, "type": "collab" }
+    "data": {
+      "id": 323,
+      "source": 66,
+      "target": 145,
+      "type": "collab",
+      "year": "2016,2017"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 252, "source": 44, "target": 45, "type": "collab" }
+    "data": {
+      "id": 324,
+      "source": 139,
+      "target": 141,
+      "type": "collab",
+      "year": "2016,2017,2017"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 253, "source": 44, "target": 47, "type": "collab" }
+    "data": {
+      "id": 325,
+      "source": 139,
+      "target": 145,
+      "type": "collab",
+      "year": "2016,2017,2017"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 254, "source": 44, "target": 89, "type": "collab" }
+    "data": {
+      "id": 326,
+      "source": 139,
+      "target": 286,
+      "type": "collab",
+      "year": "2016"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 255, "source": 47, "target": 61, "type": "collab" }
+    "data": {
+      "id": 328,
+      "source": 145,
+      "target": 186,
+      "type": "collab",
+      "year": "2016,2017,2017"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 256, "source": 48, "target": 51, "type": "collab" }
+    "data": {
+      "id": 333,
+      "source": 148,
+      "target": 155,
+      "type": "collab",
+      "year": "2016,2017,2017"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 257, "source": 48, "target": 50, "type": "collab" }
+    "data": {
+      "id": 335,
+      "source": 148,
+      "target": 153,
+      "type": "collab",
+      "year": "2016,2017,2017"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 258, "source": 49, "target": 47, "type": "collab" }
+    "data": {
+      "id": 336,
+      "source": 150,
+      "target": 145,
+      "type": "collab",
+      "year": "2016,2017"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 259, "source": 49, "target": 36, "type": "collab" }
+    "data": {
+      "id": 337,
+      "source": 150,
+      "target": 50,
+      "type": "collab",
+      "year": "2016"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 260, "source": 50, "target": 58, "type": "collab" }
+    "data": {
+      "id": 338,
+      "source": 153,
+      "target": 172,
+      "type": "collab",
+      "year": "2016,2017"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 261, "source": 50, "target": 88, "type": "collab" }
+    "data": {
+      "id": 339,
+      "source": 153,
+      "target": 283,
+      "type": "collab",
+      "year": "2016"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 262, "source": 50, "target": 71, "type": "collab" }
+    "data": {
+      "id": 341,
+      "source": 153,
+      "target": 231,
+      "type": "collab",
+      "year": "2016,2017"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 263, "source": 50, "target": 57, "type": "collab" }
+    "data": {
+      "id": 342,
+      "source": 153,
+      "target": 169,
+      "type": "collab",
+      "year": "2016,2017,2017"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 264, "source": 52, "target": 47, "type": "collab" }
+    "data": {
+      "id": 346,
+      "source": 157,
+      "target": 145,
+      "type": "collab",
+      "year": "2016,2017"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 265, "source": 52, "target": 44, "type": "collab" }
+    "data": {
+      "id": 347,
+      "source": 157,
+      "target": 139,
+      "type": "collab",
+      "year": "2016,2017"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 266, "source": 56, "target": 74, "type": "collab" }
+    "data": {
+      "id": 349,
+      "source": 165,
+      "target": 245,
+      "type": "collab",
+      "year": "2016"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 267, "source": 57, "target": 58, "type": "collab" }
+    "data": {
+      "id": 350,
+      "source": 169,
+      "target": 172,
+      "type": "collab",
+      "year": "2016,2017,2017"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 268, "source": 57, "target": 32, "type": "collab" }
+    "data": {
+      "id": 351,
+      "source": 169,
+      "target": 37,
+      "type": "collab",
+      "year": "2016,2017"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 269, "source": 57, "target": 35, "type": "collab" }
+    "data": {
+      "id": 352,
+      "source": 169,
+      "target": 48,
+      "type": "collab",
+      "year": "2016,2017"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 270, "source": 57, "target": 88, "type": "collab" }
+    "data": {
+      "id": 354,
+      "source": 169,
+      "target": 283,
+      "type": "collab",
+      "year": "2016"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 271, "source": 59, "target": 32, "type": "collab" }
+    "data": {
+      "id": 357,
+      "source": 176,
+      "target": 37,
+      "type": "collab",
+      "year": "2016,2017"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 272, "source": 71, "target": 74, "type": "collab" }
+    "data": {
+      "id": 362,
+      "source": 231,
+      "target": 245,
+      "type": "collab",
+      "year": "2016"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 273, "source": 76, "target": 78, "type": "collab" }
+    "data": {
+      "id": 366,
+      "source": 249,
+      "target": 258,
+      "type": "collab",
+      "year": "2016"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 274, "source": 76, "target": 83, "type": "collab" }
+    "data": {
+      "id": 367,
+      "source": 249,
+      "target": 270,
+      "type": "collab",
+      "year": "2016"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 275, "source": 77, "target": 71, "type": "collab" }
+    "data": {
+      "id": 368,
+      "source": 256,
+      "target": 231,
+      "type": "collab",
+      "year": "2016"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 276, "source": 77, "target": 32, "type": "collab" }
+    "data": {
+      "id": 369,
+      "source": 256,
+      "target": 37,
+      "type": "collab",
+      "year": "2016"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 277, "source": 77, "target": 35, "type": "collab" }
+    "data": {
+      "id": 370,
+      "source": 256,
+      "target": 48,
+      "type": "collab",
+      "year": "2016"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 278, "source": 78, "target": 38, "type": "collab" }
+    "data": {
+      "id": 371,
+      "source": 258,
+      "target": 54,
+      "type": "collab",
+      "year": "2016"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 279, "source": 78, "target": 71, "type": "collab" }
+    "data": {
+      "id": 373,
+      "source": 258,
+      "target": 231,
+      "type": "collab",
+      "year": "2016"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 280, "source": 80, "target": 83, "type": "collab" }
+    "data": {
+      "id": 374,
+      "source": 262,
+      "target": 270,
+      "type": "collab",
+      "year": "2016"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 281, "source": 80, "target": 91, "type": "collab" }
+    "data": {
+      "id": 375,
+      "source": 262,
+      "target": 296,
+      "type": "collab",
+      "year": "2016"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 282, "source": 80, "target": 90, "type": "collab" }
+    "data": {
+      "id": 376,
+      "source": 262,
+      "target": 291,
+      "type": "collab",
+      "year": "2016"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 283, "source": 80, "target": 71, "type": "collab" }
+    "data": {
+      "id": 377,
+      "source": 262,
+      "target": 231,
+      "type": "collab",
+      "year": "2016"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 284, "source": 80, "target": 82, "type": "collab" }
+    "data": {
+      "id": 378,
+      "source": 262,
+      "target": 266,
+      "type": "collab",
+      "year": "2016"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 285, "source": 80, "target": 81, "type": "collab" }
+    "data": {
+      "id": 379,
+      "source": 262,
+      "target": 264,
+      "type": "collab",
+      "year": "2016"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 286, "source": 81, "target": 83, "type": "collab" }
+    "data": {
+      "id": 380,
+      "source": 264,
+      "target": 270,
+      "type": "collab",
+      "year": "2016"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 287, "source": 81, "target": 91, "type": "collab" }
+    "data": {
+      "id": 382,
+      "source": 264,
+      "target": 296,
+      "type": "collab",
+      "year": "2016"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 288, "source": 82, "target": 83, "type": "collab" }
+    "data": {
+      "id": 383,
+      "source": 266,
+      "target": 270,
+      "type": "collab",
+      "year": "2016"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 289, "source": 82, "target": 91, "type": "collab" }
+    "data": {
+      "id": 385,
+      "source": 266,
+      "target": 296,
+      "type": "collab",
+      "year": "2016"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 290, "source": 82, "target": 90, "type": "collab" }
+    "data": {
+      "id": 386,
+      "source": 266,
+      "target": 291,
+      "type": "collab",
+      "year": "2016"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 291, "source": 82, "target": 71, "type": "collab" }
+    "data": {
+      "id": 387,
+      "source": 266,
+      "target": 231,
+      "type": "collab",
+      "year": "2016"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 292, "source": 83, "target": 71, "type": "collab" }
+    "data": {
+      "id": 391,
+      "source": 270,
+      "target": 231,
+      "type": "collab",
+      "year": "2016"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 293, "source": 83, "target": 90, "type": "collab" }
+    "data": {
+      "id": 392,
+      "source": 270,
+      "target": 291,
+      "type": "collab",
+      "year": "2016"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 294, "source": 86, "target": 58, "type": "collab" }
+    "data": {
+      "id": 393,
+      "source": 279,
+      "target": 172,
+      "type": "collab",
+      "year": "2016"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 295, "source": 86, "target": 71, "type": "collab" }
+    "data": {
+      "id": 394,
+      "source": 279,
+      "target": 231,
+      "type": "collab",
+      "year": "2016"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 296, "source": 87, "target": 80, "type": "collab" }
+    "data": {
+      "id": 395,
+      "source": 281,
+      "target": 262,
+      "type": "collab",
+      "year": "2016"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 297, "source": 87, "target": 83, "type": "collab" }
+    "data": {
+      "id": 396,
+      "source": 281,
+      "target": 270,
+      "type": "collab",
+      "year": "2016"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 298, "source": 87, "target": 71, "type": "collab" }
+    "data": {
+      "id": 397,
+      "source": 281,
+      "target": 231,
+      "type": "collab",
+      "year": "2016"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 299, "source": 87, "target": 90, "type": "collab" }
+    "data": {
+      "id": 398,
+      "source": 281,
+      "target": 291,
+      "type": "collab",
+      "year": "2016"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 300, "source": 88, "target": 32, "type": "collab" }
+    "data": {
+      "id": 399,
+      "source": 283,
+      "target": 37,
+      "type": "collab",
+      "year": "2016"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 301, "source": 88, "target": 89, "type": "collab" }
+    "data": {
+      "id": 400,
+      "source": 283,
+      "target": 286,
+      "type": "collab",
+      "year": "2016"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 302, "source": 88, "target": 58, "type": "collab" }
+    "data": {
+      "id": 402,
+      "source": 283,
+      "target": 172,
+      "type": "collab",
+      "year": "2016"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 303, "source": 90, "target": 91, "type": "collab" }
+    "data": {
+      "id": 406,
+      "source": 291,
+      "target": 296,
+      "type": "collab",
+      "year": "2016"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 304, "source": 90, "target": 71, "type": "collab" }
+    "data": {
+      "id": 407,
+      "source": 291,
+      "target": 231,
+      "type": "collab",
+      "year": "2016"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 305, "source": 91, "target": 83, "type": "collab" }
+    "data": {
+      "id": 408,
+      "source": 296,
+      "target": 270,
+      "type": "collab",
+      "year": "2016"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 306, "source": 91, "target": 71, "type": "collab" }
+    "data": {
+      "id": 411,
+      "source": 296,
+      "target": 231,
+      "type": "collab",
+      "year": "2016"
+    }
   },
   {
     "group": "edges",
-    "data": { "id": 307, "source": 92, "target": 47, "type": "collab" }
+    "data": {
+      "id": 414,
+      "source": 299,
+      "target": 145,
+      "type": "collab",
+      "year": "2016"
+    }
   }
 ]

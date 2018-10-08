@@ -59,6 +59,7 @@ build:
     - apt-get purge --auto-remove -y curl
     - rm -rf /src/*.deb
     - mv parser/output/output.json src/assets
+    - mv parser/output/years.json src/assets
     - yarn build
   artifacts:
     paths:

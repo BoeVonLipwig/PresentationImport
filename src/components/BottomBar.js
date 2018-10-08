@@ -2,6 +2,7 @@ import React from "react";
 import Search from "./Search";
 import logo from "../assets/vic-logo.svg";
 import ContactButton from "./ContactButton";
+import DataSwitch from "./DataSwitch";
 import { observer } from "mobx-react";
 import "./BottomBar.css";
 
@@ -17,7 +18,9 @@ class BottomBar extends React.Component {
             <img src={logo} id="vuw-logo" alt="Connected Worlds Logo" />
           </div>
         </div>
-
+        <div class="sliderContainer">
+          <DataSwitch />
+        </div>
         <ContactButton />
       </div>
     );
