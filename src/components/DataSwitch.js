@@ -6,6 +6,7 @@ import "rc-tooltip/assets/bootstrap.css";
 import "rc-slider/assets/index.css";
 // import { autorun } from "mobx";
 import "./DataSwitch.css";
+import years from "../assets/years.json";
 
 const createSliderWithTooltip = Slider.createSliderWithTooltip;
 const Range = createSliderWithTooltip(Slider.Range);
@@ -19,8 +20,8 @@ class DataSwitch extends React.Component {
 
     this.min = 0;
     this.max = 1;
-    // hard coded currently, will change upon parser finishing
-    this.years = ["2016", "2017", "2018"];
+
+    Promise.resolve((this.years = years));
   }
 
   handleChange = event => {

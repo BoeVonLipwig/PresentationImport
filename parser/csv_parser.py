@@ -234,7 +234,7 @@ def loadData(dir):
     # Remove 'fields' dict from nodeSize
     [delattr(node, 'fields') for node in allNodes]
 
-    return allNodes, allEdges, keys
+    return allNodes, allEdges, keys, years
 
 
 def formatForCytoscape(nodes, edges, keyList):
@@ -266,18 +266,28 @@ def formatForCytoscape(nodes, edges, keyList):
     return json.dumps(data, separators=(',', ':'))
 
 
-def generateOutputFile(elements):
+def formatYears(years):
+    years.sort()
+    return json.dumps(years)
+
+
+def generateOutputFiles(elements, years):
     if not os.path.exists('./output'):
         os.makedirs('./output')
     path = './output/output.json'
     jsonFile = open(path, 'w+')
     jsonFile.write(elements)
     jsonFile.close()
+    path = './output/years.json'
+    yearsFile = open(path, 'w+')
+    yearsFile.write(years)
+    yearsFile.close()
 
 
 if __name__ == '__main__':
-    nodes, edges, keys = loadData('data')
+    nodes, edges, keys, years = loadData('data')
 
     elements = formatForCytoscape(nodes, edges, keys)
+    years = formatYears(years)
 
-    generateOutputFile(elements)
+    generateOutputFiles(elements, years)
