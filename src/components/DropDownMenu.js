@@ -13,13 +13,11 @@ class DropDownMenu extends React.Component {
     this.setWrapperRef = this.setWrapperRef.bind(this);
     this.handleClickOutside = this.handleClickOutside.bind(this);
     this.state = {
-      showMenu: true,
-      selected: HelpButton
+      showMenu: true
     };
   }
 
   render() {
-    const Selected = this.state.selected;
     let divClass = "";
     if (this.state.showMenu) {
       divClass = "menu-selected";
@@ -28,7 +26,7 @@ class DropDownMenu extends React.Component {
       <Fragment>
         <div ref={this.setWrapperRef}>
           <div id="buttonCss" className={divClass} onClick={this.buttonClicked}>
-            <Selected parent={this} menu={false} />
+            <menuButton parent={this} menu={false} />
           </div>
           {this.state.showMenu ? this.createMenu() : null}
         </div>

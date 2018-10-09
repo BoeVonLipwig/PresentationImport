@@ -1,14 +1,15 @@
 #buttonCss {
   cursor: pointer;
   position: fixed;
-  right: 20px;
-  bottom: 20px;
+  left: 20px;
+  top: 20px;
   z-index: 5;
   font: 15px roboto condensed, helvetica neue, helvetica, arial, sans-serif;
   background-color: var(--bg);
   border: solid 1px var(--ll);
   padding: 6px 20px;
   color: var(--fg);
+  height: 30px;
   width: 150px;
 }
 
