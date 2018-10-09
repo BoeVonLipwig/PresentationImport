@@ -593,23 +593,18 @@ class Cytoscape extends React.Component {
       this.props.cytoscapeStore.layouts = ProjectLayout.getLayout();
 
       autorun(() => {
+        if (
+          this.props.cytoscapeStore.minYear <= this.props.cytoscapeStore.maxYear
+        ) {
+          this.checkYears();
+        }
         this.props.cytoscapeStore.layouts.forEach(layout => {
           layout.run();
         });
         this.arrangeKey();
         this.cy.fit(50);
         this.setVisNodes();
-        this.checkYears();
-
         if (this.props.cytoscapeStore.selectedNode !== null) this.reframe();
-      });
-
-      autorun(() => {
-        if (
-          this.props.cytoscapeStore.minYear <= this.props.cytoscapeStore.maxYear
-        ) {
-          this.checkYears();
-        }
       });
 
       autorun(() => {
@@ -634,16 +629,27 @@ class Cytoscape extends React.Component {
   }
 
   checkYears() {
-    this.cy.nodes().forEach(ele => {
-      let years = ele.data("years").split(",");
-      for (let year in years) {
+    this.cy.elements().forEach(ele => {
+      if (ele.data("year") === undefined) {
+        return;
+      }
+      let years = ele.data("year").split(",");
+      let show = false;
+      for (let year of years) {
         if (
-          year < this.props.cytoscapeStore.minYear ||
-          year > this.props.cytoscapeStore.maxYear
+          year >= this.props.cytoscapeStore.minYear &&
+          year <= this.props.cytoscapeStore.maxYear
         ) {
-          ele.addClass("filtered");
+          show = true;
           break;
         }
+      }
+      if (!show) {
+        ele.addClass("filtered");
+        ele.addClass("yearFilter");
+      } else if (show && ele.hasClass("yearFilter") && ele.hasClass("active")) {
+        ele.removeClass("filtered");
+        ele.removeClass("yearFilter");
       }
     });
   }

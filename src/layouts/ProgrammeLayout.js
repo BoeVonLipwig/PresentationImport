@@ -80,6 +80,9 @@ class ProgrammeLayout extends Layout {
 
     elesHide.addClass("hidden");
     elesFilter.addClass("filtered");
+
+    this.cy.elements('[type = "school"]').addClass("active");
+    this.cy.nodes('[type = "project"]').addClass("active");
     elesHide.unselectify().ungrabify();
 
     elesHide.position({
@@ -128,7 +131,7 @@ class ProgrammeLayout extends Layout {
       avoidOverlap: false,
       padding: this.layoutPadding,
       startAngle:
-        Math.PI * 2 / this.schoolNodes.size() / 2 * (this.schoolNum % 2) +
+        ((Math.PI * 2) / this.schoolNodes.size() / 2) * (this.schoolNum % 2) +
         Math.PI / 2,
       boundingBox: {
         x1: 0 - this.schoolRadius,

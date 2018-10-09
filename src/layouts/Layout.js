@@ -8,6 +8,7 @@ class Layout {
     this.cy.elements().removeClass("filtered");
     this.cy.elements().removeClass("hidden");
     this.cy.elements().removeClass("highlighted");
+    this.cy.elements().removeClass("active");
     this.cy.edges().unselect();
   }
 

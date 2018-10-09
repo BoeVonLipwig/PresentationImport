@@ -22,7 +22,6 @@ class DataSwitch extends React.Component {
     this.max = 1;
 
     Promise.resolve((this.years = years));
-    console.log(this.years);
     cytoscapeStore.minYear = this.years[0];
     cytoscapeStore.maxYear = this.years[this.years.length - 1];
   }
@@ -42,7 +41,7 @@ class DataSwitch extends React.Component {
 
   render() {
     return (
-      <div class="wrapper">
+      <div className="wrapper">
         <p>
           Range: {cytoscapeStore.minYear} - {cytoscapeStore.maxYear}
         </p>
