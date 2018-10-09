@@ -19,11 +19,11 @@ class DataSwitch extends React.Component {
     };
 
     this.min = 0;
-    this.max = 1;
+    this.max = 2;
 
     Promise.resolve((this.years = years));
-    cytoscapeStore.minYear = this.years[0];
-    cytoscapeStore.maxYear = this.years[this.years.length - 1];
+    cytoscapeStore.minYear = this.years[this.min];
+    cytoscapeStore.maxYear = this.years[this.max];
   }
 
   handleChange = event => {
@@ -31,8 +31,8 @@ class DataSwitch extends React.Component {
     this.max = event[1];
 
     // update the global store to notify which data should be filtered
-    cytoscapeStore.minYear = this.years[event[0]];
-    cytoscapeStore.maxYear = this.years[event[1]];
+    cytoscapeStore.minYear = this.years[this.min];
+    cytoscapeStore.maxYear = this.years[this.max];
   };
 
   handleSelect = item => {
@@ -48,7 +48,7 @@ class DataSwitch extends React.Component {
         <Range
           min={0}
           max={this.years.length - 1}
-          defaultValue={[0, 1]}
+          defaultValue={[this.min, this.max]}
           onChange={this.handleChange}
         />
       </div>

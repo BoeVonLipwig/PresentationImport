@@ -515,9 +515,6 @@ class Cytoscape extends React.Component {
       wheelSensitivity: 0.5
     });
 
-    this.props.cytoscapeStore.minYear = 2017;
-    this.props.cytoscapeStore.maxYear = 2018;
-
     this.props.cytoscapeStore.specialTypes = types.filter(
       type => !["key", "border", "person", "collab"].includes(type)
     );
@@ -640,6 +637,7 @@ class Cytoscape extends React.Component {
           year >= this.props.cytoscapeStore.minYear &&
           year <= this.props.cytoscapeStore.maxYear
         ) {
+          console.log("test");
           show = true;
           break;
         }

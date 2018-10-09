@@ -11,8 +11,6 @@ class CytoscapeStore {
   maxYear = null;
   specialTypes = [];
   showTutorial = false;
-  minYear = 2016;
-  maxYear = 2017;
 }
 decorate(CytoscapeStore, {
   layouts: observable,
