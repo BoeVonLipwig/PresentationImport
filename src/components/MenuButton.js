@@ -1,8 +1,8 @@
 import React from "react";
 import cytoscapeStore from "../util/CytoscapeStore";
-import "./Button.css";
+import "./MenuButton.css";
 
-class Button extends React.Component {
+class menuButton extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -12,6 +12,7 @@ class Button extends React.Component {
   }
 
   render() {
+    console.log(this.props.name);
     return (
       <div className="" id={"buttonCss"} onClick={this.onClick}>
         {this.props.name}
@@ -20,4 +21,4 @@ class Button extends React.Component {
   }
 }
 
-export default Button;
+export default menuButton;

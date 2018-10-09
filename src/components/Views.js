@@ -59,15 +59,15 @@ class Views extends React.Component {
     let colabView = this.state.views[this.state.views.length - 1];
     return (
       <Fragment>
-        {/*{this.createRadio()}*/}
-        {this.createMenu(cytoscapeStore.specialTypes.$mobx.values)}
-        {/*<SelectButton*/}
-        {/*key={colabView.id}*/}
-        {/*name={colabView.name}*/}
-        {/*id={colabView.id}*/}
-        {/*isChecked={colabView.isChecked}*/}
-        {/*clickHandler={event => this.clickHandler(event, colabView.id)}*/}
-        {/*/>*/}
+        {this.createRadio()}
+        <DropDownMenu data={cytoscapeStore.specialTypes} />
+        <RadioButton
+          key={colabView.id}
+          name={colabView.name}
+          id={colabView.id}
+          isChecked={colabView.isChecked}
+          clickHandler={event => this.clickHandler(event, colabView.id)}
+        />
       </Fragment>
     );
   }
@@ -88,7 +88,6 @@ class Views extends React.Component {
 
   createMenu(cyArray) {
     console.log(cyArray);
-    return cyArray.length > 0 ? <DropDownMenu data={cyArray} /> : null;
   }
 }
 

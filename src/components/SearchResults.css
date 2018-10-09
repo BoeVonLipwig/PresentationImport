@@ -1,6 +1,5 @@
 .suggestion-menu {
   position: absolute;
-  bottom: calc(100%);
   width: 340px;
   left: 20px;
   bottom: 55px;
@@ -8,8 +7,8 @@
   color: var(--fg);
   background-color: var(--bg);
   border: solid 1px var(--ll);
-  padding: 0px 0px;
-  margin: 0px 0px;
+  padding: 0 0;
+  margin: 0 0;
   list-style: none;
   max-height: calc(41px * 6);
   overflow-y: auto;

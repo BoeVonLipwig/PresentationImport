@@ -16,7 +16,7 @@
   left: calc((100% - 600px) / 2);
   right: 20px;
   top: auto;
-  bottom: 0px;
+  bottom: 0;
   text-align: center;
 }
 
