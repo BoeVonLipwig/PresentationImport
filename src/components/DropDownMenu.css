@@ -6,20 +6,6 @@
   float: right;
 }
 
-#contact-button {
-  cursor: pointer;
-  position: fixed;
-  right: 20px;
-  bottom: 20px;
-  z-index: 5;
-  font: 15px roboto condensed, helvetica neue, helvetica, arial, sans-serif;
-  background-color: var(--bg);
-  border: solid 1px var(--ll);
-  padding: 6px 20px;
-  color: var(--fg);
-  width: 150px;
-}
-
 #contactAid {
   position: fixed;
   right: 10px;
@@ -37,19 +23,6 @@
   width: 170px;
 }
 
-#contact-button::selection {
-  background: var(--fg);
-  color: var(--bg);
-}
-
-#contact-button .svg-path {
-  fill: var(--fg);
-}
-
-#contact-button::-moz-selection {
-  background: var(--fg);
-  color: var(--bg);
-}
 .contact-menu {
   position: absolute;
   z-index: 9;

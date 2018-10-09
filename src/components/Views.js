@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import SelectButton from "./SelectButton";
+import RadioButton from "./RadioButton";
 import cytoscapeStore from "../util/CytoscapeStore";
 import layoutFactory from "../util/LayoutFactory";
 import { observer } from "mobx-react";
@@ -59,15 +59,15 @@ class Views extends React.Component {
     let colabView = this.state.views[this.state.views.length - 1];
     return (
       <Fragment>
-        {this.createRadio()}
+        {/*{this.createRadio()}*/}
         {this.createMenu(cytoscapeStore.specialTypes.$mobx.values)}
-        <SelectButton
-          key={colabView.id}
-          name={colabView.name}
-          id={colabView.id}
-          isChecked={colabView.isChecked}
-          clickHandler={event => this.clickHandler(event, colabView.id)}
-        />
+        {/*<SelectButton*/}
+        {/*key={colabView.id}*/}
+        {/*name={colabView.name}*/}
+        {/*id={colabView.id}*/}
+        {/*isChecked={colabView.isChecked}*/}
+        {/*clickHandler={event => this.clickHandler(event, colabView.id)}*/}
+        {/*/>*/}
       </Fragment>
     );
   }
@@ -75,7 +75,7 @@ class Views extends React.Component {
   createRadio() {
     return this.state.views.map(elem => {
       return elem.name !== "Collaborators" ? (
-        <SelectButton
+        <RadioButton
           key={elem.id}
           name={elem.name}
           id={elem.id}
@@ -88,7 +88,7 @@ class Views extends React.Component {
 
   createMenu(cyArray) {
     console.log(cyArray);
-    return cyArray.length <= 0 ? <DropDownMenu data={cyArray} /> : null;
+    return cyArray.length > 0 ? <DropDownMenu data={cyArray} /> : null;
   }
 }
 

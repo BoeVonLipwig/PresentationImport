@@ -48,10 +48,6 @@ class DropDownMenu extends React.Component {
   };
 
   render() {
-    return this.createButton(this.state.showMenu);
-  }
-
-  createButton = menu => {
     const Selected = this.state.selected;
     let divClass = "";
     if (this.state.showMenu) {
@@ -60,18 +56,14 @@ class DropDownMenu extends React.Component {
     return (
       <Fragment>
         <div ref={this.setWrapperRef}>
-          <div
-            id="contact-button"
-            className={divClass}
-            onClick={this.buttonClicked}
-          >
+          <div id="buttonCss" className={divClass} onClick={this.buttonClicked}>
             <Selected parent={this} menu={false} />
           </div>
-          {menu ? this.createMenu() : null}
+          {this.state.showMenu ? this.createMenu() : null}
         </div>
       </Fragment>
     );
-  };
+  }
 
   createMenu = () => {
     return (

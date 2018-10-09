@@ -8,12 +8,12 @@ class Button extends React.Component {
   }
 
   onClick() {
-    cytoscapeStore.focusType = this.props.name;
+    cytoscapeStore.focusType = this.props.name.toLowerCase();
   }
 
   render() {
     return (
-      <div className="" id={"contact-button"} onClick={this.onClick}>
+      <div className="" id={"buttonCss"} onClick={this.onClick}>
         {this.props.name}
       </div>
     );

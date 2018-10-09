@@ -1,7 +1,6 @@
 import React from "react";
 import cytoscapeStore from "../util/CytoscapeStore";
 import "./HelpButton.css";
-import "./Button.css";
 
 class HelpButton extends React.Component {
   svg() {
@@ -24,7 +23,7 @@ class HelpButton extends React.Component {
 
   render() {
     return (
-      <div className="" id={"contact-button"} onClick={this.onClick}>
+      <div className="" id={"helpButtonCss"} onClick={this.onClick}>
         Help
         <span id="img-option">{this.svg()}</span>
       </div>
