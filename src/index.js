@@ -1,7 +1,7 @@
-import "./Index.css";
+import "./index.css";
 import React from "react";
 import App from "./App";
-import registerServiceWorker from "./RegisterServiceWorker";
+import registerServiceWorker from "./registerServiceWorker";
 import { hydrate, render } from "react-dom";
 
 const rootElement = document.getElementById("root");
