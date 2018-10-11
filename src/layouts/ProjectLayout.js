@@ -22,10 +22,8 @@ class ProjectLayout extends Layout {
       .nodes('[type = "person"]')
       .not(this.activePeople);
 
-    this.activePeople.addClass("active");
-
     this.projects = this.cy.nodes('[type = "project"]');
-    this.projects.addClass("active");
+
     let emptySchoolNodes = this.cy
       .elements('[type = "school"]')
       .filter(function(ele) {

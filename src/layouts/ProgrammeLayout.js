@@ -80,9 +80,6 @@ class ProgrammeLayout extends Layout {
 
     elesHide.addClass("hidden");
     elesFilter.addClass("filtered");
-
-    this.cy.elements('[type = "school"]').addClass("active");
-    this.cy.nodes('[type = "project"]').addClass("active");
     elesHide.unselectify().ungrabify();
 
     elesHide.position({

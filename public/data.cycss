@@ -1,6 +1,6 @@
 /*  Color variables are defined/set in style.js as the object : colors : {}*/
 /* They can be called like regular CSS var : colors.colorname --> var(--colorname) */
-/* For variables nested in objects, simply replace dot notation by dashes : colors.object.colorname --> var(--object-colorname)*/ 
+/* For variables nested in objects, simply replace dot notation by dashes : colors.object.colorname --> var(--object-colorname)*/
 /* the function to edit this stylesheet with actual colorvalues ( colorStyleCycss() ) is called before cytoscape init in initCy() function*/
 
 .filtered {
@@ -8,6 +8,10 @@
 	events : no;
 }
 
+.yearFilter {
+    display: none;
+    events : no;
+}
 
 core {
 	active-bg-color: var(--fg);
@@ -37,7 +41,7 @@ edge.curved{
 	edge-distances : node-position;
 	target-endpoint : outside-to-line;
 	source-endpoint : outside-to-line;
-} 
+}
 
 node {
 	text-transform: uppercase;
@@ -73,11 +77,11 @@ node[var(--selector) = "var(--typename)"] {
 }
 
 edge[var(--selector) = "var(--typename)"] {
-	line-color: var(--nodecolor);	
+	line-color: var(--nodecolor);
 	z-index: var(--zindex);
 	opacity: 0.25;
 }
-	
+
 type*/
 
 

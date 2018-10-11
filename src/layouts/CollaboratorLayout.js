@@ -20,11 +20,6 @@ class CollaboratorLayout extends Layout {
 
     elesHide.addClass("hidden");
     elesFilter.addClass("filtered");
-    this.cy
-      .elements()
-      .not(elesHide)
-      .not(elesFilter)
-      .addClass("active");
     elesHide.unselectify().ungrabify();
     let layout = activePeople.layout({
       name: "circle",

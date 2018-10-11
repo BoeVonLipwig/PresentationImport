@@ -626,28 +626,17 @@ class Cytoscape extends React.Component {
   }
 
   checkYears() {
-    this.cy.elements().forEach(ele => {
-      if (ele.data("year") === undefined) {
-        return;
-      }
+    this.cy.elements('[type != "key"][type != "border"]').forEach(ele => {
       let years = ele.data("year").split(",");
-      let show = false;
+      ele.toggleClass("yearFilter", true);
       for (let year of years) {
         if (
           year >= this.props.cytoscapeStore.minYear &&
           year <= this.props.cytoscapeStore.maxYear
         ) {
-          console.log("test");
-          show = true;
+          ele.toggleClass("yearFilter", false);
           break;
         }
-      }
-      if (!show) {
-        ele.addClass("filtered");
-        ele.addClass("yearFilter");
-      } else if (show && ele.hasClass("yearFilter") && ele.hasClass("active")) {
-        ele.removeClass("filtered");
-        ele.removeClass("yearFilter");
       }
     });
   }
