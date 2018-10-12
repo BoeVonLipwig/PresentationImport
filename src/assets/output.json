@@ -84,46 +84,6 @@
   {
     "group": "nodes",
     "data": {
-      "id": 1,
-      "name": "Academic Staff",
-      "type": "roles",
-      "year": "2018"
-    }
-  },
-  {
-    "group": "nodes",
-    "data": {
-      "id": 2,
-      "name": "Masters Student",
-      "type": "roles",
-      "year": "2018"
-    }
-  },
-  {
-    "group": "nodes",
-    "data": { "id": 3, "name": "PhD Student", "type": "roles", "year": "2018" }
-  },
-  {
-    "group": "nodes",
-    "data": {
-      "id": 4,
-      "name": "Professional Staff",
-      "type": "roles",
-      "year": "2018"
-    }
-  },
-  {
-    "group": "nodes",
-    "data": {
-      "id": 5,
-      "name": "Honours Student",
-      "type": "roles",
-      "year": "2018"
-    }
-  },
-  {
-    "group": "nodes",
-    "data": {
       "id": 6,
       "name": "Colliding Conversations 4",
       "type": "project",

@@ -278,6 +278,13 @@ class Cytoscape extends React.Component {
   }
 
   reframe() {
+    if (
+      this.cy.$id(this.props.cytoscapeStore.selectedNode).hasClass("filtered")
+    ) {
+      this.props.cytoscapeStore.selectedNode = null;
+      return;
+    }
+
     let nhood = this.nhood;
     let layoutPadding = Layout.layoutPadding;
     let details = this.props.cytoscapeStore.details;
