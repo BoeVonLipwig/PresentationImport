@@ -21,7 +21,6 @@ class CollaboratorLayout extends Layout {
     elesHide.addClass("hidden");
     elesFilter.addClass("filtered");
     elesHide.unselectify().ungrabify();
-
     let layout = activePeople.layout({
       name: "circle",
       avoidOverlap: false,

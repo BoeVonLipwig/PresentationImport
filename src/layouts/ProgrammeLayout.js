@@ -128,7 +128,7 @@ class ProgrammeLayout extends Layout {
       avoidOverlap: false,
       padding: this.layoutPadding,
       startAngle:
-        Math.PI * 2 / this.schoolNodes.size() / 2 * (this.schoolNum % 2) +
+        ((Math.PI * 2) / this.schoolNodes.size() / 2) * (this.schoolNum % 2) +
         Math.PI / 2,
       boundingBox: {
         x1: 0 - this.schoolRadius,

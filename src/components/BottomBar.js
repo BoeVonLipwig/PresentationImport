@@ -18,7 +18,7 @@ class BottomBar extends React.Component {
             <img src={logo} id="vuw-logo" alt="Connected Worlds Logo" />
           </div>
         </div>
-        <div class="sliderContainer">
+        <div className="sliderContainer">
           <DataSwitch />
         </div>
         <ContactButton />
