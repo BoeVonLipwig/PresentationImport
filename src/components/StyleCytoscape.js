@@ -1,29 +1,36 @@
 import _ from "lodash";
 
 function replaceAll(target, search, replacement) {
+  if (!_.isString(target)) return target;
   return target.split(search).join(replacement);
 }
 
-function insertBefore(target, strToFind, strToInsert) {
-  let n = target.lastIndexOf(strToFind);
-  if (n < 0) return target;
-  return target.substring(0, n) + strToInsert + target.substring(n);
+function replaceSelector(target, selStr, typeStr, colStr, zStr) {
+  console.log(typeStr);
+  target.forEach(style => {
+    style.selector = replaceAll(
+      replaceAll(style.selector, "var(--selector)", selStr),
+      "var(--typename)",
+      typeStr
+    );
+    Object.keys(style.style).forEach(key => {
+      style.style[key] = replaceAll(
+        replaceAll(style.style[key], "var(--nodecolor)", colStr),
+        "var(--zindex)",
+        zStr
+      );
+    });
+  });
+  return target;
 }
 
-function replaceSelector(target, selStr, typeStr, colStr, zStr) {
-  return replaceAll(
-    replaceAll(
-      replaceAll(
-        replaceAll(target, "var(--selector)", selStr),
-        "var(--typename)",
-        typeStr
-      ),
-      "var(--nodecolor)",
-      colStr
-    ),
-    "var(--zindex)",
-    zStr
-  );
+function replaceColours(target, cssColors) {
+  Object.keys(cssColors).forEach(value => {
+    if (cssColors[value].constructor !== Array) {
+      target = replaceAll(target, "var(--" + value + ")", cssColors[value]);
+    }
+  });
+  return target;
 }
 
 function isHexColor(target) {
@@ -71,7 +78,7 @@ function unique(array) {
 }
 
 class StyleCytoscape {
-  static parseStyles(allNodes, colorList, styleList, data) {
+  static parseStyles(allNodes, colorList, styleList, styleJson) {
     // Creates an object that maps types to subtypes based on roles. If
     // no role exists, then the subtype is the type. Eg. Project -> Project.
     let typ = unique(allNodes.map(a => a.data("type")));
@@ -275,36 +282,37 @@ class StyleCytoscape {
 
     // Replaces occurrences of fg, bg, hl, ll in data.cycss with values
     // from colors.json
-    Object.keys(cssColors).forEach(value => {
+    /*Object.keys(cssColors).forEach(value => {
       if (cssColors[value].constructor !== Array) {
         data = replaceAll(data, "var(--" + value + ")", cssColors[value]);
       }
+    });*/
+
+    Object.keys(styleJson.styles).forEach(itemKey => {
+      let item = styleJson.styles[itemKey];
+      Object.keys(item.style).forEach(styleKey => {
+        item.style[styleKey] = replaceColours(item.style[styleKey], cssColors);
+      });
     });
 
-    let typeString = data
-      .split("/*type")
-      .pop()
-      .split("type*/")
-      .shift();
-    let ringString = data
-      .split("/*ring")
-      .pop()
-      .split("ring*/")
-      .shift();
-    let beforeStr = "/*ring";
     //Assign default styling for all nodes of a certain type
     nodeStyles.type.forEach(style => {
-      let styleString =
-        style.shape === "ring" ? typeString + ringString : typeString;
+      console.log(style.subtype);
       style.subtype.forEach(subName => {
+        let nodeStyle = JSON.parse(
+          JSON.stringify(
+            style.shape === "ring"
+              ? styleJson.type.concat(styleJson.ring)
+              : styleJson.type
+          )
+        );
+        console.log(subName);
         let nodeColor = isNumber(style.color)
           ? colSchm.node[style.color][0]
           : style.color;
-        data = insertBefore(
-          data,
-          beforeStr,
+        styleJson.styles = styleJson.styles.concat(
           replaceSelector(
-            styleString,
+            nodeStyle,
             "type",
             subName,
             nodeColor,
@@ -316,9 +324,14 @@ class StyleCytoscape {
 
     //Assign further styling override for nodes of certain role(subtype)
     nodeStyles.subtype.forEach(style => {
-      let styleString =
-        style.shape === "ring" ? typeString + ringString : typeString;
       style.subtype.forEach(subName => {
+        let nodeStyle = JSON.parse(
+          JSON.stringify(
+            style.shape === "ring"
+              ? styleJson.type.concat(styleJson.ring)
+              : styleJson.type
+          )
+        );
         let typeStyle = getTypeBySub(subName);
         let nodeColor =
           isNumber(typeStyle.color) && isNumber(style.color)
@@ -326,11 +339,9 @@ class StyleCytoscape {
             : isHexColor(style.color)
               ? style.color
               : typeStyle.color;
-        data = insertBefore(
-          data,
-          beforeStr,
+        styleJson.styles = styleJson.styles.concat(
           replaceSelector(
-            styleString,
+            nodeStyle,
             "role",
             subName,
             nodeColor,
@@ -345,8 +356,10 @@ class StyleCytoscape {
 
     this.nodeStyles = nodeStyles;
 
+    console.log(styleJson.styles);
+
     return {
-      stylesheet: data,
+      stylesheet: styleJson.styles,
       nodeStyles: nodeStyles
     };
   }
