@@ -12,6 +12,7 @@ import Style from "./StyleCytoscape";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSync } from "@fortawesome/free-solid-svg-icons";
 import color from "../assets/colors.json";
+import cystyle from "../assets/cystyle.json";
 
 class Cytoscape extends React.Component {
   constructor() {
@@ -504,14 +505,13 @@ class Cytoscape extends React.Component {
 
   componentDidMount() {
     let graphP = data.getGraphP();
-    let styleP = data.getStyleP();
 
     let typesP = data.getFilterNames();
 
-    Promise.all([graphP, styleP, typesP]).spread(this.initCy);
+    Promise.all([graphP, typesP]).spread(this.initCy);
   }
 
-  initCy(graph, style, types) {
+  initCy(graph, types) {
     this.setState({
       ...this.state,
       loading: false
@@ -557,7 +557,7 @@ class Cytoscape extends React.Component {
       this.cy.nodes('[type != "key"][type != "border"]'),
       color,
       styleMaster,
-      style
+      cystyle
     );
     this.cy.style(this.styleList.stylesheet);
 
