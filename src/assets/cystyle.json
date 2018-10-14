@@ -240,7 +240,9 @@
         "text-valign": "center",
         "background-opacity": 1,
         "border-width": "2px"
-      },
+      }
+    },
+    {
       "selector": "node[var(--selector) = \"var(--typename)\"].faded",
       "style": {
         "opacity": 1,

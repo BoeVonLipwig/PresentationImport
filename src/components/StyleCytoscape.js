@@ -6,7 +6,6 @@ function replaceAll(target, search, replacement) {
 }
 
 function replaceSelector(target, selStr, typeStr, colStr, zStr) {
-  console.log(typeStr);
   target.forEach(style => {
     style.selector = replaceAll(
       replaceAll(style.selector, "var(--selector)", selStr),
@@ -288,17 +287,11 @@ class StyleCytoscape {
       }
     });*/
 
-    Object.keys(styleJson.styles).forEach(itemKey => {
-      let item = styleJson.styles[itemKey];
-      Object.keys(item.style).forEach(styleKey => {
-        item.style[styleKey] = replaceColours(item.style[styleKey], cssColors);
-      });
-    });
-
     //Assign default styling for all nodes of a certain type
     nodeStyles.type.forEach(style => {
-      console.log(style.subtype);
       style.subtype.forEach(subName => {
+        console.log(style.shape);
+        console.log(styleJson.ring);
         let nodeStyle = JSON.parse(
           JSON.stringify(
             style.shape === "ring"
@@ -306,7 +299,7 @@ class StyleCytoscape {
               : styleJson.type
           )
         );
-        console.log(subName);
+        console.log(nodeStyle);
         let nodeColor = isNumber(style.color)
           ? colSchm.node[style.color][0]
           : style.color;
@@ -325,6 +318,7 @@ class StyleCytoscape {
     //Assign further styling override for nodes of certain role(subtype)
     nodeStyles.subtype.forEach(style => {
       style.subtype.forEach(subName => {
+        console.log(style.shape);
         let nodeStyle = JSON.parse(
           JSON.stringify(
             style.shape === "ring"
@@ -332,6 +326,7 @@ class StyleCytoscape {
               : styleJson.type
           )
         );
+        console.log(nodeStyle);
         let typeStyle = getTypeBySub(subName);
         let nodeColor =
           isNumber(typeStyle.color) && isNumber(style.color)
@@ -351,6 +346,13 @@ class StyleCytoscape {
             ) + 1
           )
         );
+      });
+    });
+
+    Object.keys(styleJson.styles).forEach(itemKey => {
+      let item = styleJson.styles[itemKey];
+      Object.keys(item.style).forEach(styleKey => {
+        item.style[styleKey] = replaceColours(item.style[styleKey], cssColors);
       });
     });
 
