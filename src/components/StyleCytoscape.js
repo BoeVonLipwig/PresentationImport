@@ -279,14 +279,6 @@ class StyleCytoscape {
       ll: colSchm.ll
     };
 
-    // Replaces occurrences of fg, bg, hl, ll in data.cycss with values
-    // from colors.json
-    /*Object.keys(cssColors).forEach(value => {
-      if (cssColors[value].constructor !== Array) {
-        data = replaceAll(data, "var(--" + value + ")", cssColors[value]);
-      }
-    });*/
-
     let moreStyle = [];
 
     //Assign default styling for all nodes of a certain type
