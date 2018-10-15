@@ -60,7 +60,9 @@ class Views extends React.Component {
     return (
       <Fragment>
         {this.createRadio()}
-        <DropDownMenu data={cytoscapeStore.specialTypes} />
+        <Fragment>
+          <DropDownMenu data={cytoscapeStore.specialTypes} />
+        </Fragment>
         <RadioButton
           key={colabView.id}
           name={colabView.name}

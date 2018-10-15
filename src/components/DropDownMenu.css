@@ -2,23 +2,10 @@
   width: 190px;
 }
 
-#img-option {
-  float: right;
-}
-
 .menu {
-  position: absolute;
   z-index: 9;
-  /*color: var(--fg);*/
   width: 193px;
-  left: 21px;
-  top: 57px;
   display: none;
-  /*  background-color:  var(--bg);
-    border: solid 1px var(--ll);*/
-  /*padding: 0px 0px;
-    margin : 0px 0px;
-    list-style:none;*/
 }
 
 .menu-selected {
@@ -26,17 +13,14 @@
 }
 
 #menu {
-  position: absolute;
-  top: calc(100%);
   cursor: pointer;
+  position: absolute;
   z-index: 9;
   color: var(--fg);
   width: 193px;
   background-color: var(--bg);
   border: solid 1px var(--ll);
   font: 15px roboto condensed, helvetica neue, helvetica, arial, sans-serif;
-  padding: 0 0;
-  margin: 0 0;
   list-style: none;
 }
 

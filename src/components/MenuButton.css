@@ -1,7 +1,7 @@
 #buttonCss {
   cursor: pointer;
-  position: fixed;
-  left: 20px;
+  position: absolute;
+  left: 200px;
   top: 20px;
   z-index: 5;
   font: 15px roboto condensed, helvetica neue, helvetica, arial, sans-serif;

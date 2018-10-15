@@ -1,6 +1,5 @@
 import React, { Fragment } from "react";
 import "./DropDownMenu.css";
-import HelpButton from "./HelpButton";
 import menuButton from "./MenuButton";
 
 class DropDownMenu extends React.Component {
@@ -9,7 +8,6 @@ class DropDownMenu extends React.Component {
     if (this.props.clickHandler) {
       this.buttonClicked = this.props.clickHandler;
     }
-    this.buttons = this.props.data;
     this.setWrapperRef = this.setWrapperRef.bind(this);
     this.handleClickOutside = this.handleClickOutside.bind(this);
     this.state = {
@@ -26,7 +24,7 @@ class DropDownMenu extends React.Component {
       <Fragment>
         <div ref={this.setWrapperRef}>
           <div id="buttonCss" className={divClass} onClick={this.buttonClicked}>
-            <menuButton parent={this} menu={false} />
+            <menuButton name={"Menu"} />
           </div>
           {this.state.showMenu ? this.createMenu() : null}
         </div>
@@ -42,16 +40,16 @@ class DropDownMenu extends React.Component {
           id="menu"
           className="ui-menu ui-corner-bottom ui-widget ui-widget-content menu-ul"
         >
-          {this.allButtons(this.buttons)}
+          {this.allButtons()}
         </ul>
       </div>
     );
   };
 
-  allButtons(buttons) {
+  allButtons() {
     return (
       <Fragment>
-        {buttons.forEach(buttonName => {
+        {this.props.data.forEach(buttonName => {
           <menuButton name={buttonName} />;
         })}
       </Fragment>
