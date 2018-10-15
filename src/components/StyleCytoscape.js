@@ -287,11 +287,11 @@ class StyleCytoscape {
       }
     });*/
 
+    let moreStyle = [];
+
     //Assign default styling for all nodes of a certain type
     nodeStyles.type.forEach(style => {
       style.subtype.forEach(subName => {
-        console.log(style.shape);
-        console.log(styleJson.ring);
         let nodeStyle = JSON.parse(
           JSON.stringify(
             style.shape === "ring"
@@ -299,11 +299,10 @@ class StyleCytoscape {
               : styleJson.type
           )
         );
-        console.log(nodeStyle);
         let nodeColor = isNumber(style.color)
           ? colSchm.node[style.color][0]
           : style.color;
-        styleJson.styles = styleJson.styles.concat(
+        moreStyle = moreStyle.concat(
           replaceSelector(
             nodeStyle,
             "type",
@@ -318,7 +317,6 @@ class StyleCytoscape {
     //Assign further styling override for nodes of certain role(subtype)
     nodeStyles.subtype.forEach(style => {
       style.subtype.forEach(subName => {
-        console.log(style.shape);
         let nodeStyle = JSON.parse(
           JSON.stringify(
             style.shape === "ring"
@@ -326,7 +324,6 @@ class StyleCytoscape {
               : styleJson.type
           )
         );
-        console.log(nodeStyle);
         let typeStyle = getTypeBySub(subName);
         let nodeColor =
           isNumber(typeStyle.color) && isNumber(style.color)
@@ -334,7 +331,7 @@ class StyleCytoscape {
             : isHexColor(style.color)
               ? style.color
               : typeStyle.color;
-        styleJson.styles = styleJson.styles.concat(
+        moreStyle = moreStyle.concat(
           replaceSelector(
             nodeStyle,
             "role",
@@ -348,6 +345,12 @@ class StyleCytoscape {
         );
       });
     });
+
+    console.log(styleJson.styles);
+    console.log(moreStyle);
+
+    styleJson.styles.splice(5, 0, ...moreStyle);
+    console.log(styleJson.styles);
 
     Object.keys(styleJson.styles).forEach(itemKey => {
       let item = styleJson.styles[itemKey];
