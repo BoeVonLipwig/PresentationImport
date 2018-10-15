@@ -346,11 +346,7 @@ class StyleCytoscape {
       });
     });
 
-    console.log(styleJson.styles);
-    console.log(moreStyle);
-
     styleJson.styles.splice(5, 0, ...moreStyle);
-    console.log(styleJson.styles);
 
     Object.keys(styleJson.styles).forEach(itemKey => {
       let item = styleJson.styles[itemKey];
@@ -360,8 +356,6 @@ class StyleCytoscape {
     });
 
     this.nodeStyles = nodeStyles;
-
-    console.log(styleJson.styles);
 
     return {
       stylesheet: styleJson.styles,
