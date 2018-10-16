@@ -12,6 +12,7 @@ class CytoscapeStore {
   visNodesData = [];
   specialTypes = [];
   showTutorial = false;
+  layoutID = "showSegment";
 }
 
 decorate(CytoscapeStore, {

@@ -2,6 +2,7 @@ import React, { Fragment } from "react";
 import "./DropDownMenu.css";
 import MenuButton from "./MenuButton";
 import cytoscapeStore from "../util/CytoscapeStore";
+import layoutFactory from "../util/LayoutFactory";
 
 class DropDownMenu extends React.Component {
   constructor(props) {
@@ -18,6 +19,9 @@ class DropDownMenu extends React.Component {
 
   onItemSelected = name => {
     cytoscapeStore.focusType = name.toLowerCase();
+    cytoscapeStore.layouts = layoutFactory.computeLayout(
+      cytoscapeStore.layoutID
+    );
     this.setState({ ...this.state, showMenu: false });
   };
 
