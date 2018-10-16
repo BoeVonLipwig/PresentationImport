@@ -1,8 +1,5 @@
 #buttonCss {
   cursor: pointer;
-  position: absolute;
-  left: 200px;
-  top: 20px;
   z-index: 5;
   font: 15px roboto condensed, helvetica neue, helvetica, arial, sans-serif;
   background-color: var(--bg);

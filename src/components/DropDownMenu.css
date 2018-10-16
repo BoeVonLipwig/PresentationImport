@@ -1,10 +1,5 @@
-.menu-ul {
-  width: 190px;
-}
-
 .menu {
   z-index: 9;
-  width: 193px;
   display: none;
 }
 
@@ -12,12 +7,14 @@
   outline: var(--fg) dotted thin;
 }
 
+.drop-down {
+  float: left;
+}
+
 #menu {
-  cursor: pointer;
   position: absolute;
   z-index: 9;
   color: var(--fg);
-  width: 193px;
   background-color: var(--bg);
   border: solid 1px var(--ll);
   font: 15px roboto condensed, helvetica neue, helvetica, arial, sans-serif;

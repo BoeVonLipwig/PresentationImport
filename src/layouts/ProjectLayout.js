@@ -13,7 +13,6 @@ class ProjectLayout extends Layout {
     } else if (focus === "project") {
       return "school";
     }
-    console.log("failed focus check");
     return "project";
   }
 

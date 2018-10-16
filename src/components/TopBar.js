@@ -3,8 +3,6 @@ import Views from "./Views";
 import DetailsPane from "./DetailsPane";
 import { observer } from "mobx-react";
 import "./TopBar.css";
-import DropDownMenu from "./DropDownMenu";
-import cytoscapeStore from "../util/CytoscapeStore";
 
 class TopBar extends React.Component {
   clickHandler() {
