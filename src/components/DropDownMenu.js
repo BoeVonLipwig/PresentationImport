@@ -21,7 +21,7 @@ class DropDownMenu extends React.Component {
       divClass = "menu-selected";
     }
     return (
-      <div ref={this.setWrapperRef} className="drop-down">
+      <div ref={this.setWrapperRef} className="control">
         <div className={divClass} onClick={this.buttonClicked}>
           <MenuButton name="Menu" />
         </div>

@@ -9,10 +9,12 @@
 
 .drop-down {
   float: left;
+  margin-top: ;
 }
 
 #menu {
   position: absolute;
+  padding-left: 0;
   z-index: 9;
   color: var(--fg);
   background-color: var(--bg);
