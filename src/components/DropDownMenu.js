@@ -1,6 +1,7 @@
 import React, { Fragment } from "react";
 import "./DropDownMenu.css";
 import MenuButton from "./MenuButton";
+import cytoscapeStore from "../util/CytoscapeStore";
 
 class DropDownMenu extends React.Component {
   constructor(props) {
@@ -15,6 +16,11 @@ class DropDownMenu extends React.Component {
     };
   }
 
+  onItemSelected = name => {
+    cytoscapeStore.focusType = name.toLowerCase();
+    this.setState({ ...this.state, showMenu: false });
+  };
+
   render() {
     let divClass = "";
     if (this.state.showMenu) {
@@ -22,8 +28,8 @@ class DropDownMenu extends React.Component {
     }
     return (
       <div ref={this.setWrapperRef} className="control">
-        <div className={divClass} onClick={this.buttonClicked}>
-          <MenuButton name="Menu" />
+        <div className={divClass}>
+          <MenuButton name="Menu" onSelect={this.buttonClicked} />
         </div>
         {this.state.showMenu ? this.createMenu() : null}
       </div>
@@ -44,7 +50,7 @@ class DropDownMenu extends React.Component {
     return (
       <Fragment>
         {this.props.data.map(buttonName => (
-          <MenuButton name={buttonName} />
+          <MenuButton name={buttonName} onSelect={this.onItemSelected} />
         ))}
       </Fragment>
     );
