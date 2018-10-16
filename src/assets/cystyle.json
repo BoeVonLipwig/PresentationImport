@@ -69,6 +69,13 @@
       }
     },
     {
+      "selector": ".yearFilter",
+      "style": {
+        "display": "none",
+        "events": "no"
+      }
+    },
+    {
       "selector": "node[type = \"center\"]",
       "style": {
         "opacity": 0
