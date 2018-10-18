@@ -19,7 +19,7 @@ class DataSwitch extends React.Component {
     };
 
     this.min = 0;
-    this.max = 1;
+    this.max = 2;
 
     Promise.resolve((this.years = years));
     cytoscapeStore.minYear = this.years[0];
