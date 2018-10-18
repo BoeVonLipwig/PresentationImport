@@ -5,7 +5,7 @@ class MenuButton extends React.Component {
   render() {
     return (
       <div
-        id={"buttonCss"}
+        className="button-css"
         onClick={() => {
           this.props.onSelect(this.props.name);
         }}

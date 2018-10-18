@@ -33,7 +33,7 @@ class DropDownMenu extends React.Component {
     }
     return (
       <div ref={this.setWrapperRef} className="control">
-        <div className={divClass}>
+        <div id="drop-down-menu" className={divClass}>
           <MenuButton
             name={cytoscapeStore.focusType.toUpperCase()}
             onSelect={this.buttonClicked}

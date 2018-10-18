@@ -9,17 +9,17 @@ exports[`renders views correctly without crashing 1`] = `
       class="checkbox-round"
     >
       <input
-        id="showProjects"
+        id="showSegment"
         type="checkbox"
         readonly=""
         checked=""
       />
       <label
-        for="showProjects"
+        for="showSegment"
       />
     </div>
     <h2>
-      Projects
+      Semi-Circle
     </h2>
   </div>
   <div
@@ -29,16 +29,16 @@ exports[`renders views correctly without crashing 1`] = `
       class="checkbox-round"
     >
       <input
-        id="showSchools"
+        id="showCircles"
         type="checkbox"
         readonly=""
       />
       <label
-        for="showSchools"
+        for="showCircles"
       />
     </div>
     <h2>
-      Programme
+      Groups
     </h2>
   </div>
   <div
@@ -59,6 +59,18 @@ exports[`renders views correctly without crashing 1`] = `
     <h2>
       Collaborators
     </h2>
+  </div>
+  <div
+    class="control"
+  >
+    <div
+      id="drop-down-menu"
+      class=""
+    >
+      <div
+        class="button-css"
+      />
+    </div>
   </div>
 </div>
 `;
