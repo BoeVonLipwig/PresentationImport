@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import Views from "./Views";
-import SelectButton from "./SelectButton";
+import RadioButton from "./RadioButton";
 import { mount, find, at, simulate, text, instance } from "enzyme";
 
 it("renders views without crashing", () => {
@@ -48,9 +48,9 @@ it("should unselect the projects and collaborators buttons when the programmes b
     });
 
   wrapper.update();
-  const projectsButtonOld = wrapper.find(SelectButton).at(0);
-  const programmesButtonOld = wrapper.find(SelectButton).at(1);
-  const collaboratorsButtonOld = wrapper.find(SelectButton).at(2);
+  const projectsButtonOld = wrapper.find(RadioButton).at(0);
+  const programmesButtonOld = wrapper.find(RadioButton).at(1);
+  const collaboratorsButtonOld = wrapper.find(RadioButton).at(2);
 
   expect(projectsButtonOld.find("input").props().checked).toEqual(true);
   expect(programmesButtonOld.find("input").props().checked).toEqual(false);
@@ -59,9 +59,9 @@ it("should unselect the projects and collaborators buttons when the programmes b
   programmesButtonOld.prop("clickHandler")();
 
   wrapper.update();
-  const projectsButtonNew = wrapper.find(SelectButton).at(0);
-  const programmesButtonNew = wrapper.find(SelectButton).at(1);
-  const collaboratorsButtonNew = wrapper.find(SelectButton).at(2);
+  const projectsButtonNew = wrapper.find(RadioButton).at(0);
+  const programmesButtonNew = wrapper.find(RadioButton).at(1);
+  const collaboratorsButtonNew = wrapper.find(RadioButton).at(2);
 
   expect(projectsButtonNew.find("input").props().checked).toEqual(false);
   expect(programmesButtonNew.find("input").props().checked).toEqual(true);

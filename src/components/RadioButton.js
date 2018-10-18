@@ -1,7 +1,7 @@
 import React from "react";
-import "./SelectButton.css";
+import "./RadioButton.css";
 
-class SelectButton extends React.Component {
+class RadioButton extends React.Component {
   render() {
     return (
       <div className="control">
@@ -20,4 +20,4 @@ class SelectButton extends React.Component {
   }
 }
 
-export default SelectButton;
+export default RadioButton;

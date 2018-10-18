@@ -1,16 +1,8 @@
 import React from "react";
-import cytoscapeStore from "../../util/CytoscapeStore";
-import "../ContactButton.css";
+import cytoscapeStore from "../util/CytoscapeStore";
+import "./HelpButton.css";
 
 class HelpButton extends React.Component {
-  data = ["Help", "help", ""];
-
-  constructor(props) {
-    super(props);
-    this.onClick = this.onClick.bind(this);
-    this.state = { menu: this.props.menu };
-  }
-
   svg() {
     return (
       <svg
@@ -26,33 +18,16 @@ class HelpButton extends React.Component {
   }
 
   onClick() {
-    if (this.state.menu) {
-      cytoscapeStore.showTutorial = true;
-
-      this.props.parent.setState({
-        ...this.props.parent.state,
-        showMenu: false
-      });
-    }
+    cytoscapeStore.showTutorial = true;
   }
 
   render() {
-    let html = (
-      <div className="ui-menu-item-wrapper">
-        {this.data[0]}
-        <span className={this.data[1]} />
+    return (
+      <div className="" id={"helpButtonCss"} onClick={this.onClick}>
+        Help
         <span id="img-option">{this.svg()}</span>
       </div>
     );
-    if (this.state.menu) {
-      return (
-        <li className="ui-menu-item" onClick={() => this.onClick()}>
-          {html}
-        </li>
-      );
-    } else {
-      return html;
-    }
   }
 }
 

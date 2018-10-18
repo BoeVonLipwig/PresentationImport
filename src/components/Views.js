@@ -1,21 +1,24 @@
-import React from "react";
-import SelectButton from "./SelectButton";
+import React, { Fragment } from "react";
+import RadioButton from "./RadioButton";
 import cytoscapeStore from "../util/CytoscapeStore";
 import layoutFactory from "../util/LayoutFactory";
+import { observer } from "mobx-react";
+import DropDownMenu from "./DropDownMenu";
 
 class Views extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      hasTypes: false,
       views: [
         {
-          name: "Projects",
-          id: "showProjects",
+          name: "Semi-Circle",
+          id: "showSegment",
           isChecked: true
         },
         {
-          name: "Programme",
-          id: "showSchools",
+          name: "Groups",
+          id: "showCircles",
           isChecked: false
         },
         {
@@ -31,9 +34,8 @@ class Views extends React.Component {
   toggleCheck(id) {
     const newViews = this.state.views.map(function(entry) {
       if (entry.id === id) {
-        if (!entry.isChecked) {
-          cytoscapeStore.layouts = layoutFactory.computeLayout(entry.id);
-        }
+        cytoscapeStore.layoutID = entry.id;
+        cytoscapeStore.layouts = layoutFactory.computeLayout(entry.id);
         return Object.assign({}, entry, {
           isChecked: true
         });
@@ -55,9 +57,18 @@ class Views extends React.Component {
   }
 
   render() {
-    const items = this.state.views.map(elem => {
+    return (
+      <Fragment>
+        {this.createRadio()}
+        <DropDownMenu data={cytoscapeStore.specialTypes} />
+      </Fragment>
+    );
+  }
+
+  createRadio() {
+    return this.state.views.map(elem => {
       return (
-        <SelectButton
+        <RadioButton
           key={elem.id}
           name={elem.name}
           id={elem.id}
@@ -66,8 +77,7 @@ class Views extends React.Component {
         />
       );
     });
-    return items;
   }
 }
 
-export default Views;
+export default observer(Views);

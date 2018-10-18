@@ -1,19 +1,20 @@
 import Layout from "./Layout";
+import cytoscapeStore from "../util/CytoscapeStore";
 
 class ProgrammeLayout extends Layout {
-  static schoolNodes;
-  static schoolNum;
+  static focusNodes;
+  static focusNum;
   static schoolRadius;
   static projectRadius;
   static schoolBB;
   static maxClusterSize;
 
-  static spreadSchools(forceRadius) {
+  static spreadFocusNodes(forceRadius) {
     this.schoolBB.w = 0;
     this.schoolBB.h = 0;
     let mSC = 0;
 
-    this.schoolNodes.forEach(function(ele) {
+    this.focusNodes.forEach(function(ele) {
       let node = ele;
       let nhood = node.closedNeighborhood();
       let npos = node.position();
@@ -51,18 +52,35 @@ class ProgrammeLayout extends Layout {
     });
   }
 
-  static init() {
+  static determineNonFocusGroup(focus) {
+    if (focus === "school") {
+      return "project";
+    } else if (focus === "project") {
+      return "school";
+    }
+    return "project";
+  }
+
+  static init(focus) {
     this.cy
       .elements()
       .selectify()
       .grabify();
 
-    let elesHide = this.cy.elements('edge[type = "collab"]');
-    let elesFilter = this.cy.elements('[type = "null"]');
+    let nonFocus = this.determineNonFocusGroup(focus);
+    let nonFocusString = '[type = "' + nonFocus + '"]';
+    let focusString = '[type = "' + focus + '"]';
+    let elesFilter = this.cy.elements(nonFocusString);
 
-    this.schoolNodes = this.cy.nodes('[type = "school"]');
+    this.focusNodes = this.cy.nodes(focusString);
 
-    let emptySchoolNodes = this.schoolNodes.filter(function(ele) {
+    let activePeople = this.cy
+      .nodes(focusString)
+      .closedNeighborhood()
+      .nodes('[type = "person"]');
+    let nonActivePeople = this.cy.nodes('[type = "person"]').not(activePeople);
+
+    let emptyFocusNodes = this.focusNodes.filter(function(ele) {
       return (
         ele
           .closedNeighborhood()
@@ -71,31 +89,23 @@ class ProgrammeLayout extends Layout {
       );
     });
 
-    this.schoolNodes = this.cy.nodes('[type = "school"]').not(emptySchoolNodes);
+    this.focusNodes = this.cy.nodes(focusString).not(emptyFocusNodes);
 
-    this.schoolNum = this.schoolNodes.size();
-    let sn = this.schoolNodes.size();
+    this.focusNum = this.focusNodes.size();
+    let sn = this.focusNodes.size();
 
-    elesFilter = elesFilter.add(emptySchoolNodes);
-
-    elesHide.addClass("hidden");
+    elesFilter = elesFilter.add(nonActivePeople);
     elesFilter.addClass("filtered");
-    elesHide.unselectify().ungrabify();
-
-    elesHide.position({
-      x: this.cy.width() / 2,
-      y: -50
-    });
 
     this.schoolBB = { w: 0, h: 0 };
     this.maxClusterSize = 0;
 
-    this.spreadSchools();
+    this.spreadFocusNodes();
 
-    this.projectRadius = this.circleRadius(this.cy.nodes('[type = "project"]'));
+    this.projectRadius = this.circleRadius(this.cy.nodes(nonFocusString));
 
     this.schoolRadius = this.circleRadius(
-      this.schoolNodes,
+      this.focusNodes,
       this.maxClusterSize,
       200
     );
@@ -107,28 +117,34 @@ class ProgrammeLayout extends Layout {
       this.schoolRadius = this.projectRadius + this.maxClusterSize / 2 + 200;
     }
 
-    this.schoolNodes = this.schoolNodes.sort(function(a, b) {
+    this.focusNodes = this.focusNodes.sort(function(a, b) {
       return a.closedNeighborhood().size() - b.closedNeighborhood().size();
     });
 
-    this.schoolNodes.forEach(function(node, f) {
+    this.focusNodes.forEach(function(node, f) {
       let i = f + 1;
       let order =
         Math.ceil(sn / 2) -
         ((i % 2) * -2 + 1) * (Math.ceil(sn / 2) - Math.ceil(i / 2));
       node.data("order", order);
     });
+
+    // let hiddenNodes = this.cy.nodes().not(this.focusNodes);
+    // hiddenNodes.addClass("filtered");
   }
 
   static getLayout() {
+    let focus = cytoscapeStore.focusType;
+    let nonFocus = this.determineNonFocusGroup(focus);
+
     this.clearStyles();
-    this.init();
-    let schoolLayout = this.cy.elements('[type = "school"]').layout({
+    this.init(focus);
+    let focuslayout = this.cy.elements('[type = "' + focus + '"]').layout({
       name: "circle",
       avoidOverlap: false,
       padding: this.layoutPadding,
       startAngle:
-        ((Math.PI * 2) / this.schoolNodes.size() / 2) * (this.schoolNum % 2) +
+        ((Math.PI * 2) / this.focusNodes.size() / 2) * (this.focusNum % 2) +
         Math.PI / 2,
       boundingBox: {
         x1: 0 - this.schoolRadius,
@@ -142,7 +158,7 @@ class ProgrammeLayout extends Layout {
         return a.data("order") - b.data("order");
       }
     });
-    let projectLayout = this.cy.nodes('[type = "project"]').layout({
+    let nonfocuslayout = this.cy.nodes('[type = "' + nonFocus + '"]').layout({
       name: "circle",
       avoidOverlap: false,
       padding: this.layoutPadding,
@@ -156,12 +172,12 @@ class ProgrammeLayout extends Layout {
       nodeDimensionsIncludeLabels: false
     });
 
-    projectLayout.run();
-    schoolLayout.run();
+    nonfocuslayout.run();
+    focuslayout.run();
 
-    this.spreadSchools(this.maxClusterSize / 2);
+    this.spreadFocusNodes(this.maxClusterSize / 2);
 
-    return [schoolLayout, projectLayout];
+    return [focuslayout, nonfocuslayout];
   }
 }
 

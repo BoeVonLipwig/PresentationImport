@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders button correctly without crashing 1`] = `
+<div>
+  <div
+    class="control"
+  >
+    <div
+      id="drop-down-menu"
+      class=""
+    >
+      <div
+        class="button-css"
+      />
+    </div>
+  </div>
+</div>
+`;

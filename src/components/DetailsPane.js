@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import SelectButton from "./SelectButton";
+import RadioButton from "./RadioButton";
 import cytoscapeStore from "../util/CytoscapeStore";
 import { observer } from "mobx-react";
 import NodeInfo from "./NodeInfo";
@@ -13,7 +13,7 @@ class DetailsPane extends React.Component {
     };
   }
 
-  clickHandler(e) {
+  clickHandler() {
     this.setState({
       ...this.state,
       isChecked: !this.state.isChecked
@@ -39,7 +39,7 @@ class DetailsPane extends React.Component {
       <div id="detailsBar">
         <div id="toggle">
           <Fragment>
-            <SelectButton
+            <RadioButton
               name={""}
               id={""}
               isChecked={this.state.isChecked}

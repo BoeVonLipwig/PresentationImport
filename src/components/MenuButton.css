@@ -1,0 +1,17 @@
+.button-css {
+  cursor: pointer;
+  z-index: 5;
+  text-align: center;
+  font: 15px roboto condensed, helvetica neue, helvetica, arial, sans-serif;
+  background-color: var(--bg);
+  border: solid 1px var(--ll);
+  padding: 10px 20px;
+  color: var(--fg);
+  height: 20px;
+  width: 120px;
+}
+
+.button-css:hover {
+  background-color: var(--fg);
+  color: var(--bg);
+}
