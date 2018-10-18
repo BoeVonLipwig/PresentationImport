@@ -17,7 +17,7 @@ class Views extends React.Component {
           isChecked: true
         },
         {
-          name: "Circles",
+          name: "Groups",
           id: "showCircles",
           isChecked: false
         },
@@ -57,25 +57,17 @@ class Views extends React.Component {
   }
 
   render() {
-    let colabView = this.state.views[this.state.views.length - 1];
     return (
       <Fragment>
         {this.createRadio()}
-        <RadioButton
-          key={colabView.id}
-          name={colabView.name}
-          id={colabView.id}
-          isChecked={colabView.isChecked}
-          clickHandler={event => this.clickHandler(event, colabView.id)}
-        />
         <DropDownMenu data={cytoscapeStore.specialTypes} />
       </Fragment>
     );
   }
 
   createRadio() {
-    return this.state.views.map((elem, i) => {
-      return elem.name !== "Collaborators" ? (
+    return this.state.views.map(elem => {
+      return (
         <RadioButton
           key={elem.id}
           name={elem.name}
@@ -83,7 +75,7 @@ class Views extends React.Component {
           isChecked={elem.isChecked}
           clickHandler={event => this.clickHandler(event, elem.id)}
         />
-      ) : null;
+      );
     });
   }
 }
