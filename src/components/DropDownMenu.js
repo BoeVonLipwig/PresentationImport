@@ -33,7 +33,10 @@ class DropDownMenu extends React.Component {
     return (
       <div ref={this.setWrapperRef} className="control">
         <div className={divClass}>
-          <MenuButton name="Menu" onSelect={this.buttonClicked} />
+          <MenuButton
+            name={cytoscapeStore.focusType.toUpperCase()}
+            onSelect={this.buttonClicked}
+          />
         </div>
         {this.state.showMenu ? this.createMenu() : null}
       </div>
@@ -44,21 +47,15 @@ class DropDownMenu extends React.Component {
     return (
       <div className="menu menu-open menu-div">
         <ul id="menu" className="menu-ul">
-          {this.allButtons()}
+          <Fragment>
+            {this.props.data.map(buttonName => (
+              <MenuButton name={buttonName} onSelect={this.onItemSelected} />
+            ))}
+          </Fragment>
         </ul>
       </div>
     );
   };
-
-  allButtons() {
-    return (
-      <Fragment>
-        {this.props.data.map(buttonName => (
-          <MenuButton name={buttonName} onSelect={this.onItemSelected} />
-        ))}
-      </Fragment>
-    );
-  }
 
   componentDidMount() {
     document.addEventListener("mousedown", this.handleClickOutside);
