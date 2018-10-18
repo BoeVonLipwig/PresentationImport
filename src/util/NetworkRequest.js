@@ -6,19 +6,11 @@ class NetworkRequest {
   constructor() {
     this.graphP = Promise.resolve(input);
 
-    this.styleP = fetch("data.cycss").then(x => {
-      return x.text();
-    });
-
     this.filterNames = filter.parseElementsToGetFilterNames(this.getGraphP());
   }
 
   getGraphP() {
     return this.graphP;
-  }
-
-  getStyleP() {
-    return this.styleP;
   }
 
   getFilterNames() {

@@ -46,6 +46,10 @@
   top: calc(100% - 76px);
 }
 
+.sliderContainer {
+  margin-left: 70%;
+}
+
 @media (max-width: 1160px) and (min-width: 0px) {
   #header > span {
     display: none;

@@ -10,6 +10,8 @@ class CytoscapeStore {
   hoveredNode = null;
   visNodesMap = {};
   visNodesData = [];
+  minYear = null;
+  maxYear = null;
   specialTypes = [];
   showTutorial = false;
   layoutID = "showSegment";
@@ -24,6 +26,8 @@ decorate(CytoscapeStore, {
   visNodesMap: observable,
   visNodesData: observable,
   specialTypes: observable,
+  minYear: observable,
+  maxYear: observable,
   showTutorial: observable
 });
 

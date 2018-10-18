@@ -13,6 +13,7 @@ import Style from "./StyleCytoscape";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSync } from "@fortawesome/free-solid-svg-icons";
 import color from "../assets/colors.json";
+import cystyle from "../assets/cystyle.json";
 
 class Cytoscape extends React.Component {
   constructor() {
@@ -279,6 +280,13 @@ class Cytoscape extends React.Component {
   }
 
   reframe() {
+    if (
+      this.cy.$id(this.props.cytoscapeStore.selectedNode).hasClass("filtered")
+    ) {
+      this.props.cytoscapeStore.selectedNode = null;
+      return;
+    }
+
     let nhood = this.nhood;
     let layoutPadding = Layout.layoutPadding;
     let details = cytoscapeStore.details;
@@ -498,14 +506,13 @@ class Cytoscape extends React.Component {
 
   componentDidMount() {
     let graphP = data.getGraphP();
-    let styleP = data.getStyleP();
 
     let typesP = data.getFilterNames();
 
-    Promise.all([graphP, styleP, typesP]).spread(this.initCy);
+    Promise.all([graphP, typesP]).spread(this.initCy);
   }
 
-  initCy(graph, style, types) {
+  initCy(graph, types) {
     this.setState({
       ...this.state,
       loading: false
@@ -555,7 +562,7 @@ class Cytoscape extends React.Component {
       this.cy.nodes('[type != "key"][type != "border"]'),
       color,
       styleMaster,
-      style
+      cystyle
     );
     this.cy.style(this.styleList.stylesheet);
 
@@ -595,6 +602,9 @@ class Cytoscape extends React.Component {
       cytoscapeStore.layouts = ProjectLayout.getLayout();
 
       autorun(() => {
+        if (cytoscapeStore.minYear <= cytoscapeStore.maxYear) {
+          this.checkYears();
+        }
         cytoscapeStore.layouts.forEach(layout => {
           layout.run();
         });
@@ -622,6 +632,22 @@ class Cytoscape extends React.Component {
           this.hoverLight(this.cy.$id(cytoscapeStore.hoveredNode));
         }
       });
+    });
+  }
+
+  checkYears() {
+    this.cy.elements('[type != "key"][type != "border"]').forEach(ele => {
+      let years = ele.data("year").split(",");
+      ele.toggleClass("yearFilter", true);
+      for (let year of years) {
+        if (
+          year >= this.props.cytoscapeStore.minYear &&
+          year <= this.props.cytoscapeStore.maxYear
+        ) {
+          ele.toggleClass("yearFilter", false);
+          break;
+        }
+      }
     });
   }
 
