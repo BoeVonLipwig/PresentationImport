@@ -18,11 +18,11 @@ class DropDownMenu extends React.Component {
   }
 
   onItemSelected = name => {
+    this.setState({ ...this.state, showMenu: false });
     cytoscapeStore.focusType = name.toLowerCase();
     cytoscapeStore.layouts = layoutFactory.computeLayout(
       cytoscapeStore.layoutID
     );
-    this.setState({ ...this.state, showMenu: false });
   };
 
   render() {
