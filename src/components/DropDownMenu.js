@@ -50,7 +50,11 @@ class DropDownMenu extends React.Component {
         <ul id="menu" className="menu-ul">
           <Fragment>
             {this.props.data.map(buttonName => (
-              <MenuButton name={buttonName} onSelect={this.onItemSelected} />
+              <MenuButton
+                key={buttonName}
+                name={buttonName}
+                onSelect={this.onItemSelected}
+              />
             ))}
           </Fragment>
         </ul>
