@@ -17,3 +17,5 @@ Then you can start the application with
 ```
 yarn start
 ```
+
+For more information you can read the documentation provided in the docs folder or possibly the wiki.
