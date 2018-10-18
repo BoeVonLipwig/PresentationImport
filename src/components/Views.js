@@ -17,7 +17,7 @@ class Views extends React.Component {
           isChecked: true
         },
         {
-          name: "Circles",
+          name: "Groups",
           id: "showCircles",
           isChecked: false
         },
