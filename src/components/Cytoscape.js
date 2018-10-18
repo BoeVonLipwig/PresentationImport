@@ -520,6 +520,10 @@ class Cytoscape extends React.Component {
       type => !["key", "border", "person", "collab"].includes(type)
     );
 
+    if (cytoscapeStore.specialTypes.length > 0) {
+      cytoscapeStore.focusType = cytoscapeStore.specialTypes[0];
+    }
+
     //styleMaster is a placeholder object with options for colorScheme selection,
     //and override for foreground, background, highlight, and lowlight color variables
     //as well as override for the color of nodes, and the name they should be referred to in the key

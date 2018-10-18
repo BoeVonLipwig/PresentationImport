@@ -4,7 +4,7 @@ class CytoscapeStore {
   //stores the current layout
   layouts = null;
   //stores the current special node type that's being focused on
-  focusType = "school";
+  focusType = "";
   selectedNode = null;
   details = true;
   hoveredNode = null;

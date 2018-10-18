@@ -3,6 +3,7 @@ import "./DropDownMenu.css";
 import MenuButton from "./MenuButton";
 import cytoscapeStore from "../util/CytoscapeStore";
 import layoutFactory from "../util/LayoutFactory";
+import { observer } from "mobx-react";
 
 class DropDownMenu extends React.Component {
   constructor(props) {
@@ -87,4 +88,4 @@ class DropDownMenu extends React.Component {
   };
 }
 
-export default DropDownMenu;
+export default observer(DropDownMenu);
