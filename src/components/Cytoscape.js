@@ -611,7 +611,6 @@ class Cytoscape extends React.Component {
         this.arrangeKey();
         this.cy.fit(50);
         this.setVisNodes();
-        if (cytoscapeStore.selectedNode !== null) this.reframe();
       });
 
       autorun(() => {
