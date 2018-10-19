@@ -13,8 +13,7 @@ class BottomBar extends React.Component {
         <Search />
         <div id="outer-header">
           <div id="header">
-            <a>Connected Worlds</a>
-            <span>: Research into VR, AR and MR at Victoria</span>
+            <a>Connected Worlds: Research into VR, AR and MR at Victoria</a>
             <img src={logo} id="vuw-logo" alt="Connected Worlds Logo" />
           </div>
         </div>
