@@ -13,7 +13,7 @@ class VideoHelp extends React.Component {
       <div className="helpVideoWrapper">
         <iframe
           title="Youtube Video"
-          src="https://www.youtube.com/watch?v=Wv2WjIAPMFI&feature=youtu.be"
+          src="https://www.youtube.com/embed/Wv2WjIAPMFIe"
           frameBorder="0"
           allow="autoplay; encrypted-media"
           allowFullScreen
