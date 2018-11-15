@@ -32,6 +32,8 @@ jobs:
     steps:
       - checkout
       - run: yarn install
+      - run: mv parser/output/output.json src/assets
+      - run: mv parser/output/years.json src/assets
       - run: yarn build
       - store_artifacts:
           path: ~/project/build
