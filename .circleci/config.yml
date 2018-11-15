@@ -46,7 +46,7 @@ jobs:
       - attach_workspace:
           at: ~/project
       - run: "npm install surge --global"
-      - run: "surge --project ./build --domain $url"
+      - run: "surge --project ./build --domain $URL"
 workflows:
   version: 2
   test-build-deploy:
