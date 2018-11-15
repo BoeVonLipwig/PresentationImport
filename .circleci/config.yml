@@ -30,7 +30,8 @@ jobs:
     docker:
       - image: node:8
     steps:
-      - checkout
+      - attach_workspace:
+          at: ~/project
       - run: yarn install
       - run: mv parser/output/output.json src/assets
       - run: mv parser/output/years.json src/assets
