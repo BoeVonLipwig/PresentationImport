@@ -1,6 +1,6 @@
 # Connected Worlds
 
-Network visualisation tool
+This is a react based website for viewing networks of people in a web browser. This was a agile group project for a "industry client" done as part of my university honours requierments.
 
 # Dev Setup
 
