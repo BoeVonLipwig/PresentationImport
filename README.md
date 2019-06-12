@@ -1,6 +1,6 @@
 # Connected Worlds
 
-This is a react based website for viewing networks of people in a web browser. This was a agile group project for a "industry client" done as part of my university honours requierments.
+This is a react based website for viewing networks of people in a web browser. This was a agile group project for a "industry client" done as part of my university honours requierments. To see full documentation and records see the documentation folder.
 
 # Dev Setup
 
