@@ -2,5 +2,5 @@
 
 - [Cytoscape](documentation/technical-documentation/cytoscape)
 - [Parser](documentation/technical-documentation/csv-parser)
-- [Testing](documentation/technical-documentation/testing)
+- [Testing](/testing)
 - [Future Developments](documentation/technical-documentation/Future Developments)
