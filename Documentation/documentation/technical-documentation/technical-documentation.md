@@ -1,6 +1,6 @@
 # Technical Documentation
 
-- [Cytoscape](documentation/technical-documentation/cytoscape)
-- [Parser](documentation/technical-documentation/csv-parser)
+- [Cytoscape](https://github.com/BoeVonLipwig/ConnectedWorlds/blob/master/Documentation/documentation/technical-documentation/cytoscape.md)
+- [Parser](https://github.com/BoeVonLipwig/ConnectedWorlds/blob/master/Documentation/documentation/technical-documentation/csv-parser.md)
 - [Testing](https://github.com/BoeVonLipwig/ConnectedWorlds/blob/master/Documentation/documentation/technical-documentation/testing.md)
-- [Future Developments](documentation/technical-documentation/Future Developments)
+- [Future Developments](https://github.com/BoeVonLipwig/ConnectedWorlds/blob/master/Documentation/documentation/technical-documentation/Future-Developments.md)
