@@ -1,12 +1,12 @@
 # Contents
-* [What happens in an iteration](#What happens in an iteration)
-* [Iteration process](#Iteration process)
-* [Stuck and need help](#Stuck and need help)
-* [What happens when we finish early](#What happens when we finish early)
-* [What happens when we do not finish an iteration](#What happens when we do not finish an iteration)
-* [What is your communication expectations](#What is your communication expectations)
-* [Client Engagement](#Client Engagement)
-* [Coding Standards](#Coding Standards)
+* [What happens in an iteration](#What-happens-in-an-iteration)
+* [Iteration process](#Iteration-process)
+* [Stuck and need help](#Stuck-and-need-help)
+* [What happens when we finish early](#What-happens-when-we-finish-early)
+* [What happens when we do not finish an iteration](#What-happens-when-we-do-not-finish-an-iteration)
+* [What is your communication expectations](#What-is-your-communication-expectations)
+* [Client Engagement](#Client-Engagement)
+* [Coding Standards](#Coding-Standards)
 
 [Link to retrospectives](iterations/retrospectives/retrospective-notes)
 
